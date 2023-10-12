@@ -1,0 +1,40 @@
+@using PE.BaseDbEntity.EnumClasses
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialOverview
+
+<div class="row h-100" id="RawMaterialDetailsBody_@Model.RawMaterialId">
+  <div class="col">
+    @(
+        Html.Kendo().TabStrip()
+        .Name("RawMaterialBody_" + Model.RawMaterialId.ToString())
+        .Animation(false)
+        .HtmlAttributes(new { style = "width: 100%;" })
+        .Scrollable(false)
+        .Items(async tabstrip =>
+        {
+          tabstrip.Add().Text(VM_Resources.NAME_MaterialDetails)
+          .Selected(!Model.AfterL3Assign).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/RawMaterial/_RawMaterialDetails.cshtml", Model)).ToHtmlString());
+          if (Model.EnumRawMaterialType != RawMaterialType.GetValue(RawMaterialType.Bundle))
+          {
+            tabstrip.Add().Text(VM_Resources.NAME_L3MaterialAssignment)
+            .Selected(Model.AfterL3Assign).LoadContentFrom("L3MaterialAssignment", "RawMaterial", new { rawMaterialId = Model.RawMaterialId });
+          }
+          tabstrip.Add().Text(VM_Resources.NAME_Measurements)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/RawMaterial/_RawMaterialMeasurmentsList.cshtml", Model.RawMaterialId)).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_MaterialHistory)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/RawMaterial/_RawMaterialHistoryList.cshtml", Model.RawMaterialId)).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_MaterialGenealogy)
+          .Selected(false).LoadContentFrom("GetRawMaterialGenealogy", "RawMaterial", new { rawMaterialId = Model.RawMaterialId });
+          tabstrip.Add().Text(VM_Resources.NAME_Events)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/RawMaterial/_RawMaterialEvents.cshtml", Model.RawMaterialId)).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_Defects)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/RawMaterial/_RawMaterialDefectList.cshtml", Model.RawMaterialId)).ToHtmlString());
+
+          if (Model.FKProductId.HasValue)
+          {
+            tabstrip.Add().Text(VM_Resources.NAME_ProductDetails)
+            .Selected(false).LoadContentFrom("GetProductDetails", "Products", new { productId = Model.FKProductId });
+          }
+        })
+        )
+  </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Device
+
+<div class="row h-100">
+    <div class="col">
+        @(Html.Kendo().TabStrip()
+              .Name("MaintenanceBody_" + Guid.NewGuid().ToString())
+              .Animation(false)
+              .Scrollable(false)
+              .Items(tabstrip =>
+              {
+                  tabstrip.Add().Text(VM_Resources.NAME_DeviceDetails)
+                    .Selected(true).Content(@Html.Partial("~/Views/Module/PE.Lite/Maintenance/InstalledView/_MaintenanceDetails.cshtml", Model).ToHtmlString()).ContentHtmlAttributes(new { @class = "partialHeight" });
+                  //      tabstrip.Add().Text(VM_Resources.NAME_ComponentsDetails)
+                  //.Selected(false).Content(@Html.Partial("~/Views/Module/PE.Lite/Maintenance/InstalledView/_ComponentsList.cshtml", Model).ToHtmlString()).ContentHtmlAttributes(new { @class = "partialHeight" });
+                  tabstrip.Add().Text(VM_Resources.NAME_ComponentsDetails)
+          .Selected(false).Content(@Html.Partial("~/Views/Module/PE.Lite/Maintenance/InstalledView/_ComponentsListTree.cshtml", Model).ToHtmlString()).ContentHtmlAttributes(new { @class = "partialHeight" });
+                  //   tabstrip.Add().Text(VM_Resources.NAME_ComponentsDetailsSchema)
+                  //.Selected(false).Content(@Html.Partial("~/Views/Module/PE.Lite/Maintenance/InstalledView/_ComponentsDetails.cshtml", Model).ToHtmlString()).ContentHtmlAttributes(new { @class = "partialHeight" });
+              })
+    //.Events(e =>
+    //{
+    //    e.Select("saveTabStripState");
+    //})
+    )
+    </div>
+</div>

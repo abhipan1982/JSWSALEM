@@ -1,0 +1,534 @@
+<#
+// Copyright (C) Szymon Franczyk 2021
+// v4.0.1
+#>
+<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ include file="EF6.Utility.CS.ttinclude" once="true" #>
+<#@ assembly name="System.Windows.Forms" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Data.Common" #>
+<#@ import namespace="System.Data.Entity.Infrastructure.Pluralization" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.Windows.Forms" #>
+<#@ import namespace="EnvDTE" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="EnvDTE80" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="EnvDTE80" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ assembly name="System.IO" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System" #>
+<#@ assembly name="Microsoft.VisualStudio.Interop" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#+
+
+  [Flags]
+  public enum CommentsStyle
+  {
+      None,
+      InSummaryBlock,
+      AtEndOfField
+  };
+
+  // Settings - edit these in the main <name>.tt file
+  string OutputProjectName = "";
+  string OutputProjectFolder_Enum = "";
+  ///will be generate in script on runtime
+  private string _connectionString = "";
+
+  public Dictionary<string, Type> PrimitiveTypes = new Dictionary<string, Type>()
+    {
+      {"bool", typeof(Boolean)},
+      {"char", typeof(Char)},
+      {"sbyte", typeof(SByte)},
+      {"byte", typeof(Byte)},
+      {"short", typeof(Int16)},
+      {"ushort", typeof(UInt16)},
+      {"int", typeof(Int32)},
+      {"uint", typeof(UInt32)},
+      {"long", typeof(Int64)},
+      {"ulong", typeof(UInt64)},
+      {"float", typeof(Single)},
+      {"double", typeof(Double)},
+      {"decimal", typeof(Decimal)},
+      {"string", typeof(String)}
+    };
+
+  public static void ArgumentNotNull<T>(T arg, string name) where T : class
+  {
+      if (arg == null)
+      {
+          throw new ArgumentNullException(name);
+      }
+  }
+#>
+<#+
+public void GenerateEnums()
+{
+    // instantiate CoreAutomation
+    var coreAutomation = new CoreAutomation((IServiceProvider)this.Host);
+    
+
+    // get startup project for our solution
+    var startupProject = coreAutomation.StartUpProject;
+    var proj = coreAutomation.Solution;
+    var path = Directory.GetParent(proj.FullName);
+
+    //moving generated file between POCO project and target project
+    string projectPathDir = @"" + path.FullName + "\\" + OutputProjectName;
+    string destinationDir = projectPathDir + "\\" + OutputProjectFolder_Enum;
+                
+    string connectionString = JObject.Parse(File.ReadAllText(projectPathDir + "\\appsettings.json")).GetValue("ConnectionStrings").SelectToken("PEContext").ToString();
+
+    // enum value column name:
+    const string enumDescriptionColumnName = "Keyword";
+    const string enumDescriptionColumnValue = "Value";
+
+    //header of new file
+    WriteLine("using System;");
+    WriteLine("using SMF.DbEntity.EnumClasses;");
+    WriteLine("using PE.BaseDbEntity.EnumClasses;");
+    WriteLine("namespace " + OutputProjectName+ "." + OutputProjectFolder_Enum);
+    WriteLine("//[SF] Connection string: " + connectionString);
+    WriteLine("");
+    ClearIndent();
+    WriteLine("{");
+    PushIndent("    ");
+    if (connectionString != null)
+    {
+
+        //connecting with db and query
+        var connection = new SqlConnection(connectionString);
+        var command1 = connection.CreateCommand();
+        var command2 = connection.CreateCommand();
+        connection.Open();
+
+        command1.CommandText = string.Format(@"SELECT EnumNameId, EnumName, EnumType, IsSMF, IsCustom FROM smf.EnumNames WHERE IsSMF = 0 AND IsCustom = 1");
+
+        var tableReaderCustom = command1.ExecuteReader();
+        var enumList = new List<EnumsNames>();
+        var derivedEnumList = new List<EnumsNames>();
+        while (tableReaderCustom.Read())
+        {
+            enumList.Add(new EnumsNames() { Id = tableReaderCustom["EnumNameId"].ToString(), Name = tableReaderCustom["EnumName"].ToString(), Type = tableReaderCustom["EnumType"].ToString() });
+        }
+
+        connection.Close();
+        connection.Open();
+
+        command2.CommandText = string.Format(@"SELECT EnumNameId, EnumName, EnumType, IsSMF, IsCustom FROM smf.EnumNames e WHERE  e.IsCustom = 0 and (SELECT top(1) v.EnumValueId FROM smf.EnumValues v WHERE v.FkEnumNameId = e.EnumNameId and v.IsCustom = 1) > 0");
+        var tableReaderDerived = command2.ExecuteReader();
+
+        while (tableReaderDerived.Read())
+        {
+            derivedEnumList.Add(new EnumsNames() { Id = tableReaderDerived["EnumNameId"].ToString(), Name = tableReaderDerived["EnumName"].ToString(), Type = tableReaderDerived["EnumType"].ToString() });
+        }
+        
+        connection.Close();
+
+        foreach (var row in enumList)
+        {
+            connection.Open();
+
+            WriteLine("[Serializable]");
+            // get the enum name
+             WriteLine("public class " + row.Name + " : GenericEnumType<" + row.Type + ">");
+            WriteLine("{");
+
+            ClearIndent();
+
+            command1.CommandText = string.Format("SELECT * FROM smf.EnumValues WHERE FkEnumNameId = {0} AND isCustom = 1 ORDER BY Value", row.Id);
+            var columnReader = command1.ExecuteReader();
+            var values = new Dictionary<string, string>();
+            while (columnReader.Read())
+            {
+                // Fill only the values that the field "Keyword" have value
+                if (!string.IsNullOrEmpty(columnReader[enumDescriptionColumnName].ToString().Trim()))
+                {
+                    values.Add(columnReader[enumDescriptionColumnName].ToString().Trim().Replace(" ",""),
+                               columnReader[enumDescriptionColumnValue].ToString().Trim().Replace(" ",""));
+
+                }
+            }
+            
+            foreach (var entry in values)
+            {
+                PushIndent("    ");
+                PushIndent("    ");
+                WriteLine("public static readonly " + row.Name + " " + entry.Key + " = new " + row.Name + "(" + entry.Value + ", " + "\"" + entry.Key + "\"" + ");");
+                ClearIndent();
+                
+            }
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("");
+            WriteLine("protected " + row.Name + "(" + row.Type + " value, string name) : base(value, name)");
+            WriteLine("{");
+            WriteLine("}");
+            WriteLine("");
+            WriteLine("public override string ToString() => $\"" + row.Name + "({Name})\"" + ";");
+            WriteLine("public override TypeCode GetTypeCode() => TypeCode." + PrimitiveTypes[row.Type].Name + ";");
+            WriteLine("public override " + row.Type + " To" + PrimitiveTypes[row.Type].Name + "(IFormatProvider provider) => this.Value;");
+            WriteLine("");
+            WriteLine("public static implicit operator " + row.Type + "(" + row.Name + " obj) => obj != null ? obj.Value : (" + row.Type + ") 0;");
+            WriteLine("");
+            WriteLine("public static explicit operator " + row.Name + "(" + row.Type + " input) => GetValue(input);");
+            WriteLine("");
+            WriteLine("public override bool Equals(object obj)");
+            WriteLine("{");
+            PushIndent("    ");
+            WriteLine("if (obj is " + row.Name + " other)");
+            WriteLine("{");
+            PushIndent("    ");
+            WriteLine("return other.Value == this.Value;");
+            ClearIndent();
+            PushIndent("    ");
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+            WriteLine("");
+            WriteLine("return false;");
+            ClearIndent();
+            
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+            
+            WriteLine("public static bool operator ==(" + row.Name + " obj1, " + row.Name + " obj2)");
+            WriteLine("{");
+            PushIndent("    ");
+            WriteLine("if (ReferenceEquals(obj1, obj2))");
+            WriteLine("{");
+            PushIndent("    ");
+            WriteLine("return true;");
+            ClearIndent();
+            PushIndent("    ");
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+            WriteLine("if (ReferenceEquals(obj1, null))");
+            WriteLine("{");
+            PushIndent("    ");
+            WriteLine("return false;");
+            ClearIndent();
+            PushIndent("    ");
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+            WriteLine("if (ReferenceEquals(obj2, null))");
+            WriteLine("{");
+            PushIndent("    ");
+            WriteLine("return false;");
+            ClearIndent();
+            PushIndent("    ");
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+            WriteLine("");
+            WriteLine("return obj1.Equals(obj2);");
+            ClearIndent();
+            
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+            WriteLine("");
+
+            WriteLine("public static bool operator !=(" + row.Name + " obj1, " + row.Name + " obj2) => !(obj1 == obj2);");
+            WriteLine("");
+
+
+            WriteLine("public static bool operator ==(" + row.Type + " obj1, " + row.Name + " obj2)");
+            WriteLine("{");
+            PushIndent("    ");
+            WriteLine("if (ReferenceEquals(obj2, null))");
+            WriteLine("{");
+            PushIndent("    ");
+            WriteLine("return false;");
+            ClearIndent();
+            PushIndent("    ");
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+            WriteLine("");
+            WriteLine("return obj1 == obj2.Value;");
+            ClearIndent();
+            
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+            WriteLine("");
+
+            WriteLine("public static bool operator !=(" + row.Type + " obj1, " + row.Name + " obj2) => !(obj1 == obj2);");
+            WriteLine("");
+
+            WriteLine("public static bool operator ==(" + row.Name + " obj1, " + row.Type + " obj2) => obj2 == obj1;");
+            WriteLine("");
+
+            WriteLine("public static bool operator !=(" + row.Name + " obj1, " + row.Type + " obj2) => !(obj1 == obj2);");
+            WriteLine("");
+
+
+            WriteLine("public override int GetHashCode() => base.GetHashCode();");
+            WriteLine("");
+            
+            WriteLine("public static " + row.Name + " GetValue(" + row.Type +" input)");
+            WriteLine("{");
+            PushIndent("    ");
+            WriteLine("switch(input)");
+            WriteLine("{");
+            PushIndent("    ");
+            foreach (var entry in values)
+            {
+                WriteLine("case var value when value == " + entry.Key + ".Value:");
+                WriteLine("return " + entry.Key + ";");
+            }
+
+            WriteLine("default: throw new ArgumentOutOfRangeException(input.ToString());");
+            ClearIndent();
+            PushIndent("    ");
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+            ClearIndent();
+
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+
+
+
+            ClearIndent();
+
+            PushIndent("    ");
+            WriteLine("}");
+            WriteLine("");
+            connection.Close();
+        }
+
+        foreach (var row in derivedEnumList)
+        {
+            connection.Open();
+
+            WriteLine("[Serializable]");
+            // get the enum name
+            WriteLine("public class Custom" + row.Name + " : " + row.Name + "");
+            WriteLine("{");
+
+            ClearIndent();
+
+            command2.CommandText = string.Format("SELECT * FROM smf.EnumValues WHERE FkEnumNameId = {0} AND isCustom = 1 ORDER BY Value", row.Id);
+            var columnReader = command2.ExecuteReader();
+            var values = new Dictionary<string, string>();
+            while (columnReader.Read())
+            {
+                // Fill only the values that the field "Keyword" have value
+                if (!string.IsNullOrEmpty(columnReader[enumDescriptionColumnName].ToString().Trim()))
+                {
+                    values.Add(columnReader[enumDescriptionColumnName].ToString().Trim().Replace(" ",""),
+                               columnReader[enumDescriptionColumnValue].ToString().Trim().Replace(" ",""));
+
+                }
+            }
+            
+            foreach (var entry in values)
+            {
+                PushIndent("    ");
+                PushIndent("    ");
+                WriteLine("public static readonly " + row.Name + " " + entry.Key + " = GetInstance(" + entry.Value + ", " + "\"" + entry.Key + "\"" + ");");
+                ClearIndent();
+                
+            }
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("");
+            WriteLine("internal static void Init() => GetCustom = GetCustomValue;");
+            WriteLine("");
+            WriteLine("protected Custom" + row.Name + "(" + row.Type + " value, string name) : base(value, name)");
+            WriteLine("{");
+            WriteLine("}");
+            WriteLine("");
+            
+            WriteLine("public static " + row.Name + " GetCustomValue(" + row.Type +" input)");
+            WriteLine("{");
+            PushIndent("    ");
+            WriteLine("switch(input)");
+            WriteLine("{");
+            PushIndent("    ");
+            foreach (var entry in values)
+            {
+                WriteLine("case var value when value == " + entry.Key + ".Value:");
+                WriteLine("return " + entry.Key + ";");
+            }
+
+            WriteLine("default: throw new ArgumentOutOfRangeException();");
+            ClearIndent();
+            PushIndent("    ");
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+            ClearIndent();
+
+            PushIndent("    ");
+            PushIndent("    ");
+            WriteLine("}");
+
+
+
+            ClearIndent();
+
+            PushIndent("    ");
+            WriteLine("}");
+            WriteLine("");
+            connection.Close();
+        }
+
+        WriteLine("public class EnumInitializator");
+        WriteLine("{");
+        PushIndent("    ");
+        WriteLine("public static void Init()"); 
+        WriteLine("{");
+        PushIndent("    ");
+        foreach(var row in derivedEnumList)
+        {
+            WriteLine("Custom" + row.Name + ".Init();");
+        }
+        ClearIndent();
+
+        PushIndent("    ");
+        PushIndent("    ");
+        WriteLine("}");
+        ClearIndent();
+        PushIndent("    ");
+        WriteLine("}");
+    }
+
+    ClearIndent();
+    WriteLine("}");
+    ClearIndent();
+}
+#>
+<#+
+    public class EnumsNames
+    {
+        public string Id {get; set;}
+        public string Name {get; set;}
+        public string Type {get; set;}
+    }
+#>
+<#+
+public class CoreAutomation
+{
+    private readonly DTE _dte;
+  
+    public CoreAutomation(IServiceProvider host)
+    {
+        _dte = (DTE)host.GetCOMService(typeof(DTE));
+    }
+
+    /// <summary>
+    /// Provides access to the host project.
+    /// </summary>
+    /// <remarks>
+    /// http://msdn.microsoft.com/en-us/library/envdte.project.aspx
+    /// </remarks>
+    public Project CurrentProject
+    {
+        get
+        {
+            return (Project)((Array)_dte.ActiveSolutionProjects).GetValue(0);
+        }
+    }
+
+    /// <summary>
+    /// Provides access to the host solution.
+    /// </summary>
+    public Solution Solution 
+    { 
+        get { return _dte.Solution; }
+    }
+
+
+
+    /// <summary>
+    /// Provides access to the hosts solution startup project.
+    /// </summary>
+    public Project StartUpProject 
+    {
+        get
+        {
+            var startupProjectName = ((Array)_dte.Solution.SolutionBuild.StartupProjects).GetValue(0).ToString();
+            
+            var projects = Projects();
+
+            foreach (var project in projects)
+            {
+                // returns object typeof(Project), not just project name
+                if (project.UniqueName == startupProjectName)
+                return project;
+            }
+            return null;
+        }
+    }
+    
+
+    /// <summary>
+    /// Returns all Projects in Solution
+    /// </summary> 
+    public IList<Project> Projects()
+    {
+        var projects = _dte.Solution.Projects;
+        var list = new List<Project>();
+        var item = projects.GetEnumerator();
+        while (item.MoveNext())
+        {
+            var project = item.Current as Project;
+            if (project == null)
+            {
+                continue;
+            }
+
+            if (project.Kind == ProjectKinds.vsProjectKindSolutionFolder)
+            {
+                list.AddRange(GetSolutionFolderProjects(project));
+            }
+            else
+            {
+            list.Add(project);
+            }
+        }
+        return list;
+    }
+
+    private IEnumerable<Project> GetSolutionFolderProjects(Project solutionFolder)
+    {
+        var list = new List<Project>();
+        for (var i = 1; i <= solutionFolder.ProjectItems.Count; i++)
+        {
+            var subProject = solutionFolder.ProjectItems.Item(i).SubProject;
+            if (subProject == null)
+            {
+                continue;
+            }
+
+            // If this is another solution folder, do a recursive call, otherwise add
+            if (subProject.Kind == ProjectKinds.vsProjectKindSolutionFolder)
+            {
+                list.AddRange(GetSolutionFolderProjects(subProject));
+            }
+            else
+            {
+                list.Add(subProject);
+            }
+        }
+        return list;
+    }
+}
+#>

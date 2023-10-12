@@ -1,0 +1,109 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.WorkOrder.VM_WorkOrderSummary
+
+@{
+  Layout = "~/Views/Shared/_TabLayout.cshtml";
+}
+@section TabIncludes
+{
+  @Html.ImageButton("sendToL3", "_WorkOrder_SendL3.sendWorkOrderToL3(" + Model.WorkOrderId + ", () => { reloadGrid('ScheduleList')})", false, "BUTTON_SendWorkOrderToL3")
+}
+
+<div class="row mt-5">
+  <div class="col">
+    <div class="form-group row">
+      <div class="col text-right">
+        @Html.LabelFor(x => x.WorkOrderName)
+      </div>
+      <div class="col text-left">
+        @Html.DisplayFor(m => m.WorkOrderName)
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group row">
+      <div class="col text-right">
+        @Html.LabelFor(x => x.HeatName)
+      </div>
+      <div class="col text-left">
+        @Html.DisplayFor(m => m.HeatName)
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group row">
+      <div class="col text-right">
+        @Html.LabelFor(x => x.MaterialShapeName)
+      </div>
+      <div class="col text-left">
+        @Html.DisplayFor(m => m.MaterialShapeName)
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="form-group row">
+      <div class="col text-right">
+        @Html.LabelFor(x => x.SteelgradeName)
+      </div>
+      <div class="col text-left">
+        @Html.DisplayFor(m => m.SteelgradeName)
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group row">
+      <div class="col text-right">
+        @Html.LabelFor(x => x.SteelgradeCode)
+      </div>
+      <div class="col text-left">
+        @Html.DisplayFor(m => m.SteelgradeCode)
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group row">
+      <div class="col text-right">
+        @Html.LabelFor(x => x.ProductThickness)
+      </div>
+      <div class="col text-left">
+        @Html.DisplayFor(m => m.ProductThickness)
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="form-group row">
+      <div class="col text-right">
+        @Html.LabelFor(x => x.WorkOrderStart)
+      </div>
+      <div class="col text-left">
+        @Html.DisplayFor(m => m.WorkOrderStart)
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group row">
+      <div class="col text-right">
+        @Html.LabelFor(x => x.DurationHMS)
+      </div>
+      <div class="col text-left">
+        @Html.DisplayFor(m => m.DurationHMS)
+      </div>
+    </div>
+  </div>
+  <div class="col">
+  </div>
+</div>
+
+<div class="row mt-5 pt-4">
+  <div class="col-4">
+    @await Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_RollingSummary.cshtml", Model)
+  </div>
+  <div class="col-7">
+    @await Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_RejectsSummary.cshtml", Model)
+  </div>
+</div>

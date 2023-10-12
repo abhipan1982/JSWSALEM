@@ -1,0 +1,14 @@
+{
+  "solution": "PE_Lite_Dev.sln",
+  "solutionFolder": null,
+  "mappings": {
+    "SMF.Core": "../../SMF 4.0/SRC/SMF.Core/SMF.Core.csproj",
+    "SMF.DbEntity": "../../SMF 4.0/SRC/SMF.DbEntity/SMF.DbEntity.csproj",
+    "SMF.HMI": "../../SMF 4.0/SRC/SMF.HMI/SMF.HMI.csproj",
+    "SMF.HMIWWW": "../../SMF 4.0/SRC/SMF.HMIWWW/SMF.HMIWWW.csproj",
+    "SMF.Module": "../../SMF 4.0/SRC/SMF.Module/SMF.Module.csproj",
+    "SMF.Startup": "../../SMF 4.0/SRC/SMF.Startup/SMF.Startup.csproj",
+    "SMF.Watchdog": "../../SMF 4.0/SRC/SMF.Watchdog/SMF.Watchdog.csproj"
+  },
+  "removeProjects": true
+}

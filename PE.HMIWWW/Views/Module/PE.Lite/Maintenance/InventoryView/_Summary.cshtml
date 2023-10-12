@@ -1,0 +1,127 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Device
+
+<script src="~/Scripts/core.js"></script>
+<script src="~/Scripts/charts.js"></script>
+
+<div class="col-12 p-0 pt-3">
+
+    @*<h8>@Html.Label(VM_Resources.NAME_Search)</h8>*@
+    <div class="form-group yieldChart">
+        <div id="chartdivInventory"></div>
+
+        <script>
+            var d = new Date();
+            d.setDate(d.getDate() - 5);
+
+            var model = @Html.Raw(Json.Encode(Model));
+
+            var chart = am4core.create("chartdivInventory", am4charts.XYChart);
+            chart.paddingRight = 36;
+            chart.paddingLeft = 36;
+            //chart.legend = new am4charts.Legend();
+            //chart.legend.useDefaultMarker = true;
+            //let marker = chart.legend.markers.template.children.getIndex(0);
+            //marker.cornerRadius(12, 12, 12, 12);
+            //marker.strokeWidth = 2;
+            //marker.strokeOpacity = 1;
+            //marker.stroke = am4core.color("#ccc");
+
+            chart.dateFormatter.inputDateFormat = "yyyy-MM-dd HH:mm";
+            chart.dateFormatter.dateFormat = "yyyy-MM-dd";
+            var colorSet = new am4core.ColorSet();
+            colorSet.saturation = 0.4;
+            function getDateIfDate(d) {
+                var m = d.match(/\/Date\((\d+)\)\//);
+                return m ? (new Date(+m[1])).toISOString() : d;
+                    }
+
+            $.ajax({
+                url: "/Maintenance/GetIncidentsForDevice",
+                data: {
+                    deviceId: model.DeviceId,
+                    startDateTime: d.toISOString(),
+                    endDateTime: new Date().toISOString()
+                },
+                success: function (result) {
+                    let data = [];
+                    for (let i = 0; i < result.Data.length; i++) {
+                        let item = result.Data[i];
+                        //console.log({
+                        //    "category": "1",
+                        //    "start": getDateIfDate(item.StartTime),
+                        //    "end": getDateIfDate(item.EndTime),
+                        //    "color": "#009000",
+                        //    "task": item.FKIncidentTypeId
+                        //});
+                        debugger;
+                        data.push({
+                            "category": "1",
+                            "start": getDateIfDate(item.StartTime),
+                            "end": getDateIfDate(item.EndTime),
+                            "color": item.CategoryColor,
+                            "task": item.FKIncidentTypeId
+                        })
+                    }
+                    chart.data = data;
+                }
+            });
+
+
+            var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "category";
+            categoryAxis.renderer.grid.template.location = 0;
+            categoryAxis.renderer.inversed = true;
+            categoryAxis.renderer.labels.template.disabled = true;
+            var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+            dateAxis.renderer.minGridDistance = 70;
+            dateAxis.baseInterval = { count: 1, timeUnit: "minute" };
+            //dateAxis.max = new Date(2021, 0, 5, 10, 30, 00, 0);
+            //dateAxis.min = new Date(2021, 0, 7, 10, 30, 00, 0);
+            //dateAxis.max = new Date().getTime();
+            //dateAxis.strictMinMax = true;
+            dateAxis.renderer.tooltipLocation = 0;
+            var series1 = chart.series.push(new am4charts.ColumnSeries());
+            series1.columns.template.height = am4core.percent(70);
+            series1.columns.template.tooltipText = "{task}: [bold]{openDateX}[/] - [bold]{dateX}[/]";
+            series1.dataFields.openDateX = "start";
+            series1.dataFields.dateX = "end";
+            series1.dataFields.categoryY = "category";
+            series1.columns.template.propertyFields.fill = "color"; // get color from data
+            series1.columns.template.propertyFields.stroke = "color";
+            series1.columns.template.strokeOpacity = 1;
+            //series1.name = "dd";
+            //chart.scrollbarX = new am4core.Scrollbar();
+
+            //var legend = new am4charts.Legend();
+            //legend.parent = chart.chartContainer;
+            //legend.itemContainers.template.togglable = false;
+            //legend.marginTop = 20;
+            //legend.
+
+
+            //series1.events.on("ready", function (ev) {
+            //    var legenddata = [];
+            //    series1.columns.each(function (column) {
+            //        legenddata.push({
+            //            name: column.dataItem.categoryX,
+            //            fill: column.fill
+            //        });
+            //    });
+            //    legend.data = legenddata;
+            //});
+
+        </script>
+    </div>
+</div>
+
+<style>
+    .yieldChart {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .completionChart {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+</style>

@@ -1,0 +1,89 @@
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<link rel="stylesheet" href="~/bundles/css/Module/DataAnalysis.css" />
+
+@section module_menu
+{<div class="row float-left" style="    margin-right: 5px;">
+    @Html.ImageButton("data_analysis", "openChart()", false, "BUTTON_OpenChart")
+    <div id="exportPDF" title="@VM_Resources.NAME_ExportTo PDF"><span class="k-icon k-i-pdf"></span></div>
+    <div id="exportExcel" title="@VM_Resources.NAME_ExportTo Excel"><span class="k-icon k-i-excel"></span></div>
+  </div>
+}
+
+<div id='configurator-expand' class='pivot-filters-btn'>
+  <span onclick='filtersExpand()' id="conf-arrow" class="arrow k-icon k-i-arrow-60-right"></span> @VM_Resources.NAME_Configurator
+</div>
+
+@(Html.Kendo().PivotConfigurator()
+    .Name("configurator")
+    .Filterable(true)
+    .Height(720)
+)
+@(Html.Kendo().PivotGrid<PE.HMIWWW.ViewModel.Module.Lite.DataAnalysis.VM_DataAnalysisDefect>()
+    .Name("pivotgrid")
+    .Excel(excel => excel
+        .FileName("Defects.xlsx")
+          .Filterable(true)
+          .ProxyURL(Url.Action("Excel_Export_Save", "DataAnalysis")))
+      .Pdf(pdf => pdf
+          .FileName("Defects.pdf")
+          .ProxyURL(Url.Action("Pdf_Export_Save", "DataAnalysis")))
+        .Configurator("#configurator")
+        .ColumnWidth(120)
+        .Filterable(true)
+        .Height(720)
+      //.DataCellTemplateId("dataCellTemplate")
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Transport(transport => transport.Read("GetDefectsDataList", "DataAnalysis"))
+          .Schema(schema => schema
+              .Cube(cube => cube
+                  .Dimensions(dimensions =>
+                  {
+                    dimensions.Add(model => model.ProductThickness).Caption(VM_Resources.NAME_ProductsThicknesses);
+                    dimensions.Add(model => model.HeatName).Caption(VM_Resources.NAME_Heats);
+                    dimensions.Add(model => model.SteelgradeName).Caption(VM_Resources.NAME_Steelgrades);
+                    dimensions.Add(model => model.DefectCategoryName).Caption(VM_Resources.NAME_Categories);
+                    dimensions.Add(model => model.WorkOrderName).Caption(VM_Resources.NAME_WorkOrders);
+                    dimensions.Add(model => model.ShiftCode).Caption(VM_Resources.NAME_Shifts);
+                    dimensions.Add(model => model.CrewName).Caption(VM_Resources.NAME_Crews);
+                    dimensions.Add(model => model.Day).Caption(VM_Resources.NAME_Days);
+                    //dimensions.Add(model => model.Date).Caption(VM_Resources.NAME_All + " " + VM_Resources.NAME_Dates);
+                    dimensions.Add(model => model.Week).Caption(VM_Resources.NAME_Weeks);
+                    dimensions.Add(model => model.Month).Caption(VM_Resources.NAME_Months);
+                    dimensions.Add(model => model.Year).Caption(VM_Resources.NAME_Years);
+                  })
+              .Measures(measures => measures.Add(VM_Resources.NAME_DefectCount).Field(model => model.DefectsNumber).AggregateName("count"))
+              ))
+          .Columns(columns =>
+          {
+            columns.Add("ShiftCode").Expand(true);
+          })
+          .Rows(rows =>
+          {
+            rows.Add("Month").Expand(true);
+          })
+      .Measures(measures =>
+      {
+        measures.Values(VM_Resources.NAME_DefectCount);
+      })
+      .Events(e => e.Change("function() { replaceColumnsNames(); }"))
+    )
+)
+
+<script src="~/bundles/js/Module/DataAnalysis.js"></script>
+<script src="~/Scripts/kendo/2020.1.114/jszip.min.js"></script>
+
+<script id="dataCellTemplate" type="text/x-kendo-tmpl">
+  # var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #
+  # var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #
+  # var value = dataItem.value; #
+
+  # if (columnMember.children.length || rowMember.children.length) { #
+  <em style="    color: steelblue">#: value # (total)</em>
+  # } else { #
+  #: value #
+  # } #
+</script>

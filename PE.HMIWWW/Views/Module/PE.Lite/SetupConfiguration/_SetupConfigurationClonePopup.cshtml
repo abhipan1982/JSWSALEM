@@ -1,0 +1,67 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Setup
+@model VM_SetupConfiguration
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<form asp-controller="SetupConfiguration" asp-action="CloneSetupConfiguration" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.ConfigurationId)
+
+    <div class="row form-group">
+
+        <div class="col-2 text-right">
+            <label>@Html.LabelFor(x => x.ConfigurationName)</label>
+        </div>
+        <div class="col-4">
+            @Html.Kendo().TextBoxFor(x => x.ConfigurationName).HtmlAttributes(new { @class = "form-control form-control-sm popup_input_standard" })
+            @Html.ValidationMessageFor(x => x.ConfigurationName)
+        </div>
+
+        <div class="col-2 text-right">
+            <label>@Html.LabelFor(x => x.ConfigurationVersion)</label>
+        </div>
+        <div class="col-4">
+            @Html.PeKendo().NumericTextBoxFor(x => x.ConfigurationVersion).Min(1).HtmlAttributes(new { @class = "form-control form-control-sm popup_input_standard" })
+            @Html.ValidationMessageFor(x => x.ConfigurationVersion)
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row form-group">
+        <div class="col text-right">
+            <button class="btn btn-primary popup_button" type="submit">
+                @VM_Resources.BUTTON_clone
+            </button>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    $(function () {
+
+        $('#error').css("display", "none");
+        $("#form").kendoValidator().data("kendoValidator");
+
+    });
+
+    function displayMessage() {
+
+        var validator = $("#form").kendoValidator().data("kendoValidator");
+
+        if (validator.validate()) {
+            $('#error').css("display", "none");
+        } else {
+            $('#error').css("display", "block");
+            $('#popup-footer')
+                .css('display', 'block')
+                .css('background-color', 'rgb(206, 0, 55)');
+        }
+    }
+
+</script>

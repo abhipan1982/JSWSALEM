@@ -1,0 +1,54 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_Scrap
+
+@if (Model.ScrapPercent.HasValue)
+{
+    <div>
+        <div class="mt-4 mb-1">
+            <p class="quality-title">@VM_Resources.NAME_ScrapData</p>
+        </div>
+
+        <div class="p-0 pt-2 row">
+
+            <div class="col-3 p-0">
+                <div class="container-fluid">
+                    <div class="form-group row">
+                        <div class="col-4 text-right">
+                            @Html.LabelFor(m => m.AssetName)
+                        </div>
+                        <div class="col">
+                            @Html.DisplayFor(m => m.AssetName)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3 p-0">
+                <div class="container-fluid">
+                    <div class="form-group row">
+                        <div class="col-4 text-right">
+                            @Html.Label(@VM_Resources.NAME_Percent + " [" + @VM_Resources.UNIT_Percent + "]")
+                        </div>
+                        <div class="col">
+                            @Html.DisplayFor(m => m.Percent)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3 p-0">
+                <div class="container-fluid">
+                    <div class="form-group row">
+                        <div class="col-4 text-right">
+                            @Html.LabelFor(m => m.ScrapRemark)
+                        </div>
+                        <div class="col">
+                            @Html.DisplayFor(m => m.ScrapRemark)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+

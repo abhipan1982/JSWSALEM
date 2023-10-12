@@ -1,0 +1,101 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Incident
+
+@{
+    ViewBag.Title = "_IncidentModify";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+@using (Ajax.BeginForm("UpdateIncident", "Maintenance", new AjaxOptions { UpdateTargetId = "formContainer", OnBegin = "OnFormBegin", OnSuccess = "OnFormSuccess", OnFailure = "OnFormError" }, new { @class = "container-fluid", id = "form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.DeviceId)
+
+    <div class="row h-25 p-0 pt-3">
+        <div class="col-12 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.StartTime)
+                    </div>
+                    <div class="col">
+                        @Html.Kendo().DateTimePickerFor(x => x.StartTime).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_LongDateTime_FORMAT_Picker).HtmlAttributes(new { @class = "form-control form-control-sm" })
+                        @Html.ValidationMessageFor(x => x.StartTime)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.EndTime)
+                    </div>
+                    <div class="col">
+                        @Html.Kendo().DateTimePickerFor(x => x.EndTime).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_LongDateTime_FORMAT_Picker).HtmlAttributes(new { @class = "form-control form-control-sm" })
+                        @Html.ValidationMessageFor(x => x.EndTime)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.IsPlanned)
+                    </div>
+                    <div class="col">
+                        @Html.Kendo().CheckBoxFor(x => x.IsPlanned).HtmlAttributes(new { @class = "form-control" }).Label(String.Empty)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row h-25 p-0 pt-3">
+        <hr />
+        <div class="col-12 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.FKIncidentTypeId)
+                    </div>
+                    <div class="col">
+                        @(Html.Kendo().DropDownListFor(x => x.FKIncidentTypeId)
+                                             .Name("FKIncidentTypeId")
+                                             .DataTextField("Text")
+                                             .DataValueField("Value")
+                                             .Events(e=>e.Change("OnIncidentTypeIdChange"))
+                                             .HtmlAttributes(new { @class = "form-control form-control-sm" })
+                                             .BindTo(new SelectList(@ViewBag.IncidentsTypeList, "IncidentTypeId", "IncidentTypeName"))
+                                             .OptionLabel("-")
+            )
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.IncidentCode)
+                    </div>
+                    <div class="col">
+                        <div span id="incidentTypeCode">
+                            @Html.DisplayFor(m => m.IncidentCode)
+                            </div>
+                        </div>
+                    </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.IncidentTypeDescription)
+                    </div>
+                    <div class="col">
+                        <div span id="IncidentTypeDescription">
+                            @Html.DisplayFor(m => m.IncidentTypeDescription)
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col invalid">
+            <p id="error">
+                <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+            </p>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+                @VM_Resources.GLOB_Form_Button_Update
+            </button>
+        </div>
+    </div>
+}
+

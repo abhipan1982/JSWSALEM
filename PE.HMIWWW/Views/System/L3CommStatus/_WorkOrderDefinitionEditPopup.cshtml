@@ -1,0 +1,276 @@
+@model PE.HMIWWW.ViewModel.System.VM_L3L2WorkOrderDefinition
+@{
+    /**/
+
+    ViewBag.Title = "_WorkOrderDefinitionEditPopup";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<style>
+    .textboxWidth {
+        width: 100px;
+    }
+
+    .text-style {
+        color: #00587c;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    .form-group label {
+        color: #00587c;
+        font-size: 13px;
+        margin-top: 2px;
+    }
+</style>
+
+<form asp-controller="L3CommStatus" asp-action="UpdateWorkOrderDefinition" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+@Html.AntiForgeryToken()
+@Html.HiddenFor(x => x.CounterId)
+@Html.HiddenFor(x => x.CommStatus)
+<div style="height:auto;overflow-x:hidden">
+    <div class="row form-group">
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.WorkOrderName)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.WorkOrderName).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.WorkOrderName)
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.ExternalWorkOrderName)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.ExternalWorkOrderName).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.ExternalWorkOrderName)
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.PreviousWorkOrderName)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.PreviousWorkOrderName).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.PreviousWorkOrderName)
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.OrderDeadline)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.OrderDeadline).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.OrderDeadline)
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.HeatName)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.HeatName).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.HeatName)
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.CustomerName)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.CustomerName).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.CustomerName)
+        </div>
+    </div>
+    <div class="row form-group">
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.TargetWorkOrderWeight)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.TargetWorkOrderWeight).HtmlAttributes(new {@class = "form-control form-control-sm"})
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.TargetWorkOrderWeightMin)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.TargetWorkOrderWeightMin).HtmlAttributes(new {@class = "form-control form-control-sm"})
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.TargetWorkOrderWeightMax)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.TargetWorkOrderWeightMax).HtmlAttributes(new {@class = "form-control form-control-sm"})
+        </div>
+
+    </div>
+    <div class="row form-group">
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.BundleWeightMin)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.BundleWeightMin).HtmlAttributes(new {@class = "form-control form-control-sm"})
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.BundleWeightMax)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.BundleWeightMax).HtmlAttributes(new {@class = "form-control form-control-sm"})
+        </div>
+        
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.NumberOfBillets)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.NumberOfBillets).HtmlAttributes(new {@class = "form-control form-control-sm"})
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.SteelgradeCode)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.SteelgradeCode).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.SteelgradeCode)
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.MaterialCatalogueName)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.MaterialCatalogueName).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.MaterialCatalogueName)
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.ProductCatalogueName)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.ProductCatalogueName).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.ProductCatalogueName)
+        </div>
+
+    </div>
+    <div class="row form-group">
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.BilletWeight)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.BilletWeight).HtmlAttributes(new {@class = "form-control form-control-sm"})
+        </div>
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.InputThickness)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.InputThickness).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.InputThickness)
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.InputWidth)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.InputWidth).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.InputWidth)
+        </div>
+    </div>
+    <div class="row form-group">
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.BilletLength)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.BilletLength).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.BilletLength)
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.InputShapeSymbol)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.InputShapeSymbol).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.InputShapeSymbol)
+        </div>
+        
+        <div class="col"> </div>
+        <div class="col"> </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.OutputThickness)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.OutputThickness).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.OutputThickness)
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.OutputWidth)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.OutputWidth).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.OutputWidth)
+        </div>
+
+        <div class="col text-right pr-0">
+            <label>@Html.LabelFor(x => x.OutputShapeSymbol)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.OutputShapeSymbol).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.OutputShapeSymbol)
+        </div>
+
+    </div>
+
+</div>
+
+<hr>
+
+<div class="row form-group">
+    <div class="col invalid">
+        <p id="error">
+            <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+        </p>
+    </div>
+    <div class="col text-right">
+        <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+            @VM_Resources.GLOB_Form_Button_Update
+        </button>
+    </div>
+</div>
+
+<script>
+
+        $(function () {
+
+            $('#error').css("display", "none");
+            $("#form").kendoValidator().data("kendoValidator");
+
+        });
+
+        function displayMessage() {
+
+            var validator = $("#form").kendoValidator().data("kendoValidator");
+
+            if (validator.validate()) {
+                $('#error').css("display", "none");
+            } else {
+                $('#error').css("display", "block");
+                $('#popup-footer')
+                    .css('display', 'block')
+                    .css('background-color', 'rgb(206, 0, 55)');
+            }
+        }
+
+    </script>
+</form>

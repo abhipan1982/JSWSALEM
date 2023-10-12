@@ -1,0 +1,97 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Setup
+@model VM_SetupConfiguration
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<form asp-controller="SetupConfiguration" asp-action="CreateSetupConfiguration" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+    @Html.AntiForgeryToken()
+
+    <div class="row form-group">
+
+        <div class="col-4 mt-3">
+            <div class="row  mr-5">
+                <div class="col-5 text-right align-self-center">
+                    <label>@Html.LabelFor(x => x.ConfigurationVersion)</label>
+                </div>
+                <div class="col-7">
+                    @Html.Kendo().TextBoxFor(x => x.ConfigurationName).HtmlAttributes(new { @class = "form-control form-control-sm" })
+                    @Html.ValidationMessageFor(x => x.ConfigurationName)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4 mt-3">
+            <div class="row mr-5">
+                <div class="col-5 text-right align-self-center">
+                    <label>@Html.LabelFor(x => x.ConfigurationVersion)</label>
+                </div>
+                <div class="col-7">
+                    @Html.PeKendo().NumericTextBoxFor(x => x.ConfigurationVersion).Min(1).HtmlAttributes(new { @class = "form-control form-control-sm" })
+                    @Html.ValidationMessageFor(x => x.ConfigurationVersion)
+                </div>
+            </div>
+        </div>
+
+        @foreach ((VM_SetupConnector item, Int32 i) in Model.ConnectedSetups.Select((item, i) => (item, i)))
+        {
+            <div class="col-4 mt-3">
+                <div class="row  mr-5">
+                    <div class="col-5 text-right align-self-center">
+                        <label>@Html.Label(item.SetupTypeName)</label>
+                    </div>
+                    <div class="col-7">
+                        @(Html.Kendo().DropDownList()
+                            .Name(String.Format("ConnectedSetups[{0}].SetupId", i))
+                            .DataTextField("Text")
+                            .DataValueField("Value")
+                            .BindTo(new SelectList(Model.Setups.Where(x => x.SetupTypeId == item.SetupTypeId), "SetupId", "SetupName"))
+                            .Value(Model.ConnectedSetups[i].SetupId.ToString())
+                            .OptionLabel("-")
+                        )
+                    </div>
+                </div>
+
+                @Html.Hidden(String.Format("SetupConfigurations[{0}].SetupTypeId", i), item.SetupTypeId)
+            </div>
+        }
+    </div>
+
+    <hr />
+
+    <div class="row form-group">
+        <div class="col text-right">
+            <button class="btn btn-primary popup_button" type="submit">
+                @VM_Resources.BUTTON_add
+            </button>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    $(function () {
+
+        $('#error').css("display", "none");
+        $("#form").kendoValidator().data("kendoValidator");
+
+    });
+
+    function displayMessage() {
+
+        var validator = $("#form").kendoValidator().data("kendoValidator");
+
+        if (validator.validate()) {
+            $('#error').css("display", "none");
+        } else {
+            $('#error').css("display", "block");
+            $('#popup-footer')
+                .css('display', 'block')
+                .css('background-color', 'rgb(206, 0, 55)');
+        }
+    }
+
+</script>

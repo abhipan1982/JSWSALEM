@@ -1,0 +1,29 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.ProductYard;
+
+<div id="dispatchLocations" class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_Locations</div>
+<div id="dispatchLocationsFiltered" class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_LocationsByWO</div>
+@(Html.Kendo().Grid<VM_Location>()
+    .Name("LocationsByWOList")
+    .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 660) })
+    .Filterable()
+    .Scrollable()
+    .Columns(c =>
+    {
+      c.Bound(x => x.ParentAssetDescription).Title(VM_Resources.NAME_Yard).Hidden(true);
+      c.Bound(x => x.AssetId).Visible(false);
+      c.Bound(x => x.AreaId).Visible(false);
+      c.Bound(x => x.AssetDescription);
+      c.Bound(x => x.AreaDescription);
+      c.Bound(x => x.CountProduct);
+      c.Bound(x => x.WeightProducts);
+      c.Bound(p => p.AssetId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+      .ClientTemplate(@Html.ImageButton("details", "GoToLocation(#:AssetId#)", false, "NAME_Location").ToString());
+    })
+    .DataSource(ds => ds
+       .Ajax()
+       .Group(g => g.Add(c => c.AreaDescription))
+       .ServerOperation(true)
+       .Events(e => e.Error("TelerikErrorHandler"))
+       .Read(r => r.Action("GetLocationsByWorkOrder", "ProductYard").Data("getWOData"))
+    )
+)

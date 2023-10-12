@@ -1,0 +1,20 @@
+@using Kendo.Mvc.UI
+@using PE.HMIWWW.Core.Extensions;
+@using PE.HMIWWW.Core.Resources
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration.VM_FeatureInstance
+
+<div class="row h-100">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+    .Name("FeatureBody")
+    .Animation(false)
+    .HtmlAttributes(new {style = "width: 100%;"})
+    .Scrollable(false)
+    .Items(async tabstrip =>
+    {
+    tabstrip.Add().Text(VM_Resources.NAME_Feature)
+    .Selected(true).Content((await Html.PartialAsync("~/Areas/MillConfigurator/Views/MillConfiguration/_FeatureDetails.cshtml", Model)).ToHtmlString());
+    })
+    )
+  </div>
+</div>

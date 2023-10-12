@@ -1,0 +1,112 @@
+@model PE.HMIWWW.ViewModel.System.VM_L2L3ProductReport
+
+<div class="row">
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ProductName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ProductName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.HeatName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.HeatName)
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4 text-right">
+        @Html.LabelFor(x => x.OutputThickness)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(m => m.OutputThickness)
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4 text-right">
+        @Html.LabelFor(x => x.SequenceInWorkOrder)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(m => m.SequenceInWorkOrder)
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.WorkOrderName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.WorkOrderName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.SteelgradeCode)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.SteelgradeCode)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.OutputWidth)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.OutputWidth)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.OutputPieces)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.OutputPieces)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ShiftName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ShiftName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ProductType)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ProductType)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.OutputWeight)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.OutputWeight)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.InspectionResult)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.InspectionResult)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

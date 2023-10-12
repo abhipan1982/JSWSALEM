@@ -1,0 +1,63 @@
+﻿@using PE.HMIWWW.ViewModel.Module.Lite.Product
+@{
+    ViewBag.Title = VM_Resources.PAGE_TITLE_ProductCatalogue_Index;
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("new", "CreateProductCataloguePopup()")
+}
+
+@(Html.Kendo().Grid<VM_ProductCatalogue>()
+    .Name("ProductCatalogueList")
+    .HtmlAttributes(new {style = string.Format(" height:{0}px;", ViewBag.FullGridHeight)})
+    .Scrollable()
+    .Pageable(p => p
+        .Messages(m => m
+            .Display(VM_Resources.GLOB_pagination)))
+    .Filterable()
+    .Columns(c =>
+    {
+        c.Bound(x => x.Id)
+            .Visible(false);
+        c.Bound(x => x.ProductCatalogueName)
+            .Filterable(true);
+        c.Bound(x => x.ProductExternalCatalogueName)
+            .Filterable(true);
+        c.Bound(x => x.Type)
+            .Filterable(false);
+        c.Bound(x => x.Shape)
+            .Filterable(false);
+        c.Bound(x => x.Length)
+            .Filterable(false);
+        c.Bound(x => x.Width)
+            .Filterable(false);
+        c.Bound(x => x.Thickness)
+            .Filterable(false);
+        c.Bound(x => x.Weight)
+            .Filterable(false);
+        c.Bound(x => x.Id)
+            .Filterable(false)
+            .ClientTemplate(Html.ImageButton("edit", "EditProductCataloguePopup(#:Id#)") + Html.ImageButton("details", "GoToDetails(#:Id#)").ToString()
+                            + Html.ImageButton("delete", "Delete(#=Id#)"))
+            .Title(" ")
+            .Width(100);
+    })
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(27)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetProductCatalogueList", "ProductCatalogue")))
+    )
+
+
+<script src="~/js/Module/PE.Lite/ProductCatalogue.js"></script>
+
+<script>
+    function onDataBound() {
+        var dropdownlist = $("#Steelgrade").data("kendoDropDownList");
+        dropdownlist.value($steelgradeId);
+    }
+</script>

@@ -1,0 +1,20 @@
+@using Kendo.Mvc.UI
+@using PE.HMIWWW.Core.Extensions;
+@using PE.HMIWWW.Core.Resources
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.FeatureTemplate.VM_FeatureTemplate
+
+<div class="row h-100">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+    .Name("FeatureTemplateBody")
+    .Animation(false)
+    .HtmlAttributes(new {style = "width: 100%;"})
+    .Scrollable(false)
+    .Items(async tabstrip =>
+    {
+    tabstrip.Add().Text(VM_Resources.NAME_FeatureTemplate)
+    .Selected(true).Content((await Html.PartialAsync("~/Areas/MillConfigurator/Views/FeatureTemplate/_FeatureTemplateDetails.cshtml", Model)).ToHtmlString());
+    })
+    )
+  </div>
+</div>

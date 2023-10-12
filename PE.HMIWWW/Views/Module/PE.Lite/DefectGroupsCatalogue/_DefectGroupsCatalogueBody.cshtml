@@ -1,0 +1,17 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Defect.VM_DefectGroupsCatalogue
+
+<div class="row h-100">
+    <div class="col">
+        @(Html.Kendo().TabStrip()
+            .Name("DefectCatalogueBody")
+            .Animation(false)
+            .Scrollable(false)
+            .Items(tabstrip =>
+            {
+                tabstrip.Add().Text(VM_Resources.NAME_DefectsGroupsCatalogueDetails)
+                    .Selected(true).Content(Html.Partial("~/Views/Module/PE.Lite/DefectGroupsCatalogue/_DefectGroupsCatalogueDetails.cshtml", Model).ToHtmlString()).ContentHtmlAttributes(new {@class = "partialHeight"});
+            })
+            .Events(e => { e.Select("saveTabStripState"); })
+            )
+    </div>
+</div>

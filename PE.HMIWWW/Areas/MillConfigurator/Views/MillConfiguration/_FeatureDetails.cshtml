@@ -1,0 +1,272 @@
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration;
+@using PE.HMIWWW.Core.HtmlHelpers
+@using PE.HMIWWW.Core.Resources;
+@using Kendo.Mvc.UI;
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration.VM_FeatureInstance
+
+<div class="row">
+
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.AssetName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.AssetName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.UnitOfMeasureSymbol)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.UnitOfMeasureSymbol)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ExtUnitOfMeasureSymbol)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ExtUnitOfMeasureSymbol)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.FeatureDescription)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.FeatureDescription)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.DataTypeName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.DataTypeName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ParentFeatureName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ParentFeatureName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ConsumptionAggregationTime)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ConsumptionAggregationTime)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.CommChannelTypeText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.CommChannelTypeText)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.FeatureProviderText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.FeatureProviderText)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsConsumptionFeature)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsConsumptionFeature, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsMaterialRelated)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsMaterialRelated, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsLengthRelated)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsLengthRelated, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsQETrigger)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsQETrigger, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsDigital)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsDigital, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.MinValue)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.MinValue)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.RetentionFactor)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.RetentionFactor)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.AggregationStrategyText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.AggregationStrategyText)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.TagValidationResultText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.TagValidationResultText)
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsActive)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsActive, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsOnHMI)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsOnHMI, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsTrackingPoint)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsTrackingPoint, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsMeasurementPoint)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsMeasurementPoint, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.SampleOffsetTime)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.SampleOffsetTime)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.MaxValue)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.MaxValue)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.FeatureTypeText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.FeatureTypeText)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.FeatureCode)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.FeatureCode)
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<hr>
+
+<div class="col-12 p-0 pt-3">
+  <div class="container-fluid">
+    <div class="form-group row">
+      <div class="col-1 text-right">
+        @Html.LabelFor(x => x.CommAttr1)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(m => m.CommAttr1)
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 p-0 pt-3">
+  <div class="container-fluid">
+    <div class="form-group row">
+      <div class="col-1 text-right">
+        @Html.LabelFor(x => x.CommAttr2)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(m => m.CommAttr2)
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 p-0 pt-3">
+  <div class="container-fluid">
+    <div class="form-group row">
+      <div class="col-1 text-right">
+        @Html.LabelFor(x => x.CommAttr3)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(m => m.CommAttr3)
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <SMFVersion>4.1.28</SMFVersion>
+    <PEStandardVersion>1.2.14</PEStandardVersion>
+    <SMFStartupVersion>1.1.1</SMFStartupVersion>
+    <EFVersion>6.0.0</EFVersion>
+  </PropertyGroup>
+  <Target Name="AddInternalsVisibleTo" BeforeTargets="BeforeCompile">
+    <ItemGroup Condition="'@(InternalsVisibleTo->Count())' &gt; 0">
+      <AssemblyAttribute Update="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <_Parameter1>%(InternalsVisibleTo.Identity)</_Parameter1>
+      </AssemblyAttribute>
+    </ItemGroup>
+  </Target>
+  <!-- https://github.com/dotnet/sdk/issues/1458#issuecomment-420456386 -->
+  <Target Name="_ResolveCopyLocalNuGetPackagePdbsAndXml" Condition="$(CopyLocalLockFileAssemblies) == true" AfterTargets="ResolveReferences">
+    <ItemGroup>
+      <ReferenceCopyLocalPaths
+        Include="@(ReferenceCopyLocalPaths->'%(RootDir)%(Directory)%(Filename).pdb')"
+        Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' and Exists('%(RootDir)%(Directory)%(Filename).pdb')" />
+    </ItemGroup>
+  </Target>
+</Project>

@@ -1,0 +1,246 @@
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration.VM_FeaturesToPdf
+@using PE.HMIWWW.Core.Resources;
+
+@{
+  Layout = "";
+}
+@*<link rel="stylesheet" href="~/css/Module/PE.Lite/PDFstyles.css" />*@
+
+<div class="print-screen" style="display: none">
+    <div class="page-header">
+      <div>
+         <img alt="Primetals logo" class="logo prime" src="/css/System/img/primetals.png">
+      </div>
+      <div class="text-right">
+        <span class="bold">ProcessExpert</span> <br />
+        Technical - Communication <br />
+        @Model.ProjectName <br />
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div class="mt-1">
+        Primetals Technologies Poland Sp. z o.o.  <br />
+      </div>
+      <div class="mt-1">
+        @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year
+      </div>
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <td>
+                    <!--place holder for the fixed-position header-->
+                    <div class="page-header-space"></div>
+                </td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>
+                    <!--*** CONTENT ***-->
+                    <div class="page">
+                        <h1 class="pdf-h1 pdf-title">
+                            ProcessExpert
+                        </h1>
+
+                        <h2 class="pdf-h2 pdf-subtitle">
+                            @Model.ProjectName
+                        </h2>
+
+                        <h3 class="pdf-h3 bold">
+                            Technical
+                        </h3>
+
+                        <h3 class="pdf-h3">
+                            Communication
+                        </h3>
+                    </div>
+                    <div class="page">
+                        <h4 class="pdf-h4 bold">1 Document</h4>
+
+                        <p class="pdf-text pdf-content-text">
+                            This document is an integral part of technical documentation prepared for @Model.ProjectName.Replace("-", " ") project. It must be analysed in context of entire project.
+                        </p>
+
+                        <h5 class="pdf-h5 bold">1.1 Content</h5>
+
+                        <p class="pdf-text">
+                            Document contains L1 communication details.
+                        </p>
+
+                        <h4 class="pdf-h4 bold">2 Mill organization </h4>
+
+                        <ul>
+                            @{
+                                @foreach (var asset in Model.Assets)
+                                {
+                                    var margin = 20 * asset.Level;
+                                    var marginLeft = margin + "px";
+                                    <li style="margin-left: @marginLeft" class="pdf-text">
+                                        @asset.AssetName
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+
+                    <div class="">
+
+                        <h3 class="pdf-h3 bold mt-3">3 List of features </h3>
+
+                        <div class="list">
+
+                            @foreach (var area in Model.Features.GroupBy(x => x.AreaName))
+                            {
+                                var areaFeatureList = area.ToList();
+
+                                <div class="pdf-table">
+
+                                    <div class="pdf-table-title">
+                                        <div class="pdf-text bold">@area.Key</div>
+                                    </div>
+
+                                    @foreach (var group in areaFeatureList.GroupBy(x => x.AssetName))
+                                    {
+                                        var featureList = group.ToList();
+                                        var delayCheckpoint = featureList.Any(x => x.IsDelayCheckpoint);
+
+                                        <div class="pdf-row">
+
+                                            <div class="pdf-group-col">
+                                            @if (delayCheckpoint)
+                                            {
+                                              <div class="pdf-text">@group.Key <span class="pdf-delay-text"><br/>@VM_Resources.NAME_DelayCheckpoint</span></div>
+                                            }
+                                            else
+                                            {
+                                              <div class="pdf-text">@group.Key</div>
+                                            }
+                                            </div>
+
+                                            <div class="pdf-list-col">
+
+                                                @foreach (var item in featureList)
+                                                {
+                                                    <div class="list-element">
+                                                        <div class="pdf-row">
+                                                            <div class="pdf-col-2">
+
+                                                                <div class="pdf-row">
+                                                                    <div class="mr-2 mt-1">
+
+                                                                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <circle cx="12.5" cy="12.5" r="12.5" fill="#FCEECC" />
+                                                                            <path d="M18.2254 13.2313C18.2563 12.9913 18.2794 12.7475 18.2794 12.5C18.2794 12.2525 18.2563 12.0087 18.2254 11.7687L19.8558 10.5275C20.0022 10.415 20.0446 10.2125 19.9483 10.0475L18.4066 7.44875C18.3102 7.2875 18.1098 7.22 17.9364 7.2875L16.017 8.04125C15.62 7.745 15.1845 7.49375 14.7142 7.3025L14.4252 5.315C14.3905 5.13875 14.2325 5 14.0398 5H10.9564C10.7637 5 10.6057 5.13875 10.5748 5.315L10.2858 7.3025C9.81554 7.49375 9.38002 7.74125 8.98303 8.04125L7.06364 7.2875C6.8902 7.22375 6.68978 7.2875 6.59342 7.44875L5.05174 10.0475C4.95539 10.2087 4.99778 10.4112 5.14424 10.5275L6.77072 11.7687C6.73988 12.0087 6.71676 12.2525 6.71676 12.5C6.71676 12.7475 6.73988 12.9913 6.77072 13.2313L5.14424 14.4725C4.99778 14.585 4.95539 14.7875 5.05174 14.9525L6.59342 17.5513C6.68978 17.7125 6.8902 17.78 7.06364 17.7125L8.98303 16.9587C9.38002 17.255 9.81554 17.5063 10.2858 17.6975L10.5748 19.685C10.6057 19.8612 10.7637 20 10.9564 20H14.0398C14.2325 20 14.3905 19.8612 14.4213 19.685L14.7104 17.6975C15.1806 17.5063 15.6161 17.2587 16.0131 16.9587L17.9325 17.7125C18.1059 17.7763 18.3064 17.7125 18.4027 17.5513L19.9444 14.9525C20.0408 14.7913 19.9984 14.5888 19.8519 14.4725L18.2254 13.2313V13.2313ZM12.4981 15.125C11.0065 15.125 9.80013 13.9512 9.80013 12.5C9.80013 11.0488 11.0065 9.875 12.4981 9.875C13.9897 9.875 15.196 11.0488 15.196 12.5C15.196 13.9512 13.9897 15.125 12.4981 15.125Z" fill="#F2A900" />
+                                                                        </svg>
+
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <div class="feature-name">@item.FeatureName</div>
+                                                                        <div class="pdf-row">
+                                                                            <div class="pdf-label">Type of measurement: </div>
+                                                                            @if (@item.IsSampledFeature)
+                                                                            {
+                                                                                <div class="pdf-val"> Sample </div>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                              <div class="pdf-val"> Aggregated </div>
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="pdf-col-1">
+                                                                <div class="pdf-row">
+                                                                    <div class="pdf-label">@VM_Resources.NAME_Unit: </div>
+                                                                    <div class="pdf-val">@item.UnitCategoryName [@item.UnitOfMeasureSymbol]</div>
+                                                                </div>
+                                                                <div class="pdf-row">
+                                                                    <div class="pdf-label">@VM_Resources.NAME_Limits: </div>
+                                                                    @if (@item.MinValue == null && @item.MaxValue == null)
+                                                                    {
+                                                                        <div class="pdf-val"> - </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <div class="pdf-val">
+                                                                            @if (@item.MinValue == null)
+                                                                            {
+                                                                                <span> ? </span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                @item.MinValue
+                                                                            }
+                                                                            -
+                                                                            @if (@item.MaxValue == null)
+                                                                            {
+                                                                                <span> ? </span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                @item.MaxValue
+                                                                            }
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="pdf-col-3">
+                                                                <div class="pdf-row">
+                                                                    <div class="pdf-label">@VM_Resources.NAME_DataType: </div>
+                                                                    @if (@item.MaxLength != null)
+                                                                    {
+                                                                      <div class="pdf-val">@item.DataTypeName [@item.MaxLength bit]</div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                      <div class="pdf-val">@item.DataTypeName</div>
+                                                                    }
+                                                                </div>
+                                                                <div class="pdf-row">
+                                                                    <div class="pdf-label">@VM_Resources.NAME_CommAttr1: </div>
+                                                                    <div class="pdf-val">@item.CommAttr1</div>
+                                                                </div>
+                                                                <div class="pdf-row">
+                                                                    <div class="pdf-label">@VM_Resources.NAME_CommAttr2: </div>
+                                                                    <div class="pdf-val">@item.CommAttr2</div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="pdf-val mt-1">@item.FeatureDescription</div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td>
+                    <!--place holder for the fixed-position footer-->
+                    <div class="page-footer-space"></div>
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+</div>
+
+

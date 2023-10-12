@@ -1,0 +1,17 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialMeasurements
+
+<div class="row h-100">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+    .Name("MeasurementBody_" + Model.RawMaterialId)
+    .Animation(false)
+    .HtmlAttributes(new { style = "width: 100%;" })
+    .Scrollable(false)
+    .Items(async tabstrip =>
+    {
+      tabstrip.Add().Text(VM_Resources.GLOB_Name_Details)
+        .Selected(true).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Layer/_MeasurementDetails.cshtml", Model)).ToHtmlString()).ContentHtmlAttributes(new { @class = "partialHeight" });
+    })
+    )
+  </div>
+</div>

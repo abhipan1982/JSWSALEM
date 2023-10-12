@@ -1,0 +1,59 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Schedule.VM_Schedule
+
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+
+@if (Model != null && !ViewData.ModelState.IsValid)
+{
+    <script>
+        $(document).ready(function () {
+            $("#popup-footer").css('background', '#ce0037').css('color', '#fff');
+        })
+    </script>
+}
+
+<form asp-controller="Schedule" asp-action="CreateTestSchedule" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ScheduleId)
+    @Html.HiddenFor(model => model.FKWorkOrderId)
+
+    <div class="row form-group">
+        <div class="col-5 text-right">
+            @Html.LabelFor(m => m.PlannedWeight, new {@class = "control-label"})
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.PlannedWeight).HtmlAttributes(new {@class = "w-100", type = "number"})
+            @Html.ValidationMessageFor(m => m.PlannedWeight, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-5 text-right">
+            @Html.LabelFor(m => m.NoOfmaterials, new {@class = "control-label"})
+        </div>
+        <div class="col">
+            @(Html.Kendo()
+              .NumericTextBoxFor(x => x.NoOfmaterials)
+              .Min(0)
+              .Value(Model.NoOfmaterials > ViewBag.MaxMaterialsCount ? ViewBag.MaxMaterialsCount : Model.NoOfmaterials)
+              .Max(ViewBag.MaxMaterialsCount)
+              .HtmlAttributes(new {@class = "w-100"})
+            )
+
+            @Html.ValidationMessageFor(m => m.NoOfmaterials, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row form-group">
+        <div class="col text-right">
+            <input type="submit" class="btn btn-primary popup_button" value="@VM_Resources.BUTTON_SubmitForm" />
+        </div>
+    </div>
+</form>

@@ -1,0 +1,76 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Defect.VM_DefectCatalogue
+<style>
+    .line {
+        margin: 0 auto;
+        width: 95%;
+        height: 1px;
+        background-color: rgba(0, 100, 135, 0.7);
+    }
+</style>
+
+<div class="row h-100 p-0 pt-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(x => x.DefectCatalogueCode)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.DefectCatalogueCode)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(x => x.DefectCatalogueName)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.DefectCatalogueName)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(x => x.DefectCatalogueDescription)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.DefectCatalogueDescription)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.DefectCatalogueCategoryCode)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.DefectCatalogueCategoryCode)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.ParentDefectCatalogueCode)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.ParentDefectCatalogueCode)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                    </div>
+                    <div class="col text-left">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

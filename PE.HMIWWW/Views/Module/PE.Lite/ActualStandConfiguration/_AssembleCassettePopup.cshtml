@@ -1,0 +1,103 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.RollSetToCassette.VM_CassetteOverviewWithPositions
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+@if (Model != null && @ViewData.ModelState.IsValid)
+{
+  <script>
+		$(document).ready(function () {
+			var positionsCnt = @Model.NumberOfPositions + 3;
+			var mainHeight = 150 + (positionsCnt ) * 40;
+			ChangePopupSize(mainHeight);
+		})
+  </script>
+}
+
+<form asp-controller="RollSetToCassette" asp-action="AssembleRollSetAndCassette" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+  @Html.AntiForgeryToken()
+  @Html.HiddenFor(model => model.Id)
+  @Html.HiddenFor(m => m.CassetteName)
+  @Html.HiddenFor(m => m.CassetteTypeId)
+  @Html.HiddenFor(m => m.EnumCassetteStatus)
+  @Html.HiddenFor(m => m.NumberOfPositions)
+
+  <div style="width:900px; height:@(150 + Model.NumberOfPositions * 40)px;">
+    <div class="col-xs-6">
+      <center>
+        <div class="form-group">
+          <center>
+            @Html.LabelFor(m => m.CassetteName, new { @class = "col-md-6 control-label" })
+            @Html.DisplayFor(m => m.CassetteName)
+          </center>
+        </div>
+        <div class="form-group">
+          @Html.LabelFor(m => m.CassetteTypeId, new { @class = "col-md-6 control-label" })
+          @Html.Raw(((SelectList)ViewBag.CassetteType).Where(p => p.Value == Model.CassetteTypeId.ToString()).First().Text)
+        </div>
+        <div class="form-group">
+          @Html.LabelFor(m => m.EnumCassetteStatus, new { @class = "col-md-6 control-label" })
+          @Html.Raw(((SelectList)ViewBag.CassetteStatus).Where(p => p.Value == Model.EnumCassetteStatus.ToString()).First().Text)
+        </div>
+        <div class="form-group">
+          @Html.LabelFor(m => m.NumberOfPositions, new { @class = "col-md-6 control-label" })
+          @Html.DisplayFor(m => m.NumberOfPositions)
+        </div>
+
+        <br />
+        <table cellspacing="2" cellpadding="2" border="0">
+          <tr>
+            <td width="100px">
+              <b>@PE.HMIWWW.Core.Resources.VM_Resources.FIELDNAME_Position</b>
+            </td>
+            <td width="790px">
+              <b>@PE.HMIWWW.Core.Resources.VM_Resources.FIELDNAME_Rollset</b>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+          </tr>
+
+          @for (var i = 0; i < Model.RollSetss.Count; i++)
+          {
+            <tr>
+              <td width="100px">@(i + 1).</td>
+
+              <td width="790px">
+                @(Html.Kendo().DropDownList().Name("RollSetss[" + i + "].Id")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .HtmlAttributes(new { style = "width: 300px" })
+                                .DataSource(source =>
+                                {
+                                  source
+                                      .Read(read =>
+                                      {
+                                        read
+                                      .Action("GetCassetteRSWith3RollsList", "RollSetToCassette", new { CassetteType = @Model.CassetteTypeId });
+                                      })
+                      ;
+                                })
+                                )
+                @Html.ValidationMessageFor(m => m.RollSetss[i].RollSetId)
+              </td>
+            </tr>
+          }
+
+        </table>
+        <br />
+
+
+      </center>
+      <input type="submit" class="btn btn-primary popup_button" value="@PE.HMIWWW.Core.Resources.VM_Resources.BUTTON_SubmitForm" />
+    </div>
+  </div>
+</form>
+
+<script>
+  function ChangePopupSize(mainHeight) {
+    $(".popup_content").height(mainHeight);
+  }
+</script>

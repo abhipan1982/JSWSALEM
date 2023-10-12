@@ -1,0 +1,24 @@
+<script src="~/bundles/js/Module/Charging.js" />
+@(
+        Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialOverview>()
+                .Name("ChargingRawMaterialsList")
+                .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 640) })
+                .Scrollable()
+                .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                .Filterable()
+                .Columns(c =>
+                {
+                  c.Bound(x => x.OrderSeq).Width(100);
+                  c.Bound(x => x.RawMaterialName).ClientTemplate("#if(RawMaterialId){ # <span class='link' onclick='_RawMaterial.GoToRawMaterial(#= RawMaterialId #)'>#= RawMaterialName #</span> #}#");
+                  c.Bound(x => x.WorkOrderName).ClientTemplate("#if(WorkOrderId){ # <span class='link' onclick='_WorkOrder.GoToWorkOrder(#= WorkOrderId #)'>#= WorkOrderName #</span> #}#");
+                  c.Bound(x => x.HeatName).ClientTemplate("#if(HeatId){ # <span class='link' onclick='_Heat.GoToHeat(#= HeatId #)'>#= HeatName #</span> #}#");
+
+                })
+                .DataSource(ds => ds
+                    .Ajax()
+                    .ServerOperation(true)
+                    .PageSize(7)
+                    .Events(e => e.Error("TelerikErrorHandler"))
+                )
+)

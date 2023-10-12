@@ -1,0 +1,27 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Products
+@model long?
+@(Html.Kendo().Grid<VM_ProductsOverview>()
+  .Name("WorkOrderProducts")
+  .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Pageable(p => p
+  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Sortable()
+  .Filterable()
+  .HtmlAttributes(new {style = "height: 100%;"})
+  .Columns(columns =>
+  {
+    columns.Bound(c => c.ProductId).Visible(false);
+    columns.Bound(c => c.ProductName);
+    columns.Bound(c => c.ProductWeight);
+    columns.Bound(c => c.ProductCreatedTs).Format(VM_Resources.GLOB_ShortDateTime_FORMAT);
+    columns.Bound(c => c.WorkOrderName);
+    columns.ForeignKey(o => o.EnumInspectionResult, (SelectList)ViewBag.ProductQualityList).ClientTemplate(
+      "<img src='" + "#=InspectionResultImageSRC#".BuildImageSrc() + "' /> #=InspectionResultText#").Width(160);
+  })
+  .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(23)
+    .Read(r => r.Action("GetWorkOrderProductsList", "WorkOrder", new {workOrderId = Model}))
+  )
+)

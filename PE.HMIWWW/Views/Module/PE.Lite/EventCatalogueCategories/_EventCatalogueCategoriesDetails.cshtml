@@ -1,0 +1,99 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Event.VM_EventCatalogueCategory
+<style>
+    .line {
+        margin: 0 auto;
+        width: 95%;
+        height: 1px;
+        background-color: rgba(0, 100, 135, 0.7);
+    }
+</style>
+
+<div class="row h-100 p-0 pt-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(x => x.EventCatalogueCategoryCode)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.EventCatalogueCategoryCode)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(x => x.EventCatalogueCategoryName)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.EventCatalogueCategoryName)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(x => x.EventCategoryGroupName)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.EventCategoryGroupName)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.EventCatalogueCategoryDescription)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.EventCatalogueCategoryDescription)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.EventTypeCode)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.EventTypeCode)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.EventTypeName)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.EventTypeName)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col-5 text-right">
+                        @Html.LabelFor(x => x.EnumAssignmentTypeName)
+                    </div>
+                    <div class="col-3 text-left">
+                        @Html.DisplayFor(m => m.EnumAssignmentTypeName)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.IsDefault)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.IsDefault)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

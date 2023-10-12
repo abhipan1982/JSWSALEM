@@ -1,0 +1,104 @@
+@model PE.HMIWWW.ViewModel.System.VM_L2L3WorkOrderReport
+
+<div class="row">
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.WorkOrderName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.WorkOrderName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.WorkOrderStart)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.WorkOrderStart)
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4 text-right">
+        @Html.LabelFor(x => x.TotalWeightOfMaterials)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(m => m.TotalWeightOfMaterials)
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4 text-right">
+        @Html.LabelFor(x => x.NumberOfScrappedMaterials)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(m => m.NumberOfScrappedMaterials)
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ProductCatalogueName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ProductCatalogueName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.WorkOrderEnd)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.WorkOrderEnd)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.NumberOfPlannedMaterials)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.NumberOfPlannedMaterials)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.NumberOfRejectedMaterials)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.NumberOfRejectedMaterials)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.NumberOfProducts)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.NumberOfProducts)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.TotalWeightOfProducts)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.TotalWeightOfProducts)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.NumberOfRolledMaterials)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.NumberOfRolledMaterials)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

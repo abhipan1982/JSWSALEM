@@ -1,0 +1,40 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Material
+@model long?
+@(Html.Kendo().Grid<VM_L3L1MaterialAssignment>()
+  .Name("MaterialGrading")
+  .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Sortable()
+  .Filterable()
+  .Pageable(p => p
+  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .HtmlAttributes(new { style = "height: 640px;" })
+  .Columns(c =>
+  {
+    c.Bound(x => x.MaterialId).Visible(false);
+    c.Bound(x => x.RawMaterialId).Visible(false);
+    c.Bound(x => x.DisplayedMaterialName);
+    c.Bound(c => c.HasDefects).ClientTemplate(
+      "<img src='" + "#=HasDefectImageSRC#".BuildImageSrc() + "' /> #=HasDefectsText#").Width(40);
+    c.ForeignKey(o => o.EnumRejectLocation, (SelectList)ViewBag.RejectLocation);
+    c.Bound(x => x.OutputPieces);
+    c.ForeignKey(o => o.EnumTypeOfScrap, (SelectList)ViewBag.TypeOfScrap);
+    c.ForeignKey(o => o.EnumRawMaterialStatus, (SelectList)ViewBag.RawMaterialStatus);
+    c.Bound(x => x.ScrapPercent).Format(@VM_Resources.FORMAT_Percent_Scrap);
+    c.Bound(x => x.WorkOrderId).Visible(false);
+    c.Bound(p => p.MaterialId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(115)
+      .ClientTemplate(
+        "#if(ScrapActionAvailable){ #" + @Html.ImageButton("scrap_material", "_Scrap.ScrapPopup(#:RawMaterialId#, () => { reloadGrid('MaterialGrading'); })").ToString() + "#}#" +
+        "#if(RejectActionAvailable){ #" + @Html.ImageButton("reject", "_Reject.RejectRawMaterialPopup(#:RawMaterialId#, () => { reloadGrid('MaterialGrading'); })").ToString() + "#}#" +
+        "#if(MaterialReadyActionAvailable){ #" + @Html.ImageButton("confirm", "_RawMaterial.MaterialReadyPopup(#:RawMaterialId#, () => { reloadGrid('MaterialGrading'); })", false, "NAME_Ready").ToString() + "#}#" +
+        "#if(ProductUndoActionAvailable){ #" + @Html.ImageButton("undo_product", "_RawMaterial.ProductUndo(#:RawMaterialId#, () => { reloadGrid('MaterialGrading'); })").ToString() + "#}#" +
+        "#if(RawMaterialId == null){ #" + @Html.ImageButton("details", "_Material.GoToMaterial(#:MaterialId#)").ToString() + "#}" +
+        "else {#" + @Html.ImageButton("details", "_RawMaterial.GoToRawMaterial(#:RawMaterialId#)").ToString() + "#}#"
+    );
+  })
+  .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(23)
+    .Read(r => r.Action("GetMaterialsListByWorkOrderId", "WorkOrder", new {workOrderId = Model }))
+  )
+)

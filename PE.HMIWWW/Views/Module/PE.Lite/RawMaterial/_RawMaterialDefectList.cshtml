@@ -1,0 +1,32 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Inspection
+@model long?
+
+
+@(Html.Kendo()
+      .Grid<VM_Defect>()
+      .Name("RawMaterialDefectList")
+      .NoRecords(true)
+      .Sortable()
+      .Filterable()
+      .Scrollable()
+      .Pageable(p => p.Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+      .HtmlAttributes(new { style = "height: 100%;" })
+      .Columns(c =>
+      {
+        c.Bound(x => x.DefectCatalogueName);
+        c.Bound(x => x.DefectDescription);
+        c.Bound(x => x.DefectPosition);
+        c.Bound(x => x.AssetName);
+        c.Bound(p => p.DefectId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(70)
+          .ClientTemplate(
+            @Html.ImageButton("edit", "_Defect.editDefectPopup(#:DefectId#, () => { reloadGrid('RawMaterialDefectList'); })").ToString() +
+            @Html.ImageButton("delete", "_Defect.deleteDefect(#:DefectId#, () => { reloadGrid('RawMaterialDefectList'); })").ToString()
+          );
+      })
+      .DataSource(d => d
+        .Ajax()
+        .ServerOperation(false)
+        .PageSize(24)
+        .Read(r => r.Action("GetDefectListByRawMaterialId", "RawMaterial", new { rawMaterialId = Model }))
+      )
+)

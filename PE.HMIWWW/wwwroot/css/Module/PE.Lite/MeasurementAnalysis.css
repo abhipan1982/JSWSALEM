@@ -1,0 +1,32 @@
+﻿.chart-container {
+  display: none;
+  width: 100%;
+  height: 380px;
+  max-width: 100%
+}
+
+.msg-container {
+  width: 100%;
+  height: 380px;
+  max-width: 100%;
+  text-align: center;
+  line-height: 380px;
+}
+
+.k-tabstrip-wrapper > .k-tabstrip > .k-content {
+  height: 83%;
+  overflow: hidden;
+}
+
+#Measurements-0 {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+#FeaturesList .k-tabstrip-items .k-state-default:first-child {
+  margin-left: 0px;
+}
+
+#FeaturesList .k-tabstrip-items .k-state-default {
+  margin-left: -14px;
+}

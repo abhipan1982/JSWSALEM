@@ -1,0 +1,37 @@
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_L3CommStatus_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+  {
+  @Html.ImageButton("filter", "ShowOnlyFailedRecords()", false)
+  @Html.ImageButton("clear-filters", "ShowAllRecords()", false)
+  @Html.ImageButton("new", "CreateWorkOrderDefinitionPopup()",false, "BUTTON_CreateWorkOrderDefinition")
+  @Html.ImageButton("bottom", "ImportWorkOrderDefinitionPopup()",false, "BUTTON_import")
+}
+
+  <div class="row">
+    <div class="col">
+      @(Html.Kendo().TabStrip()
+        .Name("L3CommStatus")
+        .Animation(false)
+        .HtmlAttributes(new { style = "width: 100%;" })
+        .Scrollable(false)
+        .Items(async tabstrip =>
+        {
+          tabstrip.Add().Text(VM_Resources.NAME_L3TransferTable_General)
+          .Selected(true).Content((await Html.PartialAsync("~/Views/System/L3CommStatus/_L3TransferTableGeneral.cshtml")).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_L3TransferTable_WorkOrder)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/System/L3CommStatus/_L3TransferTableWorkOrder.cshtml")).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_L3TransferTable_WorkOrderReports)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/System/L3CommStatus/_L3TransferTableWorkOrderReport.cshtml")).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_L3TransferTable_ProductReports)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/System/L3CommStatus/_L3TransferTableProductReport.cshtml")).ToHtmlString());
+        })
+        )
+  </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/System/L3TransferTableWorkOrder.css" />
+<script src="~/bundles/js/System/L3TransferTableCommStatus.js" />

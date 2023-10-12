@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release</Configurations>
+		<Platforms>AnyCPU</Platforms>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\PE.BaseInterfaces\PE.BaseInterfaces.csproj" />
+		<ProjectReference Include="..\..\PE.BaseCommon\PE.BaseCommon.csproj" />
+		<ProjectReference Include="..\..\PE.BaseCore\PE.BaseCore.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Nito.AsyncEx" />
+		<PackageReference Include="SMF.Core" />
+		<PackageReference Include="SMF.DbEntity" />
+		<PackageReference Include="SMF.Module" />
+		<PackageReference Include="SMF.Startup" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Models\Entities" />
+	</ItemGroup>
+</Project>

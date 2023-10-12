@@ -1,0 +1,33 @@
+@model long?
+@using PE.HMIWWW.ViewModel.Module.Lite.Inspection
+
+<div>
+    <p class="quality-title">@VM_Resources.NAME_Defects</p>
+</div>
+<div>
+    @(Html.Kendo().Grid<VM_Defect>()
+            .Name("IStationDefectsGrid")
+            .HtmlAttributes(new { style = "height: 300px; margin-top: 10px" })
+            .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+            .Sortable()
+            .Filterable()
+            .Pageable(p => p
+                .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+            .Columns(c =>
+            {
+                c.Bound(x => x.DefectId).Visible(false);
+                c.Bound(x => x.DefectCatalogueId).Visible(false);
+                c.Bound(x => x.DefectCatalogueName);
+                c.Bound(x => x.AssetName);
+                c.Bound(p => p.DefectId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+                    .ClientTemplate(@Html.ImageButton("edit", "_Defect.editDefectPopup(#:DefectId#, () => { reloadGrid('IStationDefectsGrid'); reloadGrid('SearchGrid');})").ToString());
+                c.Bound(p => p.DefectId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+                    .ClientTemplate(@Html.ImageButton("delete", "_Defect.deleteDefect(#:DefectId#, () => { reloadGrid('IStationDefectsGrid'); reloadGrid('SearchGrid');})").ToString());
+            })
+            .DataSource(d => d
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(6)
+                .Read(r => r.Action("GetDefectsByRawMaterialId", "CoilInspectionStation", new { rawMaterialId = Model }))
+                ))
+</div>

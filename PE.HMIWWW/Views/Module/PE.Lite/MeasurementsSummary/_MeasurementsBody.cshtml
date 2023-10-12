@@ -1,0 +1,41 @@
+@using PE.HMIWWW.Core.Helpers
+
+@model IEnumerable<PE.HMIWWW.ViewModel.Module.Lite.Measurements.VM_RawMaterialInArea>
+
+<div class="measurements-chart">
+    <ul class="chart-menu">
+        <li class="chart-menu-el min" data-chart-el="min">min</li>
+        <li class="chart-menu-el avg active" data-chart-el="avg">avg</li>
+        <li class="chart-menu-el max" data-chart-el="max">max</li>
+    </ul>
+    @await Html.PartialAsync("~/Views/Module/PE.Lite/MeasurementsSummary/_MeasurementsSummaryChart.cshtml")
+</div>
+
+
+<div class="row" style="height: 300px">
+    <div class="col">
+        @(Html.Kendo().TabStrip()
+        .Name("MeasurementsLists")
+        .Animation(false)
+        .HtmlAttributes(new { style = "width: 100%;" })
+        .Scrollable(false)
+        .Items(tabstrip =>
+        {
+          var tabItemIndex = 0;
+
+          foreach (var tabItem in Model)
+          {
+            if (tabItemIndex == 0)
+            {
+              tabstrip.Add().Text(TrackingAreaHelpers.TrackingAreas.Where(x => x.TrackingAreaCode == tabItem.AreaCode).Single().TrackingAreaTitle).Selected(true).Content(@Html.Partial("~/Views/Module/PE.Lite/MeasurementsSummary/_MeasurementsGrid.cshtml", tabItem.AreaCode.ToString()).ToHtmlString());
+            }
+            else
+            {
+              tabstrip.Add().Text(TrackingAreaHelpers.TrackingAreas.Where(x => x.TrackingAreaCode == tabItem.AreaCode).Single().TrackingAreaTitle).Selected(false).Content(@Html.Partial("~/Views/Module/PE.Lite/MeasurementsSummary/_MeasurementsGrid.cshtml", tabItem.AreaCode.ToString()).ToHtmlString());
+            }
+            tabItemIndex++;
+          }
+        }
+        ))
+    </div>
+</div>

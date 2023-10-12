@@ -1,0 +1,30 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Delay
+
+@(Html.Kendo().Grid<VM_Delay>()
+  .Name("DelayUnplannedList")
+  .HtmlAttributes(new {style = string.Format(" height:{0}px;", 375)})
+  .Filterable()
+  .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Scrollable()
+  .Sortable()
+  .Columns(c =>
+  {
+  c.Bound(x => x.Id).Filterable(false).Width(20).Visible(false);
+  c.Bound(x => x.EventStartTs).Width(90).Format(VM_Resources.GLOB_ShortDateTime_FORMAT);
+  c.Bound(x => x.EventEndTs).Width(90).Format(VM_Resources.GLOB_ShortDateTime_FORMAT);
+  c.Bound(x => x.RawMaterialName).Width(100)
+    .ClientTemplate("#if(RawMaterialName){ # <a class='link' href='javascript:_RawMaterial.GoToRawMaterial(#:FkRawMaterialId#);'> #:RawMaterialName# </a> #}#");
+  c.Bound(x => x.DelayCatalogueName).Width(160);
+  c.Bound(x => x.UserComment).Width(200);
+  c.Bound(x => x.Id).Width(50).Filterable(false)
+    .ClientTemplate(Html.ImageButton("edit", "DelayEditPopup(#:Id#)")
+    + Html.ImageButton("delay_split", "DelayDividePopup(#:Id#)").ToString()).Title(" ");
+  })
+  .DataSource(ds => ds
+    .Ajax()
+    .Sort(sort => sort.Add(x => x.EventStartTs).Ascending())
+    .ServerOperation(true)
+    .Events(e => e
+      .Error("TelerikErrorHandler"))
+    .Read(r => r.Action("GetDelaysUnpannedBetweenDatesList", "Delays").Data("getDateRange")))
+)

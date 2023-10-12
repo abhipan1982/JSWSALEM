@@ -1,0 +1,80 @@
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.FeatureTemplate.VM_FeatureTemplate
+
+<div class="row">
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.FeatureTemplateName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.FeatureTemplateName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.UnitOfMeasureSymbol)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.UnitOfMeasureSymbol)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.DataType)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.DataType)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.FeatureTypeText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.FeatureTypeText)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ExtUnitOfMeasureSymbol)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ExtUnitOfMeasureSymbol)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.FeatureTemplateDescription)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.FeatureTemplateDescription)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.AggregationStrategyText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.AggregationStrategyText)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.CommChannelTypeText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.CommChannelTypeText)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

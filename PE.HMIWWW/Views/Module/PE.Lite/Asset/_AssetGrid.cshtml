@@ -1,0 +1,68 @@
+﻿@using PE.HMIWWW.ViewModel.Module.Lite.Asset
+@using PE.HMIWWW.ViewModel.Module.Lite.Feature
+@(Html.Kendo().Grid<VM_Asset>
+    ()
+    .Name("AssetGrid")
+    .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Sortable()
+    .Scrollable()
+    .Filterable()
+    .Selectable()
+    .HtmlAttributes(new {style = string.Format("height:{0}px;", ViewBag.FullGridHeight - 75)})
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.IsDelayCheckpoint).Width(100);
+        // columns.Bound(c => c.AssetId).Width(20).Visible(false);
+        columns.Bound(c => c.Levels).Width(150).Visible(true).ClientTemplate("<span style='white-space:pre-wrap'>#:Levels#</span>");
+        columns.Bound(c => c.AssetCode).Width(100);
+        columns.Bound(c => c.AssetName).Width(100);
+        columns.Bound(c => c.AssetDescription).Width(150);
+        columns.Bound(c => c.AreaCode).Width(100);
+        columns.Bound(c => c.AreaName).Width(80);
+        columns.Bound(c => c.ZoneCode).Width(80);
+        columns.Bound(c => c.ZoneName).Width(100);
+        //columns.Bound(c => c.IsCheckpoint).Width(100);
+    })
+    .DataSource(d => d
+        .Ajax()
+        .ServerOperation(true)
+        .Sort(sort => { sort.Add(s => s.OrderSeq).Ascending(); })
+        .Read(r => r.Action("GetAssetOverList", "Asset"))
+    )
+    .ClientDetailTemplateId("FeatureByAssetId")
+    )
+
+<script id="FeatureByAssetId" type="text/kendo-tmpl">
+
+    @(Html.Kendo().Grid<VM_Feature>()
+        .Name("FeatureGrid_#=AssetId#")
+        .Columns(columns =>
+        {
+            columns.Bound(o => o.FkAssetId).Width(20).Visible(false);
+            columns.Bound(o => o.FeatureId).Width(20).Visible(false);
+            columns.Bound(o => o.FeatureCode).Width(20).Visible(true);
+            columns.Bound(o => o.FeatureName).Width(20).Visible(true);
+            columns.Bound(o => o.IsActive).Width(20).Visible(true);
+            columns.Bound(o => o.IsLengthRelated).Width(20).Visible(true);
+            columns.Bound(o => o.IsMaterialRelated).Width(20).Visible(true);
+            columns.Bound(o => o.IsNewProcessingStep).Width(20).Visible(true);
+        })
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(5)
+            .Read(read => read.Action("GetFeatureByAssetId", "Asset", new {assetId = "#=AssetId#"})) //#=AssetId#  this parameter must same to table cloumn name
+        )
+        .Pageable(p => p
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+        .Sortable()
+        .ToClientTemplate()
+        )                          
+
+
+</script>
+
+<script>
+    function dataBound() {
+        this.expandRow(this.tbody.find("tr.k-master-row").first());
+    }
+</script>

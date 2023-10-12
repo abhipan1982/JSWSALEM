@@ -1,0 +1,28 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_IncidentType
+
+    <div class="row h-100 p-0 pt-3">
+        @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Incident>()
+                    .Name("IncidentsActions" + Guid.NewGuid().ToString())
+                    .NoRecords(VM_Resources.GLOB_GRID_NO_DATA)
+                    .Sortable()
+                    .Filterable()
+                    .Scrollable()
+                    .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                    .HtmlAttributes(new { style = "height: 375px;" })
+                    .Columns(c =>
+                    {
+                        c.Bound(x => x.IncidentId).Visible(false);
+                        c.Bound(x => x.IncidentName);
+                        c.Bound(p => p.IncidentId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(30)
+                                     .ClientTemplate(@Html.ImageButton("details", "GoToComponent(#:RecommendedActionId#)").ToString());
+
+                    })
+                    .DataSource(d => d
+                        .Ajax()
+                        .ServerOperation(true)
+                        .PageSize(24)
+                        .Read(r => r.Action("GetRecommendedActionsList", "IncidentType", new { incidentTypeId = Model.IncidentTypeId }))
+                        ))
+
+    </div>

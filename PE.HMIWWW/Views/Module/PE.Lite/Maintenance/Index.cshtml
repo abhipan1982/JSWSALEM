@@ -1,0 +1,421 @@
+﻿@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_Equipment_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    <div class="row pl-2 date-selector">
+        <div class="datepicker-container row">
+            <div class="dateRangeError"></div>
+            <div class="datepicker demo-section k-content" style="width: 200px">
+                @(Html.Kendo().DateTimePicker()
+                .Name("datetimepicker-from")
+                .Value(DateTime.Now.AddDays(-7))
+                .HtmlAttributes(new { style = "width: 200px", title = "datetimepicker", @class = "delays-datepicker k-input" })
+                 .DateInput()
+        )
+            </div>
+            <div class="datepicker demo-section k-content" style="width: 200px">
+                @(Html.Kendo().DateTimePicker()
+                .Name("datetimepicker-to")
+                .Value(DateTime.Now)
+                .HtmlAttributes(new { style = "width: 200px", title = "datetimepicker", @class = "delays-datepicker k-input" })
+                .DateInput()
+        )
+            </div>
+            <div class="action-icons">
+                @Html.ImageButton("calendar", "getIncidentsData()", false, "NAME_DateRange")
+                <span style="margin: 0 10px">
+                    @Html.ImageButton("today", "getIncidentsSummaryForToday()", false, "NAME_Today")
+                    @Html.ImageButton("yesterday", "getIncidentsSummaryForYesterday()", false, "NAME_Yesterday")
+                    @Html.ImageButton("lastWeek", "getIncidentsSummaryForLastWeek()", false, "NAME_LastWeek")
+                </span>
+            </div>
+        </div>
+        @Html.ImageButton("clear-filters", "ClearFilters()", false)
+        @Html.ImageButton("maintenance_inventory", "OnInstalledHide()", false)
+        @Html.ImageButton("maintenance_installed", "OnInventoryHide()", false)
+        @Html.ImageButton("new", "AddNewDevice()", false)
+        @Html.ImageButton("edit", "EditDevice()", false)
+        @Html.ImageButton("delete", "DeleteDevice()", false)
+    <div id="InstalledFunctions">
+        @Html.ImageButton("device_dismount", "UninstallDevice()", false)
+    </div>
+    <div id="InventoryFunctions">
+        @Html.ImageButton("device_mount", "InstallDevice()", false)
+    </div>
+    </div>
+}
+@Scripts.Render("~/bundles/module/maintenance")
+@Scripts.Render("~/Scripts/expandCategoriesButton.js")
+@Styles.Render("~/Content/Module/Maintenance")
+@Styles.Render("~/Content/expandCategoriesButton.css")
+
+
+
+<div class="container-fluid p-3">
+  <div id="InstalledSection">
+    <div class="row">
+      <div class="col-3 grid-filter">
+        @*@Html.Label(VM_Resources.NAME_Search + ":")  <input class="k-textbox" style="width:320px" placeholder="@VM_Resources.NAME_SearchTextBoxTip" />*@
+        <script>
+
+          $("input").on("input", function () {
+            var query = this.value.toLowerCase();
+            var dataSource = $("#treeview").data("kendoTreeView").dataSource;
+
+            filter(dataSource, query);
+          });
+        </script>
+
+        <script id="treelist-template" type="text/x-kendo-template">
+
+          #  if (IsDevice) { #
+          <div class='el-icon'
+               style='background-image: url("../../../../Content/Functions/Small/true.png");'></div>
+          <div class='el-name '>#: Name # </div>
+          # } else if (IsArea){ #
+          <div class='el-icon'
+               style='background-image: url("../../../../Content/Functions/Small/materialTracking_hover.png"); opacity: 0.7'></div>
+          <div class='el-name'>#: Name # </div>
+          # } else { #
+          <div class='el-icon'
+               style='background-image: url("../../../../Content/Functions/Small/new_hover.png"); opacity: 0.5'></div>
+          <div class='el-name'>#: Name # </div>
+          # } #
+        </script>
+
+
+        @(Html.Kendo().TreeList<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_AssetTreeListEl>()
+          .Name("treelist")
+          .Columns(columns =>
+          {
+            columns.Add().Field(e => e.Name).TemplateId("treelist-template");
+          })           
+          .Filterable()
+          .Sortable()
+          .Selectable()
+          .DataSource(dataSource => dataSource
+              .Read(read => read.Action("GetAssetTreeListData", "Maintenance"))
+              .ServerOperation(false)
+              .Model(m => {
+                m.Id(f => f.Id);
+                m.ParentId(f => f.ParentId);
+                m.Expanded(true);
+                m.Field(f => f.Name);
+                m.Field(f => f.IsDevice);
+              })
+          )
+          .Events(ev => { ev.Change("onChange");
+            ev.DataBound("onDataBound");
+          }
+            )
+          .Height(750)
+          )
+  
+        @*<div style='overflow:auto; width:400px;height:730px;'>
+          @(Html.Kendo().TreeView()
+              .Name("treeview")
+                    .ExpandAll(true)
+              .DataSource(e => e.ServerFiltering(false))
+              .BindTo((IEnumerable<TreeViewItemModel>)ViewBag.AssetTreeData)
+                    .Events(e => e.Select("OnTreeElementSelect")
+                    ))
+
+        </div>*@
+      </div>
+      <div class="col-9 element-details" id="MaintenanceDetails">
+        <div class="row justify-content-center plug">
+          <div class="col-6 align-self-center">
+            <img src="~/Content/Shared/plug.png" />
+            <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="InventorySection" style="display: none">
+    <div class="row">
+      <div class="col-3 grid-filter">
+        @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Device>()
+            .Name("SearchGrid")
+            .NoRecords(VM_Resources.GLOB_GRID_NO_DATA)
+            .Pageable(p => p
+            .Refresh(true)
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+            .PageSizes(true))
+            .Sortable()
+            .Filterable()
+            .Selectable()
+            .HtmlAttributes(new { style = @String.Format("height:{0}px;", 746) })
+                .Columns(columns =>
+                {
+                    columns.Bound(c => c.DeviceId).Visible(false);
+                    columns.Bound(c => c.DeviceName).HtmlAttributes(new { @class = "nowrap" });
+                    columns.Bound(c => c.Description).HtmlAttributes(new { @class = "nowrap" });
+                    columns.Bound(c => c.Model).Hidden(true);
+                    columns.Bound(c => c.AcquireDate).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+                    columns.Bound(c => c.DisposeDate).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+                    columns.Bound(c => c.Components).Hidden(true);
+                    columns.Bound(c => c.DeviceGroup).Hidden(true);
+                    columns.Bound(c => c.Status).Hidden(true);
+                    columns.Bound(c => c.SerialNumber).Hidden(true);
+                    columns.Bound(c => c.InstalationCycle).Hidden(true);
+                    //columns.Bound(c => c.DeviceId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(35)
+                    //                .ClientTemplate(@Html.ImageButton("rolls_mount_cassette", "InstallDevice(#:DeviceId#)").ToString());
+                })
+             .ToolBar(toolbar =>
+             {
+             toolbar.Template(@<text>
+                        <div class="refreshBtnContainer" onclick="showHideCategories()">
+                            <p class="k-link off show-hide-categories m-0">
+                                <span class="filters-text more">@VM_Resources.NAME_MoreFilters</span> <span class="filters-text less">@VM_Resources.NAME_LessFilters</span>
+                                <span class="arrow arrow-categories arrow-white k-icon k-i-arrow-right"></span>
+                            </p>
+                        </div>
+                    </text>);
+            })
+        .DataSource(ds => ds
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(27)
+                .Events(e => e.Error("TelerikErrorHandler"))
+                .Read(r => r.Action("GetDeviceSearchList", "Maintenance"))
+                 .Events(e => e.Change("dataSourceChange"))
+                )
+             .Events(e =>
+     {
+         e.Change("onElementSelect");
+     })
+)
+
+      </div>
+      <div class="col-9 element-details" id="MaintenanceDetailsFull">
+        <div class="row justify-content-center plug">
+          <div class="col-6 align-self-center">
+            <img src="~/Content/Shared/plug.png" />
+            <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  function filter(dataSource, query) {
+    var hasVisibleChildren = false;
+    var data = dataSource instanceof kendo.data.HierarchicalDataSource && dataSource.data();
+
+    for (var i = 0; i < data.length; i++) {
+      var item = data[i];
+      var text = item.text.toLowerCase();
+      var itemVisible =
+        query === true // parent already matches
+        || query === "" // query is empty
+        || text.indexOf(query) >= 0; // item text matches query
+
+      var anyVisibleChildren = filter(item.children, itemVisible || query); // pass true if parent matches
+
+      hasVisibleChildren = hasVisibleChildren || anyVisibleChildren || itemVisible;
+
+      item.hidden = !itemVisible && !anyVisibleChildren;
+    }
+
+    if (data) {
+      // Re-apply the filter on the children.
+      dataSource.filter({ field: "hidden", operator: "neq", value: true });
+    }
+
+    return hasVisibleChildren;
+  }
+
+  function GoToComponent(componentId) {
+    let dataToSend = {
+      ComponentId: componentId
+    };
+    openSlideScreenWithComponent('Maintenance', 'ComponentElementDetails', dataToSend);
+
+  }
+
+  function openSlideScreenWithComponent(controller, method = 'Index', parameters = null, title = null) {
+    let url = "/Maintenance/ComponentElementDetails";
+    id = controller;
+    if ($('#MainScreen > .block-overlay').length <= 0) {
+      let overlay = $('<div class="block-overlay"></div>').hide().fadeIn(300);
+      $('#MainScreen').prepend(overlay);
+    }
+    if (title) {
+      tmpBreadcrumb = title;
+    } else {
+      tmpBreadcrumb = controller;
+    }
+    RequestStarted();
+    AjaxReqestHelperSilentWithoutDataType(url, parameters, showSlideScreen, closeSlideScreen);
+  }
+  function OpenIncidentDetails(id) {
+    let dataToSend = {
+      id: id
+    };
+    openSlideScreenWithIncidents('Maintenance', 'ShowIncidentDetails', dataToSend);
+  }
+
+  function openSlideScreenWithIncidents(controller, method = 'Index', parameters = null, title = null) {
+    let url = "/Maintenance/" + method;
+    id = controller;
+    if ($('#MainScreen > .block-overlay').length <= 0) {
+      let overlay = $('<div class="block-overlay"></div>').hide().fadeIn(300);
+      $('#MainScreen').prepend(overlay);
+    }
+    if (title) {
+      tmpBreadcrumb = title;
+    } else {
+      tmpBreadcrumb = controller;
+    }
+    RequestStarted();
+    AjaxReqestHelperSilentWithoutDataType(url, parameters, showSlideScreen, closeSlideScreen);
+  }
+  function ShowDeviceGroupDetails(name) {
+    let dataToSend = {
+      name: name
+    };
+    openSlideScreenWithDeviceGroupDetails('Maintenance', 'ShowDeviceGroupDetails', dataToSend);
+  }
+
+  function ShowDeviceGroupDetailsById(id) {
+    let dataToSend = {
+      id: id
+    };
+    openSlideScreenWithDeviceGroupDetailsById('Maintenance', 'ShowDeviceGroupDetailsById', dataToSend);
+  }
+
+  function openSlideScreenWithDeviceGroupDetails(controller, method = 'Index', parameters = null, title = null) {
+    let url = "/Maintenance/ShowDeviceGroupDetails";
+    id = controller;
+    if ($('#MainScreen > .block-overlay').length <= 0) {
+      let overlay = $('<div class="block-overlay"></div>').hide().fadeIn(300);
+      $('#MainScreen').prepend(overlay);
+    }
+    if (title) {
+      tmpBreadcrumb = title;
+    } else {
+      tmpBreadcrumb = controller;
+    }
+    RequestStarted();
+    AjaxReqestHelperSilentWithoutDataType(url, parameters, showSlideScreen, closeSlideScreen);
+  }
+  function openSlideScreenWithDeviceGroupDetailsById(controller, method = 'Index', parameters = null, title = null) {
+    let url = "Maintenance/ShowDeviceGroupDetailsById";
+    id = controller;
+    if ($('#MainScreen > .block-overlay').length <= 0) {
+      let overlay = $('<div class="block-overlay"></div>').hide().fadeIn(300);
+      $('#MainScreen').prepend(overlay);
+    }
+    if (title) {
+      tmpBreadcrumb = title;
+    } else {
+      tmpBreadcrumb = controller;
+    }
+    RequestStarted();
+    AjaxReqestHelperSilentWithoutDataType(url, parameters, showSlideScreen, closeSlideScreen);
+  }
+
+  function onDataBound(e) {
+  }
+
+  function onChange(e) {
+    var dataItem = this.dataItem(this.select());
+    var grid = e.sender;
+    let itemId = dataItem.DeviceId;
+    var selectedRow = grid.select();
+      if (itemId == null) {
+          SelectedDeviceId = 0;
+      $(selectedRow).removeClass('selected-event');
+      $(selectedRow).removeClass('k-state-selected');
+      var url = "/Maintenance/ElementDetailsEmpty";
+      var dataToSend = {
+        ElementId: 0
+      };
+      AjaxReqestHelperSilentWithoutDataType(url, dataToSend, setElementDetailsPartialView);
+    } else {
+      if ($('.k-i-arrow-left').length) {
+        button_array.toggleClass('k-i-arrow-right k-i-arrow-left');
+        $('.more').show(100);
+        $('.less').hide(100);
+      }
+
+      $('#MaintenanceDetails').addClass('loading-overlay');
+      var grid = e.sender;
+      var selectedRow = grid.select();
+      var selectedItem = grid.dataItem(selectedRow);
+      var dataToSend = {
+        ElementId: itemId
+      };
+
+      CurrentElement = {
+        ElementId: itemId
+        };
+
+        SelectedDeviceId = itemId;
+
+      var url = "/Maintenance/ElementDetails";
+      AjaxReqestHelperSilentWithoutDataType(url, dataToSend, setElementDetailsPartialView);
+    }
+  }
+</script>
+
+
+
+
+
+<style>
+
+  .el-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-position: center center;
+    vertical-align: middle;
+    line-height: 32px;
+    margin-right: 5px;
+  }
+
+  .el-name {
+    display: inline-block;
+    vertical-align: middle;
+  }
+   
+  .yieldChart {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .completionChart {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .delays-datepicker {
+    background-image: none !important;
+    color: #006487;
+    width: 200px;
+  }
+
+  .k-datetimepicker {
+    width: 200px;
+  }
+
+  .k-picker-wrap > .k-select {
+    background-color: #fff;
+  }
+
+  .verticalLine {
+    border-left: 1px solid #808080;
+  }
+
+
+</style>
+
+

@@ -1,0 +1,47 @@
+@model long?
+<style>
+  #WorkOrderBody .k-tabstrip-items .k-state-default {
+    max-width: 130px;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #WorkOrderBody .k-tabstrip-items .k-state-hover {
+    max-width: none;
+  }
+
+  #WorkOrderBody .k-tabstrip-items .k-state-active {
+    max-width: none;
+  }
+</style>
+<div class="row h-100">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+      .Name("WorkOrderToL3Body")
+      .Animation(false)
+      .HtmlAttributes(new { style = "width: 100%;" })
+      .Scrollable(false)
+      .Items(async tabstrip =>
+      {
+        tabstrip.Add().Text(VM_Resources.NAME_WorkOrderDetails)
+          .Selected(true).LoadContentFrom("SendL3Details", "WorkOrder", new { workOrderId = Model }).HtmlAttributes(new { id = "SendL3Details" });
+        tabstrip.Add().Text(VM_Resources.NAME_MaterialsList)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderMaterialsListForPopup.cshtml", Model)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Events)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderEventsList.cshtml", Model)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Delays)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderDelaysList.cshtml", Model)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Defects)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderDefectsList.cshtml", Model)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Rejects)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderRejectsList.cshtml", Model)).ToHtmlString()).HtmlAttributes(new { id = "Rejects" });
+        tabstrip.Add().Text(VM_Resources.NAME_Scraps)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderScrapsList.cshtml", Model)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Quality)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderInspection.cshtml", Model)).ToHtmlString());
+      })
+    )
+  </div>
+</div>

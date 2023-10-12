@@ -1,0 +1,69 @@
+@using SMF.HMI.Core
+@using SMF.DbEntity.Models
+@model PE.HMIWWW.ViewModel.System.LoginViewModel
+
+@{
+  Layout = "~/Views/Shared/_LoginLayout.cshtml";
+  ViewBag.Page_Title = @VM_Resources.NAME_Login;
+}
+
+<div class="center">
+  @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, true, new { @class = "form-horizontal", role = "form", id = "form" }))
+  {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+    <div style="text-align:center;margin-top:45px;">
+      <p style="font-size:35px">@VM_Resources.NAME_Login</p>
+    </div>
+    <div style="text-align:center">
+      <div class="form-group">
+        @Html.TextBoxFor(m => m.Email, new {placeholder = VM_Resources.NAME_Email, @class = "form-control inputFont"})
+        @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
+      </div>
+      <div class="form-group">
+        @Html.PasswordFor(m => m.Password, new {placeholder = VM_Resources.NAME_Password, @class = "form-control inputFont"})
+        @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})
+      </div>
+    </div>
+    <div style="text-align:center">
+      <input type="submit" value="Log in" class="btn-login" />
+
+
+      <div class="checkbox" style="font-size:16px;">
+        @Html.CheckBoxFor(m => m.RememberMe, htmlAttributes: new {@style = "position:static"})
+        @Html.LabelFor(m => m.RememberMe)
+      </div>
+    </div>
+    <div style="position:absolute;bottom:10px;left:15px;">
+      @{
+        var langList = CultureHelper.GetLanguagesList();
+        foreach (Language lang in langList.OrderBy(o => o.LanguageName))
+        {
+          <a asp-controller="Home" asp-action="SetCulture" asp-route-culture="@lang.LanguageCode" asp-route-returnUrl="@Context.Request.AbsolutePath()" style="text-decoration:none;">
+            <img id="@(lang.LanguageCode)" src="~/css/flag/@(lang.IconName + ".png")" style="cursor: pointer;padding-right:5px;" alt="@(lang.LanguageName)" />
+          </a>
+        }
+      }
+    </div>
+    <p style="position:absolute;bottom:0;right:15px; font-size:16px">
+      @Html.ActionLink(VM_Resources.GLOB_RegisterAsNewUser, "Register")
+    </p>
+  }
+</div>
+
+@*<script src="~/bundles/jqueryval.js"></script>*@
+
+<script>
+  $(document).ready(function () {
+      $('#form').submit(function () {
+          if ($(this).find('.input-validation-error').length === 0) {
+              $(this).find(':submit').attr('disabled', 'disabled');
+          }
+      });
+  })
+
+  function refreshAfterLanguageChange() {
+      location.reload();
+  }
+</script>

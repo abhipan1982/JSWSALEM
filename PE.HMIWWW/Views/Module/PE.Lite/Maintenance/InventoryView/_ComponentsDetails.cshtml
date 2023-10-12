@@ -1,0 +1,128 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Device
+
+
+@*<div class="row h-300 p-0 pt-3">*@
+<script>
+    function visualTemplate(options) {
+        var dataviz = kendo.dataviz;
+        var g = new dataviz.diagram.Group();
+        var dataItem = options.dataItem;
+
+        g.append(new dataviz.diagram.Rectangle({
+            width: 210,
+            height: 75,
+            stroke: {
+                width: 0
+            },
+            fill: {
+                gradient: {
+                    type: "linear",
+                    stops: [{
+                        color: dataItem.ColorScheme,
+                        offset: 0,
+                        opacity: 0.5
+                    }, {
+                        color: dataItem.ColorScheme,
+                        offset: 1,
+                        opacity: 1
+                    }]
+                }
+            }
+        }));
+
+        var textblock = new dataviz.diagram.TextBlock({
+            text: dataItem.ComponentType + ":",
+            x: 25,
+            y: 2,
+            fill: "#000"
+        });
+        textblock.drawingElement.options.set("font", "bold 15px sans-serif");
+        g.append(textblock);
+
+        g.append(new dataviz.diagram.TextBlock({
+            text: dataItem.ComponentCode,
+            x: 85,
+            y: 2,
+            color: "#fff"
+        }));
+
+        g.append(new dataviz.diagram.TextBlock({
+            text: dataItem.ComponentName,
+            x: 25,
+            y: 14,
+            color: "#fff"
+        }));
+
+        var textblockIsActive = new dataviz.diagram.TextBlock({
+            text: dataItem.IsActiveLabel + ":",
+            x: 25,
+            y: 26,
+            fill: "#000"
+        });
+        textblockIsActive.drawingElement.options.set("font", "bold 15px sans-serif");
+        g.append(textblockIsActive);
+
+        g.append(new dataviz.diagram.TextBlock({
+            text: dataItem.IsActive,
+            x: 85,
+            y: 26,
+            color: "#fff"
+        }));
+
+        g.append(new dataviz.diagram.TextBlock({
+            text: dataItem.GroupCode,
+            x: 25,
+            y: 40,
+            color: "#fff",
+        }));
+
+        g.append(new dataviz.diagram.TextBlock({
+            text: dataItem.Supplier,
+            x: 25,
+            y: 54,
+            color: "#fff"
+        }));
+
+
+        return g;
+    }
+
+    function onDataBound() {
+        this.bringIntoView(this.shapes);
+    }
+    function onClick(e) {
+        var itemId = e.item.dataItem.ComponentId;
+        //Check if it is a component
+        if (e.item.dataItem.ComponentType == "Component")
+            GoToComponent(itemId);
+    }
+</script>
+@(Html.Kendo().Diagram()
+      .Name("diagramInventory")
+      .DataSource(dataSource => dataSource
+          .Read(read => read
+              .Action("ComponentSchema", "Maintenance", new { deviceId = Model.DeviceId})
+          )
+          .Model(m => m.Children("Items"))
+      )
+      .Editable(false)
+      .Layout(l => l.Type(DiagramLayoutType.Layered))
+      .ShapeDefaults(sd => sd
+          .Visual("visualTemplate")
+      )
+      .ConnectionDefaults(cd => cd
+          .Stroke(s => s
+              .Color("#979797")
+              .Width(2)
+          )
+      )
+      .Events(events => events.DataBound("onDataBound").Click("onClick"))
+)
+<style>
+    #diagramInventory svg text {
+        /*  font-weight: 900 !important;*/
+        font-size: 10px !important;
+    }
+</style>
+
+

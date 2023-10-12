@@ -1,0 +1,41 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Event
+@using PE.DbEntity.HmiModels
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("new", "EventCatalogueCategoriesAddPopup()")
+}
+
+@(Html.Kendo().Grid<V_EventCategorySearchGrid>()
+    .Name("EventCatalogueCategoriesList")
+    .HtmlAttributes(new {style = string.Format(" height:{0}px;", ViewBag.FullGridHeight)})
+    .Scrollable()
+    .Pageable(p => p
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Filterable()
+    .Columns(c =>
+    {
+        c.Bound(x => x.EventCatalogueCategoryCode).ClientTemplate("#= EventCatalogueCategoryCode # # if(IsDefault) {#(" + VM_Resources.NAME_IsDefault + ")#}#");
+        c.Bound(x => x.EventCatalogueCategoryName);
+        c.Bound(x => x.EventCategoryGroupName);
+        c.Bound(x => x.EventTypeName);
+        c.Bound(x => x.EventCatalogueCategoryId)
+            .Filterable(false)
+            .ClientTemplate(Html.ImageButton("edit", "EventCatalogueCategoriesEditPopup(#:Id#)") + Html.ImageButton("details", "GoToDetails(#:Id#)").ToString()
+                            + Html.ImageButton("delete", "Delete(#=Id#)"))
+            .Width(100)
+            .Title(" ");
+    })
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(30)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetEventCatalogueCategoriesList", "EventCatalogueCategories"))
+    )
+    )
+
+<script src="~/js/Module/PE.Lite/EventCatalogueCategories.js"></script>

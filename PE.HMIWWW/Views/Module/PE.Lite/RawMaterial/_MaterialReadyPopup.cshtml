@@ -1,0 +1,106 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialGenealogy
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+@if (Model.ProductCatalogueTypeId.HasValue)
+{
+  <script>
+    $(document).ready(function () {
+      let element = $("#ProductCatalogueTypeId").data("kendoDropDownList");
+      element.readonly();
+    })
+  </script>
+}
+
+<form asp-controller="Visualization" asp-action="MaterialReadyAction" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="form-horizontal" target="formContainer" role="form" id="form">
+
+  @Html.AntiForgeryToken()
+  @Html.HiddenFor(x => x.Id)
+  @Html.HiddenFor(x => x.EnumRawMaterialStatus)
+
+  <div class="row form-group">
+    <div class="col text-right align-self-center">
+      <label>@Html.LabelFor(x => x.ProductCatalogueTypeId)</label>
+    </div>
+    <div class="col-8">
+      @(Html.Kendo().DropDownListFor(x => x.ProductCatalogueTypeId)
+      .DataTextField("Text")
+      .DataValueField("Value")
+      .HtmlAttributes(new { @class = "form-control form-control-sm" })
+      .BindTo(new SelectList(ViewBag.ProductTypeList, "ProductCatalogueTypeId", "ProductCatalogueTypeCode"))
+      .OptionLabel("-")
+      )
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col text-right align-self-center">
+      <label>@Html.LabelFor(x => x.ChildsNo)</label>
+    </div>
+    <div class="col-8">
+      @(Html.PeKendo().NumericTextBoxFor(x => x.ChildsNo)
+      .Min(@Model.ChildsNo)
+      .HtmlAttributes(new { @class = "form-control form-control-sm" }))
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col text-right align-self-center">
+      <label>@Html.LabelFor(x => x.KeepInTracking)</label>
+    </div>
+    <div class="col-8">
+      @(Html.Kendo().CheckBoxFor(x => x.KeepInTracking)
+      .HtmlAttributes(new { @class = "form-control form-control-sm" }))
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row form-group">
+    <div class="col invalid">
+      <p id="error">
+        <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+      </p>
+    </div>
+    <div class="col text-right">
+      <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+        @VM_Resources.GLOB_Form_Button_Update
+      </button>
+    </div>
+  </div>
+</form>
+
+<script>
+
+  $(function () {
+    let numerictextbox = $("#ChildsNo").data("kendoNumericTextBox");
+    numerictextbox.bind("change", function() {
+      if (this.value() == 1) {
+        this.value(2);
+      }
+    });
+
+    $('#error').css("display", "none");
+    $("#form").kendoValidator().data("kendoValidator");
+
+  });
+
+  function displayMessage() {
+
+    var validator = $("#form").kendoValidator().data("kendoValidator");
+
+    if (validator.validate()) {
+      $('#error').css("display", "none");
+    } else {
+      $('#error').css("display", "block");
+      $('#popup-footer')
+        .css('display', 'block')
+        .css('background-color', 'rgb(206, 0, 55)');
+    }
+  }
+
+</script>
+

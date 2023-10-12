@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ModuleA</AssemblyName>
+    <AssemblyTitle>PE.MDA.ModuleA</AssemblyTitle>
+    <Company>Primetals Technologies Poland Sp. z o.o.</Company>
+    <Product>PE.MDA.ModuleA</Product>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PE.BaseModules\PE.MDA.Base\PE.MDA.Base.csproj" />
+    <ProjectReference Include="..\..\PE.Config\PE.Config.csproj" />
+    <ProjectReference Include="..\..\PE.Interfaces\PE.Interfaces.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SMF.Module" />
+  </ItemGroup>
+</Project>

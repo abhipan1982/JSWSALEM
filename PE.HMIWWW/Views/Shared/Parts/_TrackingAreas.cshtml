@@ -1,0 +1,403 @@
+@using PE.HMIWWW.Core.Helpers
+
+@foreach (var item in TrackingAreaHelpers.TrackingAreas)
+{
+  item.TrackingAreaTitle = ResxHelper.GetResxAreaText((Int32)item.TrackingAreaCode);
+}
+
+<script>
+  const TrackingAreas = JSON.parse('@Html.Raw(Json.Serialize(TrackingAreaHelpers.TrackingAreas))');
+</script>
+
+<script>
+  function simulateRefresh() {
+    let dc;
+    let data = [
+      [{
+        AreaId: TrackingAreaKeys.CHG_AREA,
+        Materials: [
+          { RawMaterialId: 60000, MaterialName: "RawMaterial1", PositionOrder: 1, IsScrap: 1, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60001, MaterialName: "RawMaterial2", PositionOrder: 2, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60002, MaterialName: "RawMaterial3", PositionOrder: 3, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60003, MaterialName: "RawMaterial4", PositionOrder: 4, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60004, MaterialName: "RawMaterial5", PositionOrder: 5, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60005, MaterialName: "RawMaterial6", PositionOrder: 6, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60006, MaterialName: "RawMaterial7", PositionOrder: 7, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60007, MaterialName: "RawMaterial8", PositionOrder: 8, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60008, MaterialName: "RawMaterial9", PositionOrder: 9, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60009, MaterialName: "RawMaterial10", PositionOrder: 10, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60010, MaterialName: "RawMaterial11", PositionOrder: 11, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60011, MaterialName: "RawMaterial12", PositionOrder: 12, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60012, MaterialName: "RawMaterial13", PositionOrder: 13, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60013, MaterialName: "RawMaterial14", PositionOrder: 14, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60014, MaterialName: "RawMaterial15", PositionOrder: 15, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60015, MaterialName: "RawMaterial16", PositionOrder: 16, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60016, MaterialName: "RawMaterial17", PositionOrder: 17, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60017, MaterialName: "RawMaterial18", PositionOrder: 18, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60018, MaterialName: "RawMaterial19", PositionOrder: 19, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60019, MaterialName: "RawMaterial20", PositionOrder: 20, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60020, MaterialName: "RawMaterial21", PositionOrder: 21, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60021, MaterialName: "RawMaterial22", PositionOrder: 22, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60022, MaterialName: "RawMaterial23", PositionOrder: 23, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60023, MaterialName: "RawMaterial24", PositionOrder: 24, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60024, MaterialName: "RawMaterial25", PositionOrder: 25, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60025, MaterialName: "RawMaterial26", PositionOrder: 26, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60026, MaterialName: "RawMaterial27", PositionOrder: 27, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60027, MaterialName: "RawMaterial28", PositionOrder: 28, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60028, MaterialName: "RawMaterial29", PositionOrder: 29, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60029, MaterialName: "RawMaterial30", PositionOrder: 30, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60030, MaterialName: "RawMaterial31", PositionOrder: 31, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60031, MaterialName: "RawMaterial32", PositionOrder: 32, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60032, MaterialName: "RawMaterial33", PositionOrder: 33, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60033, MaterialName: "RawMaterial34", PositionOrder: 34, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60034, MaterialName: "RawMaterial35", PositionOrder: 35, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60035, MaterialName: "RawMaterial36", PositionOrder: 36, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60037, MaterialName: "RawMaterial37", PositionOrder: 37, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60038, MaterialName: "RawMaterial38", PositionOrder: 38, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60039, MaterialName: "RawMaterial39", PositionOrder: 39, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60040, MaterialName: "RawMaterial40", PositionOrder: 40, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.FCE_AREA,
+        Materials: [
+          { RawMaterialId: 70001, MaterialName: "FurnaceMaterial_001", PositionOrder: 1, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70002, MaterialName: "FurnaceMaterial_002", PositionOrder: 2, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70003, MaterialName: "FurnaceMaterial_003", PositionOrder: 3, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70004, MaterialName: "FurnaceMaterial_004", PositionOrder: 4, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70005, MaterialName: "FurnaceMaterial_005", PositionOrder: 5, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70006, MaterialName: "FurnaceMaterial_006", PositionOrder: 6, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70007, MaterialName: "FurnaceMaterial_007", PositionOrder: 7, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70008, MaterialName: "FurnaceMaterial_008", PositionOrder: 8, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70009, MaterialName: "FurnaceMaterial_009", PositionOrder: 9, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70010, MaterialName: "FurnaceMaterial_010", PositionOrder: 10, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70011, MaterialName: "FurnaceMaterial_011", PositionOrder: 11, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70012, MaterialName: "FurnaceMaterial_012", PositionOrder: 12, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70013, MaterialName: "FurnaceMaterial_013", PositionOrder: 13, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70014, MaterialName: "FurnaceMaterial_014", PositionOrder: 14, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70015, MaterialName: "FurnaceMaterial_015", PositionOrder: 15, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70016, MaterialName: "FurnaceMaterial_016", PositionOrder: 16, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70017, MaterialName: "FurnaceMaterial_017", PositionOrder: 17, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70018, MaterialName: "FurnaceMaterial_018", PositionOrder: 18, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70019, MaterialName: "FurnaceMaterial_019", PositionOrder: 19, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70020, MaterialName: "FurnaceMaterial_020", PositionOrder: 20, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70021, MaterialName: "FurnaceMaterial_021", PositionOrder: 21, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70022, MaterialName: "FurnaceMaterial_022", PositionOrder: 22, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70023, MaterialName: "FurnaceMaterial_023", PositionOrder: 23, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70024, MaterialName: "FurnaceMaterial_024", PositionOrder: 24, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70025, MaterialName: "FurnaceMaterial_025", PositionOrder: 25, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70026, MaterialName: "FurnaceMaterial_026", PositionOrder: 26, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70027, MaterialName: "FurnaceMaterial_027", PositionOrder: 27, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70028, MaterialName: "FurnaceMaterial_028", PositionOrder: 28, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70029, MaterialName: "FurnaceMaterial_029", PositionOrder: 29, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70030, MaterialName: "FurnaceMaterial_030", PositionOrder: 30, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70031, MaterialName: "FurnaceMaterial_031", PositionOrder: 31, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70032, MaterialName: "FurnaceMaterial_032", PositionOrder: 32, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70033, MaterialName: "FurnaceMaterial_033", PositionOrder: 33, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70034, MaterialName: "FurnaceMaterial_034", PositionOrder: 34, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70035, MaterialName: "FurnaceMaterial_035", PositionOrder: 35, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70036, MaterialName: "FurnaceMaterial_036", PositionOrder: 36, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70037, MaterialName: "FurnaceMaterial_037", PositionOrder: 37, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70038, MaterialName: "FurnaceMaterial_038", PositionOrder: 38, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70039, MaterialName: "FurnaceMaterial_039", PositionOrder: 39, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70040, MaterialName: "FurnaceMaterial_040", PositionOrder: 40, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70041, MaterialName: "FurnaceMaterial_041", PositionOrder: 41, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70042, MaterialName: "FurnaceMaterial_042", PositionOrder: 42, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70043, MaterialName: "FurnaceMaterial_043", PositionOrder: 43, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70044, MaterialName: "FurnaceMaterial_044", PositionOrder: 44, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70045, MaterialName: "FurnaceMaterial_045", PositionOrder: 45, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70046, MaterialName: "FurnaceMaterial_046", PositionOrder: 46, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70047, MaterialName: "FurnaceMaterial_047", PositionOrder: 47, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70048, MaterialName: "FurnaceMaterial_048", PositionOrder: 48, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70049, MaterialName: "FurnaceMaterial_049", PositionOrder: 49, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70050, MaterialName: "FurnaceMaterial_050", PositionOrder: 50, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70051, MaterialName: "FurnaceMaterial_051", PositionOrder: 51, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70052, MaterialName: "FurnaceMaterial_052", PositionOrder: 52, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70053, MaterialName: "FurnaceMaterial_053", PositionOrder: 53, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70054, MaterialName: "FurnaceMaterial_054", PositionOrder: 54, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70055, MaterialName: "FurnaceMaterial_055", PositionOrder: 55, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70056, MaterialName: "FurnaceMaterial_056", PositionOrder: 56, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70057, MaterialName: "FurnaceMaterial_057", PositionOrder: 57, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70058, MaterialName: "FurnaceMaterial_058", PositionOrder: 58, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70059, MaterialName: "FurnaceMaterial_059", PositionOrder: 59, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70060, MaterialName: "FurnaceMaterial_060", PositionOrder: 60, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70061, MaterialName: "FurnaceMaterial_061", PositionOrder: 61, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70062, MaterialName: "FurnaceMaterial_062", PositionOrder: 62, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70063, MaterialName: "FurnaceMaterial_063", PositionOrder: 63, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70064, MaterialName: "FurnaceMaterial_064", PositionOrder: 64, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70065, MaterialName: "FurnaceMaterial_065", PositionOrder: 65, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70066, MaterialName: "FurnaceMaterial_066", PositionOrder: 66, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70067, MaterialName: "FurnaceMaterial_067", PositionOrder: 67, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70068, MaterialName: "FurnaceMaterial_068", PositionOrder: 68, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70069, MaterialName: "FurnaceMaterial_069", PositionOrder: 69, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70070, MaterialName: "FurnaceMaterial_070", PositionOrder: 70, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70071, MaterialName: "FurnaceMaterial_071", PositionOrder: 71, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70072, MaterialName: "FurnaceMaterial_072", PositionOrder: 72, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70073, MaterialName: "FurnaceMaterial_073", PositionOrder: 73, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70074, MaterialName: "FurnaceMaterial_074", PositionOrder: 74, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70075, MaterialName: "FurnaceMaterial_075", PositionOrder: 75, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70076, MaterialName: "FurnaceMaterial_076", PositionOrder: 76, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70077, MaterialName: "FurnaceMaterial_077", PositionOrder: 77, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70078, MaterialName: "FurnaceMaterial_078", PositionOrder: 78, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70079, MaterialName: "FurnaceMaterial_079", PositionOrder: 79, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.RM_AREA,
+        Materials: [
+          { RawMaterialId: 50, MaterialName: "RawMaterial20200608081250926", PositionOrder: 1, IsScrap: 0, IsHot: 1 },
+          { RawMaterialId: 50, MaterialName: "RawMaterial20200608081250926", PositionOrder: 2, IsScrap: 0, IsHot: 1 },
+          { RawMaterialId: 50, MaterialName: "RawMaterial20200608081250926", PositionOrder: 3, IsScrap: 0, IsHot: 1 },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.IM_AREA,
+        Materials: [
+          { RawMaterialId: 50, MaterialName: "RawMaterial20200608081250926", PositionOrder: 1, IsScrap: 0, IsHot: 1 },
+          { RawMaterialId: 51, MaterialName: "RawMaterial20200608081250926", PositionOrder: 2, IsScrap: 0, IsHot: 1 },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.FM_AREA,
+        Materials: [
+          { RawMaterialId: 52, MaterialName: "RawMaterial20200608081250926", PositionOrder: 1, IsScrap: 0, IsHot: null },
+          { RawMaterialId: 53, MaterialName: "RawMaterial20200608081250926", PositionOrder: 2, IsScrap: 0, IsHot: null },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.ROD_AREA,
+        Materials: [
+          { RawMaterialId: 82944, MaterialName: "RawMaterial20200608081250926", PositionOrder: 1, IsScrap: 0, IsHot: null },
+          { RawMaterialId: 587364, MaterialName: "RawMaterial20200608081250926", PositionOrder: 2, IsScrap: 0, IsHot: null },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.TRANSPORT_AREA,
+        Materials: [
+          { RawMaterialId: 87001, MaterialName: "TransportMaterial_001", PositionOrder: 1, IsScrap: 0, IsHot: null },
+          { RawMaterialId: 87002, MaterialName: "TransportMaterial_002", PositionOrder: 2, IsScrap: 0, IsHot: null },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.GREY_AREA,
+        Materials: [
+          { RawMaterialId: 100001, MaterialName: "GreyMaterial_100001", PositionOrder: 1, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 100002, MaterialName: "GreyMaterial_100002", PositionOrder: 2, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 100003, MaterialName: "GreyMaterial_100003", PositionOrder: 3, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 100004, MaterialName: "GreyMaterial_100004", PositionOrder: 4, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 100005, MaterialName: "GreyMaterial_100005", PositionOrder: 5, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 100006, MaterialName: "GreyMaterial_100006", PositionOrder: 6, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 100007, MaterialName: "GreyMaterial_100007", PositionOrder: 7, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+        ]
+      }],
+      [{
+        AreaId: TrackingAreaKeys.CHG_AREA,
+        Materials: [
+          { RawMaterialId: 60000, MaterialName: "RawMaterial1", PositionOrder: 1, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60001, MaterialName: "RawMaterial2", PositionOrder: 2, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60002, MaterialName: "RawMaterial3", PositionOrder: 3, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60003, MaterialName: "RawMaterial4", PositionOrder: 4, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60004, MaterialName: "RawMaterial5", PositionOrder: 5, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60005, MaterialName: "RawMaterial6", PositionOrder: 6, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60006, MaterialName: "RawMaterial7", PositionOrder: 7, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60007, MaterialName: "RawMaterial8", PositionOrder: 8, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60008, MaterialName: "RawMaterial9", PositionOrder: 9, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60009, MaterialName: "RawMaterial10", PositionOrder: 10, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60010, MaterialName: "RawMaterial11", PositionOrder: 11, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60011, MaterialName: "RawMaterial12", PositionOrder: 12, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60012, MaterialName: "RawMaterial13", PositionOrder: 13, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60013, MaterialName: "RawMaterial14", PositionOrder: 14, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60014, MaterialName: "RawMaterial15", PositionOrder: 15, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60015, MaterialName: "RawMaterial16", PositionOrder: 16, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60016, MaterialName: "RawMaterial17", PositionOrder: 17, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60017, MaterialName: "RawMaterial18", PositionOrder: 18, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60018, MaterialName: "RawMaterial19", PositionOrder: 19, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60019, MaterialName: "RawMaterial20", PositionOrder: 20, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.FCE_AREA,
+        Materials: [
+          { RawMaterialId: 70001, MaterialName: "FurnaceMaterial_001", PositionOrder: 1, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70002, MaterialName: "FurnaceMaterial_002", PositionOrder: 2, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70003, MaterialName: "FurnaceMaterial_003", PositionOrder: 3, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70004, MaterialName: "FurnaceMaterial_004", PositionOrder: 4, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70005, MaterialName: "FurnaceMaterial_005", PositionOrder: 5, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70006, MaterialName: "FurnaceMaterial_006", PositionOrder: 6, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70007, MaterialName: "FurnaceMaterial_007", PositionOrder: 7, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70008, MaterialName: "FurnaceMaterial_008", PositionOrder: 8, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70009, MaterialName: "FurnaceMaterial_009", PositionOrder: 9, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70010, MaterialName: "FurnaceMaterial_010", PositionOrder: 10, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70011, MaterialName: "FurnaceMaterial_011", PositionOrder: 11, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70012, MaterialName: "FurnaceMaterial_012", PositionOrder: 12, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70013, MaterialName: "FurnaceMaterial_013", PositionOrder: 13, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70014, MaterialName: "FurnaceMaterial_014", PositionOrder: 14, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70015, MaterialName: "FurnaceMaterial_015", PositionOrder: 15, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70016, MaterialName: "FurnaceMaterial_016", PositionOrder: 16, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70017, MaterialName: "FurnaceMaterial_017", PositionOrder: 17, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70018, MaterialName: "FurnaceMaterial_018", PositionOrder: 18, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70019, MaterialName: "FurnaceMaterial_019", PositionOrder: 19, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70020, MaterialName: "FurnaceMaterial_020", PositionOrder: 20, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70021, MaterialName: "FurnaceMaterial_021", PositionOrder: 21, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70022, MaterialName: "FurnaceMaterial_022", PositionOrder: 22, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70023, MaterialName: "FurnaceMaterial_023", PositionOrder: 23, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70024, MaterialName: "FurnaceMaterial_024", PositionOrder: 24, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70025, MaterialName: "FurnaceMaterial_025", PositionOrder: 25, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70026, MaterialName: "FurnaceMaterial_026", PositionOrder: 26, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70027, MaterialName: "FurnaceMaterial_027", PositionOrder: 27, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70028, MaterialName: "FurnaceMaterial_028", PositionOrder: 28, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70029, MaterialName: "FurnaceMaterial_029", PositionOrder: 29, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70030, MaterialName: "FurnaceMaterial_030", PositionOrder: 30, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70031, MaterialName: "FurnaceMaterial_031", PositionOrder: 31, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70032, MaterialName: "FurnaceMaterial_032", PositionOrder: 32, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70033, MaterialName: "FurnaceMaterial_033", PositionOrder: 33, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70034, MaterialName: "FurnaceMaterial_034", PositionOrder: 34, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70035, MaterialName: "FurnaceMaterial_035", PositionOrder: 35, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70036, MaterialName: "FurnaceMaterial_036", PositionOrder: 36, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70037, MaterialName: "FurnaceMaterial_037", PositionOrder: 37, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70038, MaterialName: "FurnaceMaterial_038", PositionOrder: 38, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70039, MaterialName: "FurnaceMaterial_039", PositionOrder: 39, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70040, MaterialName: "FurnaceMaterial_040", PositionOrder: 40, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70041, MaterialName: "FurnaceMaterial_041", PositionOrder: 41, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70042, MaterialName: "FurnaceMaterial_042", PositionOrder: 42, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70043, MaterialName: "FurnaceMaterial_043", PositionOrder: 43, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70044, MaterialName: "FurnaceMaterial_044", PositionOrder: 44, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70045, MaterialName: "FurnaceMaterial_045", PositionOrder: 45, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70046, MaterialName: "FurnaceMaterial_046", PositionOrder: 46, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70059, MaterialName: "FurnaceMaterial_059", PositionOrder: 59, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70060, MaterialName: "FurnaceMaterial_060", PositionOrder: 60, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70061, MaterialName: "FurnaceMaterial_061", PositionOrder: 61, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+          { RawMaterialId: 70062, MaterialName: "FurnaceMaterial_062", PositionOrder: 62, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.CB_AREA,
+        Materials: [
+          { RawMaterialId: 50, MaterialName: "RawMaterial20200608081250926", PositionOrder: 1, IsScrap: 0, IsHot: 1 },
+          { RawMaterialId: 51, MaterialName: "RawMaterial20200608081250926", PositionOrder: 2, IsScrap: 0, IsHot: 1 },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.RAKE_AREA,
+        Materials: [
+          { RawMaterialId: 52, MaterialName: "RawMaterial20200608081250926", PositionOrder: 1, IsScrap: 0, IsHot: null },
+          { RawMaterialId: 53, MaterialName: "RawMaterial20200608081250926", PositionOrder: 2, IsScrap: 0, IsHot: null },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.TRANSPORT_AREA,
+        Materials: [
+          { RawMaterialId: 52, MaterialName: "RawMaterial20200608081250926", PositionOrder: 1, IsScrap: 0, IsHot: null },
+          { RawMaterialId: 53, MaterialName: "RawMaterial20200608081250926", PositionOrder: 2, IsScrap: 0, IsHot: null },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.GREY_AREA,
+        Materials: [
+          { RawMaterialId: 100001, MaterialName: "GreyMaterial_100001", PositionOrder: 1, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 100002, MaterialName: "GreyMaterial_100002", PositionOrder: 2, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+        ]
+      }],
+      [{
+        AreaId: TrackingAreaKeys.CHG_AREA,
+        Materials: [
+          { RawMaterialId: 60000, MaterialName: "RawMaterial1", PositionOrder: 1, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60001, MaterialName: "RawMaterial2", PositionOrder: 2, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60002, MaterialName: "RawMaterial3", PositionOrder: 3, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60003, MaterialName: "RawMaterial4", PositionOrder: 4, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60004, MaterialName: "RawMaterial5", PositionOrder: 5, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60005, MaterialName: "RawMaterial6", PositionOrder: 6, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60006, MaterialName: "RawMaterial7", PositionOrder: 7, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60007, MaterialName: "RawMaterial8", PositionOrder: 8, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60008, MaterialName: "RawMaterial9", PositionOrder: 9, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60009, MaterialName: "RawMaterial10", PositionOrder: 10, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60010, MaterialName: "RawMaterial11", PositionOrder: 11, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60011, MaterialName: "RawMaterial12", PositionOrder: 12, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60012, MaterialName: "RawMaterial13", PositionOrder: 13, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60013, MaterialName: "RawMaterial14", PositionOrder: 14, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60014, MaterialName: "RawMaterial15", PositionOrder: 15, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60015, MaterialName: "RawMaterial16", PositionOrder: 16, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60016, MaterialName: "RawMaterial17", PositionOrder: 17, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60017, MaterialName: "RawMaterial18", PositionOrder: 18, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60018, MaterialName: "RawMaterial19", PositionOrder: 19, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60019, MaterialName: "RawMaterial20", PositionOrder: 20, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60020, MaterialName: "RawMaterial21", PositionOrder: 21, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60021, MaterialName: "RawMaterial22", PositionOrder: 22, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60022, MaterialName: "RawMaterial23", PositionOrder: 23, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60023, MaterialName: "RawMaterial24", PositionOrder: 24, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60024, MaterialName: "RawMaterial25", PositionOrder: 25, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60025, MaterialName: "RawMaterial26", PositionOrder: 26, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60026, MaterialName: "RawMaterial27", PositionOrder: 27, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60027, MaterialName: "RawMaterial28", PositionOrder: 28, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60028, MaterialName: "RawMaterial29", PositionOrder: 29, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60029, MaterialName: "RawMaterial30", PositionOrder: 30, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60030, MaterialName: "RawMaterial31", PositionOrder: 31, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60031, MaterialName: "RawMaterial32", PositionOrder: 32, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60032, MaterialName: "RawMaterial33", PositionOrder: 33, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60033, MaterialName: "RawMaterial34", PositionOrder: 34, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60034, MaterialName: "RawMaterial35", PositionOrder: 35, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60035, MaterialName: "RawMaterial36", PositionOrder: 36, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60037, MaterialName: "RawMaterial37", PositionOrder: 37, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60038, MaterialName: "RawMaterial38", PositionOrder: 38, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60039, MaterialName: "RawMaterial39", PositionOrder: 39, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60040, MaterialName: "RawMaterial40", PositionOrder: 40, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+          { RawMaterialId: 60040, MaterialName: "RawMaterial41", PositionOrder: 40, IsScrap: 0, IsHot: 0, IsVirtual: 1 },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.FCE_AREA,
+        Materials: [
+          { RawMaterialId: 70001, MaterialName: "FurnaceMaterial_001", PositionOrder: 1, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70002, MaterialName: "FurnaceMaterial_002", PositionOrder: 2, IsScrap: 0, IsHot: 1, IsVirtual: 0 },
+          { RawMaterialId: 70002, MaterialName: "FurnaceMaterial_002", PositionOrder: 3, IsScrap: 0, IsHot: 1, IsVirtual: 1 },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.CB_AREA,
+        Materials: [
+          { RawMaterialId: 50, MaterialName: "RawMaterial20200608081250926", PositionOrder: 1, IsScrap: 0, IsHot: 1 },
+          { RawMaterialId: 51, MaterialName: "RawMaterial20200608081250926", PositionOrder: 2, IsScrap: 0, IsHot: 1 },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.RAKE_AREA,
+        Materials: [
+          { RawMaterialId: 52, MaterialName: "RawMaterial20200608081250926", PositionOrder: 1, IsScrap: 0, IsHot: null },
+          { RawMaterialId: 53, MaterialName: "RawMaterial20200608081250926", PositionOrder: 2, IsScrap: 0, IsHot: null },
+        ]
+      },
+      {
+        AreaId: TrackingAreaKeys.GREY_AREA,
+        Materials: [
+          { RawMaterialId: 60000, MaterialName: "RawMaterial1", PositionOrder: 1, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60001, MaterialName: "RawMaterial2", PositionOrder: 2, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60002, MaterialName: "RawMaterial3", PositionOrder: 3, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60003, MaterialName: "RawMaterial4", PositionOrder: 4, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60004, MaterialName: "RawMaterial5", PositionOrder: 5, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60005, MaterialName: "RawMaterial6", PositionOrder: 6, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60006, MaterialName: "RawMaterial7", PositionOrder: 7, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60007, MaterialName: "RawMaterial8", PositionOrder: 8, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+          { RawMaterialId: 60008, MaterialName: "RawMaterial9", PositionOrder: 9, IsScrap: 0, IsHot: 0, IsVirtual: 0 },
+        ]
+      },],
+    ];
+    let index = 0;
+    let timer = setInterval(function () {
+
+      if (index != 0) {
+        index = 0;
+      }
+
+      dc = data[index].reduce(function (map, obj) {
+        map[obj.AreaId] = obj;
+        return map;
+      }, {});
+
+      refreshAreas(dc);
+      //refreshGeneralArea(dc);
+
+      index += 1;
+    }, 5000);
+  }
+</script>

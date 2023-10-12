@@ -1,0 +1,245 @@
+﻿.cursor-pointer {
+  cursor: pointer;
+}
+
+  .cursor-pointer:hover {
+    opacity: 0.8;
+  }
+
+/*gauges tab*/
+
+.chartMenu {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  margin: 20px 20px;
+  padding: 0;
+  list-style-type: none;
+}
+
+.chartMenuEl {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  border-bottom: 1px solid #a6a6a6;
+}
+
+.chartMenuEl-active {
+  color: #006486;
+  font-weight: bold;
+  border-bottom: 2px solid #006486;
+}
+
+
+.chartContainer {
+  height: 530px;
+  margin-left: 20px;
+  padding-right: 0;
+}
+
+.summaryContainer {
+  width: 100%;
+}
+
+.gaugesTable {
+  position: relative;
+  top: -17px;
+  width: 210px;
+  height: auto;
+  margin-left: 310px;
+  font-size: 16px;
+}
+
+.fourSeries {
+  /*position: absolute;  
+  top: 477px;  
+  right: 400px;  
+  width: 200px;  
+  height: 200px;*/
+}
+
+.oneSeries {
+  /*position: absolute;
+  top: 587px;*/
+  /*margin-left: 150px;*/
+  /*width: 200px;
+  height: 200px;*/
+}
+
+.gaugeChartLegend {
+  /*width: 210px;*/
+  /*position: absolute;
+  top: 477px;
+  right: 300px;
+  width: 200px;
+  height: 200px;*/
+}
+
+.gaugeChartMinMaxAvg {
+  display: none;
+  /*position: absolute;
+  top: 477px;
+  right: 300px;
+  width: 200px;
+  height: 200px;*/
+}
+
+.gaugesTable {
+  display: flex;
+  flex-direction: row;
+}
+
+.gaugesTableRow {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 37px;
+  text-align: center;
+}
+
+.gaugesTableRow-title {
+  font-weight: 500;
+  color: #006486;
+}
+
+.gaugesTableCell {
+  width: 70px;
+  height: 100%;
+  text-align: right;
+  border-right: 1px solid #d2d2d2;
+  padding: 3px 15px;
+}
+
+.gaugesTableCell-title {
+  width: 90px;
+}
+
+.true-icon::before {
+  content: url('/css/Functions/Small/true.png');
+}
+
+.false-icon::before {
+  content: url('/css/Functions/Small/false.png');
+}
+
+.blueFont {
+  color: #00587c;
+}
+
+.font-white {
+  color: white;
+}
+
+tbody.threeColumns tr > td {
+  width: 33%;
+}
+
+tbody.fourColumns tr > td {
+  width: 25%;
+}
+
+.borderless-cell {
+  border: 1px solid Transparent !important;
+}
+
+hr.new {
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+
+.sias-table {
+  text-align: left;
+}
+
+  .sias-table tbody tr > th {
+    text-align: right;
+  }
+
+tbody.fourColumns tr td > p {
+  padding: 0;
+  margin: 0;
+}
+
+.StatusOK {
+  font-weight: bold;
+  color: #5BBB21;
+}
+
+.StatusWarning {
+  font-weight: bold;
+  color: #FFC100;
+}
+
+.StatusAlert {
+  font-weight: bold;
+  color: #F01C31;
+}
+
+.sias-feature {
+  font-weight: 500;
+  color: #006487;
+}
+
+.font-small {
+  font-size: 75%;
+}
+
+
+.chart-color {
+  width: 15px;
+  height: 20px;
+  float: left;
+  margin-right: 5px;
+}
+
+.legend-cell {
+  width: 70px;
+}
+
+.legend-window {
+  width: auto;
+  height: auto;
+  padding: 5px 0px 5px 0px;
+  background-color: rgba(255,255,255,0.9);
+  display: none;
+  position: absolute;
+  top: 100px;
+  right: 70px;
+  z-index: 10;
+  box-shadow: 0 3px 10px #CCCCCC;
+  word-wrap: break-word;
+  transition: 0.8s;
+}
+
+.charts-wrapper {
+  height: 380px;
+}
+
+.k-chart, .k-stockchart {
+  height: 100%;
+}
+
+
+.area-wrapper {
+  position: relative;
+}
+
+.vertical-arrow {
+  position: absolute;
+  top: -20px;
+  left: 47%;
+  /*width: 100px; /* Need a specific value to work */
+}
+
+
+.tempChartContainer {
+  height: 580px;
+  margin-top: 10px;
+  margin-left: 20px;
+  padding-right: 0;
+}

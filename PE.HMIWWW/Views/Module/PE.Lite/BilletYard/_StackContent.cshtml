@@ -1,0 +1,71 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_BilletLocationDetails
+
+<div class="row w-100 ml-1" id="locationContent">
+  <div class="detailsPanel col-3">
+    <div class="" id="stackPanel">
+      <div class="details-panel">
+        <div class="details-panel-actions" style="height: 12px;"></div>
+        <div class="details-panel-name form-inline">@Html.DisplayFor(x => x.Name)</div>
+        <div class="details-panel-header">
+          @VM_Resources.NAME_StackDetails
+        </div>
+        <div class="details-panel-data mt-3">
+          <div class="row form-group mb-0">
+            <div class="details-panel-label ml-4 text-left">
+              @Html.LabelFor(m => m.Capacity, new { @class = "control-label" })
+            </div>
+            <div class="p-0">
+              @Html.DisplayFor(x => x.Capacity)
+            </div>
+          </div>
+
+          <div class="row form-group mb-0">
+            <div class="details-panel-label ml-4 text-left">
+              @Html.LabelFor(m => m.MaterialsNumber, new { @class = "control-label" })
+            </div>
+            <div class="p-0">
+              @Model.Materials.Count()
+            </div>
+          </div>
+
+          <div class="row form-group mb-0">
+            <div class="details-panel-label ml-4 text-left">
+              @Html.LabelFor(m => m.FillDirection, new { @class = "control-label" })
+            </div>
+            <div class="p-0">
+              <img src="~/css/Functions/Small/@(Model.FillDirection).png" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4" id="heatPanel">
+      @{
+        await Html.RenderPartialAsync("~/Views/Module/PE.Lite/BilletYard/_HeatDetailsPanel.cshtml", new PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_HeatsOnYards { });
+      }
+    </div>
+    <div class="mt-4" id="materialPanel">
+      @{
+        await Html.RenderPartialAsync("~/Views/Module/PE.Lite/BilletYard/_MaterialDetailsPanel.cshtml", new PE.HMIWWW.ViewModel.Module.Lite.Material.VM_MaterialOverview { });
+      }
+    </div>
+  </div>
+  <div class="stack-view col-9">
+    <div class="stack-wrapper">
+      <p class="text-center">@Model.Name</p>
+      <div class="stack-container" id="stackContainer">
+      </div>
+    </div>
+    <div id="heatsLegend" class="heats-legend ml-3"></div>
+  </div>
+</div>
+
+<script>
+  function reloadLocationContent() {
+     const url = "/BilletYard/GetStackContenPartialtView";
+     AjaxReqestHelperSilentWithoutDataType(url, {id : @Model.LocationId}, setLocationPartialView);
+  }
+    $(document).ready(() => {
+      CreateStack(@Model.LocationId, @Model.SizeX, @Model.SizeY, "@Model.FillDirection");
+    })
+</script>

@@ -1,0 +1,192 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.WorkOrder
+@using PE.BaseDbEntity.EnumClasses
+@{
+  Layout = "~/Views/Shared/_TabLayout.cshtml";
+}
+
+
+@section TabIncludes{
+  @Html.ImageButton("add", "GoToUnasignedWorkOrder()")
+  @Html.ImageButton("legend", "displayScheduleLegendWindow()", false, "BUTTON_Legend")
+}
+
+<style>
+    #ScheduleList.k-grid tbody tr {
+        cursor: n-resize;
+    }
+
+    .legend-cell {
+        width: 70px;
+    }
+
+    .schedule-legend {
+        width: auto;
+        height: auto;
+        padding: 5px 0px 5px 0px;
+        background-color: rgba(255,255,255,0.9);
+        display: none;
+        position: absolute;
+        top: 55px;
+        right: 20px;
+        z-index: 10;
+        box-shadow: 0 3px 10px #CCCCCC;
+    }
+
+    .schedule-legend-square {
+        margin-top: 6px !important;
+    }
+
+    /*grid header tooltip*/
+    .k-animation-container {
+        margin-top: 0 !important;
+    }
+
+    .k-tooltip {
+        padding: 2px 5px !important;
+        background-color: #fff !important
+    }
+
+    .k-tooltip-content {
+        background-color: #fff !important
+    }
+
+  .status-@((short)WorkOrderStatus.Scheduled) {
+    cursor: n-resize;
+    background-color: #6ba4b8;
+    color: #fff;
+  }
+
+  .status-@((short)WorkOrderStatus.Charging) {
+    background-color: #00b5df;
+    color: #fff;
+  }
+
+  .status-@((short)WorkOrderStatus.Charged) {
+    background-color: #ffcd00;
+    color: #444;
+  }
+
+  .status-@((short)WorkOrderStatus.InRealization) {
+    background-color: #ff6347;
+    color: #fff;
+  }
+
+  .status-@((short)WorkOrderStatus.Finished) {
+    background-color: #77ce48;
+    color: #fff;
+  }
+</style>
+
+<div>
+  @(Html.Kendo().Grid<VM_WorkOrderSummary>()
+        .Name("ScheduleList")
+        .Events(e => e.DataBound("ColorRowInTable"))
+        .HtmlAttributes(new {style = " height:650px;"})
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Filterable()
+        .Pageable(p => p
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+        .Scrollable()
+        .Columns(c =>
+        {
+            c.Bound(x => x.WorkOrderId).Visible(false);
+            c.Bound(x => x.ScheduleId).Visible(false);
+            c.Bound(x => x.WorkOrderName).Width(100);
+            c.Bound(x => x.ProductCatalogueName).Width(80);
+            c.Bound(x => x.MaterialCatalogueName).Width(200);
+            c.Bound(x => x.ScheduleOrderSeq).Width(75);
+            c.Bound(x => x.SteelgradeCode).Width(100);
+            c.Bound(x => x.HeatName).Width(150);
+            c.Bound(x => x.PlannedTime).ClientTemplate("#= kendo.format('{0:00}:{1:00}:{2:00}', PlannedTime.Hours, PlannedTime.Minutes,PlannedTime.Seconds) #").Width(90);
+            //  c.Bound(x => x.Charged).Width(90);
+            //  c.Bound(x => x.SetupStatus).ClientTemplate(
+            //"#if(SetupStatus === 0)" +
+            //    "{" +
+            //        "#<span></span>#" +
+            //    "}" +
+            //     "else if( SetupStatus === 1)" +
+            //    "{" +
+            //       $"#<img src='/Content/Functions/Small/result_true.png' /> {VM_Resources.NAME_SetupAssignShort_Assigned}#" +
+            //    "}" +
+            //    "else if( SetupStatus === 2)" +
+            //    "{" +
+            //       $"#<img src='/Content/Functions/Small/result_warn.png' /> {VM_Resources.NAME_SetupAssignShort_PartiallyAssigned}#" +
+            //    "}" +
+            //    "else if( SetupStatus === 3)" +
+            //    "{" +
+            //       $"#<img src='/Content/Functions/Small/result_warn_blue.png' /> {VM_Resources.NAME_SetupAssignShort_AmbiguouslyAssigned}#" +
+            //    "}" +
+            //    "else if( SetupStatus === 4)" +
+            //    "{" +
+            //       $"#<img src='/Content/Functions/Small/result_false.png' /> {VM_Resources.NAME_SetupAssignShort_Unassigned}#" +
+            //    "}#").Width(120);
+            //  c.Bound(x => x.SetupCreatedTs).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT).Width(140);
+            c.Bound(p => p.ScheduleId).Width(185).Sortable(false).Groupable(false).Filterable(false).Title(" ")
+                .ClientTemplate(Html.ImageButton("new", "createTestSchedule(#=ScheduleId#)")
+                                + Html.ImageButton("edit", "editMaterialNumber(#=WorkOrderId#)").ToString()
+                                + Html.ImageButton("delete", "removeItemFromSchedule(#=ScheduleId#,#=WorkOrderId#, #=ScheduleOrderSeq#)")
+                                + Html.ImageButton("details", "GoToWorkOrderDetails(#=WorkOrderId#)")
+                                + Html.ImageButton("setup", "GoToSetupDetails(#=WorkOrderId#)")
+                                + Html.ImageButton("telegram_resend", "SendSetupsToL1(#=WorkOrderId#)")
+                                + Html.ImageButton("calculate", "CalcutalteSetupsForWorkOrder(#=WorkOrderId#)"));
+        })
+        .DataSource(ds => ds
+            .Ajax()
+            .ServerOperation(true)
+            .Events(e => e.Error("TelerikErrorHandler"))
+            .Read(r => r.Action("GetSchedule", "Schedule"))
+            .PageSize(28)
+            .Sort(sort => { sort.Add(s => s.ScheduleOrderSeq).Ascending(); })))
+</div>
+
+
+@(Html.Kendo().Sortable()
+    .For("#ScheduleList")
+    .Filter("table > tbody > tr:not(.restricted)")
+    .Cursor("move")
+    .HintHandler("noHint")
+    .PlaceholderHandler("placeholder")
+    .ContainerSelector("#ScheduleList tbody")
+    .Events(events => events.Change("onChange"))
+    )
+
+<div class="schedule-legend pl-1 pr-2">
+  <div class="row m-1">
+    <div class="square status-planned"></div>
+    <div class="legend">@VM_Resources.NAME_Planned</div>
+  </div>
+  <div class="row m-1">
+    <div class="square status-charged"></div>
+    <div class="legend">@VM_Resources.NAME_Charged</div>
+  </div>
+  <div class="row m-1">
+    <div class="square status-actual"></div>
+    <div class="legend">@VM_Resources.NAME_Actual</div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="~/Content/Module/Schedule.css" />
+<script src="~/Scripts/Module/Schedule.js"></script>
+
+<script>
+  $(document).ready(function () {
+    var grid = $("#ScheduleList").getKendoGrid();
+    grid.thead.kendoTooltip({
+      filter: "th",
+      content: function (e) {
+        var target = $(e.target)
+        return target[0].dataset.title;
+      }
+    })
+  });
+
+  function displayScheduleLegendWindow() {
+    let legendWindow = $('.schedule-legend');
+    if (legendWindow.css('display') === 'none') {
+      legendWindow.show();
+    } else {
+      legendWindow.hide();
+    }
+  }
+
+</script>

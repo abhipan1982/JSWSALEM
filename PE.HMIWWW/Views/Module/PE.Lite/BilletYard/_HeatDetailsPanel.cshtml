@@ -1,0 +1,57 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_HeatsOnYards
+<div class="details-panel">
+  <div class="details-panel-actions">
+    @Html.ImageButton("edit", "EditHeatPopup(" + Model.HeatId + ")", false, "BUTTON_edit")
+    @if (Model != null && Model.HeatId != 0)
+    {
+      @Html.ImageButton("scrap", "ScrapMaterials(" + Model.HeatId + "," + Model.NumberOfMaterials + "," + Model.YardId + "," + Model.AssetId + "," + @Model.IsFirstInQueueShort + ")", false, "NAME_Scrap")
+    }
+    else
+    {
+      @Html.ImageButton("scrap", "ScrapMaterials()", false, "NAME_Scrap")
+    }
+  </div>
+  <div class="details-panel-name form-inline"><div id="heatColor" class="heat-color"></div><span id="materialName">@Html.DisplayFor(x => x.HeatName)</span></div>
+  <div class="details-panel-header">
+    @VM_Resources.NAME_HeatDetails <span class="header-icon">@Html.ImageButton("details", "OpenHeatDetailsPopup(" + Model.HeatId + ")", false, "NAME_Details")</span>
+  </div>
+  <div class="details-panel-data mt-3">
+    <div class="row form-group">
+      <div class="details-panel-label ml-4 text-left">
+        <label class="control-label">@VM_Resources.LABEL_Materials</label>
+        @*@Html.LabelFor(m => m.NumberOfMaterials, new { @class = "control-label" })*@
+      </div>
+      <div class="p-0">
+        @Html.DisplayFor(x => x.NumberOfMaterials)
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="details-panel-label ml-4 text-left">
+        @Html.LabelFor(m => m.SteelgradeName, new { @class = "control-label" })
+      </div>
+      <div class="p-0">
+        @Html.DisplayFor(x => x.SteelgradeName)
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="details-panel-label ml-4 text-left">
+        @Html.LabelFor(m => m.HeatWeight, new { @class = "control-label" })
+      </div>
+      <div class="p-0">
+        @Html.DisplayFor(x => x.HeatWeight)
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(() => {
+    let bgColor = '';
+    if (@Model.HeatId) {
+      bgColor = GetColorModulo16(@Model.HeatId);
+      $('#heatColor').css('background-color', bgColor);
+    }
+
+})
+</script>

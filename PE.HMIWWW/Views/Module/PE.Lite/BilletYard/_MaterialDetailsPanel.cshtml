@@ -1,0 +1,37 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_MaterialOverview
+<div class="details-panel">
+  <div class="details-panel-actions" style="height: 12px;"></div>
+  <div class="details-panel-name form-inline"><div id="material-color"></div><div id="materialName">@Html.DisplayFor(x => x.MaterialName)</div></div>
+  <div class="details-panel-header">
+    @VM_Resources.NAME_MaterialDetails <span class="header-icon">@Html.ImageButton("details", "OpenMaterialDetailsPopup(" + Model.MaterialId +")", false, "NAME_Details")</span>
+  </div>
+  <div class="details-panel-data mt-3">
+
+    <div class="row form-group">
+      <div class="details-panel-label ml-4 text-left">
+        <label class="control-label">@VM_Resources.NAME_Catalogue</label>
+      </div>
+      <div class="p-0">
+        @Html.DisplayFor(x => x.MaterialCatalogueName)
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="details-panel-label ml-4 text-left">
+        @Html.LabelFor(m => m.MaterialThickness, new { @class = "control-label" })
+      </div>
+      <div class="p-0">
+        @Html.DisplayFor(x => x.MaterialThickness)
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="details-panel-label ml-4 text-left">
+        @Html.LabelFor(m => m.MaterialWeight, new { @class = "control-label" })
+      </div>
+      <div class="p-0">
+        @Html.DisplayFor(x => x.MaterialWeight)
+      </div>
+    </div>
+  </div>
+</div>

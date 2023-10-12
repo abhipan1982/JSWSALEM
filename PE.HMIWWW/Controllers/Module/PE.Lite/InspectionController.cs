@@ -1,0 +1,106 @@
+using System.Threading.Tasks;
+using Kendo.Mvc.UI;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using PE.Core;
+using PE.HMIWWW.Core.Authorization;
+using PE.HMIWWW.Core.Controllers;
+using PE.HMIWWW.Core.HtmlHelpers;
+using PE.HMIWWW.Core.ViewModel;
+using PE.HMIWWW.Services.Module.PE.Lite.Interfaces;
+using PE.HMIWWW.ViewModel.Module.Lite.QualityInspection;
+
+namespace PE.HMIWWW.Controllers.Module.PE.Lite
+{
+  public class InspectionController : BaseController
+  {
+    private readonly IInspectionService _inspectionService;
+
+    public InspectionController(IInspectionService service)
+    {
+      _inspectionService = service;
+    }
+
+    public override void OnActionExecuting(ActionExecutingContext ctx)
+    {
+      base.OnActionExecuting(ctx);
+
+      ViewBag.InspectionResultList = ListValuesHelper.GetInspectionResultList();
+    }
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_Inspection, Constants.SmfAuthorization_Module_Quality,
+      RightLevel.View)]
+    public ActionResult Index()
+    {
+      ViewBag.RawMaterialStatuses = ListValuesHelper.GetRawMaterialStatusesList();
+
+      return View("~/Views/Module/PE.Lite/Inspection/Index.cshtml");
+    }
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_Inspection, Constants.SmfAuthorization_Module_Quality,
+      RightLevel.View)]
+    public Task<JsonResult> GetRawMaterialSearchList([DataSourceRequest] DataSourceRequest request)
+    {
+      return PrepareJsonResultFromDataSourceResult(() =>
+        _inspectionService.GetInspectionRawMaterialSearchList(ModelState, request));
+    }
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_Inspection, Constants.SmfAuthorization_Module_Quality,
+      RightLevel.View)]
+    public Task<ActionResult> ElementDetails(long rawMaterialId)
+    {
+      return PrepareActionResultFromVm(() => _inspectionService.GetRawMaterialDetails(ModelState, rawMaterialId),
+        "~/Views/Module/PE.Lite/Inspection/_InspectionBody.cshtml");
+    }
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_Inspection, Constants.SmfAuthorization_Module_Quality,
+      RightLevel.View)]
+    public Task<ActionResult> RawMaterialQualityView(long rawMaterialId)
+    {
+      return PrepareActionResultFromVm(() => _inspectionService.GetQualityByRawMaterial(rawMaterialId),
+        "~/Views/Module/PE.Lite/Inspection/_Quality.cshtml");
+    }
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_Inspection, Constants.SmfAuthorization_Module_Quality,
+      RightLevel.View)]
+    public Task<JsonResult> GetDefectsByRawMaterialId([DataSourceRequest] DataSourceRequest request, long rawMaterialId)
+    {
+      return PrepareJsonResultFromDataSourceResult(() =>
+        _inspectionService.GetDefectsByRawMaterialId(ModelState, request, rawMaterialId));
+    }
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_Inspection, Constants.SmfAuthorization_Module_Quality,
+      RightLevel.Update)]
+    [HttpPost]
+    public Task<JsonResult> AssignRawMaterialFinalQuality(VM_QualityInspection rawMaterialQuality)
+    {
+      return TaskPrepareJsonResultFromVm<VM_Base, Task<VM_Base>>(() =>
+        _inspectionService.AssignRawMaterialFinalQuality(ModelState, rawMaterialQuality));
+    }
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_InspectionStation,
+      Constants.SmfAuthorization_Module_Quality, RightLevel.View)]
+    public Task<ActionResult> QualityEditPopup(long rawMaterialId)
+    {
+      return PreparePopupActionResultFromVm(() => _inspectionService.GetQualityByRawMaterial(rawMaterialId),
+        "~/Views/Module/PE.Lite/Inspection/_QualityEditPopup.cshtml");
+    }
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_InspectionStation,
+      Constants.SmfAuthorization_Module_Quality, RightLevel.View)]
+    public Task<ActionResult> QualityAddPopup(long rawMaterialId)
+    {
+      return PreparePopupActionResultFromVm(() => _inspectionService.GetQualityByRawMaterial(rawMaterialId),
+        "~/Views/Module/PE.Lite/Inspection/_QualityAddPopup.cshtml");
+    }
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_InspectionStation,
+      Constants.SmfAuthorization_Module_Quality, RightLevel.Update)]
+    [HttpPost]
+    public Task<JsonResult> AssignRawMaterialQuality(VM_QualityInspection rawMaterialQuality)
+    {
+      return TaskPrepareJsonResultFromVm<VM_Base, Task<VM_Base>>(() =>
+        _inspectionService.AssignRawMaterialQuality(ModelState, rawMaterialQuality));
+    }
+  }
+}

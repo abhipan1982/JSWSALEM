@@ -1,0 +1,30 @@
+﻿@model List<string>
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+@section module_menu
+{
+    @Html.ImageButton("new", $"CreateSetupPopup({@ViewBag.SetupType})", false)
+    @Html.ImageButton("clone", "CloneSetupPopup()", false)
+    @Html.ImageButton("edit", "EditSetupPopup()", false)
+    @Html.ImageButton("delete", "DeleteSetup()", false)
+}
+
+<div class="container-fluid p-3">
+    <div class="row">
+        <div class="col-4 grid-filter">
+            @await Html.PartialAsync("~/Views/Module/PE.Lite/Setup/_SetupSearchGrid.cshtml", Model)
+        </div>
+        <div class="col-8 element-details" id="SetupDetails">
+            <div class="row justify-content-center plug">
+                <div class="col-6 align-self-center">
+                    <img src="/css/Shared/plug.png" />
+                    <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/Setup.css" />
+<script src="~/bundles/js/Module/Setup.js"></script>

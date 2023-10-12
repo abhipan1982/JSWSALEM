@@ -1,0 +1,35 @@
+@model long?
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+  @Html.ImageButton("cancel_work_order", "CancelWorkOrder()")
+  @Html.ImageButton("uncancel_work_order", "UnCancelWorkOrder()")
+  @Html.ImageButton("show", "BlockWorkOrder()",false,"BUTTON_block_work_order")
+  @Html.ImageButton("hide", "UnBlockWorkOrder()",false,"BUTTON_unblock_work_order")
+  @Html.ImageButton("new", "AddNew()")
+  @Html.ImageButton("edit", "EditWorkOrder()")
+}
+
+
+<div class="container-fluid p-3">
+  <div class="row">
+    <div class="col-3 grid-filter">
+      <div> <partial name="~/Views/Module/PE.Lite/WorkOrder/_WorkOrderSearchGrid.cshtml" model="Model" /></div>
+    </div>
+    @*<button onclick="showHideCategories()" class="off show-hide-categories btn btn-sm"><i class="arrow arrow-categories arrow-white right"></i></button>*@
+    <div class="col-9 element-details" id="WorkOrderDetails">
+      <div class="row justify-content-center plug">
+        <div class="col-6 align-self-center">
+          <img src="~/css/Shared/plug.png" />
+          <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/WorkOrder.css" />
+<script src="~/bundles/js/Module/WorkOrder.js" />

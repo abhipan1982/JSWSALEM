@@ -1,0 +1,98 @@
+@using PE.HMIWWW.ViewModel.System
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+  //THIS METHOD WILL BE CALLED BY SYSTEM (SERVER) IN CASE DATA CHANGE, NAME IS IMPORTANT !!!
+  function RefreshData() {
+    //Refresh whole page because shared views must also be reloaded.
+      window.location = location.href;
+  }
+</script>
+
+@section module_menu
+  {
+  @Html.ImageButton("new", "AddNew()")
+}
+
+  @(Html.Kendo().Grid<VM_WidgetConfigurations>()
+    .Name("Widgets")
+    .HtmlAttributes(new { style = string.Format("border:none !important; height:{0}px;", ViewBag.FullGridHeight) })
+    .Pageable(p => p
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Sortable().Filterable(filtering => filtering.Enabled(true))
+    .Filterable()
+    .Sortable()
+    .Scrollable()
+    .Columns(columns =>
+    {
+      columns.Bound(p => p.WidgetId).Visible(false).Filterable(false).Width(10);
+      columns.Bound(p => p.WidgetName);
+      columns.Bound(p => p.WidgetFileName);
+      columns.Bound(p => p.IsActive).Width(70).ClientTemplate(
+          "#if(IsActive)" +
+          "{" +
+          "#<input class='not-editable' type='checkbox' disabled checked/>#" +
+          "}" +
+          "else" +
+          "{" +
+          "#<input class='not-editable' type='checkbox' disabled />#" +
+          "}#");
+      columns.Bound(p => p.WidgetId).Width(40).Sortable(false).Groupable(false).Filterable(false).Title(" ")
+      .ClientTemplate(
+        "#if(Widget != null) {#" +
+        Html.ImageButton("edit", "EditWidgetAssignment(#=Widget#)").ToString() +
+        "#}#");
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(20)
+        .Events(events => events.Error("TelerikErrorHandler"))
+        .Read(read => read.Action("GetWidgetsList", "WidgetConfiguration"))
+    ))
+
+<script>
+  function AddNew() {
+      OpenInPopupWindow({
+          controller: 'WidgetConfiguration',
+          method: 'AddWidgetConfigurationDialog',
+          width: 330,
+          afterClose: RefreshData
+      });
+  }
+  function EditData(itemId) {
+      OpenInPopupWindow({
+          controller: 'WidgetConfiguration',
+          method: 'EditWidgetConfigurationDialog',
+          width: 330,
+          data: { id: itemId },
+          afterClose: RefreshData
+      });
+  }
+
+  function EditWidgetAssignment(itemId) {
+      OpenInPopupWindow({
+          controller: 'WidgetConfiguration',
+          method: 'EditWidgetAssigmentDialog',
+          width: 430,
+          data: { widgetId: itemId },
+          afterClose: RefreshData
+      });
+  }
+
+  function Delete(itemId) {
+      var functionName = Delete2Confirm;
+      var action = 'Delete';
+      PromptMessage("@VM_Resources.GLOB_ConfirmDelete", "@VM_Resources.GLOB_ConfirmDeleteInfo", function () { return functionName(itemId, action) });
+  }
+
+  function Delete2Confirm(itemId, action) {
+
+      var url = serverAddress + "/WidgetConfiguration/" + action;
+      var data = { Id: itemId };
+
+      AjaxReqestHelper(url, data, RefreshData);
+  }
+</script>

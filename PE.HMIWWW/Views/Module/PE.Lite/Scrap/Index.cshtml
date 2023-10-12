@@ -1,0 +1,38 @@
+﻿@using PE.HMIWWW.ViewModel.Module.Lite.ScrapGroup
+@{
+    ViewBag.Title = VM_Resources.PAGE_TITLE_ScrapGroupCatalogue_Index;
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("new", "CreateScrapGroupPopup()")
+}
+
+@(Html.Kendo().Grid<VM_ScrapGroup>()
+    .Name("ScrapGroupList")
+    .HtmlAttributes(new {style = string.Format(" height:{0}px;", ViewBag.FullGridHeight)})
+    .Pageable()
+    .Filterable()
+    .Pageable(p => p
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Columns(c =>
+    {
+        c.Bound(x => x.ScrapGroupCode);
+        c.Bound(x => x.ScrapGroupName);
+        c.Bound(x => x.ScrapGroupDescription);
+        c.Bound(x => x.ScrapGroupId)
+            .Filterable(false)
+            .ClientTemplate(Html.ImageButton("edit", "EditScrapGroupPopup(#:ScrapGroupId#)") + Html.ImageButton("details", "GoToDetails(#:ScrapGroupId#)").ToString() + Html.ImageButton("delete", "Delete(#=ScrapGroupId#)"))
+            .Width(100)
+            .Title(" ");
+    })
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(30)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetScrapGroupList", "ScrapGroupCatalogue")))
+    )
+
+<script src="~/js/Module/PE.Lite/Scrap.js"></script>

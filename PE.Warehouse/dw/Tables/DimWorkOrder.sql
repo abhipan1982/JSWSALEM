@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dw].[DimWorkOrder] (
+    [SourceName]              NVARCHAR (50)  NOT NULL,
+    [SourceTime]              DATETIME       NOT NULL,
+    [DimWorkOrderIsDeleted]   BIT            NOT NULL,
+    [DimWorkOrderHash]        VARBINARY (16) NULL,
+    [DimWorkOrderKey]         BIGINT         NOT NULL,
+    [DimWorkOrderStatusKey]   SMALLINT       NOT NULL,
+    [DimHeatKey]              BIGINT         NULL,
+    [DimSteelgradeKey]        BIGINT         NOT NULL,
+    [DimMaterialCatalogueKey] BIGINT         NOT NULL,
+    [DimProductCatalogueKey]  BIGINT         NOT NULL,
+    [DimCustomerKey]          BIGINT         NULL,
+    [DimWorkOrderKeyParent]   BIGINT         NULL,
+    [WorkOrderName]           NVARCHAR (50)  NOT NULL,
+    [WorkOrderIsTest]         BIT            NOT NULL,
+    [WorkOrderCreated]        DATETIME       NOT NULL,
+    [WorkOrderCreatedInL3]    DATETIME       NOT NULL,
+    [WorkOrderDueDate]        DATETIME       NOT NULL,
+    [WorkOrderStart]          DATETIME       NULL,
+    [WorkOrderEnd]            DATETIME       NULL,
+    [WoorkOrderExternalName]  NVARCHAR (50)  NULL,
+    [WorkOrderNameParent]     NVARCHAR (50)  NULL,
+    [DimWorkOrderRow]         INT            IDENTITY (1, 1) NOT NULL
+);
+

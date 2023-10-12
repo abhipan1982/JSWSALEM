@@ -1,0 +1,11 @@
+@{ await Html.RenderPartialAsync("~/Views/Shared/parts/_userPanel.cshtml"); }
+@{ await Html.RenderPartialAsync("~/Views/Shared/parts/_logotypes.cshtml"); }
+@{ await Html.RenderPartialAsync("~/Views/Shared/parts/_SystemStatuses.cshtml"); }
+
+@*@section MenuSection
+{
+  @await Component.InvokeAsync("Menu"))
+}*@
+<profile name="Render Menu">
+  @await Component.InvokeAsync("Menu")
+</profile>

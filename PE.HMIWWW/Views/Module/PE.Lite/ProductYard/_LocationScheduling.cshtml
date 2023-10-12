@@ -1,0 +1,23 @@
+
+<div class="popup-top-actions">
+  @Html.ImageButton("legend", "displayLegend($('#locationSchedulingLegend'))", false, "BUTTON_Legend")
+</div>
+
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-6">
+      @await Html.PartialAsync("~/Views/Module/PE.Lite/ProductYard/_WorkOrderScheduleGrid.cshtml")
+    </div>
+    <div class="col-6">
+      @await Html.PartialAsync("~/Views/Module/PE.Lite/ProductYard/_LocationScheduleGrid.cshtml")
+    </div>
+  </div>
+</div>
+
+<div class="legend-window popup-legend-window" id="locationSchedulingLegend">
+  <div class="row m-1">
+    <div class="square  square-border available"></div>
+    <div class="legend">@VM_Resources.NAME_ActiveLocation</div>
+  </div>
+</div>

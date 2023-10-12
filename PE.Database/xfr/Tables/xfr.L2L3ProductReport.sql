@@ -1,0 +1,25 @@
+﻿CREATE TABLE [xfr].[L2L3ProductReport] (
+    [Counter]             BIGINT          IDENTITY (1, 1) NOT FOR REPLICATION NOT NULL,
+    [CreatedTs]           DATETIME        CONSTRAINT [DF_L2L3ProductReport_CreatedTs_1] DEFAULT (getdate()) NOT NULL,
+    [UpdatedTs]           DATETIME        CONSTRAINT [DF_L2L3ProductReport_UpdatedTs] DEFAULT (getdate()) NOT NULL,
+    [IsUpdated]           BIT             CONSTRAINT [DF_L2L3ProductReport_IsUpdated] DEFAULT ((0)) NOT NULL,
+    [CommStatus]          SMALLINT        CONSTRAINT [DF_L3L2ProductReport_CommStatus] DEFAULT ((0)) NOT NULL,
+    [CommMessage]         NVARCHAR (400)  NULL,
+    [ValidationCheck]     NVARCHAR (4000) NULL,
+    [ShiftName]           NVARCHAR (10)   NOT NULL,
+    [WorkOrderName]       NVARCHAR (50)   NOT NULL,
+    [SteelgradeCode]      NVARCHAR (50)   NOT NULL,
+    [HeatName]            NVARCHAR (50)   NOT NULL,
+    [SequenceInWorkOrder] NVARCHAR (5)    NOT NULL,
+    [ProductName]         NVARCHAR (50)   NOT NULL,
+    [ProductType]         NVARCHAR (1)    NOT NULL,
+    [OutputWeight]        NVARCHAR (10)   NOT NULL,
+    [OutputWidth]         NVARCHAR (10)   NOT NULL,
+    [OutputThickness]     NVARCHAR (10)   NOT NULL,
+    [OutputPieces]        NVARCHAR (3)    NOT NULL,
+    [InspectionResult]    NVARCHAR (1)    NOT NULL,
+    [AUDCreatedTs]        DATETIME        CONSTRAINT [DF_L2L3ProductReport_CreatedTs] DEFAULT (getdate()) NOT NULL,
+    CONSTRAINT [PK_L2L3ProductReport] PRIMARY KEY CLUSTERED ([Counter] ASC),
+    CONSTRAINT [CHK_CommStatusL3L2ProductReport] CHECK ([CommStatus]>=(-2) AND [CommStatus]<=(2))
+);
+

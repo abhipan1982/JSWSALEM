@@ -1,0 +1,80 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.QualityExpert
+@model VM_QualityExpertSlimRawMaterial
+
+@(Html.Kendo().Grid<VM_Rating>()
+  .Name("MaterialGrading")
+  .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .ClientDetailTemplateId("MaterialRatings")
+  .Scrollable()
+  .Sortable()
+  .Filterable()
+  //.Pageable(p => p.ButtonCount(3))
+  .HtmlAttributes(new { style = "height: 565px;" })
+  .Columns(c =>
+  {
+      c.Bound(p => p.RatingCurrentValue).Title(" ").Filterable(false).Sortable(false)
+        .ClientTemplate("#=setCurrValueImage(RatingCurrentValue)#")
+        .HtmlAttributes(new { @class = "material-info-bg-#=RatingCurrentValue#" })
+        .Width(35);
+      c.Bound(p => p.RatingCurrentValue).Title(" ").Filterable(false).Sortable(false)
+        .ClientTemplate("#=setAltOrForcedValueImage(RatingForcedValue, RatingAlternative)#")
+        .HtmlAttributes(new { @class = "material-info-bg-#=RatingAlternative# material-info-bg-#=RatingForcedValue#" })
+        .Width(35);
+      c.ForeignKey(p => p.RatingCurrentValue, new SelectList(ViewBag.RatingValuesTypes, "Key", "Value")).Width(160);
+      c.Bound(p => p.AssetName);
+      c.Bound(p => p.RawMaterialName).Visible(false);
+      c.Bound(p => p.RatingRanking).Visible(false);
+      c.ForeignKey(p => p.RatingValue, new SelectList(ViewBag.RatingValuesTypes, "Key", "Value")).Width(160).Visible(false);
+      c.ForeignKey(p => p.RatingForcedValue, new SelectList(ViewBag.RatingValuesTypes, "Key", "Value")).Width(160).Visible(false);
+      c.Bound(p => p.RatingType).Visible(false);
+      c.Bound(p => p.RatingCreatedTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT).Width(180);
+      c.Bound(p => p.RatingModifiedTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT).Width(180);
+  })
+  .DataSource(d => d
+      .Ajax()
+      .ServerOperation(true)
+      .PageSize(20)
+      .Sort(r => r.Add(o => o.DimAssetKey))
+      .Read(r => r.Action("GetMaterialGradingPerAsset", "QualityExpert", new { rawMaterialId = Model.RawMaterialId }))
+      ))
+
+<script id="MaterialRatings" type="text/kendo-tmpl">
+    @(Html.Kendo().Grid<VM_Rating>()
+      .Name("MaterialRatings_#=FactRatingKey#_#=DimAssetKey#")
+      .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+      .Sortable()
+      .Filterable()
+      .HtmlAttributes(new { style = "min-height: 52px;" })
+      .Columns(c =>
+      {
+          c.Bound(p => p.DimAssetKey).Title(" ").Filterable(false).Sortable(false)
+            .ClientTemplate("\\#=setCurrValueImage(RatingCurrentValue)\\#")
+            .HtmlAttributes(new { @class = "material-info-bg-\\#=RatingCurrentValue\\#" })
+            .Width(35);
+          c.Bound(p => p.DimAssetKey).Title(" ").Filterable(false).Sortable(false)
+            .ClientTemplate("\\#=setAltOrForcedValueImage(RatingForcedValue, RatingAlternative)\\#")
+            .HtmlAttributes(new { @class = "material-info-bg-\\#=RatingAlternative\\# material-info-bg-\\#=RatingForcedValue\\# " })
+            .Width(35);
+          c.Bound(p => p.RatingRanking).Visible(false);
+          c.ForeignKey(p => p.RatingValue, new SelectList(ViewBag.RatingValuesTypes, "Key", "Value")).Width(120);
+          c.ForeignKey(p => p.RatingForcedValue, new SelectList(ViewBag.RatingValuesTypes, "Key", "Value")).Width(120);
+          c.ForeignKey(p => p.RatingCurrentValue, new SelectList(ViewBag.RatingValuesTypes, "Key", "Value")).Width(120);
+          c.Bound(p => p.RatingName).Sortable(false).Filterable(false);
+          c.Bound(p => p.RatingType).Width(80);
+          c.Bound(p => p.RatingCreatedTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT).Width(180);
+          c.Bound(p => p.RatingModifiedTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT).Width(180);
+          c.Bound(p => p.DimAssetKey).Width(70).Sortable(false).Groupable(false).Filterable(false).Title(" ")
+              .ClientTemplate(@Html.ImageButton("edit", "forceValueDialog('\\#= FactRatingKey \\#','\\#= RatingCurrentValue \\#')", false).ToString()
+                  + @Html.ImageButton("details", "showRatingDetailsDialog('\\#= FactRatingKey \\#')", false).ToString());
+
+      })
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Events(events => events.Error("TelerikErrorHandler"))
+          .Read(read => read.Action("GetRatingsForAssetForMaterial", "QualityExpert",
+              new { rawMaterialId = "#=DimMaterialKey#", assetId = "#=DimAssetKey#" }))
+              .Sort(sort => sort.Add(s => s.RatingRanking))
+      )
+      .ToClientTemplate()
+    )
+</script>

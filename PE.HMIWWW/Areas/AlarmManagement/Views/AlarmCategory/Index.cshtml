@@ -1,0 +1,57 @@
+@{
+    ViewBag.Title = "Alarm Categories";
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<script>
+    function error_handler(e) {
+      var errors = $.parseJSON(e.xhr.responseText);
+
+      if (errors) {
+        alert("Errors:\n" + errors.join("\n"));
+      }
+    }
+    function onPush(e) {
+      var notification = $("#notification").data("kendoNotification");
+      notification.success(e.type);
+    }
+</script>
+
+@(Html.Kendo().Notification()
+    .Name("notification")
+    .Width("100%")
+    .Position(position => position
+        .Top(0)
+        .Left(0))
+)
+@(Html.Kendo().Grid<SMF.DbEntity.Models.AlarmCategory>()
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.CategoryCode);
+        columns.Bound(p => p.CategoryDescription);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+    })
+    .ToolBar(toolbar =>
+    {
+        toolbar.Create();
+    })
+    //.Editable(editable => editable.Mode(GridEditMode.InCell))
+	.Pageable()
+    .Sortable()
+    .Scrollable()
+	.Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+    .DataSource(dataSource => dataSource
+        .WebApi()
+        .Model(model =>
+			  {
+				  model.Id(p => p.AlarmCategoryId);
+			  })
+			  .Events(events => events.Error("error_handler"))
+			  .Read(read => read.Action("Get", "AlarmCategoryApi", new { Area = "AlarmManagement" }))
+			  .Create(create => create.Action("Post", "AlarmCategoryApi", new { Area = "AlarmManagement" }))
+			  .Update(update => update.Action("Put", "AlarmCategoryApi", new { Area = "AlarmManagement", id = "{0}"} ))
+			  .Destroy(destroy => destroy.Action("Delete", "AlarmCategoryApi", new { Area = "AlarmManagement", id = "{0}" }))
+        )
+    )
+<br />

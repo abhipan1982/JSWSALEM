@@ -1,0 +1,143 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.ActualStandConfiguration
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_ActualStandConfiguration;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<script src="~/bundles/js/Module/ActualStandConfiguration.js"></script>
+
+@(Html.Kendo().Grid<VM_StandConfiguration>()
+    .Name("ActualStandConfiguration")
+    .HtmlAttributes(new { style = @String.Format("border:none !important; height:{0}px;", (ViewBag.FullGridHeight / 2) - 5) })
+    .Pageable().Filterable(filtering => filtering.Enabled(true))
+    .Filterable()
+    .Scrollable()
+    .Columns(columns =>
+    {
+      columns.Bound(p => p.StandId).Visible(false).Filterable(false);
+      columns.Bound(p => p.RollSetId).Visible(false).Filterable(false);
+      columns.Bound(p => p.CassetteId).Visible(false).Filterable(false);
+      columns.Bound(p => p.StandName).Filterable(true).Width(100);
+      columns.Bound(p => p.CassetteName).Filterable(true);
+      columns.Bound(p => p.Position).Filterable(true).Width(100);
+      columns.ForeignKey(o => o.CassetteTypeId, (SelectList)ViewBag.CassetteType).Width(150);
+      columns.ForeignKey(o => o.EnumStandStatus, (SelectList)ViewBag.StandStat);
+      columns.ForeignKey(o => o.Arrangement, (SelectList)ViewBag.Arrang);
+      columns.Bound(p => p.StandNo).Filterable(true).Visible(false).HtmlAttributes(new { style = "text-align: right;" }).Width(100);
+      columns.Bound(p => p.RollsetsNumber).Visible(false).Width(100);
+      columns.Bound(p => p.StandId).Width(120).Sortable(false).Groupable(false).Filterable(false).Title("").ClientTemplate(
+        "# if (CassetteId != null) {#" +
+          @Html.ImageButton("edit", "EditData(#= StandId #)", false).ToString() +
+          @Html.ImageButton("cassette_details", "CassetteInfo(#= CassetteId #)", false).ToString() +
+          @Html.ImageButton("rolls_dismount_cassette", "DismountCassette(#= StandId #)", false).ToString() +
+          "# if (RollSetId != null) {#" + @Html.ImageButton("pass_change", "PassChangeGroove(#= RollSetId #)", false).ToString() + "#}#" +
+        "#} else {#" +
+          @Html.ImageButton("edit", "EditData(#= StandId #)", false).ToString() +
+          @Html.ImageButton("rolls_mount_with_cassette", "MountCassette(#= StandId #)", false).ToString() +
+          @Html.ImageButton("rolls_mount_cassette", "MountEmptyCassette(#= StandId #)", false).ToString() +
+        "#}#");
+    })
+    .DataSource(dataSource => dataSource
+    .Ajax()
+    .ServerOperation(true)
+    .Model(model =>
+    {
+      model.Id(p => p.StandId);
+    })
+    .PageSize(12)
+    .Sort(sort =>
+    {
+      sort.Add(p => p.Position).Ascending();
+      sort.Add(p => p.StandNo).Ascending();
+    })
+    .Events(events => events.Error("TelerikErrorHandler"))
+    .Read(read => read.Action("GetStandConfigurationCatalogueData", "ActualStandConfiguration"))
+))
+
+<div class="white-space" style="margin-left: 10px;"><h5 style="padding-bottom:5px; padding-top:0px; clear: both;">@PE.HMIWWW.Core.Resources.VM_Resources.NAME_ActiveGrooves</h5></div>
+
+@(Html.Kendo().Grid<VM_PassChangeDataActual>()
+    .Name("PassChangeActualData")
+    .Events(e => e.DataBound("ColorRowInTable"))
+    .HtmlAttributes(new { style = @String.Format("border:none !important; height:{0}px;", (ViewBag.FullGridHeight / 2) - 40) })
+    .Pageable().Sortable().Filterable(filtering => filtering.Enabled(true))
+    .Filterable()
+    .Scrollable()
+    .Sortable()
+    .Columns(columns =>
+    {
+      columns.Bound(p => p.StandId).Visible(false).Filterable(false).Sortable(true);
+      columns.Bound(p => p.CassetteId).Visible(false).Filterable(false).Sortable(true);
+      columns.Bound(p => p.RollSetId).Visible(false);
+      columns.Bound(p => p.EnumGrooveSetting).Visible(false).Filterable(false).Sortable(true);
+      columns.Bound(p => p.RollSetType).Visible(false).Filterable(false).Sortable(true);
+      columns.Bound(p => p.StandName).Filterable(true).Width(80);
+      columns.Bound(p => p.StandNo).Visible(true).Width(80).HtmlAttributes(new { style = "text-align: right;" });
+      columns.Bound(p => p.GrooveNumber).Visible(true).Filterable(false).Width(80);
+      columns.Bound(p => p.GrooveTemplateName).Visible(true).Filterable(false).Width(120);
+      columns.Bound(p => p.RollSetName).Filterable(true).Sortable(true).Width(120);
+      columns.ForeignKey(o => o.RollSetType, (SelectList)ViewBag.RollsetTypes).Width(120);
+      columns.Bound(p => p.CassetteName).Filterable(true).Sortable(true).Width(100);
+      columns.Bound(p => p.MountedTs).Filterable(true).Sortable(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).Width(160);
+      columns.ForeignKey(o => o.Arrangement, (SelectList)ViewBag.Arrang).Width(120);
+      columns.Bound(p => p.AccWeight).Filterable(true).Sortable(true).HtmlAttributes(new { style = "#= StylingAfterCompare(AccWeightRatio)#" + "text-align: right;" }).Width(120);
+      columns.Bound(p => p.AccWeightRatio).Filterable(true).Sortable(true).HtmlAttributes(new { style = "text-align: right;" }).Width(120);
+      columns.Bound(p => p.AccBilletCntRatio).Visible(false).Filterable(false);
+      columns.Bound(p => p.StandId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(100).ClientTemplate(
+        @Html.ImageButton("rollset_details", "RollSetInfo(#= RollSetId #)", false).ToString() +
+        @Html.ImageButton("cassette_details", "CassetteInfo(#= CassetteId #)", false).ToString() +
+        @Html.ImageButton("pass_change", "PassChangeGroove(#= RollSetId #, #= RollSetType #)", false).ToString()
+      );
+    })
+    .DataSource(dataSource => dataSource
+    .Ajax()
+    .ServerOperation(true)
+    .Model(model =>
+    {
+      model.Id(p => p.StandId);
+    })
+    .PageSize(12)
+    .Events(events => events.Error("TelerikErrorHandler"))
+    .Read(read => read.Action("GetPassChangeActualData", "ActualStandConfiguration"))
+    ))
+
+<style>
+  .status-1 {
+    background-color: #0044bc;
+    color: #fff;
+  }
+
+  .status-2 {
+    background-color: #ecc100;
+    color: #fff;
+  }
+
+  .status-3 {
+    background-color: #808080;
+    color: #fff;
+  }
+</style>
+
+<script>
+  function ColorRowInTable() {
+
+    var grid = $("#PassChangeActualData").data("kendoGrid");
+    var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "GrooveTemplateName" + "]").index();
+    var gridData = grid.dataSource.view();
+
+    for (var i = 0; i < gridData.length; i++) {
+      let value = gridData[i].EnumGrooveSetting;
+      var currentUid = gridData[i].uid;
+      var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+      var cell = currenRow.children().eq(columnIndex);
+
+      if (value == 1) {
+        $(cell).addClass('status-1')
+      } else if (value == 2) {
+        $(cell).addClass('status-2')
+      } else if (value == 3) {
+        $(cell).addClass('status-3')
+      }
+    }
+  }
+</script>

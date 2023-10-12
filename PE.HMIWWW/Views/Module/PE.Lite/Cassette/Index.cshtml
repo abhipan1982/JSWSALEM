@@ -1,0 +1,49 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Cassette;
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_Cassette_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+  @Html.ImageButton("new", "AddNew()", false)
+}
+
+<script src="~/bundles/js/Module/Cassette.js"></script>
+
+@(Html.Kendo().Grid<VM_CassetteOverview>()
+  .Name("CassetteGrid")
+  .HtmlAttributes(new { style = @String.Format(" height:{0}px;", ViewBag.FullGridHeight) })
+  .Scrollable()
+  .Pageable(p => p
+  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Filterable()
+  .Sortable()
+  .Columns(columns =>
+  {
+  columns.Bound(p => p.CassetteId).Visible(false);
+  columns.Bound(p => p.Editable).Visible(false);
+  columns.Bound(p => p.Dismountable).Visible(false);
+  //columns.ForeignKey(p => p.CassetteTypeId, (SelectList)ViewBag.CassType);
+  columns.Bound(p => p.CassetteTypeName).Filterable(true);
+  columns.Bound(p => p.CassetteName).Filterable(true);
+  columns.ForeignKey(p => p.EnumCassetteStatus, (SelectList)ViewBag.CassStatus);
+  columns.Bound(p => p.StandName).Filterable(true).HtmlAttributes(new { style = "text-align: right;" });
+  columns.Bound(p => p.StandNo).Filterable(true).HtmlAttributes(new { style = "text-align: right;" });
+  columns.ForeignKey(p => p.Arrangement, (SelectList)ViewBag.CassArrangement);
+  columns.Bound(p => p.CassetteId).Width(100).Sortable(false).Groupable(false).Filterable(false).Title(" ").ClientTemplate(
+    @Html.ImageButton("cassette_details", "CassetteInfo(#= CassetteId #)", false).ToString() +
+    "#if (Editable) {#" + @Html.ImageButton("edit", "EditData(#= CassetteId #)", false).ToString() +
+    @Html.ImageButton("delete", "Delete(#= CassetteId #)", false).ToString() +
+    "#} else {#" + " " + "#}#" +
+      "#if (Dismountable) {#" + @Html.ImageButton("rolls_dismount_cassette", "DismountCassette(#= CassetteId #)", false).ToString() +
+    "#} else {#" + " " + "#}#");
+  })
+  .DataSource(ds => ds
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(27)
+    .Events(e => e.Error("TelerikErrorHandler"))
+    .Read(r => r.Action("GetCassetteData", "Cassette"))
+  )
+)

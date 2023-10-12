@@ -1,0 +1,90 @@
+@using PE.BaseDbEntity.EnumClasses;
+@using PE.HMIWWW.ViewModel.Module.Lite.ActualStandConfiguration;
+@model PE.HMIWWW.ViewModel.Module.Lite.Cassette.VM_CassetteOverview
+
+<div class="row">
+  <div class="col-3">
+    <div class="row form-group">
+      <div class="col">
+        @Html.LabelFor(x => x.CassetteName)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(x => x.CassetteName)
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col">
+        @Html.LabelFor(x => x.CassetteTypeName)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(x => x.CassetteTypeName)
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col">
+        @Html.LabelFor(x => x.EnumCassetteStatus)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(x => x.StatusTxt)
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="row form-group">
+      <div class="col">
+        @Html.LabelFor(x => x.StandName)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(x => x.StandName)
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col">
+        @Html.LabelFor(x => x.NumberOfRolls)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(x => x.NumberOfRolls)
+      </div>
+    </div>
+  </div>
+
+  @if (Model.EnumCassetteStatus != CassetteStatus.Empty.Value)
+  {
+    <div class="pl-1">
+      @(Html.Kendo().Grid<VM_RollSetOverviewRollChange>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+          columns.Bound(p => p.RollSetId).Visible(false).Filterable(false);
+          columns.Bound(p => p.RollSetHistoryId).Visible(false);
+          columns.Bound(p => p.RollSetName).Filterable(true).Width(130);
+          columns.ForeignKey(o => o.EnumRollSetStatus, (SelectList)ViewBag.RollsetStatus).Width(130);
+          columns.ForeignKey(o => o.RollSetType, (SelectList)ViewBag.RollsetType).Width(120);
+          columns.Bound(p => p.UpperRollTypeName).Width(120);
+          columns.Bound(p => p.UpperRollName).Width(100);
+          columns.Bound(p => p.UpperActualDiameter).Width(120).HtmlAttributes(new { style = "text-align: right;" });
+          columns.Bound(p => p.BottomRollTypeName).Width(120);
+          columns.Bound(p => p.RollNameBottom).Width(100);
+          columns.Bound(p => p.BottomActualDiameter).Width(120).HtmlAttributes(new { style = "text-align: right;" });
+          columns.Bound(p => p.InstalledInStandStatus).Visible(false);
+          columns.Bound(p => p.RollSetId).Width(40).Title(" ").Filterable(false).Sortable(false).ClientTemplate(
+        "#if(RollSetId != 0){#" + @Html.ImageButton("rollset_details", "RollSetInfo(#= RollSetId #)", false).ToString() + "#}#");
+
+        })
+        .DataSource(dataSource => dataSource
+                .Ajax()
+                .ServerOperation(true)
+                .Read(read => read.Action("GetCassetteRollSetsData", "ActualStandConfiguration", new { cassetteId = Model.CassetteId }))
+                .Events(events => events.Error("TelerikErrorHandler"))
+        )
+        )
+    </div>
+  }
+</div>
+
+<script>
+
+  function RollSetInfo(rollsetId) {
+    openSlideScreen("GrindingTurning", "RollSetHistoryPopupDialog", { id: rollsetId });
+  }
+</script>

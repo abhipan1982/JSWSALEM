@@ -1,0 +1,32 @@
+{
+  "solution": "PE_Lite_Dev.sln",
+  "solutionFolder": null,
+  "mappings": {
+    "PE.DBA.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.DBA.Base/PE.DBA.Base.csproj",
+    "PE.EVT.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.EVT.Base/PE.EVT.Base.csproj",
+    "PE.L1A.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.L1A.Base/PE.L1A.Base.csproj",
+    "PE.HMI.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.HMI.Base/PE.HMI.Base.csproj",
+    "PE.MNT.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.MNT.Base/PE.MNT.Base.csproj",
+    "PE.MVH.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.MVH.Base/PE.MVH.Base.csproj",
+    "PE.PPL.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.PPL.Base/PE.PPL.Base.csproj",
+    "PE.PRF.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.PRF.Base/PE.PRF.Base.csproj",
+    "PE.PRM.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.PRM.Base/PE.PRM.Base.csproj",
+    "PE.QEX.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.QEX.Base/PE.QEX.Base.csproj",
+    "PE.QTY.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.QTY.Base/PE.QTY.Base.csproj",
+    "PE.STP.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.STP.Base/PE.STP.Base.csproj",
+    "PE.TCP.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.TCP.Base/PE.TCP.Base.csproj",
+    "PE.TRK.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.TRK.Base/PE.TRK.Base.csproj",
+    "PE.RLS.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.RLS.Base/PE.RLS.Base.csproj",
+    "PE.YRD.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.YRD.Base/PE.YRD.Base.csproj",
+    "PE.WBF.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.WBF.Base/PE.WBF.Base.csproj",
+    "PE.ZPC.Base": "../../ProcessExpert4.Standard/SRC/PE.BaseModules/PE.ZPC.Base/PE.ZPC.Base.csproj",
+    "PE.BaseInterfaces": "../../ProcessExpert4.Standard/SRC/PE.BaseInterfaces/PE.BaseInterfaces.csproj",
+    "PE.BaseDbEntity": "../../ProcessExpert4.Standard/SRC/PE.BaseDbEntity/PE.BaseDbEntity.csproj",
+    "PE.BaseModels": "../../ProcessExpert4.Standard/SRC/PE.BaseModels/PE.BaseModels.csproj",
+    "PE.BaseModule.Core": "../../ProcessExpert4.Standard/SRC/PE.BaseModule.Core/PE.BaseModule.Core.csproj",
+    "PE.BaseHelpers": "../../ProcessExpert4.Standard/SRC/PE.BaseHelpers/PE.BaseHelpers.csproj",
+    "PE.BaseCore": "../../ProcessExpert4.Standard/SRC/PE.BaseCore/PE.BaseCore.csproj",
+    "PE.BaseCommon": "../../ProcessExpert4.Standard/SRC/PE.BaseCommon/PE.BaseCommon.csproj"
+  },
+  "removeProjects": true
+}

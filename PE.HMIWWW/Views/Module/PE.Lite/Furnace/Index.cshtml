@@ -1,0 +1,205 @@
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu {
+  @Html.ImageButton("list", "_Charging.ChargeMaterialOnFurnaceSlider()", false, "BUTTON_OpenChargingFullList")
+  @Html.ImageButton("charge", "_TrackingActions.ChargeIntoChargingGridAction()", false, "BUTTON_ChargeIntoChargingGrid")
+  @Html.ImageButton("uncharge", "_TrackingActions.UnchargeFromChargingGridAction()", false, "BUTTON_UnchargeFromChargingGrid")
+  @Html.ImageButton("furnace_charge", "_TrackingActions.ChargeIntoFurnaceAction()", false, "BUTTON_ChargeIntoFurnace")
+  @Html.ImageButton("furnace_discharge", "_TrackingActions.UnchargeFromFurnaceAction()", false, "BUTTON_UnchargeFromFurnace")
+  @Html.ImageButton("rolling_discharge", "_TrackingActions.DischargeForRollingAction()", false, "BUTTON_DischargeForRolling")
+  @Html.ImageButton("rolling_undischarge", "_TrackingActions.UndischargeFromMillAction()", false, "BUTTON_UndischargeFromRolling")
+  @Html.ImageButton("tracking", "_TrackingActions.ChargeMaterialOnFurnaceExitPopup()", false, "BUTTON_ChargeMaterialOnFurnaceExit")
+  
+
+  @*@Html.ImageButton("furnace_charge", "ChargeIntoFurnaceAction()", false, "BUTTON_ChargeIntoFurnace")
+  @Html.ImageButton("furnace_discharge", "UnchargeFromFurnaceAction()", false, "BUTTON_UnchargeFromFurnace")
+  @Html.ImageButton("arrow_right", "StepForwardAction()", false, "BUTTON_StepForward")
+  @Html.ImageButton("arrow_left", "StepBackwardAction()", false, "BUTTON_StepBackward")
+  @Html.ImageButton("rolling_discharge", "DischargeForRollingAction()", false, "BUTTON_DischargeForRolling")
+  @Html.ImageButton("rolling_undischarge", "UndischargeFromMillAction()", false, "BUTTON_UndischargeForRolling")
+  @Html.ImageButton("tracking", "ChargeWorkOrderPopup()", false, "BUTTON_ChargeWorkOrder")*@
+  @*@Html.ImageButton("legend", "displayLegendWindow()", false, "BUTTON_Legend")*@
+}
+<script>
+  let maxFurnaceTemp = @ViewBag.MaxTemp;
+</script>
+
+<script src="~/bundles/js/Module/Furnace.js" />
+<link rel="stylesheet" href="~/bundles/css/Module/Furnace.css" />
+
+<div class="">
+  <p class="grid-title"> Charging area</p>
+  @(await Html.PartialAsync("~/Views/Module/PE.Lite/Furnace/_ChargingAreaGrid.cshtml"))
+</div>
+
+
+<div id="furnace" class="furnace">
+  <div class="furnace-label">
+    <div class="label">
+      @PE.HMIWWW.Core.Resources.VM_Resources.NAME_HeatName
+    </div>
+    <div class="label">
+      @PE.HMIWWW.Core.Resources.VM_Resources.NAME_WorkOrderNameShort
+    </div>
+    @*<div class="label">
+      @VM_Resources.WIDGET_TEXT_SetupTemperature [@PE.HMIWWW.Core.Resources.VM_Resources.UNIT_Temperature]
+    </div>
+    <div class="scale">
+      <div class="label temperature">
+        @ViewBag.MaxTemp @PE.HMIWWW.Core.Resources.VM_Resources.UNIT_Temperature
+      </div>
+
+      <div class="clearfix"></div>
+      <div class="label temperature">
+        @(Math.Ceiling(ViewBag.MaxTemp * 0.75)) @PE.HMIWWW.Core.Resources.VM_Resources.UNIT_Temperature
+      </div>
+
+      <div class="clearfix"></div>
+      <div class="label temperature">
+        @(Math.Ceiling(ViewBag.MaxTemp * 0.5)) @PE.HMIWWW.Core.Resources.VM_Resources.UNIT_Temperature
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="label temperature">
+      </div>
+
+      <div class="clearfix"></div>
+
+    </div>*@
+  </div>
+  <div class="furnace-body">
+    <div class="furnace-zone">
+      @*<div class="furnace-header">
+        <div class="preheating-zone">
+          @PE.HMIWWW.Core.Resources.VM_Resources.NAME_PreheatingZone
+        </div>
+        <div class="heating-zone">
+          @PE.HMIWWW.Core.Resources.VM_Resources.NAME_HeatingZone
+        </div>
+        <div class="soaking-zone">
+          @PE.HMIWWW.Core.Resources.VM_Resources.NAME_SoakingZone
+        </div>
+
+      </div>*@
+      <div class="zone-body"></div>
+    </div>
+
+    <div class="ribbon-strip work-order-ribbon"></div>
+    <div class="ribbon-strip heat-ribbon"></div>
+  </div>
+</div>
+
+<div id="pyrometers-grid" class="pyrometers-grid row">
+
+</div>
+@*<div class="storage-grid">
+  <p class="grid-title"> Storage area</p>
+  @{ Html.RenderPartial("~/Views/Module/PE.Lite/Furnace/_StorageAreaGrid.cshtml"); }
+</div>*@
+
+<!--LEGEND-->
+@*<div class="legend-window">
+  <div class="row ml-1">
+    <div class="color-block grey-block m-1"></div>Test billet or no heating data
+  </div>
+  <div class="row ml-1">
+    <div class="color-block blue-block m-1"></div>Heating temp. not reached
+  </div>
+  <div class="row ml-1">
+    <div class="color-block green-block m-1"></div>Heating temp. and time reached
+  </div>
+  <div class="row ml-1">
+    <div class="color-block red-block m-1"></div>Heating temp. reached, heating time not reached
+  </div>
+  <div class="row ml-1">
+    <div class="color-block brown-block m-1"></div>Oxidation started
+  </div>
+  <div class="row ml-1">
+    <div class="color-block black-block m-1"></div>Billet is oxidized
+  </div>
+</div>*@
+<!--INFO PANEL BEGIN-->
+<div class="info-pane">
+  <div class="popupContainer" style="margin:0px; height:100%;  font-family: Segoe UI, Arial, sans-serif;">
+    <div id="header" class="popup-header">
+
+      <div class="popup-header-title">
+        @PE.HMIWWW.Core.Resources.VM_Resources.NAME_Info
+      </div>
+    </div>
+    <div class="container mb-4">
+
+      <div class="row form-group info-data">
+        <div class="col text-right align-self-center">
+          <label>@PE.HMIWWW.Core.Resources.VM_Resources.NAME_RawMaterialName</label>
+        </div>
+        <div class="col">
+          <span id="lbl_rawname"></span>
+        </div>
+      </div>
+      <div class="row form-group info-data">
+        <div class="col text-right align-self-center">
+          <label>@PE.HMIWWW.Core.Resources.VM_Resources.NAME_TimeInFurnace [s]</label>
+        </div>
+        <div class="col">
+          <span id="lbl_timeInFurnace"></span>
+        </div>
+      </div>
+
+      <div class="row form-group info-data">
+        <div class="col text-right align-self-center">
+          <label>@PE.HMIWWW.Core.Resources.VM_Resources.NAME_Length [@PE.HMIWWW.Core.Resources.VM_Resources.UNIT_Length]</label>
+        </div>
+        <div class="col">
+          <span id="lbl_length"></span>
+        </div>
+      </div>
+      <div class="row form-group info-data">
+        <div class="col text-right align-self-center">
+          <label>@PE.HMIWWW.Core.Resources.VM_Resources.NAME_Weight [@PE.HMIWWW.Core.Resources.VM_Resources.UNIT_Weight]</label>
+        </div>
+        <div class="col">
+          <span id="lbl_weight"></span>
+        </div>
+      </div>
+
+      <div class="row form-group info-data">
+        <div class="col text-right align-self-center">
+          <label>@PE.HMIWWW.Core.Resources.VM_Resources.NAME_WorkOrderName</label>
+        </div>
+        <div class="col">
+          <span id="lbl_woname"></span>
+        </div>
+      </div>
+      <div class="row form-group info-data">
+        <div class="col text-right align-self-center">
+          <label>@PE.HMIWWW.Core.Resources.VM_Resources.NAME_HeatName</label>
+        </div>
+        <div class="col">
+          <span id="lbl_heat"></span>
+        </div>
+      </div>
+      <div class="row form-group info-data">
+        <div class="col text-right align-self-center">
+          <label>@PE.HMIWWW.Core.Resources.VM_Resources.NAME_Steelgrade</label>
+        </div>
+        <div class="col">
+          <span id="lbl_steelgrade"></span>
+        </div>
+      </div>
+      @*<div class="row form-group info-data">
+          <div class="col text-right align-self-center">
+            <label>@PE.HMIWWW.Core.Resources.VM_Resources.NAME_NumberOfBilletsInWorkOrder</label>
+          </div>
+          <div class="col">
+            <span id="lbl_heat"></span>
+          </div>
+        </div>*@
+
+    </div>
+  </div>
+</div>
+<!--INFO PANEL END-->

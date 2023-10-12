@@ -1,0 +1,46 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Event
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_EventsCatalogue_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+  @Html.ImageButton("new", "AddEventCataloguePopup()")
+}
+
+@(Html.Kendo().Grid<VM_EventCatalogueSearchGrid>()
+  .Name("EventCatalogueList")
+  .HtmlAttributes(new {style = string.Format(" height:{0}px;", ViewBag.FullGridHeight)})
+  .Scrollable()
+  .Pageable(p => p
+      .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Filterable()
+  .Columns(c =>
+  {
+      c.Bound(x => x.EventCatalogueId).Visible(false);
+      c.Bound(x => x.EventCatalogueCode).ClientTemplate("#= EventCatalogueCode # # if(IsDefaultCatalogue) {#(" + VM_Resources.NAME_IsDefault + ")#}# # if(!IsActiveCatalogue) {#(" + VM_Resources.NAME_Inactive + ")#}#");
+      c.Bound(x => x.EventCatalogueName);
+      c.Bound(x => x.EventCatalogueCategoryCode);
+      c.Bound(x => x.EventCatalogueCategoryName);
+      c.Bound(x => x.EventTypeCode);
+      c.Bound(x => x.EventTypeName);
+      c.Bound(x => x.ParentEventCatalogueCode);
+      c.Bound(x => x.ParentEventCatalogueName);
+      c.Bound(x => x.EventCatalogueId)
+          .Filterable(false)
+          .Width(100)
+          .ClientTemplate(Html.ImageButton("edit", "EditEventCataloguePopup(#:EventCatalogueId#)") + Html.ImageButton("details", "GoToDetails(#:EventCatalogueId#)").ToString() + Html.ImageButton("delete", "Delete(#=EventCatalogueId#)"))
+          .Title(" ");
+  })
+  .DataSource(ds => ds
+      .Ajax()
+      .ServerOperation(true)
+      .PageSize(30)
+      .Events(e => e.Error("TelerikErrorHandler"))
+      .Read(r => r.Action("GetEventCatalogueSearchList", "EventsCatalogue"))
+  )
+  )
+
+<script src="~/bundles/js/Module/EventCatalogue.js"></script>
+<link rel="stylesheet" href="~/bundles/css/Module/EventCatalogue.css" />

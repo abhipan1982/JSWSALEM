@@ -1,0 +1,26 @@
+@model long
+
+@(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.QualityExpert.VM_RootCause>()
+    .Name("RootCauses" + Model)
+    .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Filterable()
+    .Pageable(p => p
+      .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .HtmlAttributes(new { style = "min-height: 30px;" })
+    .Columns(c =>
+    {
+        c.Bound(r => r.RootCauseId).Visible(false);
+        c.Bound(r => r.FkRatingId).Visible(false);
+        c.Bound(r => r.Aggregates).Width(50);
+        c.Bound(r => r.RootCausePriority).Width(15);
+        c.Bound(r => r.RootCauseName).Width(100);
+        c.Bound(r => r.RootCauseType).Width(15);
+        c.Bound(r => r.RootCauseInfo).Sortable(false).Groupable(false).Filterable(false).Width(225);
+        c.Bound(r => r.RootCauseVerification).Sortable(false).Groupable(false).Filterable(false).Width(350);
+        c.Bound(r => r.RootCauseCorrection).Sortable(false).Groupable(false).Filterable(false).Width(350);
+    })
+    .DataSource(dataSource => dataSource
+      .Ajax()
+      .Sort(sort => sort.Add(s => s.RootCausePriority))
+      .Read(read => read.Action("RootCauses", "QualityExpert", new { ratingId = Model })))
+      )

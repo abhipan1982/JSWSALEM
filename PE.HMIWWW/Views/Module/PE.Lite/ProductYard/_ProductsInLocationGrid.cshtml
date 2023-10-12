@@ -1,0 +1,28 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.ProductYard;
+@model PE.HMIWWW.ViewModel.Module.Lite.ProductYard.VM_ProductOnYard
+
+@(Html.Kendo().Grid<VM_ProductOnYard>()
+    .Name("ProductsInLocationByWO")
+    .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 700) })
+    .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Filterable()
+    .Scrollable()
+    .Columns(c =>
+    {
+      c.Bound(x => x.ProductName);
+      c.Bound(x => x.ProductWeight);
+      c.Bound(x => x.WorkOrderId).Visible(false);
+      c.Bound(x => x.WorkOrderName);
+      c.Bound(x => x.HeatName);
+      c.Bound(x => x.SteelgradeName);
+      c.Bound(p => p.ProductId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(40)
+      .ClientTemplate(@Html.ImageButton("details", "GoToProductDetails(#:ProductId#)", false, "NAME_Details").ToString());
+    })
+    .DataSource(ds => ds
+       .Ajax()
+       .ServerOperation(true)
+       .Events(e => e.Error("TelerikErrorHandler"))
+       .Read(r => r.Action("GetProductsInLocationByWO", "ProductYard", new { workOrderId = Model.WorkOrderId, locationId = Model.AssetId}))
+    )
+)
+

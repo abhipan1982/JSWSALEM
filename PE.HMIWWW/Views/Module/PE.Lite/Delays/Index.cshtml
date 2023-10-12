@@ -1,0 +1,91 @@
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_Delays_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<style>
+  .k-chart, .k-stockchart {
+    height: 300px;
+  }
+</style>
+
+@section module_menu
+{
+  <div class="row pl-2 date-selector">
+    <div class="datepicker-container row">
+      <div class="dateRangeError"></div>
+      <div class="datepicker demo-section k-content">
+        @(Html.Kendo().DateTimePicker()
+                  .Name("datetimepicker-from")
+                  .Value(DateTime.Now)
+                  .HtmlAttributes(new {style = "width: 200px", title = "datetimepicker", @class = "delays-datepicker"})
+                  .DateInput()
+                )
+        -
+      </div>
+      <div class="datepicker demo-section k-content">
+        @(Html.Kendo().DateTimePicker()
+                  .Name("datetimepicker-to")
+                  .Value(DateTime.Now)
+                  .HtmlAttributes(new {style = "width: 200px", title = "datetimepicker", @class = "delays-datepicker"})
+                  .DateInput()
+                )
+      </div>
+    </div>
+    <div class="action-icons">
+      @Html.ImageButton("calendar", "getDelaysSummaryForRange()", false, "NAME_DateRange")
+      <span style="margin: 0 10px">
+        @Html.ImageButton("today", "getDelaysSummaryForToday()", false, "NAME_Today")
+        @Html.ImageButton("yesterday", "getDelaysSummaryForYesterday()", false, "NAME_Yesterday")
+        @Html.ImageButton("lastWeek", "getDelaysSummaryForLastWeek()", false, "NAME_LastWeek")
+      </span>
+      @Html.ImageButton("new", "DelayCreatePopup()")
+    </div>
+
+  </div>
+
+}
+
+<link rel="stylesheet" href="~/bundles/css/Module/delay.css" />
+<script src="~/bundles/js/Module/Delay.js"></script>
+
+<div class="delays-charts" id="delays-charts">
+  <div class="charts demo-section k-content wide">
+    <div class="data-description" id="data-description"></div>
+    <div class="nodata-message"></div>
+    <div class="w-25 delay-chart delay-chart-1">
+      <div id="durationChart" class="mr-4" style="width: 530px"></div>
+    </div>
+    <div class="w-25 micro-delay-chart delay-chart-3">
+      <div id="durationMicroChart" class="mr-4" style="width: 530px"></div>
+    </div>
+    <div class="w-25 delay-chart delay-chart-2">
+      <div id="categoriesChart" class="ml-4" style="width: 530px"></div>
+    </div>
+  </div>
+</div>
+
+@(Html.Kendo().TabStrip()
+  .Name("DelaysBody")
+  .Animation(false)
+  .HtmlAttributes(new {style = "width: 100%; height: auto"})
+  .Scrollable(false)
+  .Items(async tabstrip =>
+  {
+    tabstrip.Add().Text(VM_Resources.NAME_Unplanned).Selected(true).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Delays/_DelaysUnplannedGrid.cshtml")).ToHtmlString());
+    tabstrip.Add().Text(VM_Resources.NAME_IsPlanned).Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Delays/_DelaysPlannedGrid.cshtml")).ToHtmlString());
+    tabstrip.Add().Text(VM_Resources.NAME_Active).Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Delays/_DelayActive.cshtml")).ToHtmlString());
+  })
+)
+
+<script>
+  function OpenRawMatSlideScreen(id) {
+    CurrentElement = {
+      RawMaterialId: id,
+    };
+    let dataToSend = {
+      RawMaterialId: id
+    };
+    openSlideScreen('RawMaterial', 'ElementDetails', dataToSend);
+  }
+</script>

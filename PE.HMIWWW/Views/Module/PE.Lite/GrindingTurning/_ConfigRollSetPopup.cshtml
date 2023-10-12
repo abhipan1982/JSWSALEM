@@ -1,0 +1,461 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.RollsetDisplay.VM_RollsetDisplay
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+@{
+    int columns = Model.GrooveActualRollUpper.Count;
+}
+
+<script>
+    function onSelect(e) {
+      let sender = $(e.sender.element);
+      var value = this.value();
+      let selectedGroove = this.text();
+      let columnIndex = sender.closest('td').index() - 2;
+      let grooveNumberStr = "";
+
+
+      console.log(value, e);
+
+      if ((columnIndex + 1) < 10) {
+        grooveNumberStr = "0" + (columnIndex + 1);
+      } else {
+        grooveNumberStr = (columnIndex + 1);
+      }
+
+      if (selectedGroove === "Flat") {
+        $('#groove-table').find('td.groove').eq(columnIndex).html('<div class="number">' + grooveNumberStr + '</div><img class="scale" src="/css/System/img/roll-profille-full.png"></td>');
+      }
+      else {
+        $('#groove-table').find('td.groove').eq(columnIndex).html('<div class="number">' + grooveNumberStr + '</div><img class="scale" src="/css/System/img/roll-profille-rd60.png"></td>');
+      }
+
+      $.ajax({
+        type: 'GET',
+        dataType: "json",
+        url: "/GrindingTurning/GetGrooveTemplate/" + value,
+        success: function (data) {
+          console.log(data);
+          let index = sender.closest("td").prevAll().length;
+          $('#WeightLimits').children().eq(index).text(data.AccBilletWeightLimit);
+          $('#CntLimits').children().eq(index).text(data.AccBilletCntLimit);
+        },
+      });
+    }
+
+    function adjustDropDownWidth(e) {
+      var listContainer = e.sender.list.closest(".k-list-container");
+      listContainer.width(listContainer.width() + kendo.support.scrollbar());
+    }
+</script>
+<style>
+    .h_dotted_ln {
+        border-bottom: 1px dashed black;
+        width: 100%;
+    }
+
+    .h_dotted_right_ln {
+        border-right: 1px solid rgba(0,0,0,.1);
+    }
+
+    .h_blank_ln {
+        width: 100%;
+        height: 20px;
+    }
+
+    .v_blank_ln {
+        width: 20px;
+    }
+
+    .table-roll-details label {
+        font-weight: bold;
+        font-style: normal;
+    }
+
+    .table-roll-details td {
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    .scale {
+        transform: scale(1);
+    }
+
+    .horizontal-scroll-except-first-column {
+        width: 100%;
+        overflow: auto;
+        padding-bottom: 10px;
+    }
+
+        .horizontal-scroll-except-first-column > table {
+            margin-left: 200px;
+        }
+
+            .horizontal-scroll-except-first-column > table > * > tr > th:first-child,
+            .horizontal-scroll-except-first-column > table > * > tr > td:first-child {
+                position: absolute;
+                width: 200px;
+                margin-left: -200px;
+                background: white;
+                z-index: 100;
+            }
+
+            .horizontal-scroll-except-first-column > table > * > tr > th,
+            .horizontal-scroll-except-first-column > table > * > tr > td {
+                /* Without this, if a cell wraps onto two lines, the first column
+                           * will look bad, and may need padding.
+                                white-space: nowrap; */
+            }
+
+                .horizontal-scroll-except-first-column > table > * > tr > th:first-child {
+                    height: 3.7rem;
+                }
+
+    .last-desc {
+        height: 3.2rem !important;
+    }
+
+    .roll {
+        position: relative;
+    }
+
+    .number {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        font-size: 24px;
+        color: #000;
+        transform: translate(-50%,-50%);
+        opacity: 0.8;
+        z-index: 1;
+    }
+
+    .header-row {
+        position: relative;
+        height: 22px;
+    }
+
+    .header-data {
+        position: absolute;
+        margin-left: 2px;
+    }
+
+    th label {
+        color: #00587c;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .section {
+        color: #6d8292;
+        font-weight: 500;
+        font-size: 14px;
+    }
+</style>
+
+
+<div class="text-right">
+    @Html.ImageButton("add", "AddNewGroove()", false)
+    @Html.ImageButton("delete", "RemoveLastGroove()", false)
+</div>
+
+<hr />
+
+<form asp-controller="GrindingTurning" asp-action="ConfigRollSetSubmit" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.RollSetId)
+    @Html.HiddenFor(m => m.UpperRollId)
+    @Html.HiddenFor(m => m.BottomRollId)
+
+    <div class="horizontal-scroll-except-first-column">
+        <table id="groove-table">
+            <tbody>
+                @* UPPER ROLL BEGIN*@
+                <tr>
+                    <th class="section">@VM_Resources.NAME_RollName</th>
+                    <td colspan="@(columns+2)"><hr /></td>
+                </tr>
+                <tr class="header-row">
+                    <th style="min-width:200px;">@Html.LabelFor(m => m.UpperRollName)</th>
+                    <td colspan="@(columns+2)" class="header-data">@Html.DisplayFor(m => m.UpperRollName)</td>
+                </tr>
+                <tr class="header-row">
+                    <th>@Html.LabelFor(m => m.UpperActualDiameter)</th>
+                    <td colspan="@(columns+2)" class="header-data">@Html.DisplayFor(m => m.UpperActualDiameter)</td>
+                </tr>
+                <tr class="header-row">
+                    <th>@Html.LabelFor(m => m.BottomRollName)</th>
+                    <td colspan="@(columns+2)" class="header-data">@Html.DisplayFor(m => m.BottomRollName)</td>
+                </tr>
+                <tr class="header-row">
+                    <th>@Html.LabelFor(m => m.BottomActualDiameter)</th>
+                    <td colspan="@(columns+2)" class="header-data">@Html.DisplayFor(m => m.BottomActualDiameter)</td>
+                </tr>
+
+                <tr>
+                    <th class="section">@VM_Resources.PAGE_TITLE_Limit_Index</th>
+                    <td colspan="@(columns+2)"><hr /></td>
+                </tr>
+
+                <tr id="WeightLimits">
+                    <th>@Html.LabelFor(m => m.AccWeightLimitLabel)</th>
+                    <td></td>
+                    @{
+                        foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+                        {
+                            <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccWeightLimit)</td>
+                        }
+                    }
+                    <td></td>
+                </tr>
+                <tr id="CntLimits">
+                    <th>@Html.LabelFor(m => m.AccBilletCntLimitLabel)</th>
+                    <td></td>
+                    @{
+                        foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+                        {
+                            <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccBilletCntLimit)</td>
+                        }
+                    }
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>@Html.LabelFor(m => m.AccWeightLabel)</th>
+                    <td></td>
+                    @{
+                        for (int i = 0; i < Model.GrooveActualRollUpper.Count(); i++)
+                        {
+                            PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper = Model.GrooveActualRollUpper[i];
+                            @Html.HiddenFor(m => Model.GrooveActualRollUpper[i].AccWeight)
+                            if (rollUpper.AccWeight > rollUpper.AccWeightLimit)
+                            {
+                                <td align="center" class="h_dotted_right_ln" style="background-color:lightpink">@Html.DisplayFor(m => rollUpper.AccWeight)</td>
+                            }
+                            else
+                            {
+                                <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccWeight)</td>
+                            }
+                        }
+                    }
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.AccWeightWithCoeffLabel)</th>
+                    <td></td>
+                    @{
+                        for (int i = 0; i < Model.GrooveActualRollUpper.Count(); i++)
+                        {
+                            PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper = Model.GrooveActualRollUpper[i];
+                            @Html.HiddenFor(m => Model.GrooveActualRollUpper[i].AccWeightWithCoeff)
+                            if (rollUpper.AccWeightWithCoeff > rollUpper.AccWeightLimit)
+                            {
+                                <td align="center" class="h_dotted_right_ln" style="background-color:lightpink">@Html.DisplayFor(m => rollUpper.AccWeightWithCoeff)</td>
+                            }
+                            else
+                            {
+                                <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccWeightWithCoeff)</td>
+                            }
+                        }
+                    }
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.AccBilletCntLabel)</th>
+                    <td></td>
+                    @{
+                        for (int i = 0; i < Model.GrooveActualRollUpper.Count(); i++)
+                        {
+                            PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper = Model.GrooveActualRollUpper[i];
+                            @Html.HiddenFor(m => Model.GrooveActualRollUpper[i].AccBilletCnt)
+                            @Html.HiddenFor(m => Model.GrooveActualRollUpper[i].EnumGrooveCondition)
+                            if (rollUpper.AccBilletCnt > rollUpper.AccBilletCntLimit)
+                            {
+                                <td align="center" class="h_dotted_right_ln" style="background-color:lightpink">@Html.DisplayFor(m => rollUpper.AccBilletCnt)</td>
+                            }
+                            else
+                            {
+                                <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccBilletCnt)</td>
+                            }
+                        }
+                    }
+                    <td></td>
+                </tr>
+                @* UPPER ROLL END *@
+                <tr>
+                    <th></th>
+                    <td></td>
+                    @for (int i = 0; i < Model.GrooveActualRollUpper.Count(); i++)
+                    {
+                        <td align="center" class="h_dotted_right_ln">
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    <th style="height:150px;"></th>
+                    <td align="center"><img class="scale" src="~/css/System/img/roll-profille-left.png"></td>
+                    @{
+                        int grooveNumber = 1;
+                        string grooveNumberStr = "";
+                        foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper.OrderBy(z => z.GrooveNumber))
+                        {
+
+                            if (grooveNumber < 10)
+                            {
+                                grooveNumberStr = "0" + grooveNumber.ToString();
+                            }
+                            else
+                            {
+                                grooveNumberStr = grooveNumber.ToString();
+                            }
+
+                            if (rollUpper.GrooveShortName == "Flat")
+                            {
+                                <td align="center" class="groove roll"><div class="number">@grooveNumberStr</div><img class="scale" src="~/css/System/img/roll-profille-full.png"></td>
+                            }
+                            else
+                            {
+                                <td align="center" class="groove roll"><div class="number">@grooveNumberStr</div><img class="scale" src="~/css/System/img/roll-profille-rd60.png"></td>
+                            }
+                            grooveNumber++;
+                        }
+                    }
+
+                    <td align="center"><img class="scale" src="~/css/System/img/roll-profille-right.png"></td>
+                </tr>
+                <tr>
+                    <th class="last-desc">@Html.LabelFor(m => m.GrooveTemplateName)</th>
+                    <td></td>
+                    @for (int i = 0; i < Model.GrooveActualRollUpper.Count(); i++)
+                    {
+                        <td align="center" class="h_dotted_right_ln">
+                            @(Html.Kendo().DropDownList()
+                        .Name(String.Format("GrooveActualRollUpper[{0}].GrooveTemplateId", i))
+                        .Events(e => e.Select("onSelect"))
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .Value(Model.GrooveActualRollUpper[i].GrooveTemplateId.ToString())
+                        .DataSource(source =>
+                        {
+                        source.Read(read =>
+                        {
+                        read.Action("GetGrooveList", "GrindingTurning");
+                        });
+                        }).Events(events => events.Open("adjustDropDownWidth"))
+                        .HtmlAttributes(new { style = "width: 100px" }))
+
+                        </td>
+                    }
+                    <td></td>
+                </tr>
+                <tr style="height:2vh"><td></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+
+    <div class="row form-group">
+        <div class="col invalid">
+            <p id="error">
+                <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error:
+                <span id="error-msg"></span>
+            </p>
+        </div>
+        <div class="col text-right">
+            <input id="save" type="submit" name="submit" class="btn btn-primary popup_button" value="@PE.HMIWWW.Core.Resources.VM_Resources.GLOB_Form_Button_Save" />
+        </div>
+    </div>
+</form>
+
+<script>
+
+
+    function AddNewGroove() {
+      displayMessage(false);
+      let grooveCount = $('#groove-table').find('td.groove').length;
+      let row = 0;
+      let grooveNumberStr = "";
+      let newHTML = '';
+      $('#groove-table').find('tr').each(function () {
+        switch (row) {
+          case 0:
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+          case 5:
+          case 11:
+          case 14:
+          case 15: newHTML = ''; break;
+
+          case 6: newHTML = '<td align="center" class="h_dotted_right_ln">-</td>'; break;
+          case 7: newHTML = '<td align="center" class="h_dotted_right_ln">-</td>'; break;
+          case 8: newHTML = '<td align="center" class="h_dotted_right_ln">0.000 <input name="GrooveActualRollUpper[' + grooveCount+'].AccWeight" type="hidden" value="0"></td>'; break;
+          case 9: newHTML = '<td align="center" class="h_dotted_right_ln">0.000 <input name="GrooveActualRollUpper[' + grooveCount +'].AccWeightWithCoeff" type="hidden" value="0"></td></td>'; break;
+          case 10: newHTML = '<td align="center" class="h_dotted_right_ln">0 <input name="GrooveActualRollUpper[' + grooveCount +'].AccBilletCnt" type="hidden" value="0"></td></td>'; break;
+          case 12:
+            if ((grooveCount + 1) < 10) {
+              grooveNumberStr = "0" + (grooveCount + 1);
+            } else {
+              grooveNumberStr = (grooveCount + 1);
+            }
+            newHTML = '<td align="center" class="groove roll"><div class="number">' + grooveNumberStr + '</div><img class="scale" src="/css/System/img/roll-profille-rd60.png"></td>'; break;
+          case 13: newHTML = '<td align="center" class="h_dotted_right_ln"><input id="GrooveActualRollUpper_' + grooveCount + '__GrooveTemplateId" name="GrooveActualRollUpper[' + grooveCount + '].GrooveTemplateId" style="width: 100px; display: none;" type="text" value="415" data-role="dropdownlist"></td>'; break;
+
+        }
+
+        $(this).find('td').eq(grooveCount).after(newHTML);
+        $('#GrooveActualRollUpper_' + grooveCount + '__GrooveTemplateId').kendoDropDownList({
+          dataTextField: "Text",
+          dataValueField: "Value",
+          dataSource: {
+            transport: {
+              read: {
+                url: Url("GrindingTurning", "GetGrooveList"),
+              }
+            }
+          },
+          change: onSelect,
+          open: adjustDropDownWidth
+        });
+        row++;
+      });
+    }
+
+    function RemoveLastGroove() {
+      let grooveCount = $('#groove-table').find('td.groove').length;
+      if (grooveCount > 0) {
+        $('#groove-table').find('tr').each(function () {
+          $(this).find('td').eq(grooveCount).remove();
+        });
+      }
+
+      if (grooveCount == 1) {
+        displayMessage(true, Translations["ERROR_InvalidGrooveCount"]);
+      }
+    }
+
+    function displayMessage(isInvalid, message = "") {
+
+      if (!isInvalid) {
+        $('#error').css("display", "none");
+        $('#popup-footer')
+          .css('display', 'none')
+        $('#save').css("pointer-events", "auto");
+      } else {
+        $('#error').css("display", "block");
+        $('#error-msg').html(message);
+        $('#popup-footer')
+          .css('display', 'block')
+          .css('background-color', 'rgb(206, 0, 55)');
+        $('#save').css("pointer-events", "none");
+      }
+    };
+
+
+</script>
+
+

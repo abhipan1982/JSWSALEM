@@ -1,0 +1,84 @@
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_TrackingManagement_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@using PE.BaseDbEntity.EnumClasses;
+
+@section module_menu
+  {
+  <div id="laneProd" class="demo-section k-content mr-3 track-status">
+    <div class="status-label">@VM_Resources.NAME_LaneStopped:</div>
+    <input type="checkbox" id="laneProdBtn" aria-label="Switch" />
+  </div>
+  <div id="slowProd" class="demo-section k-content mr-3 track-status">
+    <div class="status-label">@VM_Resources.NAME_SlowProduction:</div>
+    <input type="checkbox" id="slowProdBtn" aria-label="Switch" />
+  </div>
+  @Html.ImageButton("defects", "assignDefectsPopup()", false, "NAME_AddDefects")
+  @Html.ImageButton("quality", "assignQualityPopup()", false, "NAME_SpecifyQuality")
+  @Html.ImageButton("charge", "_TrackingActions.ChargeIntoChargingGridAction()", false, "BUTTON_ChargeIntoChargingGrid")
+  @Html.ImageButton("uncharge", "_TrackingActions.UnchargeFromChargingGridAction()", false, "BUTTON_UnchargeFromChargingGrid")
+  @Html.ImageButton("furnace_charge", "_TrackingActions.ChargeIntoFurnaceAction()", false, "BUTTON_ChargeIntoFurnace")
+  @Html.ImageButton("furnace_discharge", "_TrackingActions.UnchargeFromFurnaceAction()", false, "BUTTON_UnchargeFromFurnace")
+  @Html.ImageButton("rolling_discharge", "_TrackingActions.DischargeForRollingAction()", false, "BUTTON_DischargeForRolling")
+  @Html.ImageButton("rolling_undischarge", "_TrackingActions.UndischargeFromMillAction()", false, "BUTTON_UndischargeFromRolling")
+  @Html.ImageButton("tracking", "_TrackingActions.ChargeMaterialOnFurnaceExitPopup()", false, "BUTTON_ChargeMaterialOnFurnaceExit")
+}
+
+  <div class="tracking-container">
+
+    <div class="tracking-column-table_1" id="@TrackingArea.CHG_AREA.Name"></div>
+
+    <div class="tracking-column-arrows">
+      <div class="triangle-right"></div>
+      <div class="triangle-left"></div>
+    </div>
+
+    <div class="tracking-column-table_2" id="@TrackingArea.FCE_AREA.Name"></div>
+
+    <div class="tracking-column-arrows">
+      <div class="triangle-right"></div>
+    </div>
+
+    <div class="tracking-column-table">
+      <div class="table-area" id="@TrackingArea.RM_AREA.Name"></div>
+      <div class="triangle-bottom"></div>
+      <div class="table-area" id="@TrackingArea.IM_AREA.Name"></div>
+      <div class="triangle-bottom"></div>
+      <div class="table-area" id="@TrackingArea.FM_AREA.Name"></div>
+      <div class="triangle-bottom"></div>
+      <div class="table-area" id="@TrackingArea.PST_FM_AREA.Name"></div>
+      <div class="triangle-bottom"></div>
+      <div class="table-area" id="@TrackingArea.ROD_AREA.Name"></div>
+      <div class="triangle-bottom"></div>
+      <div class="table-area" id="@TrackingArea.TRANSPORT_AREA.Name"></div>
+      <div class="table-area" id="@TrackingArea.GREY_AREA.Name" style="margin-top: 29px;"></div>
+    </div>
+
+    <div class="tracking-column-arrows">
+      <div class="triangle-right" style="margin-top: 193px;"></div>
+      <div class="triangle-right" style="margin-top: 20px;"></div>
+    </div>
+
+    <div class="tracking-column-table">
+      <div class="table-area" id="@TrackingArea.GARRET_AREA.Name" style="margin-top: 110px;"></div>
+      <div class="table-area" id="@TrackingArea.CB_AREA.Name" style="margin-top: 20px;"></div>
+      <div class="triangle-bottom"></div>
+      <div style="height: 126px;">
+        <div class="table-area" id="@TrackingArea.ENTER_TABLE_AREA.Name"></div>
+      </div>
+      <div class="table-area" id="@TrackingArea.LAYER_AREA.Name" style="margin-top: 174px;"></div>
+    </div>
+
+    <div class="tracking-column-arrows">
+      <div class="triangle-right" style="margin-top: 370px;"></div>
+      <div class="triangle-left" style="margin-top: 315px;"></div>
+    </div>
+
+    <div class="tracking-column-table_4" id="@TrackingArea.RAKE_AREA.Name"></div>
+
+  </div>
+
+  <link rel="stylesheet" href="~/bundles/css/Module/TrackingManagement.css" />
+  <script src="~/bundles/js/Module/TrackingManagement.js" />

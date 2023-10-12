@@ -1,0 +1,28 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.KPI
+
+@model VM_KPIChart
+
+<link rel="stylesheet" href="~/bundles/css/Module/KPI.css" />
+
+<div class="k-content kpi-container">
+    @foreach (var kpi in Model.KPIOverviews)
+    {
+        @if (kpi != null)
+        {
+            <partial name="~/Views/Module/PE.Lite/KPI/_KPIGauge.cshtml" Model="kpi"></partial>
+        }
+        else
+        {
+            <div class="kpi-no-data">
+                <p>No data</p>
+            </div>
+        }
+    }
+
+    @if (Model.KPIOverviews.Count == 0)
+    {
+        <div class="kpi-no-data">
+            <p>No data</p>
+        </div>
+    }
+</div>

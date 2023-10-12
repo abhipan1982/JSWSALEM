@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyTitle>PE.BaseCore</AssemblyTitle>
+    <Company>Primetals Technologies Poland Sp. z o.o.</Company>
+    <Product>PE.BaseCore</Product>
+    <Copyright>Copyright © Primetals Technologies 2020</Copyright>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="SMF.Core" />
+  </ItemGroup>
+</Project>

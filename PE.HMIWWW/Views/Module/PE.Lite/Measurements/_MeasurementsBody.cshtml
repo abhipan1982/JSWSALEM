@@ -1,0 +1,37 @@
+@model IEnumerable<PE.HMIWWW.ViewModel.Module.Lite.Measurements.VM_RawMaterialInArea>
+@using PE.HMIWWW.Core.Helpers;
+
+<div class="row h-100">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+        .Name("MeasurementsLists")
+        .Animation(false)
+        .HtmlAttributes(new { style = "width: 100%;" })
+        .Scrollable(false)
+        .Items(tabstrip =>
+        {
+          var TabItemIndex = 0;
+          foreach (var TabItem in Model)
+          {
+            if (TabItemIndex == 0)
+            {
+              tabstrip.Add().Text(TrackingAreaHelpers.TrackingAreas.Where(x => x.TrackingAreaCode == TabItem.AreaCode).Single().TrackingAreaTitle).Selected(true).LoadContentFrom("MeasurementsGridView", "Measurements", TabItem);
+            }
+            else
+            {
+              tabstrip.Add().Text(TrackingAreaHelpers.TrackingAreas.Where(x => x.TrackingAreaCode == TabItem.AreaCode).Single().TrackingAreaTitle).Selected(false).LoadContentFrom("MeasurementsGridView", "Measurements", TabItem);
+            }
+            TabItemIndex++;
+          }
+        })
+    )
+  </div>
+</div>
+
+
+<style>
+  #Measurements-0 {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+</style>

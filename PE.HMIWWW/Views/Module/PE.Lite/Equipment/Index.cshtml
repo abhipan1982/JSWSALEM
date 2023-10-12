@@ -1,0 +1,54 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Maintenance
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_Equipment_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+  {
+  @Html.ImageButton("new", "addEquipmentPopup()")
+}
+
+  @(Html.Kendo().Grid<VM_Equipment>()
+        .Name("EquipmentGrid")
+        .HtmlAttributes(new { style = @String.Format(" height:{0}px;", ViewBag.FullGridHeight) })
+        .Scrollable()
+        .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+          .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+        .Filterable()
+        .Sortable()
+        .Events(e => e.DataBound("colorRowInTable"))
+        .Columns(c =>
+        {
+          c.Bound(x => x.EquipmentId).Visible(false);
+          c.Bound(x => x.EquipmentGroupId).Visible(false);
+          c.Bound(x => x.EquipmentCode).Filterable(true).Width(60);
+          c.Bound(x => x.EquipmentName).Filterable(true).Width(130);
+          c.Bound(x => x.EquipmentGroupCode).Filterable(true).Width(90).Sortable(true);
+          c.ForeignKey(o => o.EquipmentStatus, (SelectList)ViewBag.EquipmentStatus)
+          .Filterable(true).Width(100).Sortable(true);
+          c.ForeignKey(o => o.EnumServiceType, (SelectList)ViewBag.EquipmentServiceType).Filterable(true).Width(100).Sortable(true);
+          c.Bound(x => x.ActualValue).Filterable(true).Width(180).Sortable(true);
+          c.Bound(x => x.WarningValue).Filterable(true).Width(150).Sortable(true);
+          c.Bound(x => x.AlarmValue).Filterable(true).Width(130).Sortable(true);
+          c.Bound(x => x.IsWarned).Hidden(true);
+          c.Bound(x => x.IsOverdue).Hidden(true);
+          c.Bound(x => x.IsInactive).Hidden(true);
+          c.Bound(x => x.ServiceExpires).Filterable(false).Width(100).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT).Sortable(true);
+          c.Bound(x => x.EquipmentId).Filterable(false).Title(" ").Width(100).ClientTemplate(
+            Html.ImageButton("edit", "editEquipmentPopup(#:EquipmentId#)").ToString()
+            + Html.ImageButton("pass_change", "editEquipmentStatusPopup(#:EquipmentId#)", false, "BUTTON_EditStatus").ToString()
+            + Html.ImageButton("clone", "cloneEquipmentPopup(#=EquipmentId#)").ToString()
+            + Html.ImageButton("history", "showEquipmentHistory(#=EquipmentId#)").ToString()
+            + Html.ImageButton("delete", "deleteEquipment(#=EquipmentId#)").ToString());
+        })
+        .DataSource(ds => ds
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(27)
+                .Events(e => e.Error("TelerikErrorHandler"))
+                .Read(r => r.Action("GetEquipmentList", "Equipment")))
+)
+
+<script src="~/bundles/js/Module/Equipment.js"></script>

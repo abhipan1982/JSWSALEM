@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="DataProd(STD)">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=148.56.68.36;Initial Catalog=PE_Release</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>a8cf4460-af33-454a-a572-cc98509a6f81</DataSourceID>
+</RptDataSource>

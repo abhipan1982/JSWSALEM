@@ -1,0 +1,85 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <MvcBuildViews>true</MvcBuildViews>
+    <Copyright>$([System.DateTime]::Now.ToString("s"))</Copyright>
+    <EnableStaticWebAssets>false</EnableStaticWebAssets>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+    <SatelliteResourceLanguages>en-US;pl-PL;zh-CN;tr-TR</SatelliteResourceLanguages>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\System\ManageController.cs" />
+    <Compile Remove="Controllers\System\TestController.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Remove="Views\Module\PE.Lite\ComponentGroup\**" />
+    <Content Remove="Views\Module\PE.Lite\IncidentType\**" />
+    <Content Remove="Views\Module\PE.Lite\LabelPrinter\**" />
+    <Content Remove="Views\Module\PE.Lite\Maintenance\**" />
+    <Content Remove="Views\Module\PE.Lite\MaterialFurnace\**" />
+    <Content Remove="Views\Module\PE.Lite\QuantityType\**" />
+    <Content Remove="Views\Module\PE.Lite\RecommendedAction\**" />
+    <Content Remove="Views\System\DB2DBCommunication\**" />
+    <Content Remove="Views\System\Manage\**" />
+    <Content Remove="Views\System\Test\**" />
+    <Content Remove="Views\System\ViewsStatistics\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Module\PE.Lite\Heat\_HeatChemAnalysisChart.cshtml" />
+    <Content Remove="Views\Module\PE.Lite\WorkOrder\_SteelgradeCatalogueDetails.cshtml" />
+    <Content Remove="Views\Module\PE.Lite\WorkOrder\_WorkOrderEditTemplate.cshtml" />
+    <Content Remove="Views\Module\PE.Lite\WorkOrder\_WorkOrderMaterialsList.cshtml" />
+    <Content Remove="Views\Shared\Lockout.cshtml" />
+    <Content Remove="Views\Shared\_LayoutIncludes.cshtml" />
+    <Content Remove="Views\Shared\_LoginPartial.cshtml" />
+    <Content Remove="Views\Shared\_WideLayout.cshtml" />
+    <Content Remove="Views\System\Account\ForgotPassword.cshtml" />
+    <Content Remove="Views\System\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Remove="Views\System\Account\ResetPassword.cshtml" />
+    <Content Remove="Views\System\Account\ResetPasswordConfirmation.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="LigerShark.WebOptimizer.Core" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" PrivateAssets="All" />
+    <PackageReference Include="MiniProfiler.AspNetCore.Mvc" />
+    <PackageReference Include="MiniProfiler.EntityFrameworkCore" />
+    <PackageReference Include="Serilog.Settings.Configuration" />
+    <PackageReference Include="Serilog.Sinks.File" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" GeneratePathProperty="true" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" />
+  </ItemGroup>
+
+  <Target Name="CopySystemSecurityCryptographyPkcs" AfterTargets="Build">
+    <!-- To fix missing library; resolve in other way if possible -->
+    <Copy SourceFiles="$(PkgSystem_Security_Cryptography_Pkcs)\lib\net6.0\System.Security.Cryptography.Pkcs.dll" DestinationFolder="$(OutDir)" />
+  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PE.HMIWWW.Core\PE.HMIWWW.Core.csproj" />
+    <ProjectReference Include="..\PE.HMIWWW.Services\PE.HMIWWW.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\MillConfigurator\Views\MillConfiguration\_FeaturesExportPopup.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

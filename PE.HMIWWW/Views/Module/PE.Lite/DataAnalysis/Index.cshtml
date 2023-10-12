@@ -1,0 +1,100 @@
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<link rel="stylesheet" href="~/bundles/css/Module/DataAnalysis.css" />
+
+@section module_menu
+{<div class="row float-left" style="    margin-right: 5px;">
+  @Html.ImageButton("data_analysis", "openChart()", false, "BUTTON_OpenChart")
+  <div id="exportPDF" title="Export to PDF"><span class="k-icon k-i-pdf"></span></div>
+  <div id="exportExcel" title="Export to Excel"><span class="k-icon k-i-excel"></span></div>
+
+</div>
+}
+
+<div id='configurator-expand' class='pivot-filters-btn'>
+  <span onclick='filtersExpand()' id="conf-arrow" class="arrow k-icon k-i-arrow-60-right"></span> @VM_Resources.NAME_Configurator
+</div>
+
+@(Html.Kendo().PivotConfigurator()
+    .Name("configurator")
+    .Filterable(true)
+    .Height(720)
+)
+
+@(Html.Kendo().PivotGrid<PE.HMIWWW.ViewModel.Module.Lite.DataAnalysis.VM_DataAnalysisWorkOrder>()
+    .Name("pivotgrid")
+    .Excel(excel => excel
+        .FileName("WorkOrders.xlsx")
+          .Filterable(true)
+          .ProxyURL(Url.Action("Excel_Export_Save", "DataAnalysis")))
+      .Pdf(pdf => pdf
+          .FileName("WorkOrders.pdf")
+          .ProxyURL(Url.Action("Pdf_Export_Save", "DataAnalysis")))
+        .Configurator("#configurator")
+        .ColumnWidth(120)
+        .Filterable(true)
+        .Height(720)
+      .DataCellTemplateId("dataCellTemplate")
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Transport(transport => transport.Read("GetWorkOrdersDataList", "DataAnalysis"))
+          .Schema(schema => schema
+              .Cube(cube => cube
+                  .Dimensions(dimensions =>
+                  {
+
+                    //dimensions.Add(model => model.Category).Caption(VM_Resources.NAME_Category);
+                    dimensions.Add(model => model.WorkOrderName).Caption(VM_Resources.NAME_WorkOrderName);
+                    dimensions.Add(model => model.ProductCatalogue).Caption("ProductCatalogue");
+                    dimensions.Add(model => model.Steelgrade).Caption(VM_Resources.NAME_Steelgrade);
+                    dimensions.Add(model => model.HeatName).Caption(VM_Resources.NAME_HeatName);
+                    dimensions.Add(model => model.ShiftCode).Caption(VM_Resources.NAME_Shift);
+                    dimensions.Add(model => model.Month).Caption(VM_Resources.NAME_Month);
+                    dimensions.Add(model => model.Year).Caption(VM_Resources.NAME_Year);
+                    dimensions.Add(model => model.Week).Caption(VM_Resources.NAME_Week);
+                    dimensions.Add(model => model.Date).Caption(VM_Resources.NAME_Date);
+                  })
+              .Measures(measures => measures.Add("MatWeightSum" + '[' + VM_Resources.UNIT_Weight + ']').Field(model => model.MaterialsWeight).AggregateName("Sum"))
+              .Measures(measures => measures.Add("ProdWeightSum" + '[' + VM_Resources.UNIT_Weight + ']').Field(model => model.ProductsWeight).AggregateName("Sum"))
+              .Measures(measures => measures.Add("RawsWeightSum" + '[' + VM_Resources.UNIT_Weight + ']').Field(model => model.RawsWeight).AggregateName("Sum"))
+              .Measures(measures => measures.Add("TargetWeightSum" + '[' + VM_Resources.UNIT_Weight + ']').Field(model => model.TargetWeight).AggregateName("Sum"))
+              .Measures(measures => measures.Add("WorkOderCount").Field(model => model.WorkOrderId).AggregateName("count"))
+              .Measures(measures => measures.Add("ProductsCount").Field(model => model.WorkOrderId).AggregateName("Sum"))
+              .Measures(measures => measures.Add("MaterialsCount").Field(model => model.MaterialsCount).AggregateName("Sum"))
+              .Measures(measures => measures.Add("RawsCount").Field(model => model.RawsCount).AggregateName("Sum"))
+              ))
+          .Columns(columns =>
+          {
+            //columns.Add("ShiftCode");
+          })
+          .Rows(rows =>
+          {
+            //rows.Add("Month").Expand(true);
+          })
+      .Measures(measures =>
+      {
+        //measures.Values("WorkOderCount");
+      })
+      .Events(e => e.Change("function() { replaceColumnsNames(); }"))
+    )
+)
+
+<script src="~/bundles/js/Module/DataAnalysis.js"></script>
+<script src="~/Scripts/kendo/2020.1.114/jszip.min.js"></script>
+
+<script id="dataCellTemplate" type="text/x-kendo-tmpl">
+  # var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #
+  # var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #
+  @*# var value = kendo.toString(kendo.parseFloat(dataItem.value) || "N/A", "c2"); #*@
+
+  @*# var value = calculateSecondsToHMS(dataItem.value); #*@
+  # var value = dataItem.value; #
+
+  # if (columnMember.children.length || rowMember.children.length) { #
+  <em style="    color: steelblue">#: value # (total)</em>
+  # } else { #
+  #: value #
+  # } #
+</script>

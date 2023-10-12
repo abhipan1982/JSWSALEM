@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="PE.CommunicationTracer.Views.ViewA"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:PE.CommunicationTracer.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <!--<TextBlock Text="View A"/>-->
+        <DockPanel Grid.Column="0">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Button Content="Connect" Command="{Binding Connect}" />
+            </StackPanel>
+            <ListView x:Name="messages"
+                  ScrollViewer.CanContentScroll="True"
+                  ItemsSource="{Binding Messages}"
+                  SelectionMode="Single">
+                <behaviors:Interaction.Triggers>
+                    <behaviors:EventTrigger EventName="SelectionChanged">
+                        <behaviors:InvokeCommandAction Command="{Binding OnMessageSelected}" PassEventArgsToCommand="True" EventArgsParameterPath="AddedItems"/>
+                    </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="N" DisplayMemberBinding="{Binding CallNumber}"/>
+                        <GridViewColumn Header="TimeStamp" DisplayMemberBinding="{Binding TimeStamp}"/>
+                        <GridViewColumn Header="MethodName" DisplayMemberBinding="{Binding MethodName}"/>
+                        <GridViewColumn Header="ExecutionTime" DisplayMemberBinding="{Binding ExecutionTime}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="5" VerticalAlignment="Stretch"/>
+        <Grid Grid.Column="1" Margin="5,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ComboBox 
+                ItemsSource="{Binding Methods}" 
+                SelectedItem="{Binding SelectedMethod}"
+                DisplayMemberPath="Name" 
+                HorizontalAlignment="Left" 
+                MinWidth="181">
+                <behaviors:Interaction.Triggers>
+                    <behaviors:EventTrigger EventName="SelectionChanged">
+                        <behaviors:InvokeCommandAction Command="{Binding OnMethodSelected}" PassEventArgsToCommand="True" EventArgsParameterPath="AddedItems"/>
+                    </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>
+            </ComboBox>
+            <Button HorizontalAlignment="Right" MinWidth="120" Content="Execute" Command="{Binding Execute}" />
+            <local:ModelEditorControl Grid.Row="1" Margin="0,0,0,0" ModelContainer="{Binding RequestModelContainer}" />
+            <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Height="5" VerticalAlignment="Top"/>
+            <local:ModelEditorControl Grid.Row="2" Margin="0,5,0,0" ModelContainer="{Binding ResponseModelContainer}" ErrorMessage="{Binding ErrorModel}"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

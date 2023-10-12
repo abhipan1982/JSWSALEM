@@ -1,0 +1,134 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Device
+
+
+<div class="row h-300 p-0 pt-3">
+<div class="col-4 p-0">
+    <div class="container-fluid">
+
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.DeviceCode)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.DeviceCode)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.DeviceName)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.DeviceName)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.Status)
+            </div>
+            <div class="col">
+                @Html.Raw(((SelectList)ViewBag.DeviceStatuses).Where(p => p.Value == ((int)Model.Status).ToString()).First().Text)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.Description)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.Description)
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="col-4 p-0">
+    <div class="container-fluid">
+
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.Model)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.Model)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.SerialNumber)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.SerialNumber)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.Components)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.Components)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.SupplierName)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.SupplierName)
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="col-4 p-0">
+    <div class="container-fluid">
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.AcquireDate)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.AcquireDate)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.DisposeDate)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.DisposeDate)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.DeviceGroup)
+            </div>
+            <div class="col">
+                <a href="#" id="link" onclick="ShowDeviceGroupDetails('@Model.DeviceGroup'); return false;">@Html.DisplayFor(m => m.DeviceGroup)</a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.InstalationCycle)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.InstalationCycle)
+            </div>
+        </div>
+    </div>
+</div>
+ </div>
+<hr class="myhrline" />
+
+<div class="row h-50 p-0 pt-3">
+    @Html.Partial("~/Views/Module/PE.Lite/Maintenance/InstalledView/_SummaryIncidents.cshtml", Model)
+    <hr class="myhrline" />
+</div>
+
+<div class="row h-25 p-0 pt-3">
+    @Html.Partial("~/Views/Module/PE.Lite/Maintenance/InstalledView/_Summary.cshtml", Model)
+</div>
+
+<style>
+    hr.myhrline {
+        margin: 1px;
+    }
+</style>

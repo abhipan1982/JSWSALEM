@@ -1,0 +1,22 @@
+<div class="popup-top-actions">
+  @Html.ImageButton("dispatch", "DispatchWorkOrder()", false, "NAME_Dispatch")
+  @Html.ImageButton("legend", "displayLegend($('#shipmentLegend'))", false, "BUTTON_Legend")
+</div>
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-6">
+      @await Html.PartialAsync("~/Views/Module/PE.Lite/ProductYard/_WorkOrdersReadyGrid.cshtml")
+    </div>
+    <div class="col-6">
+      @await Html.PartialAsync("~/Views/Module/PE.Lite/ProductYard/_LocationsByWorkOrderGrid.cshtml")
+    </div>
+  </div>
+</div>
+
+<div class="legend-window popup-legend-window" id="shipmentLegend">
+  <div class="row m-1">
+    <img class="square" src='/Content/Functions/Small/result_warn.png'>
+    <div class="legend">@VM_Resources.NAME_ShipmentExceeded</div>
+  </div>
+</div>

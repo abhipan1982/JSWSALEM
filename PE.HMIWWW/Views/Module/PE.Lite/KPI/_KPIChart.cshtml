@@ -1,0 +1,8 @@
+@model long
+
+<div id="kpi-chart"></div>
+
+<script src="~/bundles/js/Module/KPIChart.js"></script>
+<script>
+  $(document).ready(() => displayKPIChart(@Model));
+</script>

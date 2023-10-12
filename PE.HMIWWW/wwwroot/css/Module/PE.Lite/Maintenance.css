@@ -1,0 +1,223 @@
+﻿.date-selector {
+  position: absolute;
+  right: 65px;
+  width: 860px;
+  font-size: 15px;
+}
+
+.k-picker-wrap > .k-select{
+  background-color: #fff;
+}
+
+.delays-datepicker {
+  background-image: none !important;
+  color: #006487;
+  width: 200px;
+}
+
+.k-state-hover {
+  color: #006487 !important;
+}
+
+.action-icons {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 20px;    
+}
+
+.delays-charts {
+  height: 400px;
+  position: relative;
+}
+.charts {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.data-description {
+  position: absolute;
+  font-size: 18px;
+  color: #006487;
+}
+
+.chartPanel_button {
+  font-size: 14px;
+  color: #fff;
+  border-radius: 0;
+  border-color: #0077a1;
+  background-color: #0077a1;
+  padding: 5px 0;
+  width: 130px;
+}
+
+  .chartPanel_button:hover {
+    color: #fff;
+    border-color: #006791;
+    background-color: #006791;
+  }
+
+.datepicker-container {
+  margin: -4px 0px;
+}
+
+.selected_button {
+  border-color: #f2a900;
+  background-color: #f2a900;
+}
+
+  .selected_button:hover {
+    border-color: #f2a900;
+    background-color: #f2a900;
+  }
+
+.datepicker {
+  margin: 6px;
+}
+
+.dateRangeError {
+  font-weight: 500;
+  /*line-height: 30px;*/
+  margin-top: 7px;
+  color: #d30d0d;
+  width: 105px;
+}
+
+.nodata-message {
+  position: absolute;
+  top: 175px;
+  font-size: 20px;
+}
+
+#durationChart g text:nth-child(3) {
+  fill: #006487;
+}
+
+#categoriesChart g text:nth-child(3) {
+  fill: #006487;
+}
+
+.line {
+  height: 1px;
+  background-color: #0077a1;
+}
+
+.summary-title {
+  color: #006487;
+  font-size: 20px;
+  position: absolute;
+  top: 50px;
+  left: 20px;
+}
+
+/*delay divide popup*/
+
+.arrow_icon {
+  border: solid rgba(255,255,255, 1);
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.up {
+  margin: 8px 15px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  margin: 4px 15px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.colon {
+  margin: 45px 0;
+}
+
+.durationPicker {
+  display: flex;
+  flex-direction: row;
+}
+
+.time {
+  margin: 0 5px;
+}
+
+.label_time {
+  margin: 0 13px;
+}
+
+.input_time {
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #bebebe;
+}
+
+.arrow {
+  width: 40px;
+  height: 20px;
+  background: #0077a1;
+  cursor: pointer;
+}
+
+.delayDivision {
+  display: flex;
+  flex-direction: row;
+}
+
+.duratrionForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+.duratrionForm_error {
+  color: #db1438;
+  font-weight: 500;
+  height: 20px;
+}
+
+.delayDateTime {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  text-align: center;
+}
+
+.delayTime {
+  font-size: 30px;
+  color: #0077a1;
+}
+
+.delayDate {
+  font-size: 20px;
+  color: #757575;
+}
+
+#diff {
+  display: none;
+}
+
+
+.loading-overlay::before {
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 11;
+  background-image: url(/css/System/Img/loading_2x.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(255,255,255,.6);
+}

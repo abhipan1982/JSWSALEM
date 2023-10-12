@@ -1,0 +1,282 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Delay.VM_DelayDivision
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<form asp-controller="Delays" asp-action="DivideDelay" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+  @Html.AntiForgeryToken()
+  @Html.HiddenFor(x => x.Id)
+
+  <div class="form-group">
+
+    <div class="text-right align-self-center">
+    </div>
+
+    <div class="delayDivision">
+
+      <div class="delayDateTime">
+        @Html.LabelFor(x => x.EventStartTs)
+        <div class="delayDate mt-1">
+          @Html.DisplayFor(x => x.EventStartTs)
+        </div>
+      </div>
+
+      <div class="duratrionForm">
+        @Html.LabelFor(x => x.NewDelayLength)
+        <div class="durationPicker mb-1">
+          <div class="time">
+            <label for="input_hours" class="label_time">H</label>
+            <div class="arrow" id="hours_up"><span class="arrow_icon up"></span></div>
+            <input pattern="\d*" type="text" class="input_time" id="input_hours" />
+            <div class="arrow" id="hours_down"><span class="arrow_icon down"></span></div>
+          </div>
+          <p class="colon">:</p>
+          <div class="time">
+            <label for="input_hours" class="label_time">M</label>
+            <div class="arrow" id="minutes_up"><span class="arrow_icon up"></span></div>
+            <input pattern="\d*" type="text" class="input_time" id="input_minutes" />
+            <div class="arrow" id="minutes_down"><span class="arrow_icon down"></span></div>
+          </div>
+          <p class="colon">:</p>
+          <div class="time">
+            <label for="input_hours" class="label_time">S</label>
+            <div class="arrow" id="seconds_up"><span class="arrow_icon up"></span></div>
+            <input type="text" class="input_time" id="input_seconds" />
+            <div class="arrow" id="seconds_down"><span class="arrow_icon down"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="delayDateTime">
+        @Html.LabelFor(x => x.EventEndTs)
+        <div class="delayDate mt-1">
+          @Html.DisplayFor(x => x.EventEndTs)
+        </div>
+      </div>
+      @Html.TextBoxFor(x => x.NewDelayLength, new { id = "diff", @class = "form-control form-control-sm" })
+    
+    </div>
+    <span id="duratrionForm_error" class="duratrionForm_error">   </span>
+
+  </div>
+
+  <hr />
+
+  <div class="row form-group">
+    <div class="col text-right">
+      <button class="btn btn-primary popup_button" type="submit">
+        @VM_Resources.GLOB_Form_Button_Save
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<script>
+  $("#input_seconds").on("input", function(){
+    return validateInputValue($(this), 59);
+  });
+
+  $("#input_minutes").on("input", function () {
+    return validateInputValue($(this), 59);
+  });
+
+  $('#input_hours').on("input", function () {
+    return validateInputValue($(this));
+  });
+
+  function validateInputValue($input, max = null){
+    let value = $input.val();
+    $input.val("");
+    if (value == "" || isNaN(value)) {
+      $input.val("00");
+    } else if (max && value > max) {
+      $input.val(max);
+    } else {
+      value = parseInt(value)
+      $input.val(prependZero(value));
+    }
+    setNewDelayLength();
+    return true;
+  }
+
+  var timeout;
+  var isValidLength = true;
+
+  $(document).ready(function () {
+
+    initDurationPicker();
+
+    let HOURS =  $('#input_hours');
+    let MINUTES =  $('#input_minutes');
+    let SECONDS =  $('#input_seconds');
+
+    let HOURS_UP = $('#hours_up');
+    let HOURS_DOWN = $('#hours_down');
+
+    let MINUTES_UP = $('#minutes_up');
+    let MINUTES_DOWN = $('#minutes_down');
+
+    let SECONDS_UP = $('#seconds_up');
+    let SECONDS_DOWN = $('#seconds_down');
+
+      timesUpEvent(HOURS_UP, HOURS);
+      timeDownEvent(HOURS_DOWN, HOURS);
+
+      timesUpEvent(MINUTES_UP, MINUTES, HOURS);
+      timeDownEvent(MINUTES_DOWN, MINUTES);
+
+      timesUpEvent(SECONDS_UP, SECONDS, MINUTES);
+      timeDownEvent(SECONDS_DOWN, SECONDS);
+
+    });
+
+    $(document).mouseup(function(){
+      clearInterval(timeout);
+        return false;
+    });
+
+  function initDurationPicker() {
+    var delay = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+    let delayDurationSec = delay.NewDelayLength;
+    let newDelayDurationSec = parseInt(delayDurationSec / 2);
+    validDelayDuration(delayDurationSec, newDelayDurationSec);
+    let delayDuration = calculateSecondsToHMS(newDelayDurationSec);
+    $('#input_hours').val(prependZero(delayDuration.hours));
+    $('#input_minutes').val(prependZero(delayDuration.minutes));
+    $('#input_seconds').val(prependZero(delayDuration.seconds));
+    setNewDelayLength();
+  }
+
+      function timesUpEvent(arrow, timeInput, nextUnitInput = null) {
+        arrow.click(function () {
+          if (timeInput.val() < 59) {
+            let val = parseInt(timeInput.val()) + 1;
+            timeInput.val(prependZero(val));
+          } else {
+            timeInput.val(0);
+            if (nextUnitInput != null) {
+              let val = parseInt(nextUnitInput.val()) + 1;
+              nextUnitInput.val(prependZero(val));
+            }
+          }
+          setNewDelayLength();
+        });
+        arrow.mousedown(function() {
+            timeout = setInterval(function () {
+            if (timeInput.val() < 59) {
+              let val = parseInt(timeInput.val()) + 1;
+              timeInput.val(prependZero(val));
+            } else {
+              timeInput.val(0);
+              if (nextUnitInput != null) {
+                let val = parseInt(nextUnitInput.val()) + 1;
+                nextUnitInput.val(prependZero(val));
+              }
+              }
+              setNewDelayLength();
+          }, 140);
+          return false;
+        });
+  }
+
+      function timeDownEvent(arrow, timeInput) {
+        arrow.click(function(){
+            if (timeInput.val() > 0) {
+              let val = parseInt(timeInput.val()) - 1;
+              timeInput.val(prependZero(val));
+            } else {
+              timeInput.val(prependZero(0));
+          }
+          setNewDelayLength();
+        });
+        arrow.mousedown(function() {
+          timeout = setInterval(function () {
+            if (timeInput.val() > 0) {
+              let val = parseInt(timeInput.val()) - 1;
+              timeInput.val(prependZero(val));
+            } else {
+              timeInput.val(prependZero(0));
+            }
+          }, 140);
+          setNewDelayLength();
+          return false;
+        });
+  }
+
+  function setNewDelayLength() {
+      var delay = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+      let totalSec = delay.NewDelayLength;
+      let newDelaySec = calculateHMSToSeconds();
+      $("#diff").val(newDelaySec);
+      validDelayDuration(totalSec, newDelaySec);
+    }
+
+   function calculateSecondsToHMS(durationSeconds) {
+     let hours = 0;
+     let minutes = 0;
+     let seconds = 0;
+
+     if (durationSeconds < 0) {
+       return {
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+      }
+     }
+
+      while (durationSeconds >= 3600) {
+          hours++;
+          durationSeconds = durationSeconds - 3600;
+      }
+      while (durationSeconds >= 60) {
+          minutes++;
+          durationSeconds = durationSeconds - 60;
+      }
+
+      seconds = durationSeconds;
+
+      return {
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+      }
+
+   }
+
+  function validDelayDuration(totalDelaySec, newDelaySec) {
+    if (totalDelaySec <= 1) {
+            let notAvailabletToDivide = "@VM_Resources.MESSAGE_DelayIsNotAvailableToDivide";
+      $('#duratrionForm_error').text(notAvailabletToDivide);
+      isValidLength = false;
+      return false;
+    }
+    let maxDelayDurationHMS = calculateSecondsToHMS(totalDelaySec - 1);
+    if (totalDelaySec <= newDelaySec) {
+      let maxDelayDurationHMSMessage = "@VM_Resources.MESSAGE_MaxNewDelayLength" + prependZero(maxDelayDurationHMS.hours) + ':' + prependZero(maxDelayDurationHMS.minutes) + ':' + prependZero(maxDelayDurationHMS.seconds);
+      $('#duratrionForm_error').text(maxDelayDurationHMSMessage);
+      isValidLength = false;
+    } else {
+      $('#duratrionForm_error').text('');
+      if (newDelaySec == 0) {
+        $('#duratrionForm_error').text("@VM_Resources.MESSAGE_NewDelayLengthRequired");
+        isValidLength = false;
+      } else {
+        isValidLength = true;
+      }
+    }
+  }
+
+  function calculateHMSToSeconds() {
+    let seconds = parseInt($('#input_hours').val() * 60 * 60) + parseInt($('#input_minutes').val() * 60) + parseInt($('#input_seconds').val());
+    return seconds;
+  }
+
+  function OnFormBegin() {
+    return isValidLength;
+  }
+
+
+</script>

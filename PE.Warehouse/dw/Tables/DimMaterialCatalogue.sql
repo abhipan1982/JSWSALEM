@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dw].[DimMaterialCatalogue] (
+    [SourceName]                    NVARCHAR (50)  NOT NULL,
+    [SourceTime]                    DATETIME       NOT NULL,
+    [DimMaterialCatalogueIsDeleted] BIT            NOT NULL,
+    [DimMaterialCatalogueHash]      VARBINARY (16) NULL,
+    [DimMaterialCatalogueKey]       BIGINT         NOT NULL,
+    [DimMaterialTypeKey]            BIGINT         NOT NULL,
+    [DimMaterialShapeKey]           BIGINT         NOT NULL,
+    [MaterialCatalogueName]         NVARCHAR (50)  NOT NULL,
+    [MaterialCatalogueDescription]  NVARCHAR (200) NULL,
+    [ExternalMaterialCatalogueName] NVARCHAR (50)  NULL,
+    [MaterialTypeCode]              NVARCHAR (10)  NOT NULL,
+    [MaterialTypeName]              NVARCHAR (50)  NOT NULL,
+    [MaterialShapeCode]             NVARCHAR (10)  NOT NULL,
+    [MaterialShapeName]             NVARCHAR (50)  NULL,
+    [MaterialCatalogueLengthMin]    FLOAT (53)     NULL,
+    [MaterialCatalogueLengthMax]    FLOAT (53)     NULL,
+    [MaterialCatalogueThicknessMin] FLOAT (53)     NOT NULL,
+    [MaterialCatalogueThicknessMax] FLOAT (53)     NOT NULL,
+    [MaterialCatalogueWidthMin]     FLOAT (53)     NULL,
+    [MaterialCatalogueWidthMax]     FLOAT (53)     NULL,
+    [MaterialCatalogueWeightMin]    FLOAT (53)     NULL,
+    [MaterialCatalogueWeightMax]    FLOAT (53)     NULL,
+    [DimMaterialCatalogueRow]       INT            IDENTITY (1, 1) NOT NULL
+);
+

@@ -1,0 +1,64 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.GrindingTurning.VM_RollSetTurningHistory
+@{
+  Layout = "~/Views/Shared/_TabLayout.cshtml";
+}
+@*@section TabIncludes{
+  @if (Model.EnumRollSetStatus == 6)
+  {
+    @Html.ImageButton("pass_change", $"PassChangeGroove({Model.RollSetId})", false)
+  }
+  @if (Model.EnumRollSetStatus == 6)
+  {
+    @Html.ImageButton("rolls_dismount_rollset", $"DismountRollSet({Model.RollSetId} , {Model.PositionInCassette})", false)
+  }
+  @if (Model.EnumRollSetStatus == 0)
+  {
+    @Html.ImageButton("rolls_mount_rollset", $"MountRollSet({Model.CassetteId}  , {Model.PositionInCassette})", false)
+  }
+}*@
+
+<script>
+
+  function refreshRollSetHistory(e) {
+    var dataItem = this.dataItem(e.item.index()).Value;
+    var dataToSend = { id: parseInt(dataItem) };
+    let url = "/GrindingTurning/GetRollSetHistoryById";
+    AjaxReqestHelperSilentWithoutDataType(url, dataToSend, setRollSetHistoryPartialView);
+  }
+
+  function setRollSetHistoryPartialView(partialView) {
+    $("#history-div").html(partialView);
+
+  }
+
+</script>
+
+<div id="main-div" class="w-100 h-100">
+  <div class="row form-group">
+    <div class="col-2">
+      @Html.LabelFor(x => x.RollSetName)
+    </div>
+    <div class="col-2">
+      @Html.Kendo().TextBoxFor(x => x.RollSetName).Enable(false).HtmlAttributes(new { style = "width: 260px" })
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-2">
+      @Html.LabelFor(x => x.EnumRollSetHistoryStatus)
+    </div>
+    <div class="col-2">
+      @(Html.Kendo().DropDownList()
+      .Name("RollSetHistoryDropDown")
+      .DataTextField("Text")
+      .DataValueField("Value")
+      .Value(Model.RollSetHistoryId.ToString())
+      .BindTo((SelectList)ViewBag.RSetHistory)
+      .HtmlAttributes(new { style = "width: 260px" })
+      .Events(e => {
+      e.Select("refreshRollSetHistory");
+      }))
+    </div>
+  </div>
+  <hr />
+  <div id="history-div"></div>
+</div>

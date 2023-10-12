@@ -1,0 +1,17 @@
+@model IEnumerable<PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialOverview>
+<div class="row">
+  @(Html.Kendo().TabStrip()
+      .Name("MaterialsInArea")
+      .Animation(false)
+      .Scrollable(false)
+      .Items(async tabstrip =>
+      {
+        foreach (var TabItem in Model)
+        {
+            tabstrip.Add().Text(TabItem.RawMaterialName).Selected(TabItem.LayerSelected).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/Visualization/_MaterialsInLayerGrid.cshtml", TabItem)).ToHtmlString()).HtmlAttributes(new { id = TabItem.RawMaterialId });
+        }
+  })
+  )
+</div>
+
+

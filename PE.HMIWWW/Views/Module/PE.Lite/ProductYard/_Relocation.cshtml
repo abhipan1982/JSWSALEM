@@ -1,0 +1,22 @@
+<div class="popup-top-actions">
+  @Html.ImageButton("legend", "displayLegend($('#relocationLegend'))", false, "BUTTON_Legend")
+</div>
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-6 grid-filter">
+      @await Html.PartialAsync("~/Views/Module/PE.Lite/ProductYard/_ProductsInLocationsSearchGrid.cshtml")
+    </div>
+    <div class="k-icon k-i-arrow-60-right between-grids-arrow-center"></div>
+    <div class="col-6">
+      @await Html.PartialAsync("~/Views/Module/PE.Lite/ProductYard/_LocationsTargetGrid.cshtml")
+    </div>
+  </div>
+</div>
+
+<div class="legend-window popup-legend-window" id="relocationLegend">
+  <div class="row m-1">
+    <div class="square square-border unavailable"></div>
+    <div class="legend">@VM_Resources.NAME_SelectedProdWeight > @VM_Resources.NAME_FreeCapacity</div>
+  </div>
+</div>

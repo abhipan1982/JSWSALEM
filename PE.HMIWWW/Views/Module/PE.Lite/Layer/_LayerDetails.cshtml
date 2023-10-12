@@ -1,0 +1,46 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialOverview
+
+<div class="row">
+    <div class="col-4 p-0 pt-3">
+        <div class="container-fluid">
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.RawMaterialName)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.RawMaterialName)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 p-0 pt-3">
+        <div class="container-fluid">
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.LayerStatus)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.LayerStatus)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 p-0 pt-3">
+        <div class="container-fluid">
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.RawMaterialCreatedTs)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.RawMaterialCreatedTs)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function onClick(e) {
+        kendoConsole.log("event :: click (" + $(e.event.target).closest(".k-button").attr("id") + ")");
+    }
+</script>

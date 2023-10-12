@@ -1,0 +1,28 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.ProductYard;
+@model long?
+
+@(Html.Kendo().Grid<VM_ProductLocationWorkOrder>()
+    .Name("WorkOrderInLocationList")
+    .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 700) })
+    .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Filterable()
+    .Scrollable()
+    .Columns(c =>
+    {
+      c.Bound(x => x.WorkOrderId).Visible(false);
+      c.Bound(x => x.WorkOrderName);
+      c.Bound(x => x.SteelgradeName);
+      c.Bound(x => x.ProductCount);
+      c.Bound(x => x.ProductWeight);
+      c.Bound(p => p.WorkOrderId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(40)
+      .ClientTemplate(@Html.ImageButton("product-yard", "GoToProducts(#:WorkOrderId#, #:LocationId#)", false, "NAME_Products").ToString());
+      c.Bound(p => p.WorkOrderId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(40)
+      .ClientTemplate(@Html.ImageButton("details", "GoToWorkOrder(#:WorkOrderId#)", false, "NAME_Details").ToString());
+    })
+    .DataSource(ds => ds
+       .Ajax()
+       .ServerOperation(true)
+       .Events(e => e.Error("TelerikErrorHandler"))
+       .Read(r => r.Action("GetWorkOrdersInLocationList", "ProductYard", new { locationId = Model }))
+    )
+)

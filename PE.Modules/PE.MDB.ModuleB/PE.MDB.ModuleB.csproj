@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ModuleB</AssemblyName>
+    <AssemblyTitle>PE.MDB.ModuleB</AssemblyTitle>
+    <Company>Primetals Technologies Poland Sp. z o.o.</Company>
+    <Product>PE.MDB.ModuleB</Product>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PE.BaseModules\PE.MDB.Base\PE.MDB.Base.csproj" />
+    <ProjectReference Include="..\..\PE.Config\PE.Config.csproj" />
+    <ProjectReference Include="..\..\PE.Interfaces\PE.Interfaces.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SMF.Module" />
+  </ItemGroup>
+</Project>

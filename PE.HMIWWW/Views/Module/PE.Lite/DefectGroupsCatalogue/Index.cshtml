@@ -1,0 +1,38 @@
+﻿@using PE.HMIWWW.ViewModel.Module.Lite.Defect
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("new", "AddDefectGroupsCataloguePopup()")
+}
+
+@(Html.Kendo().Grid<VM_DefectGroupsCatalogue>()
+    .Name("DefectGroupsCatalogueList")
+    .HtmlAttributes(new {style = string.Format(" height:{0}px;", ViewBag.FullGridHeight)})
+    .Scrollable()
+    .Pageable(p => p
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Filterable()
+    .Columns(c =>
+    {
+        c.Bound(x => x.DefectGroupCode);
+        c.Bound(x => x.DefectGroupName);
+        c.Bound(x => x.DefectGroupId).Filterable(false)
+            .ClientTemplate(Html.ImageButton("edit", "EditDefectGroupsCataloguePopup(#:DefectGroupId#)")
+                            + Html.ImageButton("details", "GoToDetails(#:DefectGroupId#)").ToString()
+                            + Html.ImageButton("delete", "DeleteDefectGroupsCatalogue(#=DefectGroupId#)"))
+            .Width(100)
+            .Title(" ");
+    })
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(30)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetDefectGroupsCatalogueList", "DefectGroupsCatalogue"))
+    )
+    )
+
+<script src="~/js/Module/PE.Lite/DefectGroupsCatalogue.js"></script>

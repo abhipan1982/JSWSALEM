@@ -1,0 +1,244 @@
+﻿.date-selector {
+    position: absolute;
+    right: 70px;
+    width: 780px;
+    font-size: 15px;
+}
+
+.k-picker-wrap > .k-select {
+    background-color: #fff;
+}
+
+.delays-datepicker {
+    background-image: none !important;
+    color: #006487;
+}
+
+.k-state-hover {
+    color: #006487 !important;
+}
+
+.action-icons {
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.delays-charts {
+    height: 330px;
+    position: relative;
+}
+
+.charts {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.delay-chart {
+    display: flex;
+    margin-top: 30px;
+}
+
+.micro-delay-chart {
+    display: flex;
+    margin-top: 30px;
+}
+
+.delay-chart-1 {
+    justify-content: flex-end;
+}
+
+.delay-chart-2 {
+    justify-content: flex-start;
+}
+
+.delay-chart-3 {
+    justify-content: flex-start;
+}
+
+.data-description {
+    position: absolute;
+    font-size: 15px;
+    color: #006487;
+}
+
+.chartPanel_button {
+    font-size: 14px;
+    color: #fff;
+    border-radius: 0;
+    border-color: #0077a1;
+    background-color: #0077a1;
+    padding: 5px 0;
+    width: 130px;
+}
+
+    .chartPanel_button:hover {
+        color: #fff;
+        border-color: #006791;
+        background-color: #006791;
+    }
+
+.datepicker-container {
+    margin: -4px 0px;
+}
+
+.selected_button {
+    border-color: #f2a900;
+    background-color: #f2a900;
+}
+
+    .selected_button:hover {
+        border-color: #f2a900;
+        background-color: #f2a900;
+    }
+
+.datepicker {
+    margin: 6px;
+}
+
+.dateRangeError {
+    font-weight: 500;
+    text-align: right;
+    /*line-height: 30px;*/
+    margin-top: 7px;
+    color: #d30d0d;
+    width: 155px;
+}
+
+.nodata-message {
+    position: absolute;
+    top: 160px;
+    font-size: 18px;
+}
+
+#durationChart g text:nth-child(3) {
+    fill: #006487;
+}
+
+#categoriesChart g text:nth-child(3) {
+    fill: #006487;
+}
+
+.line {
+    height: 1px;
+    background-color: #0077a1;
+}
+
+.summary-title {
+    color: #006487;
+    font-size: 20px;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+/*delay divide popup*/
+
+.arrow_icon {
+    border: solid rgba(255,255,255, 1);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.up {
+    margin: 8px 15px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    margin: 4px 15px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.colon {
+    margin-top: 45px;
+}
+
+.durationPicker {
+    display: flex;
+    flex-direction: row;
+}
+
+.time {
+    margin: 0 5px;
+}
+
+.label_time {
+    margin: 0 13px;
+}
+
+.input_time {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #bebebe;
+}
+
+.arrow {
+    width: 40px;
+    height: 20px;
+    background: #0077a1;
+    cursor: pointer;
+}
+
+.delayDivision {
+    display: flex;
+    flex-direction: row;
+}
+
+.duratrionForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.duratrionForm_error {
+    color: #db1438;
+    font-weight: 500;
+    height: 20px;
+}
+
+.delayDateTime {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    text-align: center;
+}
+
+.delayTime {
+    font-size: 30px;
+    color: #0077a1;
+}
+
+.delayDate {
+    font-size: 20px;
+    /*  color: #757575;*/
+}
+
+#diff {
+    display: none !important;
+}
+
+
+.loading-overlay::before {
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 11;
+    background-image: url(/css/System/Img/loading_2x.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(255,255,255,.6);
+}

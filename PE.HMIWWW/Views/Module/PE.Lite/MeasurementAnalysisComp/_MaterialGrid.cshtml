@@ -1,0 +1,32 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Material
+
+@(
+    Html.Kendo().Grid<VM_RawMaterialsTree>()
+        .Name("MaterialList")
+        .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+            .Refresh(true)
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+            .PageSizes(true))
+        .Sortable()
+        .Scrollable()
+        .Filterable()
+        .Selectable()
+        .HtmlAttributes(new { @style = @String.Format("height:{0}px;", 690) })
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.RawMaterialId).Visible(false);
+            columns.Bound(c => c.DisplayedMaterialName).HtmlAttributes(new { @class = "nowrap" });
+            columns.Bound(c => c.RawMaterialCreatedTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+            columns.ForeignKey(o => o.EnumRawMaterialStatus, (SelectList)ViewBag.RawMaterialStatuses);
+            columns.Bound(c => c.IsParent).HtmlAttributes(new { @class = "nowrap" });
+            columns.Bound(c => c.IsChild).HtmlAttributes(new { @class = "nowrap" });
+        })
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(26)
+            .Sort(sort => sort.Add(s => s.RawMaterialId).Ascending())
+            .Read(r => r.Action("GetMeasurementSearchList", "RawMaterial")))
+         .Events(e => e.Change("onMaterialSelect"))
+)

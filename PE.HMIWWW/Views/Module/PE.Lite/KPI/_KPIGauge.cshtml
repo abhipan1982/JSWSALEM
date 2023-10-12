@@ -1,0 +1,35 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.KPI
+
+@model VM_KPIOverview
+
+<div class="gauge-container">
+    <p class="kpi-title">@Model.KPIName</p>
+    <div id="@Model.KPICode" class="gauge"></div>
+    <p class="kpi-result">
+        <span class="kpi-label">
+              @Model.KPIValue [@Html.DisplayFor(x => x.UnitSymbol)]: 
+        </span>
+    </p>
+
+    <div style="display: flex; justify-content: center;">
+        <a id="icon-button-@Model.KPICode" style="border-radius: 5px;" onclick="showKPIChart(@Model.KPIValueId)"></a>
+    </div>
+</div>
+
+<script src="~/bundles/js/Module/KPIGauge.js"></script>
+<script>
+    $(document).ready(() => {
+      createGauge('#' + '@Model.KPICode', '@Model.KPIValue', '@Model.MaxValue',
+        '@Model.MinValue', '@Model.AlarmTo', '@Model.WarningTo', '@Model.EnumGaugeDirection');
+
+      $("#icon-button-@Model.KPICode").kendoButton({
+          icon: "line-stacked"
+      });
+
+      $("#icon-button-@Model.KPICode")
+    });
+
+    function showKPIChart(kpiValueId) {
+      openSlideScreen('KPI', 'KPIChart', { kpiValueId: kpiValueId }, Translations.Details);
+    }
+</script>

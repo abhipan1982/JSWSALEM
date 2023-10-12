@@ -1,0 +1,39 @@
+﻿<div class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_HeatsInLocations</div>
+@(
+  Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_HeatsOnYards>()
+      .Name("HeatsInLocationsList")
+      .Events(e => e.DataBound("ColorLocationListToCharge"))
+      .HtmlAttributes(new { @style = "height: 660px;" })
+      .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+      .Sortable()
+      .Filterable()
+      //.Selectable()
+      .Scrollable()
+      //.Pageable(p => p
+      //        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+      .Columns(c =>
+      {
+        c.Bound(x => x.AreaName).Title(VM_Resources.NAME_Yard).Hidden(true);
+
+        c.Bound(x => x.HeatName);
+        c.Bound(x => x.HeatId).Visible(false);
+        c.Bound(x => x.AssetDescription);
+        c.Bound(x => x.AssetId).Visible(false);
+        c.Bound(x => x.IsFirstInQueue).Visible(false);
+        c.Bound(x => x.YardId).Visible(false);
+        c.Bound(x => x.NumberOfMaterials);
+        c.Bound(p => p.AssetId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+            .ClientTemplate(@Html.ImageButton("tracking", "onSelectHeatToCharging(#:AssetId#, #:HeatId#, #:NumberOfMaterials#)", false, "NAME_Load").ToString());
+
+      })
+      .DataSource(d => d
+          .Ajax()
+          .Group(g => g.Add(c => c.AreaDescription))
+          .Group(g => g.Add(c => c.AssetDescription))
+          .ServerOperation(true)
+          //.PageSize(23)
+          .Read(r => r.Action("GetHeatGroupsInLocations", "BilletYard"))
+          //.Events(e => e.Change("ColorHeatListByQueueFlag"))
+          )
+//.Events(e => e.Change("onSelectHeatInLocationGridEl"))
+)

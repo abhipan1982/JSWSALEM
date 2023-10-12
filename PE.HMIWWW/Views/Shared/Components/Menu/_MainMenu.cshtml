@@ -1,0 +1,111 @@
+﻿@inject IHttpContextAccessor httpContextAccessor
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Routing
+@using Kendo.Mvc.UI.Fluent
+@using PE.HMIWWW.ViewModel.System
+@model PE.HMIWWW.ViewModel.System.VM_Menu
+
+@functions
+{
+    private void AddChildren(MenuItemBuilder builder, VM_MenuItem parent)
+    {
+        if (parent.Children != null)
+        {
+            builder.Items(children =>
+            {
+                foreach (var child in parent.Children.OrderBy(s => s.DisplayOrder))
+                {
+                    var icon = "module";
+
+                    if (!string.IsNullOrEmpty(child.IconName))
+                    {
+                        icon = child.IconName;
+                    }
+
+                    var childBuilder = children.Add().Text(child.DisplayName).ImageUrl(Url.Content("~/css/menu/" + icon + ".png"));
+                    if (!string.IsNullOrEmpty(child.Method) && !string.IsNullOrEmpty(child.Controller))
+                    {
+                        childBuilder.Url(Url.Action(child.Method, child.Controller, GetRouteValueParameters(child)));
+                      var x = GetRouteValueParameters(child);
+                      var y = Url.Action(child.Method, child.Controller, x);
+                    }
+                    AddChildren(childBuilder, child);
+                }
+            });
+        }
+    }
+
+    private RouteValueDictionary GetRouteValueParameters(VM_MenuItem item)
+    {
+      var result = new RouteValueDictionary(new { area = item.Area ?? string.Empty });
+      if (item.MethodParameter != null)
+      {
+        try
+        {
+          var listOfParameters = item.MethodParameter.Split('&');
+          foreach (var parameter in listOfParameters)
+          {
+            result.Add(parameter.Split('=')[0], parameter.Split('=')[1]);
+          }
+        }
+        catch { }
+      }
+      return result;
+    }
+}
+
+<style>
+	/*menu arrow fix*/
+	.k-menu-expand-arrow {
+		right: -4px !important;
+	}
+</style>
+
+<div id="menu-container">
+    @(Html.Kendo()
+        .Menu()
+        .Name("Menu")
+        .Items(items =>
+        {
+            // Dynamic menu part, based on DB
+            foreach (var parent in Model.Menuitems.OrderBy(s => s.DisplayOrder))
+            {
+                var icon = "module";
+
+                if (parent.IconName != null && parent.IconName != "")
+                {
+                    icon = parent.IconName;
+                }
+
+                var parentBuilder = items.Add().Text(parent.DisplayName).ImageUrl(Url.Content("~/css/menu/" + icon + ".png"));
+                if (!string.IsNullOrEmpty(parent.Method) && !string.IsNullOrEmpty(parent.Controller))
+                {
+                    parentBuilder.Url(Url.Action(parent.Method, parent.Controller, GetRouteValueParameters(parent)));
+                }
+                AddChildren(parentBuilder, parent);
+            }
+
+            // Constatnt menu part, language and log in/out
+            items.Add().Text(VM_Resources.NAME_Language).ImageUrl(Url.Content("~/css/menu/language.png")).Items(children =>
+            {
+                foreach (var item in Model.Languages.OrderBy(s => s.Order))
+                {
+                    children.Add().Text(item.DisplayName)
+                        .Url(Url.Action("SetCulture", "Home", new {area="", culture = item.Code, returnUrl = Context.Request.AbsolutePath()}))
+                        .ImageUrl(Url.Content("~/css/flag/" + item.IconName + ".png"));
+                }
+            });
+
+            if (User.Identity.IsAuthenticated)
+            {
+                items.Add().Text(VM_Resources.HMI_MENU_Logout)
+                    .Url(Url.Action("LogOff", "Account", new { area="" })).ImageUrl(Url.Content("~/css/menu/logout.png"));
+            }
+            else
+            {
+                items.Add().Text(VM_Resources.HMI_MENU_Login)
+                    .Url(Url.Action("Login", "Account", new { area="", returnUrl = httpContextAccessor.HttpContext.Request.AbsoluteUri()})).ImageUrl(Url.Content("~/css/menu/login.png"));
+            }
+        })
+        )
+</div>

@@ -1,0 +1,37 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.QualityExpert
+@(
+    Html.Kendo().Grid<VM_QualityExpertRawMaterial>()
+        .Name("SearchGrid")
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+        .Sortable()
+        .Filterable()
+        .Selectable()
+        .HtmlAttributes(new {style = string.Format("height:{0}px;", ViewBag.FullGridHeight)})
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.RawMaterialId).Visible(false);
+            columns.Bound(c => c.RawMaterialName);
+            columns.Bound(c => c.HeatName).HtmlAttributes(new {@class = "nowrap"});
+            columns.ForeignKey(p => p.LastGrading, new SelectList(ViewBag.RatingValuesTypes, "Key", "Value")).Width(160);
+            columns.Bound(c => c.RollingStartTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).HtmlAttributes(new {@class = "nowrap"});
+            columns.Bound(c => c.RollingEndTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).HtmlAttributes(new {@class = "nowrap"});
+            columns.Bound(c => c.ProductCreatedTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).HtmlAttributes(new {@class = "nowrap"});
+            columns.Bound(c => c.MaterialCreatedTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).HtmlAttributes(new {@class = "nowrap"});
+            columns.Bound(c => c.MaterialStartTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).HtmlAttributes(new {@class = "nowrap"});
+            columns.Bound(c => c.MaterialEndTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).HtmlAttributes(new {@class = "nowrap"});
+            columns.Bound(c => c.WorkOrderStartTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).HtmlAttributes(new {@class = "nowrap"});
+            columns.Bound(c => c.WorkOrderEndTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).HtmlAttributes(new {@class = "nowrap"});
+        })
+        .ToolBar(toolbar => { toolbar.ClientTemplateId("SearchGridToolbarTemplate"); })
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(26)
+            .Sort(sort => { sort.Add(s => s.RawMaterialId).Descending(); })
+            .Read(r => r.Action("GetRawMaterialSearchList", "QualityExpert"))
+            .Events(e => e.Change("dataSourceChange"))
+        )
+        .Events(e => e.Change("onElementSelect"))
+)

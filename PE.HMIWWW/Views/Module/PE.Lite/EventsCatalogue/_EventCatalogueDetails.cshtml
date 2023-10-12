@@ -1,0 +1,119 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Event.VM_EventCatalogue
+<style>
+    .line {
+        margin: 0 auto;
+        width: 95%;
+        height: 1px;
+        background-color: rgba(0, 100, 135, 0.7);
+    }
+</style>
+
+<div class="row h-100 p-0 pt-3">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(x => x.EventCatalogueCode)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.EventCatalogueCode)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(x => x.EventCatalogueName)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.EventCatalogueName)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(x => x.EventDescription)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.EventDescription)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.EventCategory)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.EventCategory)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.ParentEventCode)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.ParentEventCode)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.StdEventTime)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.StdEventTime)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.IsActive)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.IsActive)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.IsDefault)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.IsDefault)
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.IsPlanned)
+                    </div>
+                    <div class="col text-left">
+                        @Html.DisplayFor(m => m.IsPlanned)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

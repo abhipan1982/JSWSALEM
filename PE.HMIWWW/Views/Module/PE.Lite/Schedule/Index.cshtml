@@ -1,0 +1,124 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Schedule
+@using PE.BaseDbEntity.EnumClasses
+
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_Schedule_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu{
+  @Html.ImageButton("add", "GoToUnasignedWorkOrder()")
+  @Html.ImageButton("legend", "displayScheduleLegendWindow()", false, "BUTTON_Legend")
+}
+
+<style>
+  .status-@((short)WorkOrderStatus.Scheduled) {
+    cursor: n-resize;
+    background-color: #6ba4b8;
+    color: #fff;
+  }
+
+  .status-@((short)WorkOrderStatus.Charging) {
+    background-color: #00b5df;
+    color: #fff;
+  }
+
+  .status-@((short)WorkOrderStatus.Charged) {
+    background-color: #ffcd00;
+    color: #444;
+  }
+
+  .status-@((short)WorkOrderStatus.InRealization) {
+    background-color: #ff6347;
+    color: #fff;
+  }
+
+  .status-@((short)WorkOrderStatus.Finished) {
+    background-color: #77ce48;
+    color: #fff;
+  }
+</style>
+
+<div class="schedule-legend-window" id="scheduleLegend">
+  <div class="row m-1">
+    <div class="square status-@((short)WorkOrderStatus.Finished)"></div><div class="legend">@VM_Resources.ENUM_WorkOrderStatus_Finished</div>
+  </div>
+  <div class="row m-1">
+    <div class="square status-@((short)WorkOrderStatus.InRealization)"></div><div class="legend">@VM_Resources.ENUM_WorkOrderStatus_InRealization</div>
+  </div>
+  <div class="row m-1">
+    <div class="square status-@((short)WorkOrderStatus.Charged)"></div><div class="legend">@VM_Resources.ENUM_WorkOrderStatus_Charged</div>
+  </div>
+  <div class="row m-1">
+    <div class="square status-@((short)WorkOrderStatus.Charging)"></div><div class="legend">@VM_Resources.ENUM_WorkOrderStatus_Charging</div>
+  </div>
+  <div class="row m-1">
+    <div class="square status-@((short)WorkOrderStatus.Scheduled)"></div><div class="legend">@VM_Resources.ENUM_WorkOrderStatus_Scheduled</div>
+  </div>
+</div>
+
+<div>
+  @(Html.Kendo().Grid<VM_ScheduleSummary>()
+        .Name("ScheduleList")
+        .Events(e => e.DataBound("ColorRowInTable"))
+        .HtmlAttributes(new {style = string.Format(" height:{0}px;", ViewBag.FullGridHeight)})
+        .Filterable()
+        .Scrollable()
+        .Columns(c =>
+        {
+            c.Bound(x => x.WorkOrderId).Visible(false);
+            c.Bound(x => x.IsScheduledStatus).Visible(false);
+            c.Bound(x => x.ScheduleId).Visible(false);
+            c.Bound(x => x.WorkOrderName).Width(220);
+            c.Bound(x => x.ProductCatalogueName).Width(130);
+            c.Bound(x => x.MaterialCatalogueName).Width(200);
+            c.Bound(x => x.ScheduleOrderSeq).Width(60);
+            c.Bound(x => x.SteelgradeCode).Width(100);
+            c.Bound(x => x.HeatName).Width(200).HtmlAttributes(new { @class = "nowrap" });;
+            c.Bound(x => x.PlannedTime).ClientTemplate("#= kendo.format('{0:00}:{1:00}:{2:00}', PlannedTime.Hours, PlannedTime.Minutes,PlannedTime.Seconds) #").Width(80);
+            c.Bound(x => x.Progress).Width(60);
+            c.Bound(p => p.ScheduleId).Width(75).Sortable(false).Groupable(false).Filterable(false).Title(" ")
+                .ClientTemplate(Html.ImageButton("new", "createTestSchedule(#=ScheduleId#)")
+                    + Html.ImageButton("edit", "editMaterialNumber(#=WorkOrderId#)").ToString()
+                    + Html.ImageButton("details", "GoToWorkOrderDetails(#=WorkOrderId#)")
+                    +"#if(RawMaterialsParents == 0 || IsTestOrder) {#" + Html.ImageButton("delete", "removeItemFromSchedule(#=ScheduleId#,#=WorkOrderId#, #=ScheduleOrderSeq#)") + "#}#"
+                    + "#if(IsWorkOrderReportSendPossible){#" + Html.ImageButton("sendToL3", "_WorkOrder_SendL3.GoToSendWorkOrderToL3(#=WorkOrderId#)", false, "BUTTON_SendWorkOrderToL3").ToString() + "#}#"
+                    + "#if(IsEndOfWorkOrderPossible){#" + Html.ImageButton("endoforder", "EndOfWorkOrder(#=WorkOrderId#)", false, "BUTTON_EndOfWorkOrder").ToString() + "#}#");
+            c.Bound(p => p.ScheduleId).Width(75).Sortable(false).Groupable(false).Filterable(false).Visible(@ViewBag.ScheduleMoveMode == 0).Title(" ")
+                .ClientTemplate("#if(" + "displayButtons(1, ScheduleId)" + ") {#" + Html.ImageButton("top", "changeItemSequence(2, #=ScheduleId#,#=WorkOrderId#, #=ScheduleOrderSeq#)") + "#}#"
+                    + "#if(" + "displayButtons(1, ScheduleId)" + ") {#" + Html.ImageButton("up", "changeItemSequence(1, #=ScheduleId#,#=WorkOrderId#, #=ScheduleOrderSeq#)") + "#}#"
+                    + "#if(" + "displayButtons(-1, ScheduleId)" + ") {#" + Html.ImageButton("down", "changeItemSequence(-1, #=ScheduleId#,#=WorkOrderId#, #=ScheduleOrderSeq#)") + "#}#"
+                    + "#if(" + "displayButtons(-1, ScheduleId)" + ") {#" + Html.ImageButton("bottom", "changeItemSequence(-2, #=ScheduleId#,#=WorkOrderId#, #=ScheduleOrderSeq#)") + "#}#");
+        })
+        .DataSource(ds => ds
+            .Ajax()
+            .ServerOperation(true)
+            .Events(e => e.Error("TelerikErrorHandler"))
+            .Read(r => r.Action("GetSchedule", "Schedule"))
+            .PageSize(200)
+            .Sort(sort => sort.Add(s => s.ScheduleOrderSeq).Ascending()))
+        )
+</div>
+
+@if (@ViewBag.ScheduleMoveMode == 1)
+{
+  @(Html.Kendo().Sortable()
+        .For("#ScheduleList")
+        .Filter("table > tbody > tr:not(.restricted)")
+        .Cursor("move")
+        .HintHandler("noHint")
+        .PlaceholderHandler("placeholder")
+        .ContainerSelector("#ScheduleList tbody")
+        .Events(events => events.Change("onChange"))
+    )
+
+  <style>
+    #ScheduleList.k-grid tbody tr {
+      cursor: n-resize;
+    }
+  </style>
+}
+
+
+<link rel="stylesheet" href="~/bundles/css/Module/Schedule.css" />
+<script src="~/bundles/js/Module/Schedule.js"></script>

@@ -1,0 +1,36 @@
+<div class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_ProductionSchedule</div>
+@(
+    Html.Kendo()
+        .Grid<PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_ScheduleTask>()
+        .Name("ScheduleSearchGrid")
+        .Events(e => e.DataBound("SelectScheduleFirstWO"))
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+                .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+        //.Sortable()
+        //.Filterable()
+        //.Selectable()
+        .HtmlAttributes(new { style = "height: 660px;" })
+        .Columns(c =>
+        {
+          c.Bound(x => x.WorkOrderId).Visible(false);
+          c.Bound(x => x.ScheduleOrderSeq);
+          c.Bound(x => x.WorkOrderName);
+          c.Bound(x => x.HeatName);
+          c.Bound(x => x.L3NumberOfBillets).Visible(false);
+          c.Bound(x => x.MaterialsPlanned).ClientTemplate("#:MaterialsPlanned# / #:L3NumberOfBillets#");
+          c.Bound(x => x.RequiredMaterialsNumber).Visible(false);
+          c.Bound(x => x.HeatId).Visible(false);
+        })
+
+  .DataSource(d => d
+  .Ajax()
+  .ServerOperation(true)
+  .PageSize(26)
+  .Sort(r => r.Add(s => s.ScheduleOrderSeq))
+  .Read(r => r.Action("GetScheduleGrid", "BilletYard"))
+  //.Events(e => e.Change("dataSourceChange"))
+  )
+//.Events(e => e.Change("onSeletWOSearchGridEl"))
+)
+

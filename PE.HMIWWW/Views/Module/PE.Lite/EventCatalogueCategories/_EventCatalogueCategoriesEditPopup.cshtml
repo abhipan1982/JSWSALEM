@@ -1,0 +1,130 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Event.VM_EventCatalogueCategory
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<form asp-controller="EventCatalogueCategories" asp-action="UpdateEventCatalogueCategories" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="row form-group">
+        <div class="col text-right">
+            <label>@Html.LabelFor(x => x.EventCatalogueCategoryCode)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.EventCatalogueCategoryCode).HtmlAttributes(new {@class = "form-control form-control-sm", @onchange = "checkEventCatalogueCategoryCodeValidity(" + "\"" + VM_Resources.GLOB_NameExists + "\"" + ");"})
+            @Html.ValidationMessageFor(x => x.EventCatalogueCategoryCode)
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col text-right">
+            <label>@Html.LabelFor(x => x.EventCatalogueCategoryName)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.EventCatalogueCategoryName).HtmlAttributes(new {@class = "form-control form-control-sm", @onchange = "checkEventCatalogueCategoryNameValidity(" + "\"" + VM_Resources.GLOB_NameExists + "\"" + ");"})
+            @Html.ValidationMessageFor(x => x.EventCatalogueCategoryName)
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col text-right">
+          <label>@Html.LabelFor(x => x.EventTypeId)</label>
+        </div>
+        <div class="col">
+          @(Html.Kendo().DropDownTreeFor(x => x.EventTypeId)
+                .ValuePrimitive(true)
+                .BindTo((IEnumerable<DropDownTreeItemModel>)ViewBag.EventTypesTree))
+
+        </div>
+    </div>
+
+    <div class="row form-group">
+
+        <div class="col text-right">
+            <label>@Html.LabelFor(x => x.EventCategoryGroupId)</label>
+        </div>
+        <div class="col">
+            @(Html.Kendo().DropDownListFor(x => x.EventCategoryGroupId)
+                .DataTextField("EventCategoryGroupName")
+                .DataValueField("EventCategoryGroupId")
+                .HtmlAttributes(new {@class = "form-control form-control-sm", @style = "width: 150px"})
+                .OptionLabel("-")
+                .DataSource(source =>
+                {
+                    source.Read(read => { read.Action("ServerFiltering_GetEventGroups", "EventCatalogueCategories"); })
+                        .ServerFiltering(true);
+                })
+                )
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col text-right">
+            <label>@Html.LabelFor(x => x.EventCatalogueCategoryDescription)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().TextBoxFor(x => x.EventCatalogueCategoryDescription).HtmlAttributes(new {@class = "form-control form-control-sm"})
+            @Html.ValidationMessageFor(x => x.EventCatalogueCategoryDescription)
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col text-right">
+            <label>@Html.LabelFor(x => x.EnumAssignmentTypeId)</label>
+        </div>
+        <div class="col">
+            @(Html.Kendo().DropDownListFor(x => x.EnumAssignmentTypeId).BindTo((SelectList) ViewBag.EnumAssignmentType).HtmlAttributes(new {@class = "form-control form-control-sm"}))
+            @Html.ValidationMessageFor(m => m.EnumAssignmentTypeId)
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col text-right">
+            <label>@Html.LabelFor(x => x.IsDefault)</label>
+        </div>
+        <div class="col">
+            @Html.Kendo().CheckBoxFor(x => x.IsDefault).HtmlAttributes(new {@class = "form-control"}).Label(String.Empty)
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row form-group">
+        <div class="col invalid">
+            <p id="error">
+                <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+            </p>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary popup_button" type="submit" onclick="displayMessage()">
+                @VM_Resources.GLOB_Form_Button_Update
+            </button>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function () {
+
+        $("#form").kendoValidator().data("kendoValidator");
+
+    });
+
+    function displayMessage() {
+
+        var validator = $("#form").kendoValidator().data("kendoValidator");
+
+        if (validator.validate()) {
+            $('#error').css("display", "none");
+        } else {
+            $('#error').css("display", "block");
+            $('#popup-footer')
+                .css('display', 'block')
+                .css('background-color', 'rgb(206, 0, 55)');
+        }
+    }
+</script>

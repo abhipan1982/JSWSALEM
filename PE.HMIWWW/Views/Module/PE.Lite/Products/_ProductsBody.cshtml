@@ -1,0 +1,45 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.LabelPrinter
+@model PE.HMIWWW.ViewModel.Module.Lite.Products.VM_ProductsOverview
+
+<div class="row h-100">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+          .Name("ProductsBody_" + Model.ProductId)
+          .Animation(false)
+          @*.Events(e => e.Select("onSelect"))*@
+          .Scrollable(false)
+          .Items(async tabstrip =>
+          {
+            tabstrip.Add().Text(VM_Resources.NAME_ProductDetails)
+                .Selected(true).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Products/_ProductsDetails.cshtml", Model)).ToHtmlString()).ContentHtmlAttributes(new { @class = "partialHeight" });
+            tabstrip.Add().Text(VM_Resources.NAME_Label)
+                .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/ZebraPrinter/_Label.cshtml", new VM_LabelRequest {ProductId = Model.ProductId, ImageHeight = 600, ImageWidth = 400})).ToHtmlString()).ContentHtmlAttributes(new { @class = "partialHeight" });
+            if (Model.WorkOrderId.HasValue)
+            {
+              tabstrip.Add().Text(VM_Resources.NAME_WorkOrderDetails)
+                  .Selected(false).LoadContentFrom("GetWorkOrderOverview", "WorkOrder", new { workOrderId = Model.WorkOrderId }).ContentHtmlAttributes(new { @class = "partialHeight" });
+              tabstrip.Add().Text(VM_Resources.NAME_ProductCatalogue)
+                  .Selected(false).LoadContentFrom("GetProductCatalogueOverviewByWorkOrderId", "ProductCatalogue", new { workOrderId = Model.WorkOrderId }).ContentHtmlAttributes(new { @class = "partialHeight" });
+              tabstrip.Add().Text(VM_Resources.NAME_BilletCatalogue)
+                  .Selected(false).LoadContentFrom("GetBilletCatalogueOverviewByWorkOrderId", "BilletCatalogue", new { workOrderId = Model.WorkOrderId }).ContentHtmlAttributes(new { @class = "partialHeight" });
+              tabstrip.Add().Text(VM_Resources.NAME_HeatDetails)
+                  .Selected(false).LoadContentFrom("GetHeatOverviewByWorkOrderId", "Heat", new { workOrderId = Model.WorkOrderId }).ContentHtmlAttributes(new { @class = "partialHeight" });
+              if (Model.HasHeatChemicalAnalysis)
+              {
+                tabstrip.Add().Text(VM_Resources.NAME_HeatChemAnalysis)
+                  .Selected(false).LoadContentFrom("GetHeatOverviewByWorkOrderId", "Heat", new { workOrderId = Model.WorkOrderId }).ContentHtmlAttributes(new { @class = "partialHeight" });
+              }
+              tabstrip.Add().Text(VM_Resources.NAME_Quality)
+                  .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/ProductQualityMgm/_ProductDefectsList.cshtml", Model)).ToHtmlString()).ContentHtmlAttributes(new {@class = "partialHeight"});
+            }
+            //if (Model.HeatOverview.HC != null)
+            //{
+            //    tabstrip.Add().Text(VM_Resources.NAME_HeatChemAnalysis)
+            //        .Selected(false).Content(Html.Partial("~/Views/Module/PE.Lite/Heat/_HeatChemAnalysis.cshtml", Model.HeatOverview).ToHtmlString()).ContentHtmlAttributes(new {@class = "partialHeight"});
+            //}
+            //tabstrip.Add().Text(VM_Resources.NAME_Quality)
+            //    .Selected(false).Content(Html.Partial("~/Views/Module/PE.Lite/ProductQualityMgm/_ProductDefectsList.cshtml", Model).ToHtmlString()).ContentHtmlAttributes(new {@class = "partialHeight"});
+          })
+        )
+  </div>
+</div>

@@ -1,0 +1,40 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Material;
+
+@(
+    Html.Kendo().Grid<VM_RawMaterialHistory>
+    ()
+    .Name("LayerHistoryList")
+    .HtmlAttributes(new { @style = "height: 100%;" })
+    .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Sortable()
+    .Filterable()
+    .Scrollable()
+    .Pageable(p => p
+    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Columns(c =>
+    {
+        c.Bound(x => x.RawMaterialId).Visible(false);
+        c.Bound(x => x.RawMaterialStep);
+        c.Bound(x => x.AssetName).Width(200);
+        c.Bound(x => x.CreatedTs)
+         .Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_LongDateTime_FORMAT)
+         .Width(160);
+        c.Bound(x => x.RawMaterialPassNo);
+        c.Bound(x => x.RawMaterialLength);
+        c.Bound(x => x.RawMaterialThickness);
+        c.Bound(x => x.RawMaterialWeight);
+        c.Bound(x => x.RawMaterialElongation);
+        c.Bound(x => x.RawMaterialCutType);
+        c.Bound(p => p.RawMaterialStepId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+            .ClientTemplate(@Html.ImageButton("details", "_RawMaterial.GoToHistory(#:RawMaterialStepId#)").ToString());
+    })
+    .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(24)
+    .Sort(sort =>
+    {
+        sort.Add(s => s.RawMaterialId).Descending();
+    })
+    .Read(r => r.Action("GetHistoryByRawMaterialId", "Layer", new { RawMaterialId = Model }))
+    ))

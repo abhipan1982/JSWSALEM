@@ -1,0 +1,74 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.WorkOrder.VM_WorkOrderMaterials
+
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+
+<script>
+    function CalculateMaterialsWeight() {
+        var materialNumber = $("#MaterialsNumber").data("kendoNumericTextBox").value();
+        var weight = @Model.BilletWeight;
+
+        if (materialNumber && weight) {
+            $(".material-weight").show();
+            var newWeight = parseFloat(weight * materialNumber);
+
+            if (newWeight) {
+                $("#material-weight-value").text(newWeight.toFixed(3));
+            } else {
+                $("#material-weight-value").text('-');
+            }
+        }
+        else {
+            $(".material-weight").hide();
+        }
+    }
+
+    $(document).ready(function () {
+        CalculateMaterialsWeight();
+    })
+</script>
+
+
+<form asp-controller="WorkOrder" asp-action="EditMaterialNumber" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.WorkOrderId)
+
+    <div class="row form-group">
+        <div class="col-5 text-right">
+            @Html.LabelFor(x => x.MaterialsNumber)
+        </div>
+        <div class="col">
+            @Html.PeKendo().NumericTextBoxFor(x => x.MaterialsNumber).HtmlAttributes(new { @class = "form-control form-control-sm", @style = "width: 150px" }).Min(1).Max(1000).Events(x => x.Change("CalculateMaterialsWeight"))
+            @Html.ValidationMessageFor(x => x.MaterialsNumber)
+        </div>
+    </div>
+	
+    <div class="row form-group">
+        <div class="col-5 text-right">
+            @Html.LabelFor(x => x.BilletWeight)
+        </div>
+        <div class="col-2">
+					  @Model.BilletWeight
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-5 text-right material-weight">@Html.LabelFor(x => x.TargetOrderWeight)</div>
+        <div class="col material-weight"><div class="col-2" id="material-weight-value"></div></div>
+    </div>
+
+    <hr />
+
+    <div class="row form-group">
+        <div class="col text-right">
+            <input type="submit" class="btn btn-primary popup_button" value="@PE.HMIWWW.Core.Resources.VM_Resources.BUTTON_SubmitForm" />
+        </div>
+    </div>
+
+</form>
+

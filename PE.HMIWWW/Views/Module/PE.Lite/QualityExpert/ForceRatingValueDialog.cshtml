@@ -1,0 +1,60 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.QualityExpert.VM_ForceRatingValue
+@{
+    //ViewBag.Title = VM_Resources.PAGE_TITLE_QualityExpertForceValuePopup;
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<form asp-controller="QualityExpert" asp-action="ForceRatingValue" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.FactRatingKey)
+
+    <div class="row">
+        <div class="col">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-5 text-right">
+                        @Html.LabelFor(m => m.RatingValue)
+                    </div>
+                    <div class="col-7">
+                        @(ViewBag.RatingValuesTypes[Model.RatingValue.Value])
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-5 text-right">
+                    @Html.LabelFor(m => m.RatingCurrentValue)
+                </div>
+                <div class="col-7">
+                    @(ViewBag.RatingValuesTypes[Model.RatingCurrentValue.Value])
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-5 text-right ">
+                    @Html.LabelFor(m => m.RatingForcedValue)
+                </div>
+                <div class="col-7">
+                  @(Html.Kendo().DropDownListFor(x => x.RatingForcedValue)
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+                    .BindTo(new SelectList(ViewBag.RatingValuesTypes, "Key", "Value").Where(x => x.Value != "0"))
+                    .OptionLabel("-")
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row form-group">
+        <div class="col text-right">
+            <input type="submit" class="btn btn-primary popup_button" value="@PE.HMIWWW.Core.Resources.VM_Resources.BUTTON_SubmitForm" />
+        </div>
+    </div>
+
+</form>
+

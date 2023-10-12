@@ -1,0 +1,41 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.QualityInspection
+
+@(
+    Html.Kendo().Grid<VM_QualityInspection>()
+        .Name("SearchGrid")
+        .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+            .Refresh(true)
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+            .PageSizes(true))
+        .Sortable()
+        .Filterable()
+        .Selectable()
+        .Events(e => e.DataBound("selectRow"))
+        .HtmlAttributes(new { @style = @String.Format("height:{0}px;", ViewBag.FullGridHeight) })
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.RawMaterialId).Visible(false);
+            columns.Bound(c => c.RawMaterialName);
+            columns.Bound(c => c.HasDefects).ClientTemplate(
+              "<img src='" + "#=HasDefectImageSRC#".BuildImageSrc() + "' /> #=HasDefectsText#").Width(40);
+            columns.ForeignKey(o => o.EnumInspectionResult, (SelectList)ViewBag.InspectionResultList).ClientTemplate(
+              "<img src='" + "#=InspectionResultImageSRC#".BuildImageSrc() + "' /> #=InspectionResultText#").Width(95);
+            columns.Bound(x => x.WorkOrderName).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+            columns.Bound(x => x.HeatName).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+            columns.Bound(c => c.ProductCreatedTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).HtmlAttributes(new {@class = "nowrap"});
+        })
+        .ToolBar(toolbar => toolbar.ClientTemplateId("SearchGridToolbarTemplate"))
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(26)
+            .Sort(sort => sort.Add(s => s.RawMaterialId).Descending())
+            .Read(r => r.Action("GetRawMaterialSearchList", "BundleInspectionStation"))
+            .Events(e => e.Change("dataSourceChange"))
+        )
+        .Events(e =>
+        {
+            e.Change("onElementSelect");
+        })
+)

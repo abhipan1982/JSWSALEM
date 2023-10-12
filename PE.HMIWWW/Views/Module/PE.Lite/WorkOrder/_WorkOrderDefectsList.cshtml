@@ -1,0 +1,28 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Inspection
+@model long?
+@(Html.Kendo().Grid<VM_Defect>()
+  .Name("WorkOrderDefects")
+  .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Pageable(p => p
+    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Sortable()
+  .Filterable()
+  .HtmlAttributes(new {style = "height: 100%;"})
+  .Columns(columns =>
+  {
+    columns.Bound(x => x.RawMaterialName);
+    columns.Bound(x => x.DefectCatalogueName);
+    columns.Bound(x => x.DefectDescription);
+    columns.Bound(x => x.DefectPosition);
+    columns.Bound(x => x.AssetName);
+    columns.Bound(p => p.DefectId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+      .ClientTemplate(Html.ImageButton("edit", "_Defect.editDefectPopup(#:DefectId#, () => { reloadGrid('WODefectList'); reloadGrid('MaterialGrading'); })").ToString()
+      + Html.ImageButton("delete", "_Defect.deleteDefect(#:DefectId#, () => { reloadGrid('WODefectList'); reloadGrid('MaterialGrading'); })").ToString());
+  })
+  .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(23)
+    .Read(r => r.Action("GetWorkOrderDefectsList", "WorkOrder", new {workOrderId = Model}))
+  )
+)

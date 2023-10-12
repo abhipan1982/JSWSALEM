@@ -1,0 +1,22 @@
+﻿@model IList<PE.HMIWWW.ViewModel.Module.Lite.ProductYard.VM_ProductYard>
+
+<div class="yards-container area">
+
+  @foreach (var item in Model)
+  {
+    <div class="asset-card">
+      <div class="asset-card-header">
+        <div class="card-header-title">@item.YardName</div>
+      </div>
+      <div class="asset-card-body">
+        <div class="card-body-number">@item.NumberOfProducts</div>
+        <div class="card-body-label">@VM_Resources.NAME_ProductsNumber</div>
+      </div>
+      <div class="asset-card-footer">
+        <div class="card-footer-btn cursor-pointer" onclick="GoToYardMap(@item.ProductYardId)">
+          @VM_Resources.NAME_View
+        </div>
+      </div>
+    </div>
+  }
+</div>

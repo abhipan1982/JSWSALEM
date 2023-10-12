@@ -1,0 +1,201 @@
+﻿
+<style>
+  .measurements-chart {
+    height: 340px;
+    margin-bottom: 15px;
+  }
+
+  .k-chart, .k-stockchart {
+    height: 95%;
+  }
+
+  .k-tabstrip-wrapper > .k-tabstrip {
+    height: 100%;
+  }
+
+    .k-tabstrip-wrapper > .k-tabstrip > .k-content {
+      height: 85% !important;
+    }
+
+  .chart-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .chart-menu-el {
+    margin: 0 10px;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .active {
+    font-weight: 500;
+    color: #006487;
+  }
+</style>
+
+
+<div id="chart"></div>
+<script>
+  function createChart(materialData = [], max = 0, unit = "") {
+    $("#chart").kendoChart({
+      renderAs: "canvas",
+      dataSource: {
+        data: materialData
+      },
+      valueAxis: {
+        title: {
+          text: unit
+        }
+      },
+      categoryAxis: {
+        min: 0,
+        //max: max,
+        labels: {
+          rotation: "auto"
+        }
+      },
+      tooltip: {
+        visible: true
+      },
+      legend: {
+        item: 1,
+      },
+      series: [{
+        color: '#fc8803',
+        overlay: {
+          gradient: "none"
+        },
+        type: "column",
+        field: "value",
+        categoryField: "category",
+      }],
+      pannable: {
+        lock: "y"
+      },
+      zoomable: {
+        mousewheel: {
+          lock: "y"
+        },
+        selection: {
+          lock: "y"
+        }
+      },
+      seriesClick: function (e) {
+        GoToMaterial(e.dataItem.__proto__.id);
+      }
+    });
+  }
+
+  var chartMenuElements = $('.chart-menu-el');
+  var MaterialsData = [];
+
+  $(document).ready(() => {
+    initKendoData();
+    chartMenuSelectListener();
+    setMenuElAvgSelected();
+  });
+
+  function chartMenuSelectListener() {
+    chartMenuElements.click((el) => {
+      clearActive();
+      let selectedEl = $(el.target);
+      selectedEl.addClass('active');
+      if (selectedEl.data('chart-el') === 'min') {
+        minMaterialsData()
+      } else if (selectedEl.data('chart-el') === 'max') {
+        maxMaterialsData();
+      } else {
+        avgMaterialsData();
+      }
+    });
+  }
+
+  function setMenuElAvgSelected() {
+    clearActive();
+    $('.avg').addClass('active');
+  }
+
+  function clearActive() {
+    for (i = 0; i < chartMenuElements.length; i++) {
+      $(chartMenuElements[i]).removeClass('active');
+    }
+  }
+
+  function getMaterialsMeasurements() {
+
+    let parameters = {
+      featureId: CurrentFeature.FeatureId,
+      workOrderId: CurrentElement.WorkOrderId
+    }
+    let data = AjaxGetDataHelper(Url("MeasurementsSummary", "GetMeasurements"), parameters);
+    return data.Data;
+  }
+
+  function initKendoData() {
+
+    if (!CurrentFeature.FeatureId) {
+      createChart();
+      return;
+    }
+
+    MaterialsData = getMaterialsMeasurements();
+    avgMaterialsData();
+  }
+
+  function minMaterialsData() {
+    let materialsChartData = []
+    let unit = ""
+    for (let i = 0; i < MaterialsData.length; i++) {
+      materialsChartData.push({
+        category: MaterialsData[i].RawMaterialName,
+        value: MaterialsData[i].MeasurementValueMin,
+        id:  MaterialsData[i].RawMaterialId
+      });
+      unit = MaterialsData[i].UnitSymbol
+    }
+    createChart(materialsChartData, MaterialsData.length, unit);
+  }
+
+  function maxMaterialsData() {
+    let materialsChartData = []
+    let unit = ""
+    for (let i = 0; i < MaterialsData.length; i++) {
+      materialsChartData.push({
+        category: MaterialsData[i].RawMaterialName,
+        value: MaterialsData[i].MeasurementValueMax,
+        id:  MaterialsData[i].RawMaterialId
+      });
+      unit = MaterialsData[i].UnitSymbol
+    }
+    createChart(materialsChartData, MaterialsData.length, unit);
+  }
+
+  function avgMaterialsData() {
+    let materialsChartData = []
+    let unit = ""
+    for (let i = 0; i < MaterialsData.length; i++) {
+      materialsChartData.push({
+        category: MaterialsData[i].RawMaterialName,
+        value: MaterialsData[i].MeasurementValueAvg,
+        id:  MaterialsData[i].RawMaterialId
+      });
+      unit = MaterialsData[i].UnitSymbol
+    }
+    createChart(materialsChartData, MaterialsData.length, unit);
+  }
+
+  function GoToMaterial(rawMatId) {
+    if (!rawMatId) { return; }
+
+    let dataToSend = {
+      RawMaterialId: rawMatId
+    };
+    openSlideScreen('RawMaterial', 'ElementDetails', dataToSend, rawMatId);
+  }
+
+</script>

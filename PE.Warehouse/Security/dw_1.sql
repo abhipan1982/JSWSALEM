@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [dw]
+    WITH PASSWORD = N'i~vyaWcnenaWqzulg5tXpajqmsFT7_&#$!~<`tbe{|99h|qz', SID = 0xD5C73528E891FC42AE0928B8F227C21E, DEFAULT_LANGUAGE = [us_english], CHECK_POLICY = OFF;
+

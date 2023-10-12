@@ -1,0 +1,45 @@
+﻿
+@model long
+
+<div class="row h-100">
+  <div class="col-6">
+    @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Products.VM_ProductsList>()
+                    .Name("MateriaLabelList")
+                    .NoRecords(VM_Resources.GLOB_GRID_NO_DATA)
+                    .Selectable()
+                    .Sortable()
+                    .Filterable()
+                    .Pageable(p => p
+                            .Refresh(true)
+                            .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+                            .PageSizes(true))
+                    .HtmlAttributes(new { style = "height: 100%;" })
+                    .Columns(c =>
+                    {
+                      c.Bound(x => x.ProductId).Visible(false);
+                      c.Bound(x => x.ProductName);
+                      c.Bound(x => x.WorkOrderName);
+                      c.Bound(x => x.Weight);
+                      c.Bound(x => x.ShiftKey);
+                      //c.Bound(p => p.MaterialId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(30)
+                      //    .ClientTemplate(@Html.ImageButton("details", "GoToMaterial(#:MaterialId#)").ToString());
+
+                    })
+                    .DataSource(d => d
+                        .Ajax()
+                        .ServerOperation(true)
+                        .PageSize(24)
+                        //.Read(r => r.Action("GetMaterialsLabelListByWorkOrderId", "LabelPrinter", new { workOrderId = Model }))
+                        .Read(r => r.Action("GetProductsListByWorkOrderId", "LabelPrinter", new { workOrderId = Model }))
+                        .Events(e => e.Change("dataSourceChange"))
+                        )
+                        .Events(e => e.Change("onSelect"))
+)
+  </div>
+  <div class="col-5">@{Html.RenderPartial("~/Views/Module/PE.Lite/WeighingMonitor/_ProductsLabel.cshtml");}</div>
+</div>
+
+
+
+
+

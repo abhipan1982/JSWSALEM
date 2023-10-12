@@ -1,0 +1,21 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_QuantityType
+
+<div class="row h-100">
+    <div class="col">
+        @(Html.Kendo().TabStrip()
+              .Name("QuantityTypeBody_" + Guid.NewGuid().ToString())
+              .Animation(false)
+              .Scrollable(false)
+              .Items(tabstrip =>
+              {
+                  tabstrip.Add().Text(VM_Resources.NAME_Details)
+                    .Selected(true).Content(@Html.Partial("~/Views/Module/PE.Lite/QuantityType/_QuantityTypeDetails.cshtml", Model).ToHtmlString()).ContentHtmlAttributes(new { @class = "partialHeight" });
+                 
+              })
+        .Events(e =>
+        {
+            e.Select("saveTabStripState");
+        })
+		)
+    </div>
+</div>

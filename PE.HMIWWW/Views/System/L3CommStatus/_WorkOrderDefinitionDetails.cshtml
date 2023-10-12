@@ -1,0 +1,200 @@
+@model PE.HMIWWW.ViewModel.System.VM_L3L2WorkOrderDefinition
+
+<div class="row">
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.WorkOrderName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.WorkOrderName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.OrderDeadline)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.OrderDeadline)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.TargetWorkOrderWeight)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.TargetWorkOrderWeight)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.BundleWeightMin)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.BundleWeightMin)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.SteelgradeCode)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.SteelgradeCode)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.BilletWeight)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.BilletWeight)
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4 text-right">
+        @Html.LabelFor(x => x.BilletLength)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(m => m.BilletLength)
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4 text-right">
+        @Html.LabelFor(x => x.OutputThickness)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(m => m.OutputThickness)
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ExternalWorkOrderName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ExternalWorkOrderName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.HeatName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.HeatName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.TargetWorkOrderWeightMin)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.TargetWorkOrderWeightMin)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.BundleWeightMax)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.BundleWeightMax)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.MaterialCatalogueName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.MaterialCatalogueName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.InputThickness)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.InputThickness)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.InputShapeSymbol)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.InputShapeSymbol)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.OutputWidth)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.OutputWidth)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.PreviousWorkOrderName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.PreviousWorkOrderName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.CustomerName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.CustomerName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.TargetWorkOrderWeightMax)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.TargetWorkOrderWeightMax)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.NumberOfBillets)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.NumberOfBillets)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ProductCatalogueName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ProductCatalogueName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.InputWidth)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.InputWidth)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.OutputShapeSymbol)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.OutputShapeSymbol)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+﻿CREATE SCHEMA [dw]
+    AUTHORIZATION [dw];
+
+
+
+
+

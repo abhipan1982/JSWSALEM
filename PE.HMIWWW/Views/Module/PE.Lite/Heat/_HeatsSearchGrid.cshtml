@@ -1,0 +1,34 @@
+﻿@using PE.HMIWWW.ViewModel.Module.Lite.Heat
+@(
+        Html.Kendo().Grid<VM_HeatSummary>()
+            .Name("SearchGrid")
+            .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+            .Pageable(p => p
+                .Refresh(true)
+                .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+                .PageSizes(true))
+            .Sortable()
+            .Filterable()
+            .Selectable()
+            .HtmlAttributes(new {style = string.Format("height:{0}px;", 746)})
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.HeatId).Visible(false);
+                columns.Bound(c => c.HeatName).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(c => c.HeatSupplierName).Hidden(true).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(c => c.SteelgradeCode);
+                columns.Bound(c => c.SteelgradeName).Hidden(true);
+                columns.Bound(c => c.CreatedTs).Format(VM_Resources.GLOB_ShortDateTime_FORMAT).Hidden(true).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(c => c.LastUpdateTs).Format(VM_Resources.GLOB_ShortDateTime_FORMAT).Hidden(true).HtmlAttributes(new {@class = "nowrap"});
+            })
+            .ToolBar(toolbar => { toolbar.ClientTemplateId("SearchGridToolbarTemplate"); })
+            .DataSource(d => d
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(26)
+                .Sort(sort => sort.Add("HeatId").Descending())
+                .Read(r => r.Action("GetHeatSearchList", "Heat"))
+                .Events(e => e.Change("dataSourceChange"))
+            )
+            .Events(e => { e.Change("onElementSelect"); })
+    )

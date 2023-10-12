@@ -1,0 +1,119 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_MaterialCatalogue
+
+<div class="row p-0 pt-3">
+    <div class="col-4 p-0">
+        <div class="container-fluid">
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.MaterialCatalogueName)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.MaterialCatalogueName)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.ExternalMaterialCatalogueName)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.ExternalMaterialCatalogueName)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.MaterialCatalogueTypeSymbol)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.MaterialCatalogueTypeSymbol)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.Description)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.Description)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.ShapeCode)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.ShapeCode)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 p-0">
+        <div class="container-fluid">
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.LengthMin)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.LengthMin)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.LengthMax)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.LengthMax)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.WidthMin)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.WidthMin)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.WidthMax)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.WidthMax)
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-4 p-0">
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.ThicknessMin)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.ThicknessMin)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.ThicknessMax)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.ThicknessMax)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.WeightMin)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.WeightMin)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 text-right">
+                @Html.LabelFor(m => m.WeightMax)
+            </div>
+            <div class="col">
+                @Html.DisplayFor(m => m.WeightMax)
+            </div>
+        </div>
+    </div>
+</div>

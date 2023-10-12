@@ -1,0 +1,31 @@
+﻿@model long?
+
+<div class="container-fluid p-3">
+  <div class="row">
+      <div class="col-6">
+
+        @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Setup.VM_Setup>()
+          .Name("SetupHistoryForWorkOrder")
+          .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+          .Pageable(p => p
+          .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+          .HtmlAttributes(new { style = @String.Format("height:{0}px;", 615) })
+          .Columns(columns =>
+          {
+            columns.Bound(c => c.SetupId).Visible(false);
+            columns.Bound(c => c.SetupTypeName);
+            columns.Bound(c => c.CreatedTs).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT);
+            columns.Bound(c => c.UpdatedTs).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT);
+          }
+        )
+          .DataSource(d => d
+              .Ajax()
+              .ServerOperation(true)
+              .PageSize(28)     
+              .Read(r => r.Action("GetSetupParametersSearchGridDataForWorkOrder", "Setup", new { workOrderId = Model }))
+          )
+        )
+
+      </div>
+  </div>
+</div>

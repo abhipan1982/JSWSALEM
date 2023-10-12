@@ -1,0 +1,69 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Device
+
+@{
+    ViewBag.Title = "_DeviceEdit";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+@using (Ajax.BeginForm("InstallDevice", "Maintenance", new AjaxOptions { UpdateTargetId = "formContainer", OnBegin = "OnFormBegin", OnSuccess = "OnFormSuccess", OnFailure = "OnFormError" }, new { @class = "container-fluid", id = "form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.DeviceId)
+
+    <div class="row h-100 p-0 pt-3">
+        @(Html.Kendo().TreeList<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_AssetTreeListEl>()
+          .Name("treelist-install")
+          .Columns(columns =>
+          {
+              columns.Add().Field(e => e.Name).TemplateId("treelist-template");
+          })
+          .Filterable()
+          .Sortable()
+          .Selectable()
+          .DataSource(dataSource => dataSource
+              .Read(read => read.Action("GetAssetOnlyTreeListData", "Maintenance"))
+              .ServerOperation(false)
+              .Model(m => {
+                  m.Id(f => f.Id);
+                  m.ParentId(f => f.ParentId);
+                  m.Expanded(true);
+                  m.Field(f => f.Name);
+                  m.Field(f => f.IsDevice);
+              })
+          )
+          //.Events(ev => { ev.Change("onChange");
+          //  ev.DataBound("onDataBound");
+          //}
+          //  )
+          .Height(600)
+          )
+
+    </div>
+    <br />
+    <div class="row form-group">
+        <div class="col invalid">
+            <p id="error">
+                <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+            </p>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+                @VM_Resources.GLOB_Form_Button_Update
+            </button>
+        </div>
+    </div>
+}
+
+<script id="treelist-template" type="text/x-kendo-template">
+
+    if (IsArea){ #
+    <div class='el-icon'
+         style='background-image: url("../../../../Content/Functions/Small/materialTracking_hover.png"); opacity: 0.7'></div>
+    <div class='el-name'>#: Name # </div>
+    # } else { #
+    <div class='el-icon'
+         style='background-image: url("../../../../Content/Functions/Small/new_hover.png"); opacity: 0.5'></div>
+    <div class='el-name'>#: Name # </div>
+    # } #
+</script>
+

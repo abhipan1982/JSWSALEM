@@ -1,0 +1,41 @@
+﻿
+<div class="yard">
+  <div class="map-actions">
+    @Html.ImageButton("arrow_left", "GoToYardsList()", false, "BUTTON_back")
+  </div>
+  <div class="w-100 text-center">@VM_Resources.NAME_ChargingGrid</div>
+  <div class="area mt-2">
+    @(
+      Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_ScheduleTask>()
+          .Name("ChargingHeatsGrid")
+          .Events(e => e.DataBound("ColorSearchedHeatCharging"))
+          .HtmlAttributes(new { @style = "height: 680px;" })
+          .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+          .Sortable()
+          .Filterable()
+          .Scrollable()
+          .Pageable(p => p
+                  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+          .Columns(c =>
+          {
+          c.Bound(x => x.WorkOrderId).Visible(false);
+          c.Bound(x => x.ScheduleOrderSeq);
+          c.Bound(x => x.WorkOrderName);
+          c.Bound(x => x.HeatName);
+          c.Bound(x => x.OnChargingMaterialsNumber);
+          c.Bound(x => x.L3NumberOfBillets);
+          c.Bound(p => p.HeatId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(90)
+              .ClientTemplate(@Html.ImageButton("scrap", "ScrapMaterials(#:HeatId#, #:OnChargingMaterialsNumber#, 1100, null)").ToString() + @Html.ImageButton("edit", "EditHeatPopup(#:HeatId#)").ToString() + @Html.ImageButton("details", "OpenHeatDetailsPopup(#:HeatId#)").ToString());
+
+})
+          .DataSource(d => d
+              .Ajax()
+              .ServerOperation(true)
+              .PageSize(23)
+              .Sort(r => r.Add(s => s.ScheduleOrderSeq))
+              .Read(r => r.Action("GetCharginGridHeatsGrid", "BilletYard"))
+              )
+    )
+  </div>
+</div>
+

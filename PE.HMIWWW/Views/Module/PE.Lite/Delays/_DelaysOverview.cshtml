@@ -1,0 +1,33 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Delay
+@model PE.HMIWWW.ViewModel.Module.Lite.Shift.VM_ShiftWorkOrderModel
+
+@(Html.Kendo().Grid<VM_DelayOverview>()
+    .Name("Delays")
+    .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Sortable()
+    .Filterable()
+    .Scrollable()
+    .Pageable(p => p
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .HtmlAttributes(new {style = "height: 645px;"})
+    .Columns(c =>
+    {
+        c.Bound(x => x.EventId).Visible(false);
+        c.Bound(x => x.EventStartTs).Width(100).Filterable(false).Format(VM_Resources.GLOB_ShortDateTime_FORMAT);
+        c.Bound(x => x.EventEndTs).Width(100).Filterable(false).Format(VM_Resources.GLOB_ShortDateTime_FORMAT);
+        c.Bound(x => x.DelayDuration).Width(100).Sortable(false).Filterable(false);
+        c.Bound(x => x.EventCatalogueName).Width(100).Sortable(false).Filterable(false);
+        c.Bound(x => x.AssetName).Width(100).Sortable(false).Filterable(false);
+        c.Bound(x => x.EventId)
+            .Filterable(false)
+            .ClientTemplate(
+                Html.ImageButton("edit", "DelayEditPopup(#:EventId#)").ToString())
+            .Width(30)
+            .Title(" ");
+    })
+    .DataSource(d => d
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(24)
+        .Read(r => r.Action("GetDelaysOverview", "Delays", new {shiftId = Model.ShiftId, workOrderId = Model.WorkOrderId})))
+)

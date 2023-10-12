@@ -1,0 +1,79 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Schedule
+@using PE.BaseDbEntity.EnumClasses
+
+<style>
+  .status-@((short)WorkOrderStatus.Scheduled) {
+    cursor: n-resize;
+    background-color: #6ba4b8;
+    color: #fff;
+  }
+
+  .status-@((short)WorkOrderStatus.Charging) {
+    background-color: #00b5df;
+    color: #fff;
+  }
+
+  .status-@((short)WorkOrderStatus.Charged) {
+    background-color: #ffcd00;
+    color: #444;
+  }
+
+  .status-@((short)WorkOrderStatus.InRealization) {
+    background-color: #ff6347;
+    color: #fff;
+  }
+
+  .status-@((short)WorkOrderStatus.Finished) {
+    background-color: #77ce48;
+    color: #fff;
+  }
+</style>
+
+
+@(Html.Kendo().Grid<VM_Schedule>()
+  .Name("Schedule")
+  .Events(e => e.DataBound("ColorRowInTable"))
+  .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Pageable(p => p
+      .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Scrollable()
+  .HtmlAttributes(new {style = string.Format("height:{0}px;", 720)})
+  .Columns(columns =>
+  {
+    columns.Bound(c => c.ScheduleId).Visible(false);
+    columns.Bound(c => c.OrderSeq).Width(150).Visible(false);
+    columns.Bound(c => c.WorkOrderName).Width(170).Visible(true);
+    columns.Bound(c => c.HeatName).Width(150);
+    columns.Bound(c => c.MaterialsNo).Width(95).Visible(true);
+    columns.Bound(c => c.PlannedWeight).Width(90);
+    columns.Bound(c => c.IsTest).Width(50).Visible(false);
+    columns.Bound(c => c.ProductCatalogueName).Width(130);
+    columns.Bound(c => c.BilletCatalogueName).Width(120);
+    columns.Bound(c => c.Steelgrade).Width(90).Visible(true);
+    columns.Bound(c => c.BilletsToBeRolled).Visible(false);
+    columns.Bound(c => c.MaterialsNo).Width(80).Visible(false);
+    columns.Bound(c => c.StartTime).Format(VM_Resources.GLOB_LongDateTime_FORMAT).Visible(false);
+    columns.Bound(c => c.EndTime).Format(VM_Resources.GLOB_LongDateTime_FORMAT).Visible(false);
+    columns.Bound(c => c.PlannedStartTime).Width(140).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+    columns.Bound(c => c.PlannedTime).Width(90).Format(VM_Resources.GLOB_Time_FORMAT);
+    columns.Bound(c => c.PlannedEndTime).Format(VM_Resources.GLOB_LongDateTime_FORMAT).Visible(false);
+    columns.Bound(c => c.CreatedTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT).Visible(false);
+    columns.Bound(p => p.ScheduleId).Width(140).Sortable(false).Groupable(false).Filterable(false).Title(" ")
+      .ClientTemplate(Html.ImageButton("new", "createTestSchedule(#=ScheduleId#)")
+        + Html.ImageButton("up", "moveItemInSchedule(#=ScheduleId#," + ScheduleMoveOperator.Up.Value + " )").ToString()
+        + Html.ImageButton("down", "moveItemInSchedule(#=ScheduleId#," + ScheduleMoveOperator.Down.Value + ")")
+        + Html.ImageButton("delete", "removeItemFromSchedule(#=ScheduleId#,#=FKWorkOrderId#, #=OrderSeq#)")
+        + Html.ImageButton("details", "GoToWorkOrderDetails(#=FKWorkOrderId#)"));
+  })
+  .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(25)
+    .Filter(filters =>
+    {
+        //filters.Add(f => f.ScheduleId).IsNotNull();
+    })
+    .Sort(sort => { sort.Add(s => s.OrderSeq); })
+    .Read(r => r.Action("GetSchedule", "Schedule"))
+  )
+)

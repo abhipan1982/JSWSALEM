@@ -1,0 +1,29 @@
+﻿@model long?
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+@section module_menu
+{
+  <div class="row float-left" style="margin-right: 5px;">
+    @Html.ImageButton("labelPrinterIcon", "PrintLabel()", false, "NAME_PrintLabels")
+  </div>
+}
+
+<div class="container-fluid p-3">
+  <div class="row">
+    <div class="col-3 grid-filter">
+      <div> @Html.Partial("~/Views/Module/PE.Lite/LabelPrinter/_WorkOrderSearchGrid.cshtml", Model) </div>
+    </div>
+    <div class="col-9 element-details" id="WorkOrderDetails">
+      <div class="row justify-content-center plug">
+        <div class="col-6 align-self-center">
+          <img src="/Content/Shared/plug.png" />
+          <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@Styles.Render("~/Content/Module/LabelPrinter")
+@Scripts.Render("~/Scripts/Module/LabelPrinter")

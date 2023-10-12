@@ -1,0 +1,51 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.RollsetManagement;
+@model PE.HMIWWW.ViewModel.Module.Lite.RollsetManagement.VM_RollSetOverviewFull
+
+<script id="RollSetOverviewFullTemplate" type="text/x-kendo-template">
+    <text>
+            <div class="refreshBtnContainer" onclick="showHideCategories()">
+                <p class="k-link off show-hide-categories m-0">
+                    <span class="filters-text more">@VM_Resources.NAME_MoreFilters</span> <span class="filters-text less">@VM_Resources.NAME_LessFilters</span>
+                    <span class="arrow arrow-categories arrow-white k-icon k-i-arrow-right"></span>
+                </p>
+            </div>
+        </text>
+</script>
+
+  @(
+    Html.Kendo().Grid<VM_RollSetOverviewFull>()
+      .Name("SearchGrid")
+      .Events(e => e.DataBound("selectRow"))
+      .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+      .Pageable(p => p
+          .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+      .Sortable()
+      .Filterable()
+      .Selectable()
+      .HtmlAttributes(new { style = @String.Format("height:{0}px;", ViewBag.FullGridHeight) })
+      .Columns(columns =>
+      {
+        columns.Bound(p => p.RollSetId).Visible(false);
+        columns.ForeignKey(o => o.RollSetType, (SelectList)ViewBag.RollsetTypes);
+        columns.Bound(p => p.RollSetName).Filterable(true).Sortable(true);
+        columns.ForeignKey(o => o.EnumRollSetStatus, (SelectList)ViewBag.RollSetStatus).Hidden(true);
+        columns.Bound(p => p.UpperRollName).Hidden(true);
+        columns.Bound(p => p.BottomRollName).Hidden(true);
+        columns.Bound(p => p.MountedTs).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT"));
+        columns.Bound(p => p.DismountedTs).Hidden(true).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT"));
+      })
+      .ToolBar(toolbar =>
+      {
+        toolbar.ClientTemplateId("RollSetOverviewFullTemplate");
+      })
+      .DataSource(d => d
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(26)
+        .Sort(sort =>
+        {
+        })
+        .Read(r => r.Action("GetRollSetSearchList", "RollSetHistory", new { rollSetId = Model }))
+        .Events(e => e.Change("dataSourceChange")))
+      .Events(e => e.Change("onElementSelect"))
+)

@@ -1,0 +1,108 @@
+<script>
+    $(document).ready(function () {
+        SignalrConnection.on("System2HmiBroadcastProcessStatuses", (systemStatuses) => {
+            UpdateSytemStatuses(systemStatuses);
+        });
+
+    });
+
+    function UpdateSytemStatuses(systemStatuses) {
+        var container = $("#system-statuses-container");
+
+        for (var i = 0; i < systemStatuses.length; i++) {
+            var tmp = "#system-statuses-element-" + systemStatuses[i].Name;
+            var tmp2 = container.find(tmp)
+            if(tmp2.length==0)
+            {
+                var link = (systemStatuses[i].Link != null ? "onclick= GotoUrl('" + systemStatuses[i].Link + "')" : "");
+                $("#system-statuses-container").append('<div id="system-statuses-element-' + systemStatuses[i].Name + '" class="status-indicator ' + (systemStatuses[i].Link != null ? "status-indicator-clicable" : "") + '" ' + link + '><div class="status-indicator-signal"></div><span></span></div>');
+            }
+
+            var curreneObject = $("#system-statuses-element-" + systemStatuses[i].Name);
+
+            curreneObject.find('span').text(systemStatuses[i].DisplayName);
+
+            curreneObject.find('div').removeClass("status-indicator-signal-OK")
+            curreneObject.find('div').removeClass("status-indicator-signal-WARN")
+            curreneObject.find('div').removeClass("status-indicator-signal-ERR")
+            curreneObject.find('div').removeClass("status-indicator-signal-TIMEOUT")
+
+
+            if (systemStatuses[i].Status == 1)
+                $("#system-statuses-element-" + systemStatuses[i].Name).find('div').addClass("status-indicator-signal-ERR")            
+            else if (systemStatuses[i].Status == 2)
+                $("#system-statuses-element-" + systemStatuses[i].Name).find('div').addClass("status-indicator-signal-WARN")
+            else if (systemStatuses[i].Status == 3)
+                $("#system-statuses-element-" + systemStatuses[i].Name).find('div').addClass("status-indicator-signal-OK")
+            else if (systemStatuses[i].Status == 4)
+                $("#system-statuses-element-" + systemStatuses[i].Name).find('div').addClass("status-indicator-signal-TIMEOUT")
+
+        }  
+    }
+
+</script>
+
+<style>
+   .status-indicator
+   {
+       padding-top:3px;
+       padding-left:2px;
+       padding-right:2px;
+       padding-bottom:4px;
+       font-size:12px;
+       text-align:center;
+       line-height:12px;
+       float:left;
+   }
+
+   .status-indicator-clicable
+   {
+       cursor:pointer;
+       background-color:#d0d0ce;
+   }
+   .status-indicator-clicable:hover
+   {
+       background-color:#b1b3b3;
+   }
+   .status-indicator-signal
+   {
+       margin-top:1px;
+       margin-left:2px;
+       margin-right:2px;
+       margin-bottom:4px;
+       width:22px;
+       height:8px;
+   }
+   .status-indicator-signal-OK
+   {
+       background-color:#7a9a01;
+   }
+   .status-indicator-signal-WARN
+   {
+       background-color:#f2a900;
+   }
+   .status-indicator-signal-ERR
+   {
+       background-color:#ce0037;
+   }
+   .status-indicator-signal-TIMEOUT
+   {
+       background-color:#8c4799;
+   }
+
+   .status-indicator-signal-ERR,
+   .status-indicator-signal-TIMEOUT,
+   .status-indicator-signal-WARN {
+       animation: blink 1s linear infinite;
+   }
+
+   @@keyframes blink{
+      0%{opacity: 0;}
+      80%{opacity: 1;}
+      100%{opacity: .1;}
+   }
+</style>
+
+<div id="system-statuses-container" style="position: absolute; top:0px; padding:3px; left:50%; margin-right:-50%; transform: translate(-50%, 0);">
+
+</div>

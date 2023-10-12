@@ -1,0 +1,76 @@
+@model PE.HMIWWW.ViewModel.System.VM_L3L2WorkOrderDefinition
+@{
+    ViewBag.Title = "_WorkOrderImportPopup";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<style>
+    .textboxWidth {
+        width: 100px;
+    }
+
+    .text-style {
+        color: #00587c;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    .form-group label {
+        color: #00587c;
+        font-size: 13px;
+        margin-top: 2px;
+    }
+</style>
+
+<form asp-controller="L3CommStatus" asp-action="ImportWorkOrderDefinition" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+    @Html.AntiForgeryToken()
+    <div style="height:auto;overflow-x:hidden">
+        <div class="row form-group">
+            <div class="col text-right">
+                @(Html.Kendo().Upload()
+                  .Name("files")
+                  .Multiple(false)
+                  .Validation(validation => validation
+                    .AllowedExtensions(new string[] { ".xls", ".xlsx" })
+                    .MinFileSize(35)
+                  )
+                  .HtmlAttributes(new { accept = ".xls,.xlsx" })
+                  .Events(events => events
+                  .Error("onError")
+                  )
+                )
+            </div>
+        </div>
+
+
+        <div class="row form-group">
+            <div class="col invalid">
+                <p id="error">
+                    <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+                </p>
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+                    @VM_Resources.BUTTON_import
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    $(function () {
+
+        $('#error').css("display", "none");
+        $("#form").kendoValidator().data("kendoValidator");
+
+    });
+
+</script>

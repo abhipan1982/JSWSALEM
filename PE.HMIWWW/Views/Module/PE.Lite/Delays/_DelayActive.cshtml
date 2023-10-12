@@ -1,0 +1,32 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Delay
+
+@(Html.Kendo().Grid<VM_DelayOverview>()
+  .Name("DelayActive")
+  .HtmlAttributes(new {style = string.Format(" height:{0}px;", 375)})
+  .Pageable(p => p
+    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Filterable()
+  .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Scrollable()
+  .Sortable()
+  .Columns(c =>
+  {
+    c.Bound(x => x.EventId).Filterable(false).Width(20).Visible(false);
+    c.Bound(x => x.EventStartTs).Width(100).Format(VM_Resources.GLOB_ShortDateTime_FORMAT);
+    c.Bound(x => x.RawMaterialName).Width(100).ClientTemplate("#if(RawMaterialName){ # <a class='link' href='javascript:_RawMaterial.GoToRawMaterial(#:FkRawMaterialId#);'> #:RawMaterialName# </a> #}#");
+    c.Bound(x => x.EventCatalogueName).Width(160);
+    c.Bound(x => x.UserComment).Width(200);
+    c.Bound(x => x.EventId).Width(30)
+      .Filterable(false)
+      .ClientTemplate(Html.ImageButton("edit", "DelayEditPopup(#:EventId#)") + Html.ImageButton("delay_split", "DelayDividePopup(#:EventId#)").ToString())
+      .Title(" ");
+  })
+  .DataSource(ds => ds
+    .Ajax()
+    .Sort(sort => sort.Add(x => x.EventStartTs).Ascending())
+    .ServerOperation(true)
+    .PageSize(12)
+    .Events(e => e
+      .Error("TelerikErrorHandler"))
+    .Read(r => r.Action("GetActiveDelay", "Delays")))
+)

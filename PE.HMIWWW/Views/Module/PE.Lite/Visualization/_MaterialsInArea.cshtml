@@ -1,0 +1,30 @@
+@model List<PE.HMIWWW.ViewModel.Module.Lite.Asset.VM_Asset>
+@using PE.HMIWWW.Core.Helpers;
+@using PE.BaseDbEntity.EnumClasses;
+
+<div class="row">
+  @(
+    Html.Kendo().TabStrip()
+    .Name("MaterialsInArea")
+    .Animation(false)
+    .Scrollable(false)
+    .Items(async tabstrip =>
+    {
+      foreach (var TabItem in Model)
+      {
+        if (TabItem.AreaCode == TrackingArea.FCE_AREA)
+        {
+          tabstrip.Add().Text(TrackingAreaHelpers.TrackingAreas.Single(x => x.TrackingAreaCode == TabItem.AreaCode).TrackingAreaTitle)
+          .Selected(TabItem.AreaSelected)
+          .Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Visualization/_MaterialsInFurnace.cshtml", TabItem)).ToHtmlString()).HtmlAttributes(new { id = TabItem.AssetId });
+        }
+        else if (TabItem.AreaCode != TrackingArea.FCE_AREA)
+        {
+          tabstrip.Add().Text(TrackingAreaHelpers.TrackingAreas.Single(x => x.TrackingAreaCode == TabItem.AreaCode).TrackingAreaTitle)
+          .Selected(TabItem.AreaSelected)
+          .Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Visualization/_MaterialsInAreaGrid.cshtml", TabItem)).ToHtmlString()).HtmlAttributes(new { id = TabItem.AreaCode });
+        }
+      }
+    })
+    )
+</div>

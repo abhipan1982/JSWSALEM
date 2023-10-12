@@ -1,0 +1,20 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_IncidentType
+
+<div class="row h-100">
+    <div class="col">
+        @(Html.Kendo().TabStrip()
+              .Name("IncidentTypeBody_" + Guid.NewGuid().ToString())
+              .Animation(false)
+              .Scrollable(false)
+              .Items(tabstrip =>
+              {
+                  tabstrip.Add().Text(VM_Resources.NAME_IncidentTypeDetails)
+                    .Selected(true).Content(@Html.Partial("~/Views/Module/PE.Lite/IncidentType/_IncidentTypeDetails.cshtml", Model).ToHtmlString()).ContentHtmlAttributes(new { @class = "partialHeight" });
+              })
+        .Events(e =>
+        {
+            e.Select("saveTabStripState");
+        })
+		)
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="SMF.Core" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PE.BaseHelpers\PE.BaseHelpers.csproj" />
+    <ProjectReference Include="..\PE.BaseDbEntity\PE.BaseDbEntity.csproj" />
+  </ItemGroup>
+</Project>

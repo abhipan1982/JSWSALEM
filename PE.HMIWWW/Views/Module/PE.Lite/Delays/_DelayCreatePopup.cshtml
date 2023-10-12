@@ -1,0 +1,103 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Delay.VM_Delay
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<form asp-controller="Delays" asp-action="CreateDelay" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+  @Html.AntiForgeryToken()
+
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      <label>@Html.LabelFor(x => x.EventStartTs)</label>
+    </div>
+    <div class="col-7">
+      @Html.Kendo().DateTimePickerFor(x => x.EventStartTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT_Picker).HtmlAttributes(new { @class = "form-control form-control-sm" })
+      @Html.ValidationMessageFor(x => x.EventStartTs)
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      <label>@Html.LabelFor(x => x.EventEndTs)</label>
+    </div>
+    <div class="col-7">
+      @Html.Kendo().DateTimePickerFor(x => x.EventEndTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT_Picker).HtmlAttributes(new { @class = "form-control form-control-sm" })
+      @Html.ValidationMessageFor(x => x.EventEndTs)
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      <label>@Html.LabelFor(x => x.UserComment)</label>
+    </div>
+    <div class="col-7">
+      @Html.TextAreaFor(x => x.UserComment, new { @class = "form-control k-textbox", style = "width: 80%", rows = 10 })
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      <label>@Html.LabelFor(x => x.IsPlanned)</label>
+    </div>
+    <div class="col-7 mt-1">
+      @(
+              Html.Kendo()
+              .CheckBoxFor(x => x.IsPlanned)
+              .HtmlAttributes(new { @class = "form-control" })
+              .Label(string.Empty)
+              .Checked(true)
+              .Enable(false)
+            )
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      <label>@Html.LabelFor(x => x.DelayCatalogueName)</label>
+    </div>
+    <div class="col-7">
+      @(Html.Kendo().DropDownListFor(x => x.FkEventCatalogueId)
+              .DataTextField("Text")
+              .DataValueField("Value")
+              .HtmlAttributes(new {@class = "form-control form-control-sm"})
+              .BindTo(new SelectList(ViewBag.CatalogueList, "Id", "EventCatalogueName"))
+              .OptionLabel("-")
+            )
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      <label>@Html.LabelFor(x => x.DelayAssetName)</label>
+    </div>
+    <div class="col-7">
+      @(Html.Kendo().DropDownListFor(x => x.FkAssetId)
+              .DataTextField("Text")
+              .DataValueField("Value")
+              .HtmlAttributes(new {@class = "form-control form-control-sm"})
+              .BindTo(new SelectList(ViewBag.AssetList, "AssetId", "AssetName"))
+              .OptionLabel("-")
+            )
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row form-group">
+    <div class="col text-right">
+      <button class="btn btn-primary popup_button" type="submit">
+        @VM_Resources.GLOB_Form_Button_Create
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<script>
+  $(function () {
+    $("#form").kendoValidator().data("kendoValidator");
+  });
+</script>

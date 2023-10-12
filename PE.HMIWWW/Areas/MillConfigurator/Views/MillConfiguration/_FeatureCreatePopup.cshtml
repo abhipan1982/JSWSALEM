@@ -1,0 +1,422 @@
+@using Kendo.Mvc.UI
+@using PE.HMIWWW.Core.Resources;
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration.VM_FeatureInstance
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<form asp-controller="MillConfiguration" asp-action="CreateFeature" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+  @Html.AntiForgeryToken()
+
+  <div style="height:auto;overflow-x:hidden">
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.FeatureName)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().TextBoxFor(x => x.FeatureName).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.FeatureName)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.FKUnitOfMeasureId)
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.FKUnitOfMeasureId)
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .BindTo(new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol"))
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        .Filter(FilterType.Contains)
+        )
+        @Html.ValidationMessageFor(x => x.FKUnitOfMeasureId)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.FKExtUnitOfMeasureId)
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.FKExtUnitOfMeasureId)
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .BindTo(new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol"))
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        .Filter(FilterType.Contains)
+        )
+        @Html.ValidationMessageFor(x => x.FKExtUnitOfMeasureId)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.EnumFeatureProvider)
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.EnumFeatureProvider)
+        .BindTo((SelectList) ViewBag.FeatureProviderList)
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        .Filter(FilterType.Contains)
+        )
+        @Html.ValidationMessageFor(x => x.EnumFeatureProvider)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsMaterialRelated)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsMaterialRelated).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsMaterialRelated)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsLengthRelated)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsLengthRelated).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsLengthRelated)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.MinValue)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.PeKendo().NumericTextBoxFor(x => x.MinValue).Step(1).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.MinValue)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.MaxValue)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.PeKendo().NumericTextBoxFor(x => x.MaxValue).Step(1).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.MaxValue)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.RetentionFactor)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.PeKendo().IntegerTextBoxFor(x => x.RetentionFactor).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.RetentionFactor)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.FKDataTypeId)
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownList()
+        .Name("FKDataTypeId")
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard", @id="FKDataTypeId"})
+        .DataTextField("DataTypeName")
+        .DataValueField("DataTypeId")
+        .Filter(FilterType.Contains)
+        .DataSource(source =>
+        {
+        source.Read(r =>
+        {
+        r.Action("GetDataTypeList", "MillConfiguration", new { Area = "MillConfigurator" });
+        });
+        })
+        .Template("<span class=\"sql-data-type-name\">#: data.DataTypeName # [#: data.MaxLength # bit]</span></br><span> .NET: #: data.DataTypeNameDotNet #</span>")
+        .ValueTemplate("#: data.DataTypeName #")
+        )
+        @Html.ValidationMessageFor(x => x.FKDataTypeId)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.EnumFeatureType)
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.EnumFeatureType)
+        .BindTo((SelectList) ViewBag.FeatureTypeList)
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        .Filter(FilterType.Contains)
+        )
+        @Html.ValidationMessageFor(x => x.EnumFeatureType)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.EnumAggregationStrategy)
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.EnumAggregationStrategy)
+        .BindTo((SelectList) ViewBag.AggregationStrategyList)
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        .Filter(FilterType.Contains)
+        )
+        @Html.ValidationMessageFor(x => x.EnumAggregationStrategy)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.FKAssetId)
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.FKAssetId)
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .BindTo(new SelectList(ViewBag.AssetList, "AssetId", "AssetName"))
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        .Filter(FilterType.Contains)
+        )
+        @Html.ValidationMessageFor(x => x.FKAssetId)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsQETrigger)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsQETrigger).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsQETrigger)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsDigital)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsDigital).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsDigital)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.SampleOffsetTime)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.PeKendo().NumericTextBoxFor(x => x.SampleOffsetTime).Step(0.1).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.SampleOffsetTime)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsOnHMI)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsOnHMI).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsOnHMI)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.EnumCommChannelType)
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.EnumCommChannelType)
+        .BindTo((SelectList) ViewBag.CommChannelTypeList)
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        .Filter(FilterType.Contains)
+        )
+        @Html.ValidationMessageFor(x => x.EnumCommChannelType)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.FeatureDescription)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().TextBoxFor(x => x.FeatureDescription).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.FeatureDescription)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsSampledFeature)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsSampledFeature).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsSampledFeature)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsActive)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsActive).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsActive)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.ConsumptionAggregationTime)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.PeKendo().NumericTextBoxFor(x => x.ConsumptionAggregationTime).Step(1).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.ConsumptionAggregationTime)
+      </div>
+
+    </div>
+
+    <hr />
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.FKParentFeatureId)
+        </label>
+      </div>
+      <div class="col-10">
+        @(Html.Kendo().DropDownListFor(x => x.FKParentFeatureId)
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .BindTo(new SelectList(ViewBag.FeatureList, "FeatureId", "FeatureName"))
+        .OptionLabel("-")
+        .HtmlAttributes(new {@class = "form-control form-control-sm", style = "width: 910px"})
+        .Filter(FilterType.Contains)
+        )
+        @Html.ValidationMessageFor(x => x.FKParentFeatureId)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.CommAttr1)
+        </label>
+      </div>
+      <div class="col-10">
+        @Html.TextAreaFor(x => x.CommAttr1, new {@class = "form-control form-control-sm k-textbox", style = "width: 910px", rows = 2})
+        @Html.ValidationMessageFor(x => x.CommAttr1)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.CommAttr2)
+        </label>
+      </div>
+      <div class="col-10">
+        @Html.TextAreaFor(x => x.CommAttr2, new {@class = "form-control form-control-sm k-textbox", style = "width: 910px", rows = 2})
+        @Html.ValidationMessageFor(x => x.CommAttr2)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.CommAttr3)
+        </label>
+      </div>
+      <div class="col-10">
+        @Html.TextAreaFor(x => x.CommAttr3, new {@class = "form-control form-control-sm k-textbox", style = "width: 910px", rows = 2})
+        @Html.ValidationMessageFor(x => x.CommAttr3)
+      </div>
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row form-group">
+    <div class="col invalid">
+      <p id="error">
+        <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+      </p>
+    </div>
+    <div class="col text-right">
+      <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+        @VM_Resources.GLOB_Form_Button_Add
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<script>
+
+  $(function() {
+
+      $('#error').css("display", "none");
+      $("#form").kendoValidator().data("kendoValidator");
+  });
+
+  function displayMessage() {
+      var validator = $("#form").kendoValidator().data("kendoValidator");
+
+      if (validator.validate()) {
+          $('#error').css("display", "none");
+      } else {
+          $('#error').css("display", "block");
+          $('#popup-footer')
+              .css('display', 'block')
+              .css('background-color', 'rgb(206, 0, 55)');
+      }
+  };
+
+</script>

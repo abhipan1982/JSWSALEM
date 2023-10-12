@@ -1,0 +1,31 @@
+@(
+  Html.Kendo()
+      .Grid<PE.HMIWWW.ViewModel.Module.Lite.WorkOrder.VM_WorkOrderSummary>()
+      .Name("WOGrid")
+      .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+      .Pageable(p => p
+              .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+      .Sortable()
+      .Filterable()
+      .Selectable()
+      .Scrollable()
+      .HtmlAttributes(new { style = "height: 690px;" })
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.WorkOrderId).Visible(false);
+        columns.Bound(c => c.WorkOrderName).Visible(true);
+        columns.ForeignKey(o => o.EnumWorkOrderStatus, (SelectList)ViewBag.WorkOrderStatuses).Visible(true);
+        columns.Bound(c => c.ProductCatalogueName);
+        columns.Bound(c => c.MaterialCatalogueName);
+        columns.Bound(c => c.SteelgradeCode);
+        columns.Bound(c => c.HeatName);
+        columns.Bound(c => c.TargetOrderWeight).Hidden(true).Format(PE.HMIWWW.Core.Resources.VM_Resources.FORMAT_OrderWeight);
+      })
+.DataSource(d => d
+.Ajax()
+.ServerOperation(true)
+.PageSize(26)
+.Read(r => r.Action("GetWorkOrderOverviewList", "WorkOrder"))
+)
+.Events(e => e.Change("onWorkOrderSelect"))
+)

@@ -1,0 +1,43 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_RecommendedAction
+
+    <div class="row h-100 p-0 pt-3">
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.ActionDescription)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.ActionDescription)
+                    </div>
+                </div>
+               
+               
+            </div>
+        </div>
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.ActionTypeName)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.ActionTypeName)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.IncidentTypeName)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.IncidentTypeName)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

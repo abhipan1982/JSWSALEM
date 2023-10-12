@@ -1,0 +1,44 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Furnace;
+@model PE.HMIWWW.ViewModel.Module.Lite.Asset.VM_Asset
+
+<script>
+
+  function getMaterialsInFurnace()
+  {
+    let dataToSend = {
+      materials: JSON.parse('@Html.Raw(Json.Serialize(@Model))').MaterialsInFurnace
+    }
+    return dataToSend;
+  }
+
+</script>
+
+@(Html.Kendo().Grid<VM_Furnace>()
+                .Name(Model.AreaName)
+                .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+                .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 620) })
+                .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                .Filterable()
+                .Scrollable()
+                .Sortable()
+                .Columns(columns =>
+                {
+                  columns.Bound(c => c.Position).Width(90);
+                  columns.Bound(c => c.RawMaterialName);
+                  columns.Bound(c => c.CurrentTemp).Width(140);
+                  columns.Bound(c => c.WorkOrderId).Visible(false);
+                  columns.Bound(c => c.WorkOrderName);
+                  columns.Bound(c => c.HeatName);
+                  columns.Bound(p => p.RawMaterialId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+                      .ClientTemplate(@Html.ImageButton("arrow_right", "onMaterialSelectOutsideTracking(#:RawMaterialId#)", false, "NAME_Select").ToString()).Title(" ");
+                })
+                .DataSource(ds => ds
+                                    .Ajax()
+                                    .ServerOperation(true)
+                                    .PageSize(20)
+                                    .Events(e => e
+                                        .Error("TelerikErrorHandler"))
+                                    .Read(r => r.Action("GetMaterialsInFurnace", "Visualization").Data("getMaterialsInFurnace")))
+                           
+)

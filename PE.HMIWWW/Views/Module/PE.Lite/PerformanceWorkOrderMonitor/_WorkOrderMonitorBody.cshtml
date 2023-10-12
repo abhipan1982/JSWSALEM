@@ -1,0 +1,19 @@
+@model long
+
+
+<div class="row h-100">
+    <div class="col">
+        @(Html.Kendo()
+              .TabStrip()
+              .Name("WorkOrderBody")
+              .Animation(false)
+              .HtmlAttributes(new { style = "width: 100%;" })
+              .Scrollable(false)
+              .Items(tabstrip =>
+              {
+                tabstrip.Add().Text(VM_Resources.NAME_KPI).Selected(true)
+                  .LoadContentFrom("GetWorkOrderKPIs", "PerformanceWorkOrderMonitor", new { workOrderId = Model });
+              })
+        )
+    </div>
+</div>

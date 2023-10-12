@@ -1,0 +1,179 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialGenealogy
+
+@{
+  Layout = "~/Views/Shared/_TabLayout.cshtml";
+}
+
+@section TabIncludes
+{
+<div>@VM_Resources.MESSAGE_SelectMaterialForReadyOperation</div>
+}
+
+<style>
+  .parent-block {
+      background-color: #006487;
+      height: 50px;
+      text-align: center;
+      color: #FFFFFF;
+      padding-top: 25px;
+      border-left: 3px solid #006487;
+      border-right: 3px solid #006487;
+  }
+
+      .parent-block:hover {
+          opacity: 0.8;
+          cursor: pointer;
+      }
+
+  .parent-block-selected {
+      background-color: #f2a900;
+      height: 50px;
+      text-align: center;
+      color: #FFFFFF;
+      padding-top: 25px;
+      border-left: 3px solid #f2a900;
+      border-right: 3px solid #f2a900;
+  }
+
+      .parent-block-selected:hover {
+          opacity: 0.8;
+          cursor: pointer;
+      }
+
+  .parent-block-disabled {
+      background-color: grey;
+      height: 50px;
+      text-align: center;
+      color: #FFFFFF;
+      padding-top: 25px;
+      border-left: 3px solid grey;
+      border-right: 3px solid grey;
+  }
+
+  .material-block {
+      background-color: #006487;
+      height: 30px;
+      padding-top: 12px;
+      text-align: center;
+      color: #FFFFFF;
+  }
+
+  .material-block-selected {
+      background-color: #f2a900;
+      height: 30px;
+      padding-top: 12px;
+      text-align: center;
+      color: #FFFFFF;
+  }
+
+  .material-block-disabled {
+      background-color: grey;
+      height: 30px;
+      padding-top: 12px;
+      text-align: center;
+      color: #FFFFFF;
+  }
+
+  .material-block-detalis {
+      height: 20px;
+      text-align: right;
+      padding-right: 5px;
+      border-left: 3px solid #006487;
+      border-right: 3px solid #006487;
+      border-bottom: 3px solid #006487;
+  }
+
+  .child {
+      cursor: pointer;
+  }
+
+      .child:hover {
+          opacity: 0.8;
+      }
+
+  .material-block-detalis-selected {
+      height: 20px;
+      text-align: right;
+      padding-right: 5px;
+      border-left: 3px solid #f2a900;
+      border-right: 3px solid #f2a900;
+      border-bottom: 3px solid #f2a900;
+  }
+
+  .material-block-detalis-disabled {
+      height: 20px;
+      text-align: right;
+      padding-right: 5px;
+      border-left: 3px solid grey;
+      border-right: 3px solid grey;
+      border-bottom: 3px solid grey;
+  }
+</style>
+
+<div class="row">
+  <div class="col-12 p-0">
+    @if (@Model.Parent.Dividable && @Model.Parent.RawMaterialId == @Model.Id)
+    {
+      <div class="parent-block-selected mt-4 ml-5 mr-5" onclick="_RawMaterial.MaterialReadyPopup(@Model.Parent.RawMaterialId);">
+        @Html.DisplayFor(m => m.Parent.RawMaterialName)
+      </div>
+    }
+    else if (@Model.Parent.Dividable && @Model.Parent.RawMaterialId != @Model.Id)
+    {
+      <div class="parent-block mt-4 ml-5 mr-5" onclick="_RawMaterial.MaterialReadyPopup(@Model.Parent.RawMaterialId);">
+        @Html.DisplayFor(m => m.Parent.RawMaterialName)
+      </div>
+    }
+    else
+    {
+      <div class="parent-block-disabled mt-4 ml-5 mr-5">
+        @Html.DisplayFor(m => m.Parent.RawMaterialName)
+      </div>
+    }
+  </div>
+</div>
+<div class="row">
+  @foreach (var item in Model.Children)
+  {
+    <div class="col-3 p-0 mt-4">
+      <div class="ml-5 mr-5">
+        @if (item.Dividable && item.RawMaterialId == @Model.Id)
+        {
+          <div class="child" onclick="_RawMaterial.MaterialReadyPopup(item.RawMaterialId);">
+            <div class="material-block-selected mb-0">
+              @item.RawMaterialName
+            </div>
+            <div class="material-block-detalis-selected mt-0">
+              @Html.LabelFor(m => m.Parent.Length):
+              @item.Length
+            </div>
+          </div>
+        }
+        else if (item.Dividable && item.RawMaterialId != @Model.Id)
+        {
+          <div class="child" onclick="_RawMaterial.MaterialReadyPopup(item.RawMaterialId);">
+            <div class="material-block mb-0">
+              @item.RawMaterialName
+            </div>
+            <div class="material-block-detalis mt-0">
+              @Html.LabelFor(m => m.Parent.Length):
+              @item.Length
+            </div>
+          </div>
+        }
+        else
+        {
+          <div>
+            <div class="material-block-disabled mb-0">
+              @item.RawMaterialName
+            </div>
+            <div class="material-block-detalis-disabled mt-0">
+              @Html.LabelFor(m => m.Parent.Length):
+              @item.Length
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

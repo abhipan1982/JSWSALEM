@@ -1,0 +1,123 @@
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.FeatureTemplate;
+@using PE.HMIWWW.Core.HtmlHelpers
+@using PE.HMIWWW.Core.Resources;
+@using Kendo.Mvc.UI;
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.AssetTemplate.VM_AssetTemplate
+
+<script>
+
+  function getAssetTemplateId() {
+      return { assetTemplateId: @Model.AssetTemplateId };
+  }
+
+</script>
+
+<div class="row">
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.AssetTemplateName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.AssetTemplateName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.EnumTrackingAreaTypeText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.EnumTrackingAreaTypeText)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsZone)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsZone, new { disabled = "disabled", id="iz" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsArea)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsArea, new { disabled = "disabled", id="ia" })
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.AssetTemplateDescription)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.AssetTemplateDescription)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@if (!Model.IsZone)
+{
+  <script>
+
+    $(document).ready(function() {
+        var assignedFeaturesList = $("#AssignedFeaturesList").data("kendoGrid");
+        assignedFeaturesList.bind("dataBound", function(e) {
+            if (e.sender.dataSource.total() <= e.sender.dataSource.pageSize()) {
+                e.sender.pager.element.hide();
+            } else {
+                e.sender.pager.element.show();
+            }
+        });
+    })
+
+  </script>
+
+  <hr />
+  <div class="row">
+    <div class="pb-2 px-3" style="width: 99.8%">
+      @(
+    Html.Kendo().Grid<VM_FeatureTemplate>()
+    .Name("AssignedFeaturesList")
+    .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Pageable(p => p
+    .Refresh(true)
+    .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+    .PageSizes(true))
+    .Sortable()
+    .Filterable()
+    .HtmlAttributes(new {style = string.Format("height:{0}px;", 540)})
+    .Columns(columns =>
+    {
+    columns.Bound(c => c.FeatureTemplateId).Visible(false);
+    columns.Bound(c => c.FeatureTemplateName);
+    columns.ForeignKey(o => o.EnumFeatureType, (SelectList)ViewBag.FeatureTypeList);
+    columns.ForeignKey(o => o.FKUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol"));
+    columns.ForeignKey(o => o.FKExtUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol"));
+    columns.ForeignKey(o => o.FKDataTypeId, new SelectList(ViewBag.DataTypeList, "DataTypeId", "DataTypeName"));
+    columns.ForeignKey(o => o.EnumCommChannelType, (SelectList)ViewBag.CommChannelTypeList);
+    columns.ForeignKey(o => o.EnumAggregationStrategy, (SelectList)ViewBag.AggregationStrategyList);
+    columns.Bound(p => p.FeatureTemplateId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+    .ClientTemplate(@Html.ImageButton("delete", "assignTemplates(#:FeatureTemplateId#)", false, "NAME_UnassignFeature").ToString());
+    })
+    .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(19)
+    .Read(r => r.Action("GetAssignedFeatureTemplateSearchList", "FeatureTemplate", new { Area = "MillConfigurator" }).Data("getAssetTemplateId()"))
+    )
+    )
+    </div>
+  </div>
+}

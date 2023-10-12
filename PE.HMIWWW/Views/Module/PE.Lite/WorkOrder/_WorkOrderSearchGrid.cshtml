@@ -1,0 +1,50 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.WorkOrder
+@model long?
+
+@(
+        Html.Kendo()
+            .Grid<VM_WorkOrderSummary>()
+            .Name("SearchGrid")
+            .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+            .Pageable(p => p
+                .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+            .Sortable()
+            .Filterable()
+            .Selectable()
+            .HtmlAttributes(new {style = "height: 735px;"})
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.WorkOrderId).Visible(false);
+                columns.Bound(c => c.IsNewStatus).Visible(false);
+                columns.Bound(c => c.UnCancellable).Visible(false);
+                columns.Bound(c => c.IsBlocked).Visible(false);
+                columns.Bound(c => c.UnBlockable).Visible(false);
+                columns.Bound(c => c.WorkOrderName);
+                columns.ForeignKey(o => o.EnumWorkOrderStatus, (SelectList) ViewBag.WorkOrderStatuses);
+                columns.Bound(c => c.IsTestOrder).Hidden(true);
+                columns.Bound(c => c.ProductCatalogueName).Hidden(true);
+                columns.Bound(c => c.MaterialCatalogueName).Hidden(true);
+                columns.Bound(c => c.HeatName).Hidden(true);
+                columns.Bound(c => c.SteelgradeCode);
+                columns.Bound(c => c.WorkOrderCreatedInL3Ts).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).Hidden(true).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(c => c.ToBeCompletedBeforeTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).Hidden(true).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(c => c.WorkOrderCreatedTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).Hidden(true).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(c => c.WorkOrderStartTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).Hidden(true).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(c => c.WorkOrderEndTs).Filterable(f => f.UI(GridFilterUIRole.DateTimePicker)).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT")).Hidden(true).HtmlAttributes(new {@class = "nowrap"});
+            })
+            .ToolBar(toolbar => { toolbar.ClientTemplateId("SearchGridToolbarTemplate"); }
+            )
+            .DataSource(d => d
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(26)
+                .Sort(sort => sort.Add(s => s.WorkOrderId).Descending())
+                .Read(r => r.Action("GetWorkOrderOverviewList", "WorkOrder"))
+                .Events(e => e.Change("dataSourceChange"))
+            )
+            .Events(e =>
+            { 
+              e.Change("onElementSelect");
+              e.DataBound("_WorkOrder.ColorEmptyL3MaterialAndSelectRow");
+            })
+)

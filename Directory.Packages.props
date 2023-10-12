@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="SMF.Core" Version="$(SMFVersion)" />
+    <PackageVersion Include="SMF.DbEntity" Version="$(SMFVersion)" />
+    <PackageVersion Include="SMF.HMI" Version="$(SMFVersion)" />
+    <PackageVersion Include="SMF.HMIWWW" Version="$(SMFVersion)" />
+    <PackageVersion Include="SMF.Module" Version="$(SMFVersion)" />
+    <PackageVersion Include="SMF.Startup" Version="$(SMFStartupVersion)" />
+    <PackageVersion Include="Watchdog" Version="$(SMFVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="PE.BaseCommon" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.BaseCore" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.BaseDbEntity" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.BaseHelpers" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.BaseInterfaces" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.BaseModels" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.BaseModule.Core" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.DBA.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.EVT.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.HMI.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.L1A.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.MNT.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.MVH.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.PPL.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.PRF.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.PRM.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.RLS.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.QEX.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.QTY.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.STP.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.TCP.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.TRK.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.WBF.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.YRD.Base" Version="$(PEStandardVersion)" />
+    <PackageVersion Include="PE.ZPC.Base" Version="$(PEStandardVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EFVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EFVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EFVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(EFVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EFVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.1" />
+    <PackageVersion Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.0.0" />
+    <PackageVersion Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
+    <PackageVersion Include="Nito.AsyncEx" Version="5.1.0" />
+    <PackageVersion Include="MongoDB.Bson" Version="2.13.1" />
+    <PackageVersion Include="MongoDB.Driver" Version="2.13.1" />
+    <PackageVersion Include="ApacheThrift" Version="0.15.0" />
+    <PackageVersion Include="LINQKit.Core" Version="1.1.26" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="ExcelDataReader" Version="3.6.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.2.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(EFVersion)" />
+    <PackageVersion Include="LigerShark.WebOptimizer.Core" Version="3.0.344" />
+    <PackageVersion Include="Polybioz.HtmlRenderer.PdfSharp.Core" Version="1.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.Pkcs" Version="6.0.0" />
+    <PackageVersion Include="Telerik.UI.for.AspNet.Core" Version="2022.1.412" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageVersion Include="Serilog.Settings.Configuration" Version="3.4.0" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageVersion Include="Polly" Version="7.2.3" />
+    <PackageVersion Include="MiniProfiler.AspNetCore.Mvc" Version="4.2.22" />
+    <PackageVersion Include="MiniProfiler.EntityFrameworkCore" Version="4.2.22" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.FeatureManagement.AspNetCore" Version="2.4.0" />
+    <PackageVersion Include="Microsoft.FeatureManagement" Version="2.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Tools -->
+    <PackageVersion Include="AvalonEdit" Version="6.1.2.30" />
+    <PackageVersion Include="gong-wpf-dragdrop" Version="3.1.1" />
+    <PackageVersion Include="Prism.DryIoc" Version="8.1.97" />
+    <PackageVersion Include="PropertyTools.Wpf" Version="3.1.0" />
+    <!-- Tests -->
+    <PackageVersion Include="FluentAssertions" Version="5.10.3" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="2.2.3" />
+    <PackageVersion Include="MSTest.TestFramework" Version="2.2.3" />
+    <PackageVersion Include="coverlet.collector" Version="3.0.2" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(EFVersion)" />
+    <PackageVersion Include="Moq" Version="4.16.1" />
+  </ItemGroup>
+</Project>

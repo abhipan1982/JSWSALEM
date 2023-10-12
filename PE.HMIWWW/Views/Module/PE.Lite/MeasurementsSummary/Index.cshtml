@@ -1,0 +1,26 @@
+@model long?
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<div class="container-fluid p-3">
+    <div class="row">
+        <div class="col-3 grid-filter">
+            @*<div> @Html.Partial("~/Views/Module/PE.Lite/MeasurementsSummary/_WorkOrderSearchGrid.cshtml", Model) </div>*@
+            <partial name="~/Views/Module/PE.Lite/WorkOrder/_WorkOrderSearchGrid.cshtml" model=Model>
+        </div>
+
+        <div class="col-9 element-details" id="WorkOrderDetails">
+            <div class="row justify-content-center plug">
+                <div class="col-6 align-self-center">
+                    <img src="/css/Shared/plug.png" />
+                    <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/WorkOrder.css" />
+<script src="~/bundles/js/Module/MeasurementsSummary.js"></script>
+

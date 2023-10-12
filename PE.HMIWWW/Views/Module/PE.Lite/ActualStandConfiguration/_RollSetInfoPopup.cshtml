@@ -1,0 +1,312 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.RollsetDisplay.VM_RollsetDisplay
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<style>
+  .h_dotted_ln {
+    border-bottom: 1px dashed black;
+    width: 100%;
+  }
+
+  .h_dotted_right_ln {
+    border-right: 1px dashed black;
+  }
+
+  .h_blank_ln {
+    width: 100%;
+    height: 20px;
+  }
+
+  .v_blank_ln {
+    width: 20px;
+  }
+
+  .table-roll-details label {
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  .table-roll-details td {
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  .roll {
+    position: relative;
+  }
+
+  .number {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 24px;
+    color: #000;
+    transform: translate(-50%,-50%);
+    opacity: 0.8;
+    z-index: 1;
+  }
+</style>
+
+@if (Model != null && @ViewData.ModelState.IsValid)
+{
+  <script>
+		$(document).ready(function () {
+			var rollCnt = @Model.GrooveActualRollUpper.Count() + 3;
+			var rowCnt = 15;
+			var mainWidth = 350 + (rollCnt - 3) * 115;
+			var mainHeight = 650;
+			ChangePopupSize(mainWidth);
+		})
+  </script>
+}
+@{ int rollCnt = Model.GrooveActualRollUpper.Count() + 3;
+  int rowCnt = 15;
+  int mainWidth = 335 + (rollCnt - 3) * 115;
+
+  int mainHeight = 650;
+}
+
+<form asp-controller="ActualStandConfiguration" asp-action="GrindingTurning" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+  @Html.AntiForgeryToken()
+  @Html.HiddenFor(model => model.RollSetId)
+  @Html.HiddenFor(m => m.RollSetName)
+  @Html.HiddenFor(m => m.BottomActualDiameter)
+  @Html.HiddenFor(m => m.UpperActualDiameter)
+  @Html.HiddenFor(m => m.UpperRollName)
+  @Html.HiddenFor(m => m.BottomRollName)
+  @Html.HiddenFor(m => m.UpperRollId)
+  @Html.HiddenFor(m => m.UpperRollId)
+  @{int j = 0; }
+  @Html.HiddenFor(m => m.GrooveActualRollBottom[j].AccBilletCnt);
+  @Html.HiddenFor(m => m.GrooveActualRollBottom[j].GrooveTemplateName);
+  @Html.HiddenFor(m => m.GrooveActualRollBottom[j].GrooveTemplateId);
+  @Html.HiddenFor(m => m.GrooveActualRollBottom[j].GrooveConfirmed);
+  @Html.HiddenFor(m => m.GrooveActualRollBottom[j].GrooveShortName);
+  @Html.HiddenFor(m => m.GrooveActualRollUpper[j].GrooveTemplateName);
+  @Html.HiddenFor(m => m.GrooveActualRollUpper[j].GrooveConfirmed);
+  @Html.HiddenFor(m => m.GrooveActualRollUpper[j].GrooveShortName);
+
+  <div style="width:@(mainWidth);height:@(mainHeight);">
+    <table cellspacing="0" cellpadding="0" border="0" class="table-roll-details">
+      <tr>
+        <td align="left"><label>@(Html.LabelFor(m => m.RollSetName))</label></td>
+        <td colspan="@(rollCnt)" align="center">@Html.DisplayFor(m => m.RollSetName)</td>
+
+      </tr>
+      <tr>
+        <td colspan="@(rollCnt + 1)"><div class="h_blank_ln"></div></td>
+      </tr>
+
+      <tr>
+        <!-- image  for  1st roll -->
+        <td></td>
+        <td><div class="v_blank_ln"></div></td>
+        <td align="center"><img src="~/Content/System/img/roll-profille-left.png"></td>
+        @{int grooveNumber = 1;
+          string grooveNumberStr = "";
+          foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+          {
+            if (grooveNumber < 10)
+            {
+              grooveNumberStr = "0" + grooveNumber.ToString();
+            }
+            else
+            {
+              grooveNumberStr = grooveNumber.ToString();
+            }
+
+            <td align="center" class="roll"><div class="number">@grooveNumberStr</div><img src="~/Content/System/img/roll-profille-rd60.png"></td>
+
+            grooveNumber++;
+          }
+        }
+        <td align="center"><img src="~/Content/System/img/roll-profille-right.png"></td>
+      </tr>
+      <tr>
+        <td align="left"><label>@(Html.LabelFor(m => m.UpperRollName))</label></td>
+        <td colspan="@(rollCnt)" align="center">@Html.DisplayFor(m => m.UpperRollName)</td>
+      </tr>
+
+      <tr>
+        <td align="left"><label>@(Html.LabelFor(m => m.UpperActualDiameter))</label></td>
+        <td><div class="v_blank_ln"></div></td>
+        <td colspan="@(rollCnt)" align="center">@Html.DisplayFor(m => m.UpperActualDiameter)</td>
+      </tr>
+      <tr>
+        <td align="left"><label>@(Html.LabelFor(m => m.GrooveTemplateName))</label></td>
+        <td><div class="v_blank_ln"></div></td>
+        <td class="h_dotted_right_ln"></td>
+        @{foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+          {
+            <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.GrooveTemplateName)</td>
+          }
+        }
+
+
+      </tr>
+      <tr>
+        <td colspan="@(rollCnt + 1)"><div class="h_blank_ln"></div></td>
+      </tr>
+      <tr>
+        <th>@Html.LabelFor(m => m.AccWeightLabel)</th>
+        <td></td>
+        @{foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+          {
+            if (rollUpper.AccWeight > rollUpper.AccWeightLimit)
+            {
+              <td align="center" class="h_dotted_right_ln" style="background-color:red">@Html.DisplayFor(m => rollUpper.AccWeight)</td>
+            }
+            else
+            {
+              <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccWeight)</td>
+            }
+          }
+        }
+        <td></td>
+      </tr>
+      <tr>
+        <th>@Html.LabelFor(m => m.AccWeightLimitLabel)</th>
+        <td></td>
+        @{foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+          {
+            <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccWeightLimit)</td>
+          }
+        }
+        <td></td>
+      </tr>
+
+      <tr>
+        <td colspan="@(rollCnt + 1)"><div class="h_blank_ln"></div></td>
+      </tr>
+
+      <tr>
+        <th>@Html.LabelFor(m => m.AccBilletCntLabel)</th>
+        <td></td>
+        @{foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+          {
+            if (rollUpper.AccBilletCnt > rollUpper.AccBilletCntLimit)
+            {
+              <td align="center" class="h_dotted_right_ln" style="background-color:red">@Html.DisplayFor(m => rollUpper.AccBilletCnt)</td>
+            }
+            else
+            {
+              <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccBilletCnt)</td>
+            }
+          }
+        }
+        <td></td>
+      </tr>
+      <tr>
+        <th>@Html.LabelFor(m => m.AccBilletCntLimitLabel)</th>
+        <td></td>
+        @{foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+          {
+            <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccBilletCntLimit)</td>
+          }
+        }
+        <td></td>
+      </tr>
+      <!--  Bottom Roll-->
+      <tr>
+        <td><div class="v_blank_ln"></div></td>
+        <td class="h_dotted_right_ln"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="@(rollCnt + 1)"><div class="h_blank_ln"></div></td>
+      </tr>
+      <tr>
+        <td align="left"><label>@(Html.LabelFor(m => m.BottomRollName))</label></td>
+        <td><div class="v_blank_ln"></div></td>
+        <td colspan="@(rollCnt)" align="center">@Html.DisplayFor(m => m.BottomRollName)</td>
+      </tr>
+      <tr>
+        <td align="left"><label>@(Html.LabelFor(m => m.BottomActualDiameter))</label></td>
+        <td><div class="v_blank_ln"></div></td>
+        <td colspan="@(rollCnt)" align="center">@Html.DisplayFor(m => m.BottomActualDiameter)</td>
+      </tr>
+      <tr>
+        <td align="left"><label>@(Html.LabelFor(m => m.GrooveTemplateName))</label></td>
+        <td><div class="v_blank_ln"></div></td>
+        <td class="h_dotted_right_ln"></td>
+        @{foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollBottom in Model.GrooveActualRollBottom)
+          {
+            <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollBottom.GrooveTemplateName)</td>
+          }
+        }
+      </tr>
+      <tr>
+        <th>@Html.LabelFor(m => m.AccWeightLabel)</th>
+        <td></td>
+        @{foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollBottom in Model.GrooveActualRollBottom)
+          {
+            if (rollBottom.AccWeight > rollBottom.AccWeightLimit)
+            {
+              <td align="center" class="h_dotted_right_ln" style="background-color:red">@Html.DisplayFor(m => rollBottom.AccWeight)</td>
+            }
+            else
+            {
+              <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollBottom.AccWeight)</td>
+            }
+          }
+        }
+        <td></td>
+      </tr>
+      <tr>
+        <th>@Html.LabelFor(m => m.AccWeightLimitLabel)</th>
+        <td></td>
+        @{foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollBottom in Model.GrooveActualRollBottom)
+          {
+            <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollBottom.AccWeightLimit)</td>
+          }
+        }
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="@(rollCnt + 1)"><div class="h_blank_ln"></div></td>
+      </tr>
+
+      <tr>
+        <th>@Html.LabelFor(m => m.AccBilletCntLabel)</th>
+        <td></td>
+        @{foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollBottom in Model.GrooveActualRollBottom)
+          {
+            if (rollBottom.AccBilletCnt > rollBottom.AccBilletCntLimit)
+            {
+              <td align="center" class="h_dotted_right_ln" style="background-color:red">@Html.DisplayFor(m => rollBottom.AccBilletCnt)</td>
+            }
+            else
+            {
+              <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollBottom.AccBilletCnt)</td>
+            }
+
+          }
+        }
+        <td></td>
+      </tr>
+
+      <tr>
+        <td colspan="@(rollCnt + 1)"><div class="h_blank_ln"></div></td>
+      </tr>
+
+      <!-- Third roll -->
+      <tr>
+        <td class="h_dotted_right_ln"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="@(rollCnt + 1)"><div class="h_blank_ln"></div></td>
+      </tr>
+    </table>
+    <br />
+  </div>
+</form>
+
+<script>
+  function ChangePopupSize(mainWidth) {
+    $(".popup_content").width(mainWidth);
+  }
+</script>

@@ -1,0 +1,23 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_MaterialOverview
+
+<div class="row h-100" id="MaterialDetailsBody_@Model.RawMaterialId">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+      .Name("MaterialBody")
+      .Animation(false)
+      .HtmlAttributes(new {style = "width: 100%;"})
+      .Scrollable(false)
+      .Items(async tabstrip =>
+      {
+        tabstrip.Add().Text(VM_Resources.NAME_MaterialDetails)
+          .Selected(true).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Material/_MaterialDetails.cshtml", Model)).ToHtmlString()).ContentHtmlAttributes(new {@class = "partialHeight"});
+        tabstrip.Add().Text(VM_Resources.NAME_L1MaterialAssignment)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Material/_L1MaterialAssignment.cshtml", Model)).ToHtmlString()).ContentHtmlAttributes(new { @class = "partialHeight" });
+        tabstrip.Add().Text(VM_Resources.NAME_WorkOrderDetails)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderDetails.cshtml", Model.WorkOrderOverview)).ToHtmlString()).ContentHtmlAttributes(new {@class = "partialHeight"});
+        tabstrip.Add().Text(VM_Resources.NAME_BilletCatalogue)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Material/_BilletCatalogueDetails.cshtml", Model.WorkOrderOverview)).ToHtmlString()).ContentHtmlAttributes(new {@class = "partialHeight"});
+      })
+    )
+  </div>
+</div>

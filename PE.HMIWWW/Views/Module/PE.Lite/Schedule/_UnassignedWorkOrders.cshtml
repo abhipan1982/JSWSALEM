@@ -1,0 +1,30 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.WorkOrder
+
+@(
+    Html.Kendo().Grid<VM_WorkOrderOverview>()
+        .Name("UnassignedWorkOrders")
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+        .Sortable()
+        .Filterable()
+        .Scrollable()
+        .HtmlAttributes(new {style = "height: 720px;"})
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.WorkOrderId).Visible(false);
+            columns.Bound(c => c.WorkOrderName).Width(90);
+            columns.Bound(c => c.Steelgrade).Width(55);
+            columns.Bound(c => c.WorkOrderStatus).Width(60);
+            columns.Bound(c => c.TargetOrderWeight).Width(50);
+            columns.Bound(p => p.WorkOrderId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(35)
+                .ClientTemplate(Html.ImageButton("add", "_WorkOrder.AddWorkOrderToSchedule(#=WorkOrderId#, RefreshData)") + Html.ImageButton("details", "GoToWorkOrderDetails(#=WorkOrderId#)").ToString());
+        })
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(25)
+            .Sort(sort => { sort.Add(s => s.WorkOrderId).Descending(); })
+            .Read(r => r.Action("GetNoScheduledWorkOrderList", "WorkOrder"))
+        )
+    )

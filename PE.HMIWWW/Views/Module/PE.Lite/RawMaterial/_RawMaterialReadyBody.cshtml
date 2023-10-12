@@ -1,0 +1,18 @@
+@model long?
+
+<div class="row h-100">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+    .Name("RawMaterialReadyBody")
+    .Animation(false)
+    .HtmlAttributes(new {style = "width: 100%;"})
+    .Scrollable(false)
+    .Items(tabstrip =>
+    {
+    tabstrip.Add().Text(VM_Resources.NAME_Genealogy)
+    .Selected(true).LoadContentFrom("RawMaterialDivisionHistory", "RawMaterial", new {rawMaterialId = Model});
+    })
+    )
+  </div>
+</div>
+

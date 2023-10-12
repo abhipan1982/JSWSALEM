@@ -1,0 +1,132 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Component
+
+<div class="row h-50 p-0 pt-3">
+    <div class="col-4 h-25 p-0">
+        <div class="container-fluid">
+
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.ComponentName)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.ComponentName)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.ComponentCode)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.ComponentCode)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.ComponentType)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.ComponentType)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.IsActiveNum)
+                </div>
+                <div class="col">
+                    @Html.Raw(((SelectList)ViewBag.NoYes).Where(p => p.Value == ((int)Model.IsActiveNum).ToString()).First().Text)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.Supplier)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.Supplier)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.CreatedTs)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.CreatedTs)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.LastUpdateTs)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.LastUpdateTs)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.Installed)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.Installed)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.LastTimeInstalled)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.LastTimeInstalled)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.LastTimeUninstalled)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.LastTimeUninstalled)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.Description)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.Description)
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-8 h-25 p-0">
+        <div class="container-fluid">
+               
+                @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Incident>()
+                    .Name("IncidentsInComponentsList_" + Guid.NewGuid().ToString())
+                    .NoRecords(VM_Resources.GLOB_GRID_NO_DATA)
+                    .Sortable()
+                    .Filterable()
+                    .Scrollable()
+                    .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                    .HtmlAttributes(new { style = "height: 675px;" })
+                    .Columns(c =>
+                    {
+                        c.Bound(x => x.IncidentId).Visible(false);
+                        c.ForeignKey(p => p.FKIncidentTypeId, (SelectList)ViewBag.IncidentTypesList);
+                        c.ForeignKey(p => p.IsPlanned, (SelectList)ViewBag.NoYes);
+                        c.Bound(x => x.StartTime).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+                        c.Bound(x => x.EndTime).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+                        c.Bound(x => x.IncidentDescription);
+                        c.Bound(p => p.IncidentId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(90)
+                        .ClientTemplate(@Html.ImageButton("new", "GoToActions(#:IncidentId#)").ToString() + @Html.ImageButton("edit", "ModifyIncidentDetails(#:IncidentId#)").ToString()
+                        + @Html.ImageButton("delete", "ModifyIncidentDetails(#:IncidentId#)").ToString());
+
+                    })
+                    .DataSource(d => d
+                        .Ajax()
+                        .ServerOperation(true)
+                        .PageSize(24)
+                        .Read(r => r.Action("GetAllIncidentsForComponentList", "Maintenance", new {componentId = Model.ComponentId }))
+                        ))
+            </div>
+        </div>
+</div>

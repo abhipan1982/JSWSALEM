@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyTitle>PE.Lite</AssemblyTitle>
+    <Company>Primetals Technologies Poland Sp. z o.o.</Company>
+    <Product>PE.Lite</Product>
+    <Copyright>Copyright © Primetals Technologies 2020</Copyright>
+    <OutputPath>..\bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputType>Exe</OutputType>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PE.Config\PE.Config.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.DBA.DataBaseAdapter\PE.DBA.DataBaseAdapter.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.EVT.Events\PE.EVT.Events.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.HMI\PE.HMI.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.L1A.L1Adapter\PE.L1A.L1Adapter.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.MNT.Maintenance\PE.MNT.Maintenance.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.MVH.MeasValuesHistory\PE.MVH.MeasValuesHistory.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.PPL.ProdPlaning\PE.PPL.ProdPlaning.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.PRF.Performance\PE.PRF.Performance.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.PRM.ProdManager\PE.PRM.ProdManager.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.QEX.QualityExpert\PE.QEX.QualityExpert.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.QTY.Quality\PE.QTY.Quality.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.RLS.RollShop\PE.RLS.RollShop.csproj" />
+    <!--<ProjectReference Include="..\PE.Modules\PE.SIM.Simulation\PE.SIM.Simulation.csproj" />-->
+    <ProjectReference Include="..\PE.Modules\PE.STP.Setup\PE.STP.Setup.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.TRK.Tracking\PE.TRK.Tracking.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.WBF.WalkingBeamFurnance\PE.WBF.WalkingBeamFurnance.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.YRD.Yards\PE.YRD.Yards.csproj" />
+    <ProjectReference Include="..\PE.Modules\PE.ZPC.ZebraPrinterConnector\PE.ZPC.ZebraPrinterConnector.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SMF.Core" />
+    <PackageReference Include="SMF.DbEntity" />
+    <PackageReference Include="Watchdog" />
+  </ItemGroup>
+</Project>

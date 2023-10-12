@@ -1,0 +1,52 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Defect
+@{
+    ViewBag.Title = VM_Resources.PAGE_TITLE_DefectCatalogue_Index;
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<script src="~/js/Module/PE.Lite/DefectCatalogue.js"></script>
+
+@section module_menu
+{
+    @Html.ImageButton("new", "AddDefectCataloguePopup()")
+}
+
+@(Html.Kendo().Grid<VM_DefectCatalogue>()
+    .Name("DefectCatalogueList")
+    .HtmlAttributes(new {style = string.Format(" height:{0}px;", ViewBag.FullGridHeight)})
+    .Scrollable()
+    .Sortable()
+    .Pageable(p => p
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Filterable()
+    .Columns(c =>
+    {
+      c.Bound(x => x.DefectCatalogueId)
+          .Visible(false);
+      c.Bound(x => x.DefectCatalogueCode).Width(100).Sortable(true).ClientTemplate("#= DefectCatalogueCode # # if(IsDefault) {#(" + VM_Resources.NAME_IsDefault + ")#}# # if(!IsActive) {#(" + VM_Resources.NAME_Inactive + ")#}#");
+      c.Bound(x => x.DefectCatalogueName).Width(200).Sortable(true);
+      c.Bound(x => x.DefectCatalogueDescription).Width(600).Sortable(true)
+          .Filterable(false);
+      c.Bound(x => x.DefectCatalogueCategoryCode);
+     // c.ForeignKey(o => o.DefectCatalogueCategoryId, (SelectList)ViewBag.DefectCategories)
+        //.Filterable(true).Width(120).Sortable(true);
+        c.Bound(x => x.ParentDefectCatalogueCode);
+
+
+      c.Bound(x => x.DefectCatalogueId)
+          .Filterable(false)
+          //.ClientTemplate(Html.ImageButton("edit", "OpenUrlInPopupWindow('/DefectCatalogue/DefectCatalogueEditPopup', 600, null, { id: #= DefectCatalogueId # }, function(){ refreshKendoGrid('DefectCatalogueList') });").ToString())
+          .ClientTemplate(Html.ImageButton("edit", "EditDefectCataloguePopup(#:DefectCatalogueId#)")
+                          + Html.ImageButton("details", "GoToDetails(#:DefectCatalogueId#)").ToString()
+                          + Html.ImageButton("delete", "Delete(#=DefectCatalogueId#)"))
+          .Width(100)
+          .Title(" ");
+    })
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(27)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetDefectCatalogueList", "DefectCatalogue"))
+    )
+    )

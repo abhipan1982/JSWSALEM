@@ -1,0 +1,17 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Setup.VM_SetupValues
+
+
+<script>
+  $(document).ready(function () {
+    console.log('@Model')
+  });
+</script>
+
+@*@switch (Model.DataType)
+{
+  case "STRING":@(Html.Kendo().TextBoxFor(m => m.Value)); break;
+  case "BOOL":@(Html.Kendo().CheckBoxFor(m => m.Value)); break;
+  case "INT":@(Html.Kendo().NumericTextBoxFor(m => Convert.ToInt32(m.Value))); break;
+  
+  default:@(Html.Kendo().TextBoxFor(m => m.Value)); break;
+}*@

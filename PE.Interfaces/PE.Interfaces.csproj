@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyTitle>PE.Interfaces</AssemblyTitle>
+    <Company>Primetals Technologies Poland Sp. z o.o.</Company>
+    <Product>PE.Interfaces</Product>
+    <Copyright>Copyright © Primetals Technologies 2020</Copyright>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="SendOffice\**" />
+    <EmbeddedResource Remove="SendOffice\**" />
+    <None Remove="SendOffice\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Managers\ISetupTelegramSenderManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Managers\DBA\" />
+    <Folder Include="Managers\HMI\" />
+    <Folder Include="Managers\MNT\" />
+    <Folder Include="Managers\MVH\" />
+    <Folder Include="Managers\PPL\" />
+    <Folder Include="Managers\PRF\" />
+    <Folder Include="Managers\PRM\" />
+    <Folder Include="Managers\QTY\" />
+    <Folder Include="Managers\RLS\" />
+    <Folder Include="Managers\SIM\" />
+    <Folder Include="Managers\STP\" />
+    <Folder Include="Managers\TRK\" />
+    <Folder Include="Managers\WBF\" />
+    <Folder Include="Managers\YRD\" />
+    <Folder Include="Managers\ZPC\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PE.Models\PE.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="PE.BaseInterfaces" />
+    <PackageReference Include="SMF.Core" />
+  </ItemGroup>
+</Project>

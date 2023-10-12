@@ -1,0 +1,14 @@
+﻿
+<div class="row">
+  @(Html.Kendo().TabStrip()
+      .Name("WorkOrdersBody")
+      .Animation(false)
+      .Scrollable(false)
+      .Items(tabstrip =>
+      {
+        tabstrip.Add().Text("Planned").Selected(false).Content(@Html.Partial("~/Views/Module/PE.Lite/Visualization/_WorkOrdersPlannedList.cshtml").ToHtmlString());
+        tabstrip.Add().Text("Mill").Selected(true).Content(@Html.Partial("~/Views/Module/PE.Lite/Visualization/_WorkOrdersInProductionList.cshtml").ToHtmlString());
+        tabstrip.Add().Text("Produced").Selected(false).Content(@Html.Partial("~/Views/Module/PE.Lite/Visualization/_WorkOrdersProducedList.cshtml").ToHtmlString());
+      })
+  )
+</div>

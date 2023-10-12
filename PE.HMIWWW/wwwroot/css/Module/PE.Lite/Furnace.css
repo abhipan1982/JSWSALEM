@@ -1,0 +1,441 @@
+﻿
+.furnace {
+  width: 100%;
+  height: 470px;
+  display: flex;
+  margin-top: 15px;
+}
+
+  .furnace > .furnace-label {
+    width: 5%;
+    height: 100%;
+    margin-top: 163px;
+  }
+
+    .furnace > .furnace-label .label {
+      height: 50px;
+      line-height: 20px;
+      border-top: 1px solid #CCCCCC;
+      text-align: left;
+      display: flex;
+      /*align-items: center;*/
+    }
+
+      .furnace > .furnace-label .label:last-of-type {
+        border-bottom: 1px solid #CCCCCC;
+      }
+      .furnace > .furnace-label .label.temperature{
+        font-weight:600;
+        border: 0;
+        float:right;
+        /*margin-top: 20px;*/
+        height: 35px;
+      }
+      .furnace > .furnace-label .label.temperature::after {
+        content:" -";
+      }
+  .furnace > .furnace-body {
+    height: 470px;
+    width: 1805px;
+    display: flex;
+    /*border: 1px solid #000;*/
+  }
+
+.scale {
+  margin-top: 10px;
+  height: 140px;
+  font-size: 13px;
+}
+    /*.furnace > .furnace-body > .furnace-first-zone {
+      height: 100%;
+      width: 43%;
+      display: inline-block;
+    }
+    .furnace > .furnace-body > .furnace-second-zone {
+      height: 100%;
+      width: 41%;
+      display: inline-block;
+    }*/
+
+    .furnace > .furnace-body > .furnace-zone {
+      height: 100%;
+      width: 100%;
+    }
+
+    .furnace > .furnace-body > div > .furnace-header {
+      font-size: small;
+      height: 22px;
+      line-height: 22px;
+      font-weight: 500;
+      padding: 0;
+      display:flex;
+    }
+
+    .furnace > .furnace-body > div:not(.furnace-middle) > .furnace-header {
+      /*border: 1px solid #757575;*/
+      border-bottom: none;
+    }
+
+.furnace-header > div {
+  height: 100%;
+  padding: 0 0 0 6px;
+  margin:0;
+}
+
+.preheating-zone {
+  width: calc(22px*36);
+  /*width:792px;*/
+}
+
+.temp-chart{
+  position: relative;
+  text-align:left !important;
+}
+.temp-pick {
+  position: absolute;
+  left: 0;
+  border-bottom: 3px solid #ff8800;
+  width: 100%;
+}
+.temp-value > div {
+  padding-top:15px;
+  font-weight: 500;
+}
+
+.preheating-zone,
+.soaking-zone {
+  background-color: #FFC000;
+}
+
+.heating-zone {
+  background-color: #FFA200;
+  /*width:748px;*/
+  width: calc(22px*34);
+}
+
+.soaking-zone {
+  width: calc(22px*12);
+  /*width:264px;*/
+}
+
+
+.zone-body {
+  height: 100%;
+  position: relative;
+}
+
+.last-material {
+  position: absolute;
+  right: 0;
+}
+
+.furnace > .furnace-body > div > .zone-body {
+  border-left: none;
+  border-right: none;
+  border: 1px solid #CCCCCC;
+  display: flex;
+  /*max-width: 1655px;*/
+  /*overflow-x: auto;
+  overflow-y: hidden;*/
+}
+
+/*.furnace > .furnace-body > div:not(.furnace-middle) > .zone-body {
+  border: 1px solid #757575;
+  border-top: none;
+  text-align: center;
+  background-color: #f2f2f2;
+}*/
+
+/*RAW MATERIAL STYLE*/
+
+.raw-material {
+  width: 22px !important;
+  height: 100%;
+  margin-left: 0px;
+  display: inline-block;
+  /*border: 1px solid black;*/
+}
+
+  .raw-material:first-of-type {
+    margin-left: 0px;
+  }
+
+.occupied-position{
+  transition: 0.1s;
+}
+
+.occupied-position:hover {
+  transform: scale(1.05);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.raw-material > div {
+  transform: rotate(180deg);
+  font-size: smaller;
+  writing-mode: vertical-rl;
+  text-align: right;
+}
+
+  .raw-material > div.material-labels > div {
+    display: inline-block;
+  }
+
+    /*.raw-material > div.material-labels > div:first-of-type {
+      padding-bottom: 5px;
+      text-align: right;
+    }*/
+    .raw-material > div.material-labels > div.raw-name {
+      color: #fff;
+      height: 66.5%;
+      text-align: right;
+      margin-top: 28px;
+      margin-bottom: 5px;
+    }
+
+    .raw-material > div.material-labels > div.raw-temp {
+      height: 50px;
+      text-align: center;
+      margin-bottom: 2px;
+      /*margin-top: 20px;*/
+    }
+
+  .raw-material > div.empty-position,
+  .raw-material > div.material-labels {
+    /*height: 66%;*/
+    height: 100%;
+    margin: 0 2px 0 2px;
+    width:18px;
+  }
+
+  .raw-material > div.temp-chart {
+    height: 140px;
+    border-right: 1px solid #c7c7c7;
+    border-left: 1px solid #c7c7c7;
+    background-color: #f7f7f7;
+    margin: 0 2px 0 2px;
+    width: 18px;
+  }
+
+  .raw-material > div.seq-number {
+    height: 4%;
+    width:100%;
+    color: black;
+    background-color: #ECECEC;
+  }
+
+.furnace-first-zone .raw-material > div.seq-number,
+.furnace-thrid-zone .raw-material > div.seq-number {
+  background-color: #ECECEC;
+}
+
+.furnace-second-zone .raw-material > div.seq-number {
+  background-color: #D4D4D4;
+}
+
+.raw-material > div.seq-number > p {
+  transform: rotate(90deg);
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+
+
+.work-order {
+  margin-top: 5px;
+}
+
+  .work-order:hover {
+    margin-top: 0px;
+  }
+
+
+.heat {
+  margin-top: 5px;
+}
+
+  .heat:hover {
+    margin-top: 0px;
+  }
+
+.detail-block {
+  min-height: 30px;
+  z-index: 5;
+  position: absolute;
+  border: solid 1px rgba(0,0,0, 0.4);
+  font-size: smaller;
+  color: white;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: unset;
+  /*border-radius: 3px 3px 3px 3px;*/
+  padding: 4px 4px 0 4px;
+  cursor: pointer;
+}
+
+  .detail-block:hover {
+    /*transform: scale(1.1);*/
+    padding-top: 8px;
+    padding-bottom: 8px;
+    bottom: 4px;
+    z-index: 10;
+  }
+
+/*INFO PANEL*/
+.info-pane {
+  display: none;
+  width: 530px;
+  height: auto;
+  position: fixed;
+  top: 550px;
+  left: 500px;
+  background-color: rgba(255,255,255,0.9);
+  z-index: 10;
+  box-shadow: 0 3px 10px #CCCCCC;
+}
+
+  .info-pane > div > div.popup-header {
+    height: 28px;
+    background-color: rgba(0,88,124,0.9);
+    border-radius: 0 0 0 0;
+  }
+
+    .info-pane > div > div.popup-header > .popup-header-title {
+      font-size: 14px;
+      line-height: 14px;
+      color: #ffffff;
+    }
+
+  .info-pane label {
+    color: #00587c;
+  }
+
+.info-data {
+  margin: 0;
+}
+
+
+div.k-tabstrip {
+  border: none;
+}
+
+  div.k-tabstrip:focus {
+    box-shadow: none;
+  }
+
+.k-tabstrip-items
+.k-state-active
+.k-link {
+  font-weight: 500;
+  color: #425563;
+}
+
+
+.ribbon-strip {
+  position: absolute;
+  margin-left: 5px;
+  width: 92%;
+  height: 40px;
+  /*border:1px solid black;*/
+}
+
+  .ribbon-strip.heat-ribbon {
+    margin-top: 165px;
+  }
+
+  .ribbon-strip.work-order-ribbon {
+    margin-top: -moz-calc(6.6% + 87px);
+    margin-top: -webkit-calc(6.6% + 87px);
+    margin-top: -o-calc(6.6% + 87px);
+    margin-top: calc(6.6% + 87px);
+  }
+
+.pyrometers-grid{
+  float: right;
+  margin-top: 25px;
+  margin-right: 0px;
+}
+
+.pyrometer-position {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  /*background-color: red;*/
+}
+
+.pyrometer-arrow {
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #666;
+}
+
+.pyrometer-temp{
+  position: absolute;
+  left: -5px;
+}
+
+/*grids*/
+.storage-grid{
+  margin-top: 55px;
+}
+
+.grid-title{
+  margin: 0;
+  padding: 0;
+  color: #00587c;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.legend-window {
+  width: auto;
+  height: auto;
+  padding: 5px 20px 5px 0px;
+  background-color: rgba(255,255,255,0.9);
+  display: none;
+  position: fixed;
+  top: 150px;
+  right: 10px;
+  z-index: 10;
+  box-shadow: 0 3px 10px #CCCCCC;
+  word-wrap: break-word;
+}
+
+.color-block{
+  width: 15px;
+  height: 15px;
+  float: left;
+  background-color: red;
+}
+
+.grey-block {
+  background-color: #b5b5b5;
+}
+
+.blue-block {
+  background-color: #00a8cc;
+}
+
+.green-block {
+  background-color: #5bbb21;
+}
+
+.red-block {
+  background-color: #f01c31;
+}
+
+.brown-block {
+  background-color: #b07b44;
+}
+
+.black-block {
+  background-color: #1b262c;
+}

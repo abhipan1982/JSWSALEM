@@ -1,0 +1,67 @@
+﻿.edit-button,
+.edit-button:hover {
+	border: none;
+	background-color: transparent !important;
+}
+	td.k-command-cell > .k-grid-edit > span,
+	.edit-button > span {
+		background-image: url('/css/Functions/Small/edit.png');
+	}
+
+	.edit-button:hover > span {
+		background-image: url('/css/Functions/Small/edit_hover.png');
+	}
+
+.k-grid-cancel:hover > span {
+	content: url('/css/Functions/Small/cancel_hover.png');
+}
+
+.k-grid-update > span {
+	content: url('/css/Functions/Small/confirm.png');
+}
+
+.k-grid-cancel > span {
+	content: url('/css/Functions/Small/cancel.png');
+}
+
+.k-grid-update:hover > span {
+	content: url('/css/Functions/Small/confirm_hover.png');
+}
+
+.k-grid-cancel:hover > span {
+	content: url('/css/Functions/Small/cancel_hover.png');
+}
+.k-widget.k-tooltip-validation{
+	background-color:rgb(255, 255, 255);
+}
+td.k-command-cell{
+	text-align:center;
+}
+.k-button-icontext:hover {
+	background-color: transparent !important;
+}
+.k-button-icontext.k-grid-edit:hover > span{
+    background-image: url(/css/Functions/Small/edit_hover.png) !important;
+}
+.k-button-icontext.k-grid-cancel:hover,
+.k-button-icontext.k-grid-update:hover {
+	border: none;
+	background-color: transparent !important;
+}
+
+.k-grid tbody button.k-button {
+	min-width: 13px;
+}
+
+.refreshBtnContainer {
+    float: right;
+}
+/*fix {} items of {} not visible in telerik 2019.3.1024*/
+.k-pager-wrap.k-pager-md .k-pager-info,
+.k-pager-wrap.k-pager-sm .k-pager-info {
+    display: flex;
+}
+
+.k-invalid-msg{
+  color: red !important;
+}

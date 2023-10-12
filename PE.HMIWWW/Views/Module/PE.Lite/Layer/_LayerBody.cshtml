@@ -1,0 +1,25 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialOverview
+
+<div class="row h-100">
+    <div class="col">
+        @(Html.Kendo().TabStrip()
+        .Name("LayerBody_" + Model.RawMaterialId)
+        .Animation(false)
+        .HtmlAttributes(new { style = "width: 100%;" })
+        .Scrollable(false)
+        .Items(async tabstrip =>
+        {
+          tabstrip.Add().Text(VM_Resources.NAME_MaterialDetails)
+            .Selected(!Model.AfterL3Assign).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Layer/_LayerDetails.cshtml", Model)).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_Measurements)
+            .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Layer/_LayerMeasurementsList.cshtml", Model.RawMaterialId)).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_MaterialHistory)
+            .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Layer/_LayerHistoryList.cshtml", Model.RawMaterialId)).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_MaterialsList)
+            .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Layer/_LayerChildrenList.cshtml", Model.RawMaterialId)).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_MaterialGenealogy)
+            .Selected(false).LoadContentFrom("GetRawMaterialGenealogy", "RawMaterial", new {rawMaterialId = Model.RawMaterialId});
+        })
+    )
+    </div>
+</div>

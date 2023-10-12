@@ -1,0 +1,35 @@
+﻿CREATE TABLE [dw].[DimProductCatalogue] (
+    [SourceName]                       NVARCHAR (50)  NOT NULL,
+    [SourceTime]                       DATETIME       NOT NULL,
+    [DimProductCatalogueIsDeleted]     BIT            NOT NULL,
+    [DimProductCatalogueHash]          VARBINARY (16) NULL,
+    [DimProductCatalogueKey]           BIGINT         NOT NULL,
+    [DimProductTypeKey]                BIGINT         NOT NULL,
+    [DimProductShapeKey]               BIGINT         NOT NULL,
+    [ProductCatalogueName]             NVARCHAR (50)  NOT NULL,
+    [ProductCatalogueDescription]      NVARCHAR (200) NULL,
+    [ProductCatalogueExternalName]     NVARCHAR (50)  NULL,
+    [ProductTypeCode]                  NVARCHAR (10)  NOT NULL,
+    [ProductTypeName]                  NVARCHAR (50)  NOT NULL,
+    [ProductShapeCode]                 NVARCHAR (10)  NOT NULL,
+    [ProductShapeName]                 NVARCHAR (50)  NULL,
+    [ProductCatalogueLength]           FLOAT (53)     NULL,
+    [ProductCatalogueLengthMin]        FLOAT (53)     NULL,
+    [ProductCatalogueLengthMax]        FLOAT (53)     NULL,
+    [ProductCatalogueThickness]        FLOAT (53)     NOT NULL,
+    [ProductCatalogueThicknessMin]     FLOAT (53)     NOT NULL,
+    [ProductCatalogueThicknessMax]     FLOAT (53)     NOT NULL,
+    [ProductCatalogueWidth]            FLOAT (53)     NULL,
+    [ProductCatalogueWidthMin]         FLOAT (53)     NULL,
+    [ProductCatalogueWidthMax]         FLOAT (53)     NULL,
+    [ProductCatalogueWeight]           FLOAT (53)     NULL,
+    [ProductCatalogueWeightMin]        FLOAT (53)     NULL,
+    [ProductCatalogueWeightMax]        FLOAT (53)     NULL,
+    [ProductCatalogueMaxOvality]       FLOAT (53)     NULL,
+    [ProductCatalogueStdProductivity]  FLOAT (53)     NOT NULL,
+    [ProductCatalogueStdMetallicYield] FLOAT (53)     NOT NULL,
+    [DimProductCatalogueRow]           INT            IDENTITY (1, 1) NOT NULL
+);
+
+
+

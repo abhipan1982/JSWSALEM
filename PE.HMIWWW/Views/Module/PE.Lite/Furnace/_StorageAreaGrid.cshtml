@@ -1,0 +1,27 @@
+﻿@(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Furnace.VM_WorkOrderLocation>()
+    .Name("StorageTable")
+    .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 80) })
+    .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Scrollable()
+    //.Pageable(p => p
+    //          .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Columns(c =>
+    {
+        c.Bound(x => x.Seq)
+            .Visible(false);
+        c.Bound(x => x.WorkOrderName)
+            .ClientTemplate("<a class='link' href='javascript:GoToWorkOrder(#:WorkOrderId#);'>#:WorkOrderName#</a>");
+        c.Bound(x => x.SteelgradeName)
+            .ClientTemplate("<a class='link' href='javascript:GoToSteelgrade(#:SteelgradeId#);'>#:SteelgradeName#</a>");
+        c.Bound(x => x.HeatName)
+            .ClientTemplate("<a class='link' href='javascript:GoToHeat(#:HeatId#);'>#:HeatName#</a>");
+        //c.Bound(x => x.SetupTemperature);
+        c.Bound(x => x.RawMaterialCounter);
+    })
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(20)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetMaterialsInArea", "Furnace", new { areaCode = 1300 })))
+)

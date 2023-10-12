@@ -1,0 +1,107 @@
+@{
+  ViewBag.Title = "TITLE";
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@using PE.BaseDbEntity.EnumClasses;
+
+@section module_menu
+{
+}
+
+<link rel="stylesheet" href="~/bundles/css/Module/BarHandling.css" />
+<link rel="stylesheet" href="~/bundles/css/Module/Measurements.css" />
+
+@{
+  Func<int, IHtmlContent> DoubleArea =
+  @<div class="area" data-area="@item">
+    <div class="zone_name">@ResxHelper.GetResxAreaText(item)</div>
+    <div class="zone zone_double" id="@item" data-type="double">
+      <div class="zone_header">
+        <div class="materials_number">0</div>
+        <div class="signals"></div>
+        <div class="right_status"></div>
+      </div>
+      <div class="zone_body">
+        <div class="points_area points_space-between zone_top">
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+        </div>
+        <div class="materials_area materials"></div>
+        <div class="points_area points_space-between zone_bottom">
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+        </div>
+      </div>
+    </div>
+  </div>;
+
+  Func<int, IHtmlContent> MultiArea =
+  @<div class="area" data-area="@item">
+    <div class="zone_name cursor-pointer" id="@item" onclick="GoToMaterialsInArea(this)">@ResxHelper.GetResxAreaText(item)</div>
+    <div class="zone zone_multi" id="@item" data-type="multi">
+      <div class="zone_header">
+        <div class="materials_number">0</div>
+        <div class="signals"></div>
+        <div class="right_status"></div>
+      </div>
+      <div class="zone_body materials multiMaterials_order">
+      </div>
+    </div>
+  </div>;
+
+  Func<int, IHtmlContent> DoubleAreaWithSignals =
+  @<div class="area" data-area="@item">
+    <div class="zone_name">@ResxHelper.GetResxAreaText(item)</div>
+    <div class="zone zone_double" id="@item" data-type="double">
+      <div class="zone_header">
+        <div class="materials_number">0</div>
+        <div class="signals">
+          <span class="signal-icon production-icon" title="@VM_Resources.NAME_Production"></span>
+          <span class="signal-icon adjust-icon" title="@VM_Resources.NAME_Adjusting"></span>
+          <span class="signal-icon sim-icon" title="@VM_Resources.NAME_Simulation"></span>
+          <span class="signal-icon start-icon" title="@VM_Resources.NAME_StartedInGroup"></span>
+        </div>
+        <div class="right_status"></div>
+      </div>
+      <div class="zone_body">
+        <div class="points_area points_space-between zone_top">
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+        </div>
+        <div class="materials_area materials"></div>
+        <div class="points_area points_space-between zone_bottom">
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+        </div>
+      </div>
+    </div>
+  </div>;
+
+  Func<int, IHtmlContent> LayersArea =
+  @<div class="area" data-area="@item">
+    <div class="zone_name" id="@item">@ResxHelper.GetResxAreaText(item)</div>
+    <div class="zone zone_layers" id="@item" data-type="layers">
+      <div class="zone_body layers">
+      </div>
+    </div>
+  </div>;
+}
+
+<div class="row tracking_container">
+  <div class="col-10 tracking_visualization">
+    <div class="row">
+      <div class=" tracking">
+        <div class="tracking_row leftToRight">
+          @LayersArea(TrackingArea.LAYER_AREA.Value)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="~/bundles/js/Module/BarHandling.js" />

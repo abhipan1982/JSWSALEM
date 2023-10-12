@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>PE.Module.Base</RootNamespace>
+		<Configurations>Debug;Release</Configurations>
+		<Platforms>AnyCPU</Platforms>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PE.BaseInterfaces\PE.BaseInterfaces.csproj" />
+		<ProjectReference Include="..\PE.BaseModels\PE.BaseModels.csproj" />
+		<ProjectReference Include="..\PE.BaseCore\PE.BaseCore.csproj" />
+	</ItemGroup>
+</Project>

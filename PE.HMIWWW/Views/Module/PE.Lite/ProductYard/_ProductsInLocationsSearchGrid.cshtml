@@ -1,0 +1,40 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.ProductYard;
+
+<div class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_ProductsInLocations</div>
+
+@(
+  Html.Kendo().Grid<VM_ProductOnYard>()
+      .Name("ProductsInLocationsList")
+      .HtmlAttributes(new { @style = "height: 660px;" })
+      .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+      .Sortable()
+      .Filterable()
+      .Selectable()
+      .Scrollable()
+      .Columns(c =>
+      {
+        c.Bound(x => x.AreaDescription).Title(VM_Resources.NAME_Yard).Hidden(true);
+        c.Bound(x => x.AssetName).Title(VM_Resources.NAME_Location).Hidden(true);
+        c.Bound(x => x.ProductName);
+        c.Bound(x => x.ProductId).Visible(false);
+        c.Bound(x => x.HeatName);
+        c.Bound(x => x.AreaDescription).Visible(false);
+        c.Bound(x => x.AssetName).Visible(false);
+        c.Bound(x => x.WorkOrderName);
+        c.Bound(x => x.HeatId).Visible(false);
+        c.Bound(x => x.AssetId).Visible(false);
+        c.Bound(x => x.WorkOrderId).Visible(false);
+        c.Bound(x => x.ProductWeight);
+      })
+      .DataSource(d => d
+          .Ajax()
+          .Group(g => g.Add(c => c.AreaDescription))
+          .Group(g => g.Add(c => c.AssetName))
+          .Group(g => g.Add(c => c.WorkOrderName))
+          .ServerOperation(true)
+          .Read(r => r.Action("GetProductsOnYards", "ProductYard"))
+      )
+  .Events(e => e.Change("onSelectProductInLocationGridEl"))
+)
+
+

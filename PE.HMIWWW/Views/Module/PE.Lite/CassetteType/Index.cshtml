@@ -1,0 +1,39 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.CassetteType;
+@{
+    ViewBag.Title = VM_Resources.PAGE_TITLE_CassetteType_Index;
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("new", "AddNew()", false)
+}
+
+<script src="~/bundles/js/Module/CassetteType.js"></script>
+
+@(Html.Kendo().Grid<VM_CassetteType>()
+  .Name("CassetteTypesGrid")
+  .HtmlAttributes(new { style = @String.Format(" height:{0}px;", ViewBag.FullGridHeight) })
+  .Scrollable()
+  .Pageable(p => p
+  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Filterable()
+  .Sortable()
+  .Columns(columns =>
+  {
+    columns.Bound(p => p.CassetteTypeId).Visible(false);
+    columns.Bound(p => p.CassetteTypeName).Filterable(true).Width(200);
+    columns.Bound(p => p.NumberOfRolls).Filterable(true).Width(200);
+    columns.Bound(p => p.CassetteTypeDescription).Filterable(true);
+    columns.Bound(p => p.CassetteTypeId).Width(80).Sortable(false).Groupable(false).Filterable(false).Title(" ")
+    .ClientTemplate(@Html.ImageButton("edit", "EditData(#= CassetteTypeId #)", false).ToString() 
+      + @Html.ImageButton("delete", "Delete(#= CassetteTypeId #)", false).ToString());
+  })
+  .DataSource(ds => ds
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(27)
+    .Events(e => e.Error("TelerikErrorHandler"))
+    .Read(r => r.Action("GetCassetteTypeData", "CassetteType"))
+  )
+)

@@ -1,0 +1,100 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_QuantityType
+
+    <div class="row h-100 p-0 pt-3">
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.QuantityTypeName)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.QuantityTypeName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.QuantityTypeCode)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.QuantityTypeCode)
+                    </div>
+                </div>
+                @*<div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.QuantityTypeDescription)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.QuantityTypeDescription)
+                    </div>
+                </div>*@
+            </div>
+        </div>
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.CreatedTs)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.CreatedTs)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.LastUpdateTs)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.LastUpdateTs)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @*PLACEHOLDER*@
+                    </div>
+                    <div class="col">
+                        @*PLACEHOLDER*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*@(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_RecommendedAction>()
+                    .Name("Actions" + Guid.NewGuid().ToString())
+                    .NoRecords(VM_Resources.GLOB_GRID_NO_DATA)
+                    .Sortable()
+                    .Filterable()
+                          .ToolBar(toolbar =>
+            {
+            toolbar.Template(
+                  @<text>
+                    <div class="refreshBtnContainer">
+                      @Html.ImageButton("add", "AddRecommendedAction(" + Model.QuantityTypeId + ")", false)
+                    </div>
+                  </text>);
+            })
+                    .Scrollable()
+                    .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                    .HtmlAttributes(new { style = "height: 500px;" })
+                    .Columns(c =>
+                    {
+                        c.Bound(x => x.RecommendedActionId).Visible(false);
+                        c.Bound(x => x.ActionDescription);
+                        c.ForeignKey(p => p.FkQuantityTypeId, (SelectList)ViewBag.QuantityTypesList);
+                        c.ForeignKey(p => p.FkQuantityTypeId, (SelectList)ViewBag.QuantityTypesList);
+                        c.Bound(p => p.RecommendedActionId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(90)
+                                     .ClientTemplate(@Html.ImageButton("details", "GoToRecomendedAction(#:RecommendedActionId#)").ToString()
+                                     + @Html.ImageButton("edit", "EditRecommendedAction(#:RecommendedActionId#)").ToString()
+                                     + @Html.ImageButton("delete", "DeleteRecommendedAction(#:RecommendedActionId#)").ToString());
+
+                    })
+                    .DataSource(d => d
+                        .Ajax()
+                        .ServerOperation(true)
+                        .PageSize(24)
+                        .Read(r => r.Action("GetRecommendedActionsList", "QuantityType", new { QuantityTypeId = Model.QuantityTypeId }))
+                        ))*@
+    </div>

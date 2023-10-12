@@ -1,0 +1,35 @@
+﻿@Styles.Render("~/Content/Module/LabelPrinterPreview")
+
+<div class="labelPrinterContainer">
+    <div class="labelPrinterDesc">
+        <p>Work Order number</p>
+        <p>Steelgrade code</p>
+        <p>Heat number</p>
+        <p>Product diameter</p>
+        <p>Billet sequence number</p>
+        <p>Billet melt shop number</p>
+    </div>
+    <div class="labelPrinterView">
+        <div class="circle"></div>
+        <div class="labelPrinterViewText">
+            <p id="WOnumber">-</p>
+            <p id="SteelgradeCode">-</p>
+            <p id="HeatNum">-</p>
+            <p id="ProdDiameter">-</p>
+            <p id="SeqNum">-</p>
+            <p id="MeltShopNum">-</p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function setLabelPreviewMaterial(material) {
+        $('#WOnumber').css({ 'background-color': 'transparent ', 'color': '#666', 'font-size': '19px', 'margin': '0 0 15px 0' }).text(material.WorkOrderName || '-');
+        $('#SteelgradeCode').css({ 'background-color': 'transparent ', 'color': '#666', 'font-size': '19px', 'margin': '0 0 15px 0' }).text(material.SteelgradeName || '-');
+        $('#HeatNum').css({ 'background-color': 'transparent ', 'color': '#666', 'font-size': '19px', 'margin': '0 0 15px 0' }).text(material.HeatName || '-');
+        $('#ProdDiameter').css({ 'background-color': 'transparent ', 'color': '#666', 'font-size': '19px', 'margin': '0 0 15px 0' }).text(material.Thickness || '-');
+        $('#SeqNum').css({ 'background-color': 'transparent ', 'color': '#666', 'font-size': '19px', 'margin': '0 0 15px 0' }).text(material.OrderSeq || '-');
+        $('#MeltShopNum').css({ 'background-color': 'transparent ', 'color': '#666', 'font-size': '19px', 'margin': '0 0 15px 0' }).text(material.MeltShopNumber || '-');
+    }
+</script>

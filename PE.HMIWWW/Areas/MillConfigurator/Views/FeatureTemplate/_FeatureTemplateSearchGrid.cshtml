@@ -1,0 +1,41 @@
+@using Kendo.Mvc.UI
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.FeatureTemplate;
+@using PE.HMIWWW.Core.Resources;
+
+@(
+    Html.Kendo().Grid<VM_FeatureTemplate>()
+        .Name("SearchGrid")
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+            .Refresh(true)
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+            .PageSizes(true))
+        .Sortable()
+        .Filterable()
+        .Selectable()
+        .Events(e => e.DataBound("selectRow"))
+        .HtmlAttributes(new {style = string.Format("height:{0}px;", ViewBag.FullGridHeight)})
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.FeatureTemplateId).Visible(false);
+            columns.Bound(c => c.FeatureTemplateName);
+            columns.ForeignKey(o => o.EnumFeatureType, (SelectList)ViewBag.FeatureTypeList);
+            columns.ForeignKey(o => o.FKUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol"));
+            columns.ForeignKey(o => o.FKExtUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol")).Hidden(true);
+            columns.ForeignKey(o => o.FKDataTypeId, new SelectList(ViewBag.DataTypeList, "DataTypeId", "DataTypeName")).Hidden(true);
+            columns.ForeignKey(o => o.EnumCommChannelType, (SelectList)ViewBag.CommChannelTypeList).Hidden(true);
+            columns.ForeignKey(o => o.EnumAggregationStrategy, (SelectList)ViewBag.AggregationStrategyList).Hidden(true);
+        })
+        .ToolBar(toolbar => toolbar.ClientTemplateId("SearchGridToolbarTemplate"))
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(26)
+            .Read(r => r.Action("GetFeatureTemplateSearchList", "FeatureTemplate", new { Area = "MillConfigurator" }))
+        )
+        .Events(e =>
+        {
+          e.DataBound("selectRow");
+          e.Change("onElementSelect");
+        })
+)

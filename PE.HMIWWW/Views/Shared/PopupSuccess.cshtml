@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<div>
+    @VM_Resources.GLOB_Success
+</div>
+
+
+<script>
+
+
+    $(document).ready(function () {
+        window.parent.ClosePopup();
+    }
+    );
+</script>

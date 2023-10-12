@@ -1,0 +1,230 @@
+<script>
+
+  var Translations = [];
+  Translations["cancel"] = "@Html.Raw(VM_Resources.GLOB_Cancel)";
+  Translations["yes"] = "@Html.Raw(VM_Resources.GLOB_Name_Yes)";
+  Translations["error"] = "@Html.Raw(VM_Resources.GLOB_Error)";
+  Translations["warning"] = "@Html.Raw(VM_Resources.GLOB_Warning)";
+  Translations["info"] = "@Html.Raw(VM_Resources.GLOB_Info)";
+  Translations["success"] = "@Html.Raw(VM_Resources.GLOB_Success)";
+  Translations["operationSuccessful"] = "@Html.Raw(VM_Resources.GLOB_OperationRequestSuccessful)";
+  Translations["operationFailed"] = "@Html.Raw(VM_Resources.GLOB_OperationRequestFailed)";
+  Translations["alarmConfirm"] = "@Html.Raw(VM_Resources.GLOB_AlarmConfirm)";
+  Translations["close"] = "@Html.Raw(VM_Resources.GLOB_Close)";
+  Translations["alarmtype_1"] = "@Html.Raw(VM_Resources.GLOB_Info)";
+  Translations["alarmtype_2"] = "@Html.Raw(VM_Resources.GLOB_Warning)";
+  Translations["alarmtype_3"] = "@Html.Raw(VM_Resources.GLOB_Error)";
+  Translations["INFO_SelectPlugInfo"] = "@Html.Raw(VM_Resources.INFO_SelectPlugInfo)";
+  Translations["UniqueValue"] = "@Html.Raw(VM_Resources.ERROR_MustBeUnique)";
+  Translations["ERROR_InvalidRange"] = "@Html.Raw(VM_Resources.ERROR_InvalidRange)";
+  Translations["ERROR_InvalidGrooveCount"] = "@Html.Raw(VM_Resources.ERROR_InvalidGrooveCount)";
+  Translations["ERROR_OperationRestricted"] = "@Html.Raw(VM_Resources.ERROR_OperationRestricted)";
+
+  // MeasurementsCharts translations
+  Translations["NAME_CreatedTs"] = "@Html.Raw(VM_Resources.NAME_CreatedTs)";
+  Translations["NAME_Value"] = "@Html.Raw(VM_Resources.NAME_Value)";
+  Translations["NAME_Offset"] = "@Html.Raw(VM_Resources.NAME_Offset)";
+  Translations["LABEL_Parent"] = "@Html.Raw(VM_Resources.LABEL_Parent)";
+  Translations["LABEL_Child"] = "@Html.Raw(VM_Resources.LABEL_Child)";
+  Translations["LABEL_Material"] = "@Html.Raw(VM_Resources.LABEL_Material)";
+  Translations["LABEL_Feature"] = "@Html.Raw(VM_Resources.LABEL_Feature)";
+
+  Translations["MESSAGE_PleaseSelectSomeFeaturesFirst"] = "@Html.Raw(VM_Resources.MESSAGE_PleaseSelectSomeFeaturesFirst)";
+  Translations["MESSAGE_PleaseChooseTheComparisonConfigurationFirst"] = "@Html.Raw(VM_Resources.MESSAGE_PleaseChooseTheComparisonConfigurationFirst)";
+  Translations["MESSAGE_CouldNotUseSelectedChartType"] = "@Html.Raw(VM_Resources.MESSAGE_CouldNotUseSelectedChartType)";
+  Translations["MESSAGE_CouldNotLoadMeasurementDataForMaterials"] = "@Html.Raw(VM_Resources.MESSAGE_CouldNotLoadMeasurementDataForMaterials)";
+  Translations["MESSAGE_CouldNotLoadFeaturesDefinitions"] = "@Html.Raw(VM_Resources.MESSAGE_CouldNotLoadFeaturesDefinitions)";
+  Translations["MESSAGE_ThereIsNoMeasurementDataToShowOnTheChart"] = "@Html.Raw(VM_Resources.MESSAGE_ThereIsNoMeasurementDataToShowOnTheChart)";
+  Translations["MESSAGE_CouldNotLoadPredefinedChartComparisonConfigurations"] = "@Html.Raw(VM_Resources.MESSAGE_CouldNotLoadPredefinedChartComparisonConfigurations)";
+  Translations["MESSAGE_CouldNotSaveTheChartsComparisonConfiguration"] = "@Html.Raw(VM_Resources.MESSAGE_CouldNotSaveTheChartsComparisonConfiguration)";
+  Translations["MESSAGE_ConfigurationWithSelectedNameAlreadyExist"] = "@Html.Raw(VM_Resources.MESSAGE_ConfigurationWithSelectedNameAlreadyExist)";
+  Translations["MESSAGE_PleaseProvideConfigurationSetName"] = "@Html.Raw(VM_Resources.MESSAGE_PleaseProvideConfigurationSetName)";
+  Translations["MESSAGE_CouldNotSaveTheChartsComparisonConfiguration"] = "@Html.Raw(VM_Resources.MESSAGE_CouldNotSaveTheChartsComparisonConfiguration)";
+  Translations["MESSAGE_CouldNotLoadMaterialInformation"] = "@Html.Raw(VM_Resources.MESSAGE_CouldNotLoadMaterialInformation)";
+  Translations["MESSAGE_deleteConfirm"] = "@Html.Raw(VM_Resources.MESSAGE_deleteConfirm)";
+  Translations["MESSAGE_cloneConfirm"] = "@Html.Raw(VM_Resources.MESSAGE_cloneConfirm)";
+  Translations["MESSAGE_outdated"] = "@Html.Raw(VM_Resources.MESSAGE_outdated)";
+  Translations["MESSAGE_L3ValidationResult"] = "@Html.Raw(VM_Resources.MESSAGE_L3ValidationResult)";
+  Translations["MESSAGE_DisablingWorkOrderInWrongStatus"] = "@Html.Raw(VM_Resources.MESSAGE_DisablingWorkOrderInWrongStatus)";
+  Translations["MESSAGE_SelectMaterial"] = "@Html.Raw(VM_Resources.MESSAGE_SelectMaterial)";
+  Translations["MESSAGE_MaterialNotAssignedToWorkOrder"] = "@Html.Raw(VM_Resources.MESSAGE_MaterialNotAssignedToWorkOrder)";
+  Translations["MESSAGE_MaterialUnassignInfo"] = "@Html.Raw(VM_Resources.MESSAGE_MaterialUnassignInfo)";
+  Translations["MESSAGE_SelectElement"] = "@Html.Raw(VM_Resources.MESSAGE_SelectElement)";
+  Translations["MESSAGE_SendSetupConfirm"] = "@Html.Raw(VM_Resources.MESSAGE_SendSetupConfirm)";
+  Translations["MESSAGE_AllSetupsWillBeSent"] = "@Html.Raw(VM_Resources.MESSAGE_AllSetupsWillBeSent)";
+  Translations["MESSAGE_SteelgradeRelatedSetupsWillBeSent"] = "@Html.Raw(VM_Resources.MESSAGE_SteelgradeRelatedSetupsWillBeSent)";
+  Translations["MESSAGE_SelectOrderWithStatusNew"] = "@Html.Raw(VM_Resources.MESSAGE_SelectOrderWithStatusNew)";
+  Translations["MESSAGE_SelectOrderWithStatusCancelled"] = "@Html.Raw(VM_Resources.MESSAGE_SelectOrderWithStatusCancelled)";
+  Translations["MESSAGE_WorkOrderWillBeCancel"] = "@Html.Raw(VM_Resources.MESSAGE_WorkOrderWillBeCancel)";
+  Translations["MESSAGE_WorkOrderWillBeUnCancel"] = "@Html.Raw(VM_Resources.MESSAGE_WorkOrderWillBeUnCancel)";
+  Translations["MESSAGE_WorkOrderWillBeBlock"] = "@Html.Raw(VM_Resources.MESSAGE_WorkOrderWillBeBlock)";
+  Translations["MESSAGE_WorkOrderWillBeUnBlock"] = "@Html.Raw(VM_Resources.MESSAGE_WorkOrderWillBeUnBlock)";
+  Translations["MESSAGE_SelectOrderWithGrayHighlight"] = "@Html.Raw(VM_Resources.MESSAGE_SelectOrderWithGrayHighlight)";
+  Translations["MESSAGE_ConfirmDeleteFromSchedule"] = "@Html.Raw(VM_Resources.MESSAGE_ConfirmDeleteFromSchedule)";
+  Translations["MESSAGE_MaterialsAssignedOrderNotCancelableAndBlockable"] = "@Html.Raw(VM_Resources.MESSAGE_MaterialsAssignedOrderNotCancelableAndBlockable)";
+  Translations["MESSAGE_ActionNotAvailable"] = "@Html.Raw(VM_Resources.MESSAGE_ActionNotAvailable)";
+  Translations["NAME_Remove"] = "@Html.Raw(VM_Resources.NAME_Remove)";
+  Translations["MESSAGE_ConfirmationMsg"] = "@Html.Raw(VM_Resources.MESSAGE_ConfirmationMsg)";
+  Translations["MESSAGE_ConfirmEndOfWorkOrder"] = "@Html.Raw(VM_Resources.MESSAGE_ConfirmEndOfWorkOrder)";
+  Translations["MESSAGE_PageOutdated"] = "@Html.Raw(VM_Resources.MESSAGE_PageOutdated)";
+  Translations["MESSAGE_PageOutdatedMessage"] = "@Html.Raw(VM_Resources.MESSAGE_PageOutdatedMessage)";
+  Translations["MESSAGE_AssetCannotBeZone"] = "@Html.Raw(VM_Resources.MESSAGE_AssetCannotBeZone)";
+  Translations["MESSAGE_CreateBasicTrackingInstructionMessage"] = "@Html.Raw(VM_Resources.MESSAGE_CreateBasicTrackingInstructionMessage)";
+  Translations["MESSAGE_DismountConfirm"] = "@Html.Raw(VM_Resources.MESSAGE_DismountConfirm)";
+  Translations["MESSAGE_CannotFindWorkOrderForBundleCreation"] = "@Html.Raw(VM_Resources.MESSAGE_CannotFindWorkOrderForBundleCreation)";
+  Translations["MESSAGE_CannotFindWorkOrderToFinish"] = "@Html.Raw(VM_Resources.MESSAGE_CannotFindWorkOrderToFinish)";
+
+  //RawMaterial Screen
+  Translations["MESSAGE_ConfirmationMsg"] = "@Html.Raw(VM_Resources.MESSAGE_ConfirmationMsg)";
+  Translations["MESSAGE_MaterialAssign"] = "@Html.Raw(VM_Resources.MESSAGE_MaterialAssign)";
+  Translations["MESSAGE_MaterialUnassign"] = "@Html.Raw(VM_Resources.MESSAGE_MaterialUnassign)";
+
+  //Events Types
+  Translations["EVENT_TYPE_10"] = "@Html.Raw(VM_Resources.EVENT_TYPE_10)";
+  Translations["EVENT_TYPE_101"] = "@Html.Raw(VM_Resources.EVENT_TYPE_101)";
+  Translations["EVENT_TYPE_102"] = "@Html.Raw(VM_Resources.EVENT_TYPE_102)";
+  Translations["EVENT_TYPE_20"] = "@Html.Raw(VM_Resources.EVENT_TYPE_20)";
+  Translations["EVENT_TYPE_201"] = "@Html.Raw(VM_Resources.EVENT_TYPE_201)";
+  Translations["EVENT_TYPE_202"] = "@Html.Raw(VM_Resources.EVENT_TYPE_202)";
+  Translations["EVENT_TYPE_30"] = "@Html.Raw(VM_Resources.EVENT_TYPE_30)";
+  Translations["EVENT_TYPE_301"] = "@Html.Raw(VM_Resources.EVENT_TYPE_301)";
+  Translations["EVENT_TYPE_302"] = "@Html.Raw(VM_Resources.EVENT_TYPE_302)";
+  Translations["EVENT_TYPE_303"] = "@Html.Raw(VM_Resources.EVENT_TYPE_303)";
+  Translations["EVENT_TYPE_304"] = "@Html.Raw(VM_Resources.EVENT_TYPE_304)";
+  Translations["EVENT_TYPE_305"] = "@Html.Raw(VM_Resources.EVENT_TYPE_305)";
+  Translations["EVENT_TYPE_306"] = "@Html.Raw(VM_Resources.EVENT_TYPE_306)";
+  Translations["EVENT_TYPE_40"] = "@Html.Raw(VM_Resources.EVENT_TYPE_40)";
+  Translations["EVENT_TYPE_401"] = "@Html.Raw(VM_Resources.EVENT_TYPE_401)";
+  Translations["EVENT_TYPE_402"] = "@Html.Raw(VM_Resources.EVENT_TYPE_402)";
+  Translations["EVENT_TYPE_403"] = "@Html.Raw(VM_Resources.EVENT_TYPE_403)";
+  Translations["EVENT_TYPE_404"] = "@Html.Raw(VM_Resources.EVENT_TYPE_404)";
+  Translations["EVENT_TYPE_405"] = "@Html.Raw(VM_Resources.EVENT_TYPE_405)";
+  Translations["EVENT_TYPE_406"] = "@Html.Raw(VM_Resources.EVENT_TYPE_406)";
+  Translations["EVENT_TYPE_50"] = "@Html.Raw(VM_Resources.EVENT_TYPE_50)";
+
+  //NAMES
+  Translations["NAME_Unassigned"] = "@Html.Raw(VM_Resources.NAME_Unassigned)";
+  Translations["NAME_RawMaterial"] = "@Html.Raw(VM_Resources.NAME_RawMaterial)";
+  Translations["NAME_DelayCategory"] = "@Html.Raw(VM_Resources.NAME_DelayCategory)";
+  Translations["NAME_Category"] = "@Html.Raw(VM_Resources.NAME_Category)";
+  Translations["NAME_Duration"] = "@Html.Raw(VM_Resources.NAME_Duration)";
+  Translations["NAME_ShiftCode"] = "@Html.Raw(VM_Resources.NAME_ShiftCode)";
+  Translations["NAME_Day"] = "@Html.Raw(VM_Resources.NAME_Day)";
+  Translations["NAME_Year"] = "@Html.Raw(VM_Resources.NAME_Year)";
+  Translations["NAME_Week"] = "@Html.Raw(VM_Resources.NAME_Week)";
+  Translations["NAME_Month"] = "@Html.Raw(VM_Resources.NAME_Month)";
+  Translations["NAME_DelaysCount"] = "@Html.Raw(VM_Resources.NAME_DelaysCount)";
+  Translations["NAME_ProductCatalogue"] = "@Html.Raw(VM_Resources.NAME_ProductCatalogue)";
+  Translations["NAME_DefectCatalogue"] = "@Html.Raw(VM_Resources.NAME_DefectCatalogue)";
+  Translations["NAME_DataAnalysis"] = "@Html.Raw(VM_Resources.NAME_DataAnalysis)";
+  Translations["NAME_L3CommunicationStatus"] = "@Html.Raw(VM_Resources.NAME_L3CommunicationStatus)";
+  Translations["NAME_WorkOrderName"] = "@Html.Raw(VM_Resources.NAME_WorkOrderName)";
+  Translations["NAME_Steelgrade"] = "@Html.Raw(VM_Resources.NAME_Steelgrade)";
+  Translations["NAME_CrewName"] = "@Html.Raw(VM_Resources.NAME_CrewName)";
+  Translations["NAME_Crew"] = "@Html.Raw(VM_Resources.NAME_Crew)";
+  Translations["NAME_HeatName"] = "@Html.Raw(VM_Resources.NAME_HeatName)";
+  Translations["NAME_Date"] = "@Html.Raw(VM_Resources.NAME_Date)";
+  Translations["NAME_MoveBackward"] = "@Html.Raw(VM_Resources.NAME_MoveBackward)";
+  Translations["NAME_MoveForward"] = "@Html.Raw(VM_Resources.NAME_MoveForward)";
+  Translations["NAME_Last"] = "@Html.Raw(VM_Resources.NAME_Last)";
+  Translations["NAME_Area"] = "@Html.Raw(VM_Resources.GLOB_NAME_Area)";
+  Translations["NAME_Asset"] = "@Html.Raw(VM_Resources.NAME_Asset)";
+  Translations["NAME_Feature"] = "@Html.Raw(VM_Resources.NAME_Feature)";
+
+  //Empty field message
+  Translations["FORM_ATTRIBUTE_FieldIsRequired"] = "@Html.Raw(VM_Resources.FORM_ATTRIBUTE_FieldIsRequired)";
+
+  Translations["NAME_Unassigned"] = "@Html.Raw(VM_Resources.NAME_Unassigned)";
+  Translations["NAME_RawMaterial"] = "@Html.Raw(VM_Resources.NAME_RawMaterial)";
+  Translations["NAME_Time"] = "@Html.Raw(VM_Resources.NAME_Time)";
+  Translations["NAME_Value"] = "@Html.Raw(VM_Resources.NAME_Value)";
+  Translations["NAME_Second"] = "@Html.Raw(VM_Resources.UNIT_Second)";
+  Translations["NAME_Position"] = "@Html.Raw(VM_Resources.NAME_Position)";;
+
+  Translations["NAME_Temperature"] = "@Html.Raw(VM_Resources.NAME_TemperatureInFurnance)";
+  Translations["NAME_HeatingTemperature"] = "@Html.Raw(VM_Resources.NAME_HeatingTemperature)";
+  Translations["NAME_FurnaceTemperature"] = "@Html.Raw(VM_Resources.NAME_FurnaceTemperature)";
+
+  Translations["NAME_CommStatus"] = "@Html.Raw(VM_Resources.NAME_CommStatus)";
+  Translations["NAME_PreviousWorkOrderName"] = "@Html.Raw(VM_Resources.NAME_PreviousWorkOrderName)";
+  Translations["NAME_BundleWeightMin"] = "@Html.Raw(VM_Resources.NAME_BundleWeightMin)";
+  Translations["NAME_BundleWeightMax"] = "@Html.Raw(VM_Resources.NAME_BundleWeightMax)";
+  Translations["NAME_InputThickness"] = "@Html.Raw(VM_Resources.NAME_InputThickness)";
+  Translations["NAME_InputWidth"] = "@Html.Raw(VM_Resources.NAME_InputWidth)";
+  Translations["NAME_InputShapeSymbol"] = "@Html.Raw(VM_Resources.NAME_InputShapeSymbol)";
+
+  Translations["NAME_OutputThickness"] = "@Html.Raw(VM_Resources.NAME_OutputThickness)";
+  Translations["NAME_OutputWidth"] = "@Html.Raw(VM_Resources.NAME_OutputWidth)";
+  Translations["NAME_OutputShapeSymbol"] = "@Html.Raw(VM_Resources.NAME_OutputShapeSymbol)";
+  Translations["NAME_BilletWeight"] = "@Html.Raw(VM_Resources.NAME_BilletWeight)";
+  Translations["NAME_TargetWorkOrderWeight"] = "@Html.Raw(VM_Resources.NAME_TargetWorkOrderWeight)";
+  Translations["NAME_MaterialCatalogueName"] = "@Html.Raw(VM_Resources.NAME_MaterialCatalogue)";
+  Translations["NAME_ProductCatalogueName"] = "@Html.Raw(VM_Resources.NAME_ProductCatalogue)";
+  Translations["NAME_WorkOrderName"] = "@Html.Raw(VM_Resources.NAME_WorkOrderName)";
+  Translations["NAME_OperationNumber"] = "@Html.Raw(VM_Resources.NAME_OperationNumber)";
+  Translations["NAME_SteelgradeCode"] = "@Html.Raw(VM_Resources.NAME_SteelgradeCode)";
+  Translations["NAME_CommercialApplicationCode"] = "@Html.Raw(VM_Resources.NAME_CommercialApplicationCode)";
+  Translations["NAME_OutputDiameter"] = "@Html.Raw(VM_Resources.NAME_OutputDiameter)";
+  Translations["NAME_CustomerCode"] = "@Html.Raw(VM_Resources.NAME_CustomerCode)";
+  Translations["NAME_CustomerName"] = "@Html.Raw(VM_Resources.NAME_CustomerName)";
+  Translations["NAME_NextOperation"] = "@Html.Raw(VM_Resources.NAME_NextOperation)";
+  Translations["NAME_HeatCode"] = "@Html.Raw(VM_Resources.NAME_HeatCode)";
+  Translations["NAME_MaterialDimension"] = "@Html.Raw(VM_Resources.NAME_MaterialDimension)";
+  Translations["NAME_StorageIdentification"] = "@Html.Raw(VM_Resources.NAME_StorageIdentification)";
+  Translations["NAME_NumberOfBillets"] = "@Html.Raw(VM_Resources.NAME_NumberOfBillets)";
+  Translations["NAME_InputBatchWeight"] = "@Html.Raw(VM_Resources.NAME_InputBatchWeight)";
+  Translations["NAME_WeightOfABillet"] = "@Html.Raw(VM_Resources.NAME_WeightOfABillet)";
+  Translations["NAME_OrderDeadline"] = "@Html.Raw(VM_Resources.NAME_OrderDeadline)";
+  Translations["NAME_L3ValidationResult"] = "@Html.Raw(VM_Resources.NAME_L3ValidationResult)";
+  Translations["NAME_Material"] = "@Html.Raw(VM_Resources.NAME_Material)";
+  Translations["NAME_Product"] = "@Html.Raw(VM_Resources.NAME_Product)";
+
+  Translations["NAME_CategoriesSummary"] = "@Html.Raw(VM_Resources.NAME_CategoriesSummary)";
+  Translations["NAME_DurationSummary"] = "@Html.Raw(VM_Resources.NAME_DurationSummary)";
+  Translations["NAME_MicroDurationSummary"] = "@Html.Raw(VM_Resources.NAME_MicroDurationSummary)";
+  Translations["NAME_InOperation"] = "@Html.Raw(VM_Resources.NAME_InOperation)";
+  Translations["NAME_Maintenance"] = "@Html.Raw(VM_Resources.NAME_Maintenance)";
+  Translations["NAME_Delays"] = "@Html.Raw(VM_Resources.NAME_Delays)";
+  Translations["NAME_MicroDelays"] = "@Html.Raw(VM_Resources.NAME_MicroDelays)";
+
+  Translations["UNIT_Temperature"] = "@Html.Raw(VM_Resources.UNIT_Temperature)";
+  Translations["UNIT_Length"] = "@Html.Raw(VM_Resources.UNIT_Length)";
+
+  Translations["MESSAGE_NoResults"] = "@Html.Raw(VM_Resources.MESSAGE_NoResults)";
+
+  Translations["NAME_Measures"] = "@Html.Raw(VM_Resources.NAME_Measures)";
+  Translations["NAME_Values"] = "@Html.Raw(VM_Resources.NAME_Values)";
+
+  Translations["NAME_WOsReadyForShipment"] = "@Html.Raw(VM_Resources.NAME_WOsReadyForShipment)";
+  Translations["NAME_Relocation"] = "@Html.Raw(VM_Resources.NAME_Relocation)";
+  Translations["NAME_LocationScheduling"] = "@Html.Raw(VM_Resources.NAME_LocationScheduling)";
+  Translations["NAME_Details"] = "@Html.Raw(VM_Resources.NAME_Details)";
+  Translations["NAME_Location"] = "@Html.Raw(VM_Resources.NAME_Location)";
+  Translations["NAME_WOProductsInLoc"] = "@Html.Raw(VM_Resources.NAME_WOProductsInLoc)";
+  Translations["BUTTON_BackToYard"] = "@Html.Raw(VM_Resources.BUTTON_BackToYard)";
+  Translations["NAME_LoadOnChargingGrid"]= "@Html.Raw(VM_Resources.NAME_LoadOnChargingGrid)";
+  Translations["NAME_RegisterInYard"] = "@Html.Raw(VM_Resources.NAME_RegisterInYard)";
+  Translations["NAME_HeatDetails"] = "@Html.Raw(VM_Resources.NAME_HeatDetails)";
+  Translations["NAME_MaterialDetails"] = "@Html.Raw(VM_Resources.NAME_MaterialDetails)";
+  Translations["NAME_WorkOrderDetails"] = "@Html.Raw(VM_Resources.NAME_WorkOrderDetails)";
+  Translations["NAME_Location"] = "@Html.Raw(VM_Resources.NAME_Location)";
+  Translations["INFO_ProductTransfer"] = "@Html.Raw(VM_Resources.INFO_ProductTransfer)";
+  Translations["INFO_SelectWO"] = "@Html.Raw(VM_Resources.INFO_SelectWO)";
+  Translations["INFO_SelectHeatToTransfer"] = "@Html.Raw(VM_Resources.INFO_SelectHeatToTransfer)";
+  Translations["NAME_WorkOrder"] = "@Html.Raw(VM_Resources.NAME_WorkOrder)";
+
+  Translations["NAME_ProductThickness"] = "@Html.Raw(VM_Resources.NAME_ProductThickness)";
+
+  Translations["NAME_MonthNr"] = "@Html.Raw(VM_Resources.NAME_MonthNr)";
+  Translations["MESSAGE_UninstallDeviceConfirm"] = "@Html.Raw(VM_Resources.MESSAGE_UninstallDeviceConfirm)";
+  Translations["MESSAGE_Of"] = "@Html.Raw(VM_Resources.NAME_Of)";
+
+
+  Translations["GLOB_ShortDate_FORMAT"] = "@Html.Raw(VM_Resources.GLOB_ShortDate_FORMAT)";
+  Translations["GLOB_ShortDate_FORMAT_Picker"] = "@Html.Raw(VM_Resources.GLOB_ShortDate_FORMAT_Picker)";
+  Translations["ERROR_MinDateTommorow"] = "@Html.Raw(VM_Resources.ERROR_MinDateTommorow)";
+  Translations["ERROR_TwoWeeksExceeded"] = "@Html.Raw(VM_Resources.ERROR_TwoWeeksExceeded)";
+  Translations["ERROR_EndBeforeStartDate"] = "@Html.Raw(VM_Resources.ERROR_EndBeforeStartDate)";
+
+</script>
+

@@ -1,0 +1,54 @@
+@using Kendo.Mvc.UI
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.AssetTemplate;
+@using PE.HMIWWW.Core.Resources;
+
+@(
+    Html.Kendo().Grid<VM_AssetTemplate>()
+        .Name("SearchGrid")
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+            .Refresh(true)
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+            .PageSizes(true))
+        .Sortable()
+        .Filterable()
+        .Selectable()
+        .Events(e => e.DataBound("selectRow"))
+        .HtmlAttributes(new {style = string.Format("height:{0}px;", ViewBag.FullGridHeight)})
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.AssetTemplateId).Visible(false);
+            columns.Bound(c => c.AssetTemplateName);
+            columns.Bound(c => c.IsArea).ClientTemplate(
+              "#if(IsArea === true)" +
+              "{" +
+              "#<input class='not-editable' type='checkbox' disabled checked />#" +
+              "}" +
+              "else" +
+              "{" +
+              "#<input class='not-editable' type='checkbox' disabled />#" +
+              "}#");
+            columns.Bound(c => c.IsZone).ClientTemplate(
+              "#if(IsZone === true)" +
+              "{" +
+              "#<input class='not-editable' type='checkbox' disabled checked />#" +
+              "}" +
+              "else" +
+              "{" +
+              "#<input class='not-editable' type='checkbox' disabled />#" +
+              "}#");
+            columns.ForeignKey(o => o.EnumTrackingAreaType, (SelectList)ViewBag.TrackingAreaTypeList).Hidden(true);
+        })
+        .ToolBar(toolbar => toolbar.ClientTemplateId("SearchGridToolbarTemplate"))
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(26)
+            .Read(r => r.Action("GetAssetTemplateSearchList", "AssetTemplate", new { Area = "MillConfigurator" }))
+        )
+        .Events(e =>
+        {
+          e.DataBound("selectRow");
+          e.Change("onElementSelect");
+        })
+)

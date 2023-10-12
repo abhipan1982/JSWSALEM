@@ -1,0 +1,55 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Products
+@model long?
+
+<script>
+    function onProductSelect(e) {
+      const grid = e.sender;
+      const selectedRow = grid.select();
+      const selectedItem = grid.dataItem(selectedRow);
+      const productId = selectedItem.ProductId;
+
+      const url = "/LabelPrinter/GetLabelPartialView";
+
+      AjaxReqestHelperSilentWithoutDataType(url, {productId}, setLabel);
+    }
+
+    function setLabel(partialView) {
+      $('#label_wrapper').html(partialView);
+    }
+</script>
+
+<div class="h-50 w-100" id="label_wrapper"></div>
+
+<div class="h-50 w-100">
+    @(Html.Kendo().Grid<VM_ProductsOverview>()
+    .Name("WorkOrderProducts")
+    .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Sortable()
+    .Selectable()
+    .Filterable()
+    .HtmlAttributes(new { style = "height: 340px;" })
+    .Columns(columns =>
+    {
+      columns.Bound(c => c.ProductId).Visible(false);
+      columns.Bound(c => c.ProductName);
+      columns.Bound(c => c.ProductWeight);
+      columns.Bound(c => c.ProductCreatedTs).Format(VM_Resources.GLOB_ShortDateTime_FORMAT);
+      columns.Bound(c => c.WorkOrderName);
+      columns.ForeignKey(o => o.EnumInspectionResult, (SelectList)ViewBag.ProductQualityList).ClientTemplate(
+      "<img src='" + "#=InspectionResultImageSRC#".BuildImageSrc() + "' /> #=InspectionResultText#").Width(160);
+      columns.Bound(p => p.ProductId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(115)
+      .ClientTemplate(""+@Html.ImageButton("print", "printLabel(#:ProductId#)").ToString());
+    })
+    .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+        @*    .PageSize(23)*@
+    .Read(r => r.Action("GetWorkOrderProductsList", "WorkOrder", new {workOrderId = Model}))
+    )
+    .Events(e =>
+    {
+    e.Change("onProductSelect");
+        @*e.DataBound("selectProduct");*@
+    })
+    )
+</div>

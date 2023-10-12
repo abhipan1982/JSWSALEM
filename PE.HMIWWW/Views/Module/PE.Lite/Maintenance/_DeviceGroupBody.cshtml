@@ -1,0 +1,88 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_DeviceGroup
+
+<div class="row h-300 p-0 pt-3">
+    <div class="col-5 p-0">
+        <div class="container-fluid">
+
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.DeviceGroupCode)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.DeviceGroupCode)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.DeviceGroupName)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.DeviceGroupName)
+                </div>  
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.DeviceGroupDescription)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.DeviceGroupDescription)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.CreatedTs)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.CreatedTs)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.LastUpdateTs)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.LastUpdateTs)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.ParentDeviceGroupCode)
+                </div>
+                <div class="col">
+                    <a href="#" id="link" onclick="ShowDeviceGroupDetails('@Model.ParentDeviceGroupCode'); return false;">@Html.DisplayFor(m => m.ParentDeviceGroupCode)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-7 p-0">
+        <div class="container-fluid">
+            @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_DeviceGroup>()
+                    .Name("DeviceGroupHierarchyList_" + Guid.NewGuid().ToString())
+                    .NoRecords(VM_Resources.GLOB_GRID_NO_DATA)
+                    .Sortable()
+                    .Filterable()
+                    .Scrollable()
+                    .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                    .HtmlAttributes(new { style = "height: 675px;" })
+                    .Columns(c =>
+                    {
+                        c.Bound(x => x.DeviceGroupId).Visible(false);
+                        c.Bound(x => x.DeviceGroupName);
+                        c.Bound(x => x.DeviceGroupCode);
+                        c.Bound(x => x.CreatedTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+                        c.Bound(p => p.DeviceGroupId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(30)
+                                                          .ClientTemplate(@Html.ImageButton("details", "ShowDeviceGroupDetailsById(#:DeviceGroupId#)").ToString());
+
+                    })
+                    .DataSource(d => d
+                        .Ajax()
+                        .ServerOperation(true)
+                        .PageSize(24)
+                        .Read(r => r.Action("GetSubDeviceGroups", "Maintenance", new { deviceGroupId = Model.DeviceGroupId }))
+                        ))
+        </div>
+    </div>
+
+</div>

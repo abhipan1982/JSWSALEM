@@ -1,0 +1,110 @@
+﻿@using PE.HMIWWW.ViewModel.Module.Lite.Setup
+@model long?
+
+<style>
+    .header {
+        color: #fff;
+        background-color: #006487;
+    }
+</style>
+
+<div class="w-100 mb-2" style="height:8%">
+    @(Html.Kendo().Grid<VM_Setup>()
+        .Name("SetupPropertiesSearchGrid")
+        .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.SetupId).Visible(false);
+            columns.Bound(c => c.SetupName);
+            columns.Bound(c => c.SetupConfigurationLastSent).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_LongDateTime_FORMAT);
+            columns.Bound(c => c.IsSteelgradeRelated).ClientTemplate(
+                "#if(IsSteelgradeRelated === true)" +
+                "{" +
+                "#<input class='not-editable' type='checkbox' disabled checked />#" +
+                "}" +
+                "else" +
+                "{" +
+                "#<input class='not-editable' type='checkbox' disabled />#" +
+                "}#");
+            foreach (var item in ViewBag.Parameters)
+            {
+                columns.Bound(item.Replace(" ", "_"));
+            }
+        })
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(1)
+            .Read(r => r.Action("GetSetupParameters", "SetupConfiguration", new { setupId = Model, setupConfigurationId = ViewBag.SetupConfigurationId })))
+    )
+</div>
+
+@(Html.Kendo().Grid<VM_SetupValues>()
+    .Name("SetupPropertiesGrid")
+    .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Selectable()
+    .Scrollable()
+    .Pageable(p => p
+    .Refresh(true)
+    .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+    .PageSizes(true))
+    .HtmlAttributes(new { style = @String.Format("height:{0}px;", 523) })
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.InstructionId).Visible(false);
+        columns.Bound(c => c.InstructionName).Width(250);
+        columns.Bound(c => c.AssetName);
+        columns.Bound(c => c.IsRequired).ClientTemplate(
+            "#if(IsRequired === true)" +
+            "{" +
+            "#<input class='not-editable' type='checkbox' disabled checked />#" +
+            "}" +
+            "else" +
+            "{" +
+            "#<input class='not-editable' type='checkbox' disabled />#" +
+            "}#");
+        columns.Bound(c => c.RangeFrom);
+        columns.Bound(c => c.Value).ClientTemplate(
+            "#if(DataType == 'BOOL')" +
+            "{" +
+            "if(Value === '1')" +
+            "{" +
+            "#<span>true</span>#" +
+            "}" +
+            "else" +
+            "{" +
+            "#<span>false</span>#" +
+            "}" +
+            "}" +
+            "else" +
+            "{" +
+            "if(Value == null)" +
+            "{" +
+            "#<span></span>#" +
+            "}" +
+            "else" +
+            "{" +
+            "#<span>#:Value#</span>#" +
+            "}" +
+            "}#").Width(150);
+        columns.Bound(c => c.RangeTo);
+        columns.Bound(c => c.UnitSymbol);
+    })
+    .DataSource(d => d
+        .Ajax()
+        .ServerOperation(true)
+        .Model(m =>
+        {
+            m.Id(f => f.InstructionId);
+            m.Field(f => f.InstructionName).Editable(false);
+            m.Field(f => f.UnitSymbol).Editable(false);
+            m.Field(f => f.DataType).Editable(false);
+            m.Field(f => f.Value).Editable(true);
+            m.Field(f => f.RangeFrom).Editable(false);
+            m.Field(f => f.RangeTo).Editable(false);
+            m.Field(f => f.AssetName).Editable(false);
+            m.Field(f => f.IsRequired).Editable(false);
+        })
+        .PageSize(22)
+        .Read(r => r.Action("GetSetupInstructionData", "SetupConfiguration", new { setupId = Model })))
+)

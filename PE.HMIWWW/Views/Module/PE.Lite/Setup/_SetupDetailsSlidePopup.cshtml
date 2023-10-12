@@ -1,0 +1,17 @@
+﻿@model long?
+
+  <div class="row h-100">
+    <div class="col">
+      @(Html.Kendo().TabStrip()
+        .Name("SetupDetailsBody")
+        .Animation(false)
+        .HtmlAttributes(new { style = "width: 100%;" })
+        .Scrollable(false)
+        .Items(tabstrip =>
+        {
+          tabstrip.Add().Text(VM_Resources.NAME_Setup)
+            .Selected(true).Content(@Html.Partial("~/Views/Module/PE.Lite/Setup/_SetupDetails.cshtml", Model).ToHtmlString());
+        })
+      )
+    </div>
+  </div>

@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyTitle>PE.HMIWWW.Services</AssemblyTitle>
+    <Company>Primetals Technologies Poland Sp. z o.o.</Company>
+    <Product>PE.HMIWWW.Services</Product>
+    <Copyright>Copyright © Primetals Technologies 2020</Copyright>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PE.HMIWWW.Core\PE.HMIWWW.Core.csproj" />
+    <ProjectReference Include="..\PE.Interfaces\PE.Interfaces.csproj" />
+    <ProjectReference Include="..\PE.Models\PE.Models.csproj" />
+    <ProjectReference Include="..\PE.ViewModel\PE.HMIWWW.ViewModel.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ExcelDataReader" />
+    <PackageReference Include="LINQKit.Core" />
+    <PackageReference Include="PE.BaseCommon" />
+    <PackageReference Include="SMF.Core" />
+    <PackageReference Include="SMF.DbEntity" />
+    <PackageReference Include="SMF.HMI" />
+    <PackageReference Include="SMF.HMIWWW" />
+    <PackageReference Include="SMF.Module" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,73 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Device
+
+
+
+
+    @*<h8>@Html.Label(VM_Resources.NAME_Search)</h8>*@
+
+            @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Component>()
+                    .Name("ComponentsGrid")
+                    .NoRecords(VM_Resources.GLOB_GRID_NO_DATA)
+                    .Sortable()
+                    .Filterable()
+                    .Scrollable()
+                    .ToolBar(toolbar =>
+                    {
+                    toolbar.Template(
+                            @<text>
+                            <div class="refreshBtnContainer">
+                                @Html.ImageButton("add", "AddNewComponent(" + Model.DeviceId + ")", false)
+                            </div>
+                            </text>);
+                    })
+                    .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                    .HtmlAttributes(new { style = "height: 700px; width:1330px" })
+                    .Columns(c =>
+                    {
+                        c.Bound(x => x.ComponentId).Visible(false);
+                        c.Bound(x => x.ComponentName);
+                        c.Bound(x => x.ComponentCode).Width(50);
+                        c.ForeignKey(p => p.IsActiveNum, (SelectList)ViewBag.NoYes).Width(50);
+                        c.Bound(x => x.ComponentQuantity).Width(50);
+                        c.Bound(x => x.CreatedTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+                        c.Bound(x => x.LastUpdateTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+                        c.Bound(x => x.Installed).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+                        c.Bound(x => x.GroupCode);
+                        c.Bound(x => x.Supplier);
+                        c.Bound(x => x.Description);
+                        c.Bound(p => p.ComponentId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(90)
+                                     .ClientTemplate(@Html.ImageButton("details", "GoToComponent(#:ComponentId#)").ToString() + @Html.ImageButton("edit", "ModifyComponent(#:ComponentId#)").ToString()+
+                                     @Html.ImageButton("delete", "DeleteComponent(#:ComponentId#)").ToString());
+
+                    })
+                    .DataSource(d => d
+                        .Ajax()
+                        .ServerOperation(false)
+                        .PageSize(24)
+                        .Sort(x => x.Add("EndTime").Descending())
+                        .Read(r => r.Action("GetAllComponentsForDevice", "Maintenance", new { deviceId = Model.DeviceId }))
+                        ))
+
+
+
+<style>
+    .yieldChart {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .completionChart {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .delays-datepicker {
+        background-image: none !important;
+        color: #006487;
+    }
+
+    .k-picker-wrap > .k-select {
+        background-color: #fff;
+    }
+</style>

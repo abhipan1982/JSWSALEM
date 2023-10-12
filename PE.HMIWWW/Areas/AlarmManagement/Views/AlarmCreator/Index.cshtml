@@ -1,0 +1,33 @@
+@using PE.HMIWWW.Core.HtmlHelpers
+@using PE.HMIWWW.Core.Resources
+@model PE.HMIWWW.Areas.AlarmManagement.ViewModels.VM_AlarmDefinition
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+  @Html.ImageButton("new", "createAlarmDefinition()", false, "NAME_CreateAlarmDefinition")
+  @Html.ImageButton("edit", "editAlarmDefinition()", false, "NAME_EditAlarmDefinition")
+  @Html.ImageButton("delete", "deleteAlarmDefinition()", false, "NAME_DeleteAlarmDefinition")
+  @Html.ImageButton("sendToL3", "generateAlarmDefinition()", false, "NAME_Generate")
+}
+
+<div class="container-fluid p-3">
+  <div class="row">
+    <div class="col-3 grid-filter" id="AlarmCreatorSearchGrid">
+      @await Html.PartialAsync("~/Areas/AlarmManagement/Views/AlarmCreator/_AlarmCreatorSearchGrid.cshtml", Model)
+    </div>
+    <div class="col-9 element-details" id="AlarmCreatorDetails">
+      <div class="row justify-content-center plug">
+        <div class="col-6 align-self-center">
+          <img src="~/css/Shared/plug.png" />
+          <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/AlarmCreator.css" />
+<script src="~/bundles/js/Module/AlarmCreator.js"></script>

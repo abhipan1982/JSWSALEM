@@ -1,0 +1,71 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Visualization.VM_TrackingMaterialOverview
+
+<div class="details">
+  <div class="material_actions">
+    <div class="material_action reject-icon cursor-pointer" data-action="REJECT" id="reject" role="img" title="@VM_Resources.NAME_Reject"></div>
+    <div class="material_action scrap-icon cursor-pointer" id="scrap" data-action="SCRAP" role="img" title="@VM_Resources.NAME_Scrap"></div>
+    <div class="material_action unscrap-icon cursor-pointer" id="unScrap" data-action="UN_SCRAP" role="img" title="@VM_Resources.NAME_Unscrap"></div>
+    <div class="material_action quality-icon cursor-pointer resized-icon" data-action="QUALITY" id="quality" role="img" title="@VM_Resources.NAME_SpecifyQuality"></div>
+    <div class="material_action defect-icon cursor-pointer" data-action="ADD_DEFECTS" id="defects" role="img" title="@VM_Resources.NAME_AddDefects"></div>
+    <div class="material_action ready-icon cursor-pointer" data-action="MAT_READY" id="ready" role="img" title="@VM_Resources.NAME_Ready"></div>
+  </div>
+  <div class="material_name form-inline"><div id="material-color"></div><span id="materialName" class="panel_materialName">@Html.DisplayFor(x => x.MaterialName)</span></div>
+  <div class="details_header">
+    @VM_Resources.NAME_Details <span id="materialNameDetails" class="details_header_icon details-icon cursor-pointer"></span>
+  </div>
+  <div class="details_data">
+    <div class="row form-group material-data">
+      <div class="material_label ml-4 text-left">
+        @Html.LabelFor(m => m.WorkOrderName, new { @class = "control-label" })
+      </div>
+      <div class="material_label material_data p-0">
+        <p class="cursor-pointer" id="workOrderName">@Html.DisplayFor(x => x.WorkOrderName)</p>
+      </div>
+    </div>
+
+    <div class="row form-group material-data">
+      <div class="material_label ml-4 text-left">
+        @Html.LabelFor(m => m.HeatName, new { @class = "control-label" })
+      </div>
+      <div class="material_label p-0 w-50" style="display: flex; flex-direction: row; justify-content: space-between">
+        <p class="cursor-pointer" id="heatName">@Html.DisplayFor(x => x.HeatName)</p>
+        <div id="heatConsistent" class="cursor-pointer"></div>
+      </div>
+    </div>
+
+    <div class="row form-group material-data">
+      <div class="material_label ml-4 text-left">
+        @Html.LabelFor(m => m.SteelgradeCode, new { @class = "control-label" })
+      </div>
+      <div class="material_label material_data p-0">
+        <p class="cursor-pointer" id="steelgradeCode">@Html.DisplayFor(x => x.SteelgradeCode)</p>
+      </div>
+    </div>
+
+    <div class="row form-group material-data">
+      <div class="material_label ml-4 text-left">
+        @Html.LabelFor(m => m.SteelgradeName, new { @class = "control-label" })
+      </div>
+      <div class="material_label material_data p-0">
+        <p class="cursor-pointer" id="steelgradeName">@Html.DisplayFor(x => x.SteelgradeName)</p>
+      </div>
+    </div>
+
+    <div class="row form-group material-data">
+      <div class="material_label ml-4 text-left">
+        @Html.LabelFor(m => m.SlittingFactor, new { @class = "control-label" })
+      </div>
+      <div class="material_label p-0">
+        <p id="slittingFactor">@Html.DisplayFor(x => x.SlittingFactor)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="measurements">
+  <div class="measurements_header">
+    @VM_Resources.NAME_Measurements <span class="details_header_icon details-icon cursor-pointer" id="measurements_details" onclick="_Measurement.GoToMeasurements(materialDetails.currentRawMaterial || null)"></span>
+  </div>
+  <div class="measurements_data">
+  </div>
+</div>

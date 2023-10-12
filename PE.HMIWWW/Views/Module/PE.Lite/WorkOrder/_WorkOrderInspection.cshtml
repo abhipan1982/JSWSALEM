@@ -1,0 +1,31 @@
+@model long?
+@(
+  Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.QualityInspection.VM_QualityInspection>()
+  .Name("WorkOrderInspection")
+  .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Pageable(p => p
+      .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Sortable()
+  .Filterable()
+  .HtmlAttributes(new { style = "height: 100%;" })
+  .Columns(columns =>
+  {
+    columns.Bound(c => c.RawMaterialId).Visible(false);
+    columns.Bound(x => x.MaterialName).HtmlAttributes(new { @class = "nowrap" });
+    columns.Bound(c => c.HasDefects).ClientTemplate(
+      "<img src='" + "#=HasDefectImageSRC#".BuildImageSrc() + "' /> #=HasDefectsText#").Width(40);
+    columns.Bound(x => x.DiameterMin).HtmlAttributes(new { @class = "nowrap" });
+    columns.Bound(x => x.DiameterMax).HtmlAttributes(new { @class = "nowrap" });
+    columns.Bound(x => x.VisualInspection).HtmlAttributes(new { @class = "nowrap" });
+    columns.ForeignKey(o => o.EnumInspectionResult, (SelectList)ViewBag.InspectionResultList).ClientTemplate(
+      "<img src='" + "#=InspectionResultImageSRC#".BuildImageSrc() + "' /> #=InspectionResultText#").Width(95);
+    columns.ForeignKey(o => o.EnumCrashTest, (SelectList)ViewBag.CrashTestList).ClientTemplate(
+      "<img src='" + "#=CrashTestImageSRC#".BuildImageSrc() + "' /> #=CrashTestText#").Width(95);
+  })
+  .DataSource(d => d
+      .Ajax()
+      .ServerOperation(true)
+      .PageSize(23)
+  .Read(r => r.Action("GetInspectionByWorkOrder", "InspectionStation", new { workOrderId = Model }))
+  )
+)

@@ -1,0 +1,92 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Material
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_MaterialOverview
+@{
+  Layout = "~/Views/Shared/_TabLayout.cshtml";
+}
+
+<style>
+  .link {
+    cursor: pointer;
+    border-bottom: 1px solid #8da4b5;
+  }
+
+    .link:hover {
+      opacity: 0.8;
+    }
+</style>
+
+@section TabIncludes
+{
+  @if (Model.RawMaterialId != null)
+  {
+    @Html.ImageButton("unassign_billets", "_Material_Assignment.UnassignMaterial(" + Model.RawMaterialId + "," + Model.MaterialId + ", () => { try { afterMaterialAssignment(); } catch(e){} })")
+  }
+  else
+  {
+    <div>@VM_Resources.INFO_SelectRawMaterialFromBelowInfo</div>
+  }
+}
+@if (Model.RawMaterialId != null)
+{
+  <div id="raw-material-partial" style="width: 100%"></div>
+}
+else
+{
+  <div class="row h-100">
+    <div class="col">
+      @(
+        Html.Kendo().Grid<VM_RawMaterialsTree>()
+          .Name("L1MaterialsSearchList" + Model.MaterialId)
+          .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+          .Pageable(p => p
+            .Refresh(true)
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+            .PageSizes(true))
+          .Sortable()
+          .Filterable()
+          .Selectable()
+          .HtmlAttributes(new {style = string.Format("width:100%; height:600px;"), @class = string.Format("mt-2")})
+          .Columns(columns =>
+          {
+            columns.Bound(c => c.RawMaterialId).Visible(false);
+            columns.Bound(c => c.MaterialIsAssigned).Visible(false);
+            columns.Bound(c => c.DisplayedMaterialName).HtmlAttributes(new { @class = "nowrap" });
+            columns.ForeignKey(o => o.EnumRawMaterialStatus, (SelectList)ViewBag.RawMaterialStatuses);
+            columns.Bound(c => c.RawMaterialCreatedTs).Format(VM_Resources.GLOB_LongDateTime_FORMAT).HtmlAttributes(new { @class = "nowrap" });
+          })
+          .DataSource(d => d
+              .Ajax()
+              .ServerOperation(true)
+              .PageSize(22)
+              .Sort(sort => { })
+              .Read(r => r.Action("GetNotAssignedRawMaterials", "RawMaterial"))
+          )
+          .Events(e =>
+          {
+            e.Change("(e) => { _Material_Assignment.AssignMaterial(e, " + Model.MaterialId + ", () => { try { afterMaterialAssignment(); } catch(e){} })} ");
+          })
+      )
+    </div>
+  </div>
+}
+
+<script>
+  $(document).ready(function () {
+    renderRawMaterialPartial();
+  });
+
+  function renderRawMaterialPartial() {
+    if ($('#raw-material-partial').length) {
+      const model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+      let dataToSend = {
+        rawMaterialId: model.RawMaterialId
+      };
+      let url = "/RawMaterial/GetMaterialDetails";
+      AjaxReqestHelperSilentWithoutDataType(url, dataToSend, setRawMaterialPartialView);
+    }
+  }
+
+  function setRawMaterialPartialView(partialView) {
+    $('#raw-material-partial').html(partialView);
+  }
+</script>

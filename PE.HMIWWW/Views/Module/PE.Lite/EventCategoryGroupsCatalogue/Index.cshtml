@@ -1,0 +1,38 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Event
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("new", "AddEventGroupsCataloguePopup()")
+}
+
+@(Html.Kendo().Grid<VM_EventGroupsCatalogue>()
+    .Name("EventGroupsCatalogueList")
+    .HtmlAttributes(new {style = string.Format(" height:{0}px;", ViewBag.FullGridHeight)})
+    .Scrollable()
+    .Pageable(p => p
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Filterable()
+    .Columns(c =>
+    {
+        c.Bound(x => x.EventCategoryGroupCode);
+        c.Bound(x => x.EventCategoryGroupName);
+        c.Bound(x => x.EventCategoryGroupId).Filterable(false)
+            .ClientTemplate(Html.ImageButton("edit", "EditEventGroupsCataloguePopup(#:EventCategoryGroupId#)")
+                            + Html.ImageButton("details", "GoToDetails(#:EventCategoryGroupId#)").ToString()
+                            + Html.ImageButton("delete", "DeleteEventGroupsCatalogue(#=EventCategoryGroupId#)"))
+            .Width(100)
+            .Title(" ");
+    })
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(30)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetEventGroupsCatalogueList", "EventCategoryGroupsCatalogue"))
+    )
+    )
+
+<script src="~/js/Module/PE.Lite/EventGroupsCatalogue.js"></script>

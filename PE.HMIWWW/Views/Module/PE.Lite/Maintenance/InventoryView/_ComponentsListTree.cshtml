@@ -1,0 +1,120 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Device
+
+
+
+
+@(Html.Kendo().TreeList<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_ComponentsGroupsTreeListEl>()
+          .Name("treelistDevice")
+          .Columns(columns =>
+          {
+            columns.Add().Field(e => e.Name).TemplateId("treelistDevice-template");
+            columns.Add().Field(e => e.Value);
+            columns.Add().Field(e => e.Unit);
+            columns.Add().Field(e => e.ValueWarning);
+            columns.Add().Field(e => e.ValueAlarm);
+            columns.Add().Field(e => e.Id).Title(" ").Filterable(false).Sortable(false).Width(60).TemplateId("treelistDevice-template-function");
+          })
+          .Filterable()
+          .Sortable()
+          .Selectable()
+          .DataSource(dataSource => dataSource
+              .Read(read => read.Action("GetAllComponentsForDeviceTreeList", "Maintenance", new { deviceId = Model.DeviceId }))
+              .ServerOperation(false)
+              .Model(m => {
+                  m.Id(f => f.Id);
+                  m.ParentId(f => f.ParentId);
+                  m.Expanded(true);
+                  m.Field(f => f.Name);
+                  m.Field(f => f.IsDevice);
+              })
+          )
+
+          .Height(750)
+          )
+
+
+    <script id="treelistDevice-template" type="text/x-kendo-template">
+
+        #  if (IsDevice) { #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/true.png");'></div>
+        <div class='el-name '>#: Name # </div>
+        # } else if (IsGroup){ #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/materialTracking_hover.png"); opacity: 0.7'></div>
+        <div class='el-name'>#: Name # </div>
+        # }
+        else if (IsComponent){ #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/new_hover.png"); opacity: 0.7'></div>
+        <div class='el-name'>#: Name # </div>
+        # }
+        else if (IsCounterLimit){ #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/past.png"); opacity: 0.7'></div>
+        <div class='el-name'>#: Name # </div>
+        # }
+        else { #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/new_hover.png"); opacity: 0.5'></div>
+        <div class='el-name'>#: Name # </div>
+        # } #
+    </script>
+    <script id="treelistDevice-template-function" type="text/x-kendo-template">
+        @*@Html.ImageButton("details", "GoToComponent(#:Id#)").ToString();*@
+        #  if (IsCounterLimit == true) { #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/edit.png");' onclick="GoToComponent()"></div>
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/delete.png");' onclick="GoToComponent()"></div>
+        # } #
+        #  if (IsComponent == true) { #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/add.png");' onclick="GoToComponent()"></div>
+        # } #
+        @*#  if (IsDevice) { #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/true.png");'></div>
+        <div class='el-name '>#: Name # </div>
+        # } else if (IsGroup){ #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/materialTracking_hover.png"); opacity: 0.7'></div>
+        <div class='el-name'>#: Name # </div>
+        # }
+        else if (IsComponent){ #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/new_hover.png"); opacity: 0.7'></div>
+        <div class='el-name'>#: Name # </div>
+        # }
+        else if (IsCounterLimit){ #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/past.png"); opacity: 0.7'></div>
+        <div class='el-name'>#: Name # </div>
+        # }
+        else { #
+        <div class='el-icon'
+             style='background-image: url("../../../../Content/Functions/Small/new_hover.png"); opacity: 0.5'></div>
+        <div class='el-name'>#: Name # </div>
+        # } #*@
+    </script>
+
+<style>
+    .yieldChart {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .completionChart {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .delays-datepicker {
+        background-image: none !important;
+        color: #006487;
+    }
+
+    .k-picker-wrap > .k-select {
+        background-color: #fff;
+    }
+</style>

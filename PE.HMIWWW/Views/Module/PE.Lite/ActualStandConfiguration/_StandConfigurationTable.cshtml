@@ -1,0 +1,49 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.ActualStandConfiguration;
+
+@(Html.Kendo().Grid<VM_StandConfiguration>()
+    .Name("ActualStandConfiguration")
+    .HtmlAttributes(new { style = @String.Format("border:none !important; height:{0}px;", (ViewBag.FullGridHeight) - 50) })
+    .Pageable().Filterable(filtering => filtering.Enabled(true))
+    .Filterable()
+    .Scrollable()
+    .Columns(columns =>
+    {
+      columns.Bound(p => p.StandId).Visible(false).Filterable(false);
+      columns.Bound(p => p.RollSetId).Visible(false).Filterable(false);
+      columns.Bound(p => p.CassetteId).Visible(false).Filterable(false);
+      columns.Bound(p => p.StandName).Filterable(true).Width(100);
+      columns.Bound(p => p.CassetteName).Filterable(true);
+      columns.Bound(p => p.Position).Filterable(true).Width(100);
+      columns.ForeignKey(o => o.CassetteTypeId, (SelectList)ViewBag.CassetteType).Width(150);
+      columns.ForeignKey(o => o.EnumStandStatus, (SelectList)ViewBag.StandStat);
+      columns.ForeignKey(o => o.Arrangement, (SelectList)ViewBag.Arrang);
+      columns.Bound(p => p.StandNo).Filterable(true).Visible(false).HtmlAttributes(new { style = "text-align: right;" }).Width(100);
+      columns.Bound(p => p.RollsetsNumber).Visible(false).Width(100);
+      columns.Bound(p => p.StandId).Width(120).Sortable(false).Groupable(false).Filterable(false).Title(" ").ClientTemplate(
+        "# if (CassetteId != null) {#" +
+          @Html.ImageButton("edit", "EditData(#= StandId #)", false).ToString() +
+          @Html.ImageButton("cassette_details", "CassetteInfo(#= CassetteId #)", false).ToString() +
+          @Html.ImageButton("rolls_dismount_cassette", "DismountCassette(#= StandId #)", false).ToString() +
+          "# if (RollSetId != null) {#" + @Html.ImageButton("pass_change", "PassChangeGroove(#= RollSetId #)", false).ToString() + "#}#" +
+        "#} else {#" +
+          @Html.ImageButton("edit", "EditData(#= StandId #)", false).ToString() +
+          @Html.ImageButton("rolls_mount_with_cassette", "MountCassette(#= StandId #)", false).ToString() +
+          @Html.ImageButton("rolls_mount_cassette", "MountEmptyCassette(#= StandId #)", false).ToString() +
+        "#}#");
+    })
+    .DataSource(dataSource => dataSource
+    .Ajax()
+    .ServerOperation(true)
+    .Model(model =>
+    {
+      model.Id(p => p.StandId);
+    })
+    .PageSize(24)
+    .Sort(sort =>
+    {
+      sort.Add(p => p.Position).Ascending();
+      sort.Add(p => p.StandNo).Ascending();
+    })
+    .Events(events => events.Error("TelerikErrorHandler"))
+    .Read(read => read.Action("GetStandConfigurationCatalogueData", "ActualStandConfiguration"))
+))

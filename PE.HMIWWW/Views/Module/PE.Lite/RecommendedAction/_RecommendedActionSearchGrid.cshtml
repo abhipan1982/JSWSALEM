@@ -1,0 +1,45 @@
+﻿@(
+    Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_RecommendedAction>()
+            .Name("SearchGrid")
+            .NoRecords(VM_Resources.GLOB_GRID_NO_DATA)
+            .Pageable(p => p
+            .Refresh(true)
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+            .PageSizes(true))
+            .Sortable()
+            .Filterable()
+            .Selectable()
+            .HtmlAttributes(new { style = @String.Format("height:{0}px;", 746) })
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.RecommendedActionId).Visible(false);
+                columns.Bound(c => c.ActionDescription).Visible(false);
+                columns.Bound(c => c.ActionTypeName).Hidden(false);
+                columns.Bound(c => c.IncidentTypeName).Hidden(false);
+                columns.Bound(p => p.RecommendedActionId).HtmlAttributes(new { @class = "nowrap" }).Sortable(false).Groupable(false).Filterable(false).Title("").Width(60)
+                 .ClientTemplate(@Html.ImageButton("edit", "EditRecommendedAction(#:RecommendedActionId#)").ToString()
+                                     + @Html.ImageButton("delete", "DeleteRecommendedAction(#:RecommendedActionId#)").ToString());
+            })
+            .ToolBar(toolbar =>
+            {
+                toolbar.Template(@<text>
+                        <div class="refreshBtnContainer" onclick="showHideCategories()">
+                            <p class="k-link off show-hide-categories m-0">
+                                                <span class="filters-text more">@VM_Resources.NAME_MoreFilters</span> <span class="filters-text less">@VM_Resources.NAME_LessFilters</span>
+                                <span class="arrow arrow-categories arrow-white k-icon k-i-arrow-right"></span>
+                            </p>
+                        </div>
+                    </text>);
+            })
+            .DataSource(d => d
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(26)
+                .Read(r => r.Action("GetRecommendedActionList", "RecommendedAction"))
+                .Events(e => e.Change("dataSourceChange"))
+     )
+     .Events(e =>
+     {
+         e.Change("onElementSelect");
+     })
+)

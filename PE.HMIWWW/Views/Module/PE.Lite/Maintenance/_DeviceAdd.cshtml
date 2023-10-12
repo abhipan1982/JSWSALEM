@@ -1,0 +1,154 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Device
+
+@{
+    ViewBag.Title = "_IncidentAdd";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+@using (Ajax.BeginForm("AddDevice", "Maintenance", new AjaxOptions { UpdateTargetId = "formContainer", OnBegin = "OnFormBegin", OnSuccess = "OnFormSuccess", OnFailure = "OnFormError" }, new { @class = "container-fluid", id = "form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.DeviceId)
+
+    <div class="row h-100 p-0 pt-3">
+        <div class="col-12 p-0">
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.DeviceName)
+                </div>
+                <div class="col">
+                    @Html.Kendo().TextBoxFor(m => m.DeviceName)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.DeviceCode)
+                </div>
+                <div class="col">
+                    @Html.Kendo().TextBoxFor(m => m.DeviceCode)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.Description)
+                </div>
+                <div class="col">
+                    @Html.Kendo().TextBoxFor(m => m.Description)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.FkDeviceGroupId)
+                </div>
+                <div class="col">
+                    <div span id="DeviceCode">
+                        @(Html.Kendo().DropDownListFor(x => x.FkDeviceGroupId)
+                                             .Name("FkDeviceGroupId")
+                                             .DataTextField("Text")
+                                             .DataValueField("Value")
+                                             .HtmlAttributes(new { @class = "form-control form-control-sm" })
+                                             .BindTo(new SelectList(@ViewBag.DeviceGroupsList.Items, "DeviceGroupId", "DeviceGroupName"))
+                                             .OptionLabel("-"))
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.FkSupplierId)
+                </div>
+                <div class="col">
+                    <div span id="DeviceCode">
+                        @(Html.Kendo().DropDownListFor(x => x.FkSupplierId)
+                                             .Name("FkSupplierId")
+                                             .DataTextField("Text")
+                                             .DataValueField("Value")
+                                             .HtmlAttributes(new { @class = "form-control form-control-sm" })
+                                             .BindTo(new SelectList(@ViewBag.SuppliersList.Items, "SupplierId", "SupplierName"))
+                                             .OptionLabel("-"))
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.Model)
+                </div>
+                <div class="col">
+                    @Html.Kendo().TextBoxFor(m => m.Model)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.SerialNumber)
+                </div>
+                <div class="col">
+                    @Html.Kendo().TextBoxFor(m => m.SerialNumber)
+                </div>
+            </div>
+            @*<div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.Status)
+                </div>
+                <div class="col">
+                    @Html.Kendo().TextBoxFor(m => m.Status)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.AcquireDate)
+                </div>
+                <div class="col">
+                    @Html.Kendo().DateTimePickerFor(x => x.AcquireDate).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_LongDateTime_FORMAT_Picker).HtmlAttributes(new { @class = "form-control form-control-sm" })
+                    @Html.ValidationMessageFor(x => x.AcquireDate)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.DisposeDate)
+                </div>
+                <div class="col">
+                    @Html.Kendo().DateTimePickerFor(x => x.DisposeDate).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_LongDateTime_FORMAT_Picker).HtmlAttributes(new { @class = "form-control form-control-sm" })
+                    @Html.ValidationMessageFor(x => x.DisposeDate)
+                </div>
+            </div>*@
+        </div>
+        @* -------------------------------------------------------------------------------------------------------------- *@
+        @*<div class="verticalLine">
+        </div>
+        <div class="col-5 p-0">
+            <div class="container-fluid">
+                <div class="col-3 grid-filter">
+                    <input class="k-textbox" style="width:320px" placeholder="@VM_Resources.NAME_SearchTextBoxTip" />
+                    <script>
+                        $("input").on("input", function () {
+                            var query = this.value.toLowerCase();
+                            var dataSource = $("#treeviewOnPopup").data("kendoTreeView").dataSource;
+                            filter(dataSource, query);
+                        });
+                    </script>
+                    <div style='overflow:auto; width:400px;height:550px;'>
+                        @(Html.Kendo().TreeView()
+			            .Name("treeviewOnPopup")
+                        .ExpandAll(true)
+                        .DataSource(e=>e.ServerFiltering(false))
+			            .BindTo((IEnumerable<TreeViewItemModel>)ViewBag.AssetTreeWithoutDevicesData)
+                        .Events(e=>e.Select("OnTreeElementSelect")))
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    </div>
+    <div class="row form-group">
+        <div class="col invalid">
+            <p id="error">
+                <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+            </p>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+                @VM_Resources.GLOB_Form_Button_Add
+            </button>
+        </div>
+    </div>
+}
+

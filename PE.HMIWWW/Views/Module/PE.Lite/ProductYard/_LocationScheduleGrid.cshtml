@@ -1,0 +1,41 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.ProductYard;
+
+<div class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_LocationsSeq</div>
+@*//example grid data source*@
+@(Html.Kendo().Grid<VM_Location>()
+    .Name("LocationsScheduleList")
+    .Events(e => e.DataBound("ColorLocSeqGridFirstRow"))
+    .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 660) })
+    .Filterable()
+    .Scrollable()
+    .Columns(c =>
+    {
+      c.Bound(x => x.AssetId).Visible(false);
+      c.Bound(x => x.AreaId).Visible(false);
+      c.Bound(x => x.AssetDescription);
+      c.Bound(x => x.AreaDescription);
+      c.Bound(x => x.WeightProducts);
+      c.Bound(x => x.WeightMaxCapacity);
+      c.Bound(x => x.FillOrderSeq).Visible(false);
+    })
+    .DataSource(ds => ds
+       .Ajax()
+       .ServerOperation(true)
+       .Events(e => e.Error("TelerikErrorHandler"))
+       .Read(r => r.Action("GetLocations", "ProductYard"))
+       .Sort(sort =>
+       {
+         sort.Add(s => s.FillOrderSeq).Ascending();
+       })
+    )
+)
+
+@(Html.Kendo().Sortable()
+                .For("#LocationsScheduleList")
+                .Filter("table > tbody > tr")
+                .Cursor("move")
+                .HintHandler("noHint")
+                .PlaceholderHandler("placeholder")
+                .ContainerSelector("#LocationsScheduleList tbody")
+                .Events(events => events.Change("onLocationOrderChange"))
+)

@@ -1,0 +1,16 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Event.VM_EventCatalogue
+<div class="row h-100">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+            .Name("DelayCatalogueBody")
+            .Animation(false)
+            .Scrollable(false)
+            .Items(tabstrip =>
+            {
+              tabstrip.Add().Text(VM_Resources.NAME_EventsCatalogueDetails)
+                  .Selected(true).Content(Html.Partial("~/Views/Module/PE.Lite/EventsCatalogue/_EventCatalogueDetails.cshtml", Model).ToHtmlString()).ContentHtmlAttributes(new {@class = "partialHeight"});
+            })
+            .Events(e => { e.Select("saveTabStripState"); })
+            )
+  </div>
+</div>

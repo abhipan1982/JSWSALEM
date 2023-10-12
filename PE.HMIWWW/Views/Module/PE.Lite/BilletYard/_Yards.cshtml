@@ -1,0 +1,33 @@
+﻿@model IList<PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_BilletYard>
+
+  <div class="yards-container area">
+
+    @*<div class="k-card">
+      <div class="k-card-header">
+        <p class="k-card-title">Reception</p>
+      </div>
+      <div class="k-card-body">
+      </div>
+      <div class="k-card-btn cursor-pointer" onclick="GoToReception()">
+        View
+      </div>
+    </div>*@
+
+    @foreach (var item in Model)
+    {
+      <div class="asset-card">
+        <div class="asset-card-header">
+          <div class="card-header-title">@item.YardName</div>
+        </div>
+        <div class="asset-card-body">
+          <div class="card-body-number">@item.NumberOfMaterials</div>
+          <div class="card-body-label">@VM_Resources.NAME_MaterialsNumber</div>
+        </div>
+        <div class="asset-card-footer">
+          <div class="card-footer-btn cursor-pointer" onclick="GoToYard(@item.BilletYardId, @Json.Serialize(item.IsReception), @Json.Serialize(item.IsYard), @Json.Serialize(item.IsChargingGrid), @Json.Serialize(item.IsScrapped))">
+            @VM_Resources.NAME_View
+          </div>
+        </div>
+      </div>
+    }
+  </div>

@@ -1,0 +1,107 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_BilletYardDetails
+
+<div class="yard">
+  <div class="map-actions">
+    @Html.ImageButton("arrow_left", "GoToYardsList()", false, "BUTTON_back")
+    @Html.ImageButton("legend", "displayLegend($('#yardMapLegend'))", false, "BUTTON_Legend")
+  </div>
+  <div class="w-100 text-center">@Model.YardName</div>
+  <div class="yard_area mt-2">
+    @foreach (var item in Model.Locations)
+    {
+      string classColor = "";
+      if (item.fillPercentage == 0)
+      {
+        classColor = "scale-color-0";
+      }
+      else if (item.fillPercentage <= 25)
+      {
+        classColor = "scale-color-25";
+      }
+      else if (item.fillPercentage <= 50)
+      {
+        classColor = "scale-color-50";
+      }
+      else if (item.fillPercentage <= 75)
+      {
+        classColor = "scale-color-75";
+      }
+      else if (item.fillPercentage < 100)
+      {
+        classColor = "scale-color-100";
+      }
+      else if (item.fillPercentage == 100)
+      {
+        classColor = "scale-color-full";
+      }
+
+      <div class="location location_@item.LocationId @classColor nowrap-text" data-location="@item.LocationId">
+        <div class="location-actions">
+          <div class="location-capacity">
+            @item.NumberOfMaterials/@item.Capacity
+          </div>
+          <div class="location-action">
+            @Html.ImageButton("details", $"GoToStack({item.LocationId})", false, "NAME_View")
+          </div>
+        </div>
+        <div class="location-desc">
+          <div class="location-name nowrap-text" title="@item.Name">@item.Name</div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<div class="legend-window yardMap-legend-window" id="yardMapLegend">
+  <div class="row m-1">
+    <div class="square scale-color-0 scale-border"></div>
+    <div class="legend">@VM_Resources.NAME_IsEmpty</div>
+  </div>
+  <div class="row m-1">
+    <div class="square scale-color-25"></div>
+    <div class="legend text-right"> 0< - 25 [%]</div>
+  </div>
+  <div class="row m-1">
+    <div class="square scale-color-50"></div>
+    <div class="legend">26 - 50 [%]</div>
+  </div>
+  <div class="row m-1">
+    <div class="square scale-color-75"></div>
+    <div class="legend">51 - 75 [%]</div>
+  </div>
+  <div class="row m-1">
+    <div class="square scale-color-100"></div>
+    <div class="legend">76 - <100 [%]</div>
+  </div>
+  <div class="row m-1">
+    <div class="square scale-color-full"></div>
+    <div class="legend">@VM_Resources.NAME_Full</div>
+  </div>
+</div>
+
+<style>
+    .yard_area {
+      grid-template-columns: repeat(@Model.GridColumns, 1fr);
+      grid-template-rows: repeat(@Model.GridRows, 1fr);
+    }
+</style>
+
+@foreach (var item in Model.Locations)
+{
+  <style>
+  .location_@item.LocationId {
+    grid-column-start: @item.GridColumnStart;
+    grid-column-end: @item.GridColumnEnd;
+    grid-row-start: @item.GridRowStart;
+    grid-row-end: @item.GridRowEnd;
+  }
+  </style>
+}
+
+<script>
+  $(document).ready(() => {
+    searchInLocations(@Model.BilletYardId);
+    YardsContainerEl.removeClass('loading-overlay');
+  })
+</script>
+

@@ -1,0 +1,107 @@
+@using System.Globalization
+@*@using Microsoft.Extensions.Options;
+    @using Microsoft.AspNetCore.Builder;
+
+    @inject IOptions<RequestLocalizationOptions> localization*@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name='date' content='@PE.HMIWWW.Core.Parameter.ApplicationInformation.CompileDate.ToString("s")'>
+  <title>ProcessExpert - @ViewBag.Page_Title</title>
+
+
+  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/bundles/css/css.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/bundles/css/telerikcss.css" asp-append-version="true" />
+
+  <script src="~/bundles/jquery.js"></script>
+  <script src="~/bundles/bootstrap.js"></script>
+  <script src="~/bundles/telerikjs.js"></script>
+  <script src="~/bundles/service.js"></script>
+
+  @*<script src="~/signalr/hubs"></script>*@
+
+  @{
+    await Html.RenderPartialAsync("~/Views/Shared/parts/_JsTranslations.cshtml");
+  }
+  @{
+    await Html.RenderPartialAsync("~/Views/Shared/parts/_TrackingAreas.cshtml");
+  }
+
+  <script>
+
+    $(document).ready(function () {
+        //FORM VALIDATION AND BUTTON DISABLE
+        $('#form').on('submit', function () {
+            if ($('#form').valid()) {
+                console.log('Validation PASSED');
+                $('.formButtonSubmit').attr("disabled", true);
+            }
+        });
+    });
+
+    function refreshKendoCulture() {
+        kendo.culture('@CultureInfo.CurrentCulture.Name');
+    }
+
+    var userRoles = @Json.Serialize(@User.Identities.SelectMany(i => i.Claims.Where(c => c.Type == i.RoleClaimType).Select(c => c.Value).ToList()).ToList());
+  </script>
+  @*<link href="@Url.Content("~/Content/bootstrapFixes.css")" rel="stylesheet" type="text/css" />*@
+  @*@{Html.RenderPartial("~/Views/Shared/_LayoutIncludes.cshtml"); }*@
+  @RenderSection("scripts", false)
+  @RenderSection("ModuleIncludes", false)
+
+</head>
+
+<body>
+
+  @{
+    await Html.RenderPartialAsync("~/Views/Shared/Notification/_Notification.cshtml");
+  }
+
+  <header class="main">
+    @{
+      await Html.RenderPartialAsync("~/Views/Shared/parts/_TopPane.cshtml");
+    }
+
+    <div class="clearix"></div>
+  </header>
+  <div id="MainScreen" class="container-fluid main">
+    <div class="row">
+      <div class="sidebar col-2 py-4">
+        @await Component.InvokeAsync(typeof(WidgetsViewComponent))
+      </div>
+      <div class="wraper col-10">
+        <div class="row">
+          <div class="page-title col-12">
+            <i class="page-icon" style="@ViewBag.Page_Icon"></i>
+            @ViewBag.Page_Title
+            <div id="module-header-menu">
+              <div class="module-menu">
+                @RenderSection("module_menu", false)
+                @Html.DefaultButtons()
+              </div>
+            </div>
+          </div>
+          <div id="SpecificScreen" class="col-12 page-body">
+            @RenderBody()
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="container-fluid">
+    <div class="row">
+      @{
+        await Html.RenderPartialAsync("~/Views/Shared/Alarm/_LastAlarms.cshtml");
+      }
+    </div>
+  </footer>
+  <feature name="@FeatureFlags.Ui.Profiler">
+    <mini-profiler position="@RenderPosition.Right" max-traces="5" />
+  </feature>
+</body>
+</html>

@@ -1,0 +1,30 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Delay
+@model long?
+@(Html.Kendo().Grid<VM_DelayOverview>()
+  .Name("WorkOrderDelays")
+  .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Pageable(p => p
+    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Sortable()
+  .Filterable()
+  .HtmlAttributes(new {style = "height: 100%;"})
+  .Columns(columns =>
+  {
+    columns.Bound(x => x.EventId).Visible(false);
+    columns.Bound(x => x.EventStartTs).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT);
+    columns.Bound(x => x.EventEndTs).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT);
+    columns.Bound(x => x.DelayDurationText);
+    columns.Bound(x => x.EventCatalogueName);
+    columns.Bound(x => x.AssetName);
+    columns.Bound(x => x.RawMaterialName).Filterable(true).ClientTemplate("#if(RawMaterialName){ # <a class='link' href='javascript:_RawMaterial.GoToRawMaterial(#:FkRawMaterialId#);'> #:RawMaterialName# </a> #}#");
+    columns.Bound(x => x.UserComment);
+    columns.Bound(x => x.EventId).Title(" ").Width(30).Sortable(false).Filterable(false).ClientTemplate(
+      Html.ImageButton("edit", "_Delay.delayEditPopup(#:EventId#, () => { reloadGrid('WorkOrderDelays');})").ToString());
+  })
+  .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(23)
+    .Read(r => r.Action("GetWorkOrderDelaysList", "WorkOrder", new {workOrderId = Model}))
+  )
+)

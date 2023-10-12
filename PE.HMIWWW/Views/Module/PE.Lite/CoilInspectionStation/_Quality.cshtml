@@ -1,0 +1,18 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.QualityInspection.VM_QualityInspection
+
+<div id="defect-data">
+    @(await Html.PartialAsync("~/Views/Module/PE.Lite/CoilInspectionStation/_Defects.cshtml", Model.RawMaterialId))
+</div>
+
+<div id="scrap-data">
+</div>
+
+<div id="quality-data">
+    @(await Html.PartialAsync("~/Views/Module/PE.Lite/CoilInspectionStation/_Inspection.cshtml", Model))
+</div>
+
+<script>
+    $(document).ready(function () {
+        refreshScrap();
+    });
+</script>

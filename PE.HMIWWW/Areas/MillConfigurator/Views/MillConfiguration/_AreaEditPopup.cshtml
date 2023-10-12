@@ -1,0 +1,264 @@
+@using Kendo.Mvc.UI;
+@using PE.HMIWWW.Core.Resources;
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration;
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration.VM_AssetInstance
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<form asp-controller="MillConfiguration" asp-action="EditArea" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+  @Html.AntiForgeryToken()
+  @Html.HiddenFor(x => x.AssetId)
+
+  <div style="height:auto;overflow-x:hidden">
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.AssetName)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().TextBoxFor(x => x.AssetName).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard", onkeypress="return removeSpaces(event)"})
+        @Html.ValidationMessageFor(x => x.AssetName)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.FKAssetTypeId)
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.FKAssetTypeId)
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .BindTo(new SelectList(ViewBag.AssetTypeList, "AssetTypeId", "AssetTypeName"))
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        .Filter(FilterType.Contains)
+        )
+        @Html.ValidationMessageFor(x => x.FKAssetTypeId)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.AssetDescription)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().TextBoxFor(x => x.AssetDescription).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.AssetDescription)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsActive)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsActive).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsActive)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsTrackingPoint)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsTrackingPoint).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsTrackingPoint)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsDelayCheckpoint)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsDelayCheckpoint).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsDelayCheckpoint)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsPositionBased)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsPositionBased).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsPositionBased)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.PositionsNumber)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.PeKendo().NumericTextBoxFor(x => x.PositionsNumber).Min(1).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.PositionsNumber)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.VirtualPositionsNumber)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.PeKendo().NumericTextBoxFor(x => x.VirtualPositionsNumber).Min(0).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.VirtualPositionsNumber)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsReversible)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsReversible).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsReversible)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.IsVisibleOnMVH)
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsVisibleOnMVH).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsVisibleOnMVH)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.LabelFor(x => x.EnumTrackingAreaType)
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.EnumTrackingAreaType)
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        .BindTo((SelectList) ViewBag.TrackingAreaTypeList)
+        )
+      </div>
+
+    </div>
+
+    @if (Model.IsArea)
+    {
+      <script>
+        $(document).ready(function() {
+            var assignedFeaturesList = $("#AssignedFeaturesListView").data("kendoGrid");
+            assignedFeaturesList.bind("dataBound", function(e) {
+                if (e.sender.dataSource.total() <= e.sender.dataSource.pageSize()) {
+                    e.sender.pager.element.hide();
+                } else {
+                    e.sender.pager.element.show();
+                }
+            });
+        })
+
+        function getAssetId() {
+            return { assetId: @Model.AssetId };
+        }
+
+      </script>
+
+      <hr>
+
+      <div class="row form-group">
+
+        <hr>
+        <div class="pb-2 px-3" style="width: 99.8%">
+          @(
+        Html.Kendo().Grid<VM_FeatureInstance>()
+        .Name("AssignedFeaturesListView")
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+        .Refresh(true)
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+        .PageSizes(true))
+        .Sortable()
+        .Filterable()
+        .Events(e => {
+        e.DataBound("colorInactiveRecords");
+        })
+        .HtmlAttributes(new {style = string.Format("height:{0}px;", 430)})
+        .Columns(columns =>
+        {
+        columns.Bound(c => c.FeatureId).Visible(false);
+        columns.Bound(c => c.FeatureName);
+        columns.ForeignKey(o => o.EnumFeatureType, (SelectList)ViewBag.FeatureTypeList);
+        columns.ForeignKey(o => o.FKUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol"));
+        columns.ForeignKey(o => o.FKExtUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol"));
+        columns.ForeignKey(o => o.FKDataTypeId, new SelectList(ViewBag.DataTypeList, "DataTypeId", "DataTypeName"));
+        columns.ForeignKey(o => o.EnumCommChannelType, (SelectList)ViewBag.CommChannelTypeList);
+        columns.ForeignKey(o => o.EnumAggregationStrategy, (SelectList)ViewBag.AggregationStrategyList);
+        })
+        .DataSource(d => d
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(15)
+        .Read(r => r.Action("GetAssignedFeatureSearchList", "MillConfiguration", new { Area = "MillConfigurator" }).Data("getAssetId()"))
+        )
+        )
+        </div>
+
+      </div>
+    }
+
+  </div>
+
+  <hr>
+
+  <div class="row form-group">
+    <div class="col invalid">
+      <p id="error">
+        <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+      </p>
+    </div>
+    <div class="col text-right">
+      <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+        @VM_Resources.GLOB_Form_Button_Update
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<script>
+
+  $(function() {
+      $('#error').css("display", "none");
+      $("#form").kendoValidator().data("kendoValidator");
+  });
+
+  function displayMessage() {
+      var validator = $("#form").kendoValidator().data("kendoValidator");
+
+      if (validator.validate()) {
+          $('#error').css("display", "none");
+      } else {
+          $('#error').css("display", "block");
+          $('#popup-footer')
+              .css('display', 'block')
+              .css('background-color', 'rgb(206, 0, 55)');
+      }
+  };
+
+</script>

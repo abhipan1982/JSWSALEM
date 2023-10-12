@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dw].[DimRawMaterial] (
+    [SourceName]                 NVARCHAR (50)  NOT NULL,
+    [SourceTime]                 DATETIME       NOT NULL,
+    [DimRawMaterialIsDeleted]    BIT            NOT NULL,
+    [DimRawMaterialHash]         VARBINARY (16) NULL,
+    [DimRawMaterialKey]          BIGINT         NOT NULL,
+    [DimMaterialKey]             BIGINT         NOT NULL,
+    [DimWorkOrderKey]            BIGINT         NULL,
+    [DimSteelgradeKey]           BIGINT         NOT NULL,
+    [DimHeatKey]                 BIGINT         NOT NULL,
+    [DimMaterialCatalogueKey]    BIGINT         NULL,
+    [RawMaterialName]            NVARCHAR (50)  NOT NULL,
+    [MaterialName]               NVARCHAR (50)  NOT NULL,
+    [MaterialSeqNo]              SMALLINT       NOT NULL,
+    [RawMaterialCuttingSeqNo]    SMALLINT       NOT NULL,
+    [RawMaterialWeight]          FLOAT (53)     NULL,
+    [RawMaterialLength]          FLOAT (53)     NULL,
+    [RawMaterialCreated]         DATETIME       NOT NULL,
+    [RawMaterialProductionStart] DATETIME       NULL,
+    [RawMaterialProductionEnd]   DATETIME       NULL,
+    [RawMaterialRollingStart]    DATETIME       NULL,
+    [RawMaterialRollingEnd]      DATETIME       NULL,
+    [RawMaterialStatus]          VARCHAR (50)   NULL,
+    [DimRawMaterialRow]          INT            IDENTITY (1, 1) NOT NULL
+);
+

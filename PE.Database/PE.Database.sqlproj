@@ -1,0 +1,526 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>PE.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{c1b45a85-84e1-4ac9-8069-38dbce4e59ad}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql140DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>PE.Database</RootNamespace>
+    <AssemblyName>PE.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
+    <Recovery>SIMPLE</Recovery>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="xfr\" />
+    <Folder Include="xfr\Tables\" />
+    <Folder Include="Storage\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="smf\" />
+    <Folder Include="smf\Tables\" />
+    <Folder Include="smf\Views\" />
+    <Folder Include="xfr\Views\" />
+    <Folder Include="dbo\Synonyms\" />
+    <Folder Include="dbo\Sequences\" />
+    <Folder Include="dbo\User Defined Types\" />
+    <Folder Include="smf-old\" />
+    <Folder Include="smf-old\Tables\" />
+    <Folder Include="prj\" />
+    <Folder Include="prj\Tables\" />
+    <Folder Include="bak\" />
+    <Folder Include="bak\Tables\" />
+    <Folder Include="tool\" />
+    <Folder Include="tool\Views\" />
+    <Folder Include="tmp\" />
+    <Folder Include="tmp\Views\" />
+    <Folder Include="report\" />
+    <Folder Include="report\Views\" />
+    <Folder Include="hmi\" />
+    <Folder Include="hmi\Views\" />
+    <Folder Include="dw\" />
+    <Folder Include="dw\Views\" />
+    <Folder Include="new\" />
+    <Folder Include="new\Tables\" />
+    <Folder Include="new\Views\" />
+    <Folder Include="xfrprj\" />
+    <Folder Include="xfrprj\Tables\" />
+    <Folder Include="prj\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="xfr\Tables\xfr.L2L3WorkOrderReport.sql" />
+    <Build Include="xfr\Tables\xfr.L3L2WorkOrderDefinition.sql" />
+    <Build Include="Storage\MV_MEASUREMENTS.sql" />
+    <Build Include="Storage\MV_SAMPLES.sql" />
+    <Build Include="Security\smf.sql" />
+    <Build Include="Security\xfr.sql" />
+    <Build Include="dbo\Tables\dbo.PRMWorkOrders.sql" />
+    <Build Include="dbo\Tables\dbo.PRMSteelGroups.sql" />
+    <Build Include="dbo\Tables\dbo.PRMSteelgrades.sql" />
+    <Build Include="dbo\Tables\dbo.PRMSteelgradeChemicalCompositions.sql" />
+    <Build Include="dbo\Tables\dbo.PRMShapes.sql" />
+    <Build Include="dbo\Tables\dbo.PRMProducts.sql" />
+    <Build Include="dbo\Tables\dbo.PRMProductCatalogueTypes.sql" />
+    <Build Include="dbo\Tables\dbo.PRMProductCatalogue.sql" />
+    <Build Include="dbo\Tables\dbo.PRMMaterials.sql" />
+    <Build Include="dbo\Tables\dbo.PRMMaterialCatalogueTypes.sql" />
+    <Build Include="dbo\Tables\dbo.PRMMaterialCatalogue.sql" />
+    <Build Include="dbo\Tables\dbo.PRMHeatSuppliers.sql" />
+    <Build Include="dbo\Tables\dbo.PRMHeats.sql" />
+    <Build Include="dbo\Tables\dbo.PRMCustomers.sql" />
+    <Build Include="dbo\Tables\dbo.PPLSchedules.sql" />
+    <Build Include="dbo\Tables\dbo.MVHSamples.sql" />
+    <Build Include="dbo\Tables\dbo.MVHMeasurements.sql" />
+    <Build Include="dbo\Tables\dbo.MVHFeatures.sql" />
+    <Build Include="dbo\Tables\dbo.MVHAssets.sql" />
+    <Build Include="dbo\Tables\dbo.HMIWidgetConfigurations.sql" />
+    <Build Include="dbo\Tables\dbo.HMIUserConfigurations.sql" />
+    <Build Include="dbo\Tables\dbo.HMIRefreshKeys.sql" />
+    <Build Include="dbo\Functions\dbo.FNGetShiftId.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPMaterialGenealogy.sql" />
+    <Build Include="smf\Tables\smf.ViewsStatistics.sql" />
+    <Build Include="smf\Tables\smf.Users.sql" />
+    <Build Include="smf\Tables\smf.UserRoles.sql" />
+    <Build Include="smf\Tables\smf.UserLogins.sql" />
+    <Build Include="smf\Tables\smf.UserClaims.sql" />
+    <Build Include="smf\Tables\smf.UnitOfMeasureCategory.sql" />
+    <Build Include="smf\Tables\smf.UnitOfMeasure.sql" />
+    <Build Include="smf\Tables\smf.SystemStatuses.sql" />
+    <Build Include="smf\Tables\smf.Roles.sql" />
+    <Build Include="smf\Tables\smf.RoleRights.sql" />
+    <Build Include="smf\Tables\smf.Parameters.sql" />
+    <Build Include="smf\Tables\smf.ParameterGroup.sql" />
+    <Build Include="smf\Tables\smf.Limits.sql" />
+    <Build Include="smf\Tables\smf.Languages.sql" />
+    <Build Include="smf\Tables\smf.HmiClientMenu.sql" />
+    <Build Include="smf\Tables\smf.EnumValues.sql" />
+    <Build Include="smf\Tables\smf.EnumNames.sql" />
+    <Build Include="smf\Tables\smf.DefaultLanguageUOM.sql" />
+    <Build Include="smf\Tables\smf.Alarms.sql" />
+    <Build Include="smf\Tables\smf.AlarmDefinitions.sql" />
+    <Build Include="smf\Tables\smf.AlarmCategories.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPFillShiftCalendar.sql" />
+    <Build Include="xfr\Views\xfr.V_L3L2TransferTablesSummary.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPGetShiftId.sql" />
+    <Build Include="dbo\Tables\dbo.DBLogs.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPLogError.sql" />
+    <Build Include="dbo\Tables\dbo.MNTMembers.sql" />
+    <Build Include="dbo\Tables\dbo.MNTMemberRoles.sql" />
+    <Build Include="dbo\Tables\dbo.MNTCrewMembers.sql" />
+    <Build Include="dbo\Functions\dbo.FNGetEnumKeyword.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPClearRawMaterials.sql" />
+    <Build Include="dbo\Functions\dbo.FNTParseIndividualValue.sql" />
+    <Build Include="dbo\Functions\dbo.FNTSplitStrings.sql" />
+    <Build Include="dbo\Tables\dbo.RLSStands.sql" />
+    <Build Include="dbo\Tables\dbo.RLSRollTypes.sql" />
+    <Build Include="dbo\Tables\dbo.RLSRollSets.sql" />
+    <Build Include="dbo\Tables\dbo.RLSRollSetHistory.sql" />
+    <Build Include="dbo\Tables\dbo.RLSRolls.sql" />
+    <Build Include="dbo\Tables\dbo.RLSRollGroovesHistory.sql" />
+    <Build Include="dbo\Tables\dbo.RLSGrooveTemplates.sql" />
+    <Build Include="dbo\Tables\dbo.RLSCassetteTypes.sql" />
+    <Build Include="dbo\Tables\dbo.RLSCassettes.sql" />
+    <Build Include="dbo\Functions\dbo.FNTGetShiftId.sql" />
+    <Build Include="dbo\Tables\dbo.PRMScrapGroups.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPClearRawMaterial.sql" />
+    <Build Include="dbo\Functions\dbo.FNGetTimeOfEvent.sql" />
+    <Build Include="dbo\Tables\dbo.TRKRawMaterialLocations.sql" />
+    <Build Include="dbo\Tables\dbo.STPSetupWorkOrders.sql" />
+    <Build Include="dbo\Tables\dbo.STPSetupTypes.sql" />
+    <Build Include="dbo\Tables\dbo.STPSetupTypeParameters.sql" />
+    <Build Include="dbo\Tables\dbo.STPSetupTypeInstructions.sql" />
+    <Build Include="dbo\Tables\dbo.STPSetups.sql" />
+    <Build Include="dbo\Tables\dbo.STPSetupParameters.sql" />
+    <Build Include="dbo\Tables\dbo.STPSetupInstructions.sql" />
+    <Build Include="dbo\Tables\dbo.STPProductLayouts.sql" />
+    <Build Include="dbo\Tables\dbo.STPParameters.sql" />
+    <Build Include="dbo\Tables\dbo.STPLayouts.sql" />
+    <Build Include="dbo\Tables\dbo.STPIssues.sql" />
+    <Build Include="dbo\Tables\dbo.STPInstructions.sql" />
+    <Build Include="dbo\Tables\dbo.PRFKPIValues.sql" />
+    <Build Include="dbo\Tables\dbo.PRFKPIDefinitions.sql" />
+    <Build Include="dbo\Tables\dbo.HMIWidgets.sql" />
+    <Build Include="dbo\Tables\dbo.EVTShiftDefinitions.sql" />
+    <Build Include="dbo\Tables\dbo.EVTShiftCalendar.sql" />
+    <Build Include="dbo\Tables\dbo.EVTEventTypes.sql" />
+    <Build Include="dbo\Tables\dbo.EVTDaysOfYear.sql" />
+    <Build Include="dbo\Tables\dbo.EVTCrews.sql" />
+    <Build Include="dbo\Functions\dbo.FNGetRollSetGroovesSettings.sql" />
+    <Build Include="dbo\Functions\dbo.FNGetKPIValue.sql" />
+    <Build Include="dbo\Functions\dbo.FNTParameterLookup.sql" />
+    <Build Include="dbo\Functions\dbo.FNTGetActualGrooveInformations.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPSTPParameterLookup.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPAddRawMaterialLocations.sql" />
+    <Build Include="dbo\User Defined Types\dbo.TRK_RML_Row.sql" />
+    <Build Include="dbo\Tables\dbo.PRMProductSteps.sql" />
+    <Build Include="dbo\Tables\dbo.PRMMaterialSteps.sql" />
+    <Build Include="dbo\Tables\dbo.MVHAssetsLocation.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPLogDB.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPClearTransferTables.sql" />
+    <Build Include="smf\Tables\smf.UserTokens.sql" />
+    <Build Include="smf\Tables\smf.UnitOfMeasureFormat.sql" />
+    <Build Include="smf\Tables\smf.Projects.sql" />
+    <Build Include="dbo\Tables\dbo.TRKTrackingInstructions.sql" />
+    <Build Include="dbo\Tables\dbo.TRKRawMaterialsSteps.sql" />
+    <Build Include="dbo\Tables\dbo.TRKRawMaterialsCuts.sql" />
+    <Build Include="dbo\Tables\dbo.TRKRawMaterials.sql" />
+    <Build Include="dbo\Tables\dbo.STPSetupSent.sql" />
+    <Build Include="dbo\Tables\dbo.STPSetupConfigurations.sql" />
+    <Build Include="dbo\Tables\dbo.STPConfigurations.sql" />
+    <Build Include="dbo\Tables\dbo.QTYQualityInspections.sql" />
+    <Build Include="dbo\Tables\dbo.QTYDefects.sql" />
+    <Build Include="dbo\Tables\dbo.QTYDefectCategoryGroups.sql" />
+    <Build Include="dbo\Tables\dbo.QTYDefectCatalogueCategory.sql" />
+    <Build Include="dbo\Tables\dbo.QTYDefectCatalogue.sql" />
+    <Build Include="dbo\Tables\dbo.QETrigger.sql" />
+    <Build Include="dbo\Tables\dbo.QETimeSeriesValue.sql" />
+    <Build Include="dbo\Tables\dbo.QERuleMappingValue.sql" />
+    <Build Include="dbo\Tables\dbo.QERootCauseAggregate.sql" />
+    <Build Include="dbo\Tables\dbo.QERootCause.sql" />
+    <Build Include="dbo\Tables\dbo.QERating.sql" />
+    <Build Include="dbo\Tables\dbo.QEMappingValue.sql" />
+    <Build Include="dbo\Tables\dbo.QEMappingEntry.sql" />
+    <Build Include="dbo\Tables\dbo.QELengthSeriesValue.sql" />
+    <Build Include="dbo\Tables\dbo.QECompensationType.sql" />
+    <Build Include="dbo\Tables\dbo.QECompensationAggregate.sql" />
+    <Build Include="dbo\Tables\dbo.QECompensation.sql" />
+    <Build Include="dbo\Tables\dbo.QEAliasValues.sql" />
+    <Build Include="dbo\Tables\dbo.QEAliases.sql" />
+    <Build Include="dbo\Tables\dbo.PRMHeatChemicalAnalysis.sql" />
+    <Build Include="dbo\Tables\dbo.MVHLayouts.sql" />
+    <Build Include="dbo\Tables\dbo.MVHFeatureCustoms.sql" />
+    <Build Include="dbo\Tables\dbo.MVHAssetTypes.sql" />
+    <Build Include="dbo\Tables\dbo.MVHAssetLayouts.sql" />
+    <Build Include="dbo\Tables\dbo.LTRReportsConfiguration.sql" />
+    <Build Include="dbo\Tables\dbo.EVTTriggersFeatures.sql" />
+    <Build Include="dbo\Tables\dbo.EVTTriggers.sql" />
+    <Build Include="dbo\Tables\dbo.EVTEvents.sql" />
+    <Build Include="dbo\Tables\dbo.EVTEventCategoryGroups.sql" />
+    <Build Include="dbo\Tables\dbo.EVTEventCatalogueCategory.sql" />
+    <Build Include="dbo\Tables\dbo.EVTEventCatalogue.sql" />
+    <Build Include="dbo\Tables\dbo.DBPropertyValues.sql" />
+    <Build Include="dbo\Tables\dbo.DBProperties.sql" />
+    <Build Include="dbo\Tables\dbo.DBDataTypes.sql" />
+    <Build Include="prj\Tables\prj.PRMHeatsEXT.sql" />
+    <Build Include="prj\Tables\prj.PRMCustomersEXT.sql" />
+    <Build Include="prj\Tables\prj.MVHSamplesEXT.sql" />
+    <Build Include="prj\Tables\prj.TRKRawMaterialsStepsEXT.sql" />
+    <Build Include="prj\Tables\prj.TRKRawMaterialsEXT.sql" />
+    <Build Include="prj\Tables\prj.MVHAssetsEXT.sql" />
+    <Build Include="prj\Tables\prj.MVHMeasurementsEXT.sql" />
+    <Build Include="prj\Tables\prj.PRMWorkOrdersEXT.sql" />
+    <Build Include="prj\Tables\prj.PRMSteelgradesEXT.sql" />
+    <Build Include="prj\Tables\prj.PRMProductsEXT.sql" />
+    <Build Include="prj\Tables\prj.MVHFeaturesEXT.sql" />
+    <Build Include="prj\Tables\prj.PRMProductCatalogueEXT.sql" />
+    <Build Include="prj\Tables\prj.PRMMaterialsEXT.sql" />
+    <Build Include="prj\Tables\prj.PRMMaterialCatalogueEXT.sql" />
+    <Build Include="tool\Views\tool.DFLT_PRMSteelgrades.sql" />
+    <Build Include="report\Views\report.V_Rolls.sql" />
+    <Build Include="report\Views\report.V_MaterialYardReport.sql" />
+    <Build Include="report\Views\report.V_MaterialYardIOReport.sql" />
+    <Build Include="report\Views\report.V_QualityReport.sql" />
+    <Build Include="report\Views\report.V_ProductYardReport.sql" />
+    <Build Include="report\Views\report.V_Consumption.sql" />
+    <Build Include="report\Views\report.V_ProductYardIOReport.sql" />
+    <Build Include="hmi\Views\hmi.V_RollsetInCassettes.sql" />
+    <Build Include="hmi\Views\hmi.V_Rolls.sql" />
+    <Build Include="hmi\Views\hmi.V_RawMaterialSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_RawMaterialOverview.sql" />
+    <Build Include="hmi\Views\hmi.V_MaterialSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_Features.sql" />
+    <Build Include="hmi\Views\hmi.V_AreaRawMaterialMeasurements.sql" />
+    <Build Include="hmi\Views\hmi.V_ActualStandConfiguration.sql" />
+    <Build Include="hmi\Views\hmi.V_ProductOverview.sql" />
+    <Build Include="hmi\Views\hmi.V_PassChangeDataActual.sql" />
+    <Build Include="hmi\Views\hmi.V_L1L3MaterialAssignment.sql" />
+    <Build Include="hmi\Views\hmi.V_KPIValues.sql" />
+    <Build Include="hmi\Views\hmi.V_Heats.sql" />
+    <Build Include="hmi\Views\hmi.V_RawMaterialLabels.sql" />
+    <Build Include="hmi\Views\hmi.V_RawMaterialInFurnace.sql" />
+    <Build Include="hmi\Views\hmi.V_SetupConfigurationSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_RawMaterialHistory.sql" />
+    <Build Include="hmi\Views\hmi.V_SetupConfigurations.sql" />
+    <Build Include="hmi\Views\hmi.V_HeatsByGroupOnYards.sql" />
+    <Build Include="hmi\Views\hmi.V_WorkOrderLocations.sql" />
+    <Build Include="hmi\Views\hmi.V_RawMaterialMeasurements.sql" />
+    <Build Include="hmi\Views\hmi.V_EventsStructureSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_GroovesView4Accumulation.sql" />
+    <Build Include="hmi\Views\hmi.V_ActualRollsOnStandsDiameter.sql" />
+    <Build Include="hmi\Views\hmi.V_DefectsSummary.sql" />
+    <Build Include="hmi\Views\hmi.V_CassettesInStands.sql" />
+    <Build Include="hmi\Views\hmi.V_AssetsLocationOverview.sql" />
+    <Build Include="hmi\Views\hmi.V_AS_WorkOrders.sql" />
+    <Build Include="hmi\Views\hmi.V_ShiftCalendar.sql" />
+    <Build Include="hmi\Views\hmi.V_WorkOrderSummary.sql" />
+    <Build Include="hmi\Views\hmi.V_FeatureCustoms.sql" />
+    <Build Include="hmi\Views\hmi.V_WorkOrdersOnYards.sql" />
+    <Build Include="hmi\Views\hmi.V_RollHistoryPerGroove.sql" />
+    <Build Include="hmi\Views\hmi.V_RollHistory.sql" />
+    <Build Include="hmi\Views\hmi.V_Events.sql" />
+    <Build Include="hmi\Views\hmi.V_QualityInspectionSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_ProductSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_Products.sql" />
+    <Build Include="hmi\Views\hmi.V_WorkOrdersOnMaterialYards.sql" />
+    <Build Include="hmi\Views\hmi.V_RollSetOverview.sql" />
+    <Build Include="hmi\Views\hmi.V_Enums.sql" />
+    <Build Include="hmi\Views\hmi.V_ProductsOnYards.sql" />
+    <Build Include="hmi\Views\hmi.V_HeatsOnYards.sql" />
+    <Build Include="hmi\Views\hmi.V_Assets.sql" />
+    <Build Include="hmi\Views\hmi.V_DelayOverview.sql" />
+    <Build Include="hmi\Views\hmi.V_WorkOrderSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_MeasurementSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_Measurements.sql" />
+    <Build Include="hmi\Views\hmi.V_AS_Delays.sql" />
+    <Build Include="hmi\Views\hmi.V_AS_Defects.sql" />
+    <Build Include="hmi\Views\hmi.V_WidgetConfigurations.sql" />
+    <Build Include="hmi\Views\hmi.V_LayerSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_SetupParameters.sql" />
+    <Build Include="hmi\Views\hmi.V_CassettesOverview.sql" />
+    <Build Include="hmi\Views\hmi.V_WorkOrdersOnYardLocations.sql" />
+    <Build Include="hmi\Views\hmi.V_WorkOrdersOnProductYards.sql" />
+    <Build Include="hmi\Views\hmi.V_RawMaterialLocations.sql" />
+    <Build Include="dw\Views\dw.DimAsset.sql" />
+    <Build Include="dw\Views\dw.DimYear.sql" />
+    <Build Include="dw\Views\dw.DimEventCatalogue.sql" />
+    <Build Include="dw\Views\dw.DimDefectCatalogue.sql" />
+    <Build Include="dw\Views\dw.DimInspectionResult.sql" />
+    <Build Include="dw\Views\dw.DimDate.sql" />
+    <Build Include="dw\Views\dw.FactWorkOrder.sql" />
+    <Build Include="dw\Views\dw.DimMaterialStatus.sql" />
+    <Build Include="dw\Views\dw.DimMaterialCatalogue.sql" />
+    <Build Include="dw\Views\dw.DimMaterial.sql" />
+    <Build Include="dw\Views\dw.FactMaterial.sql" />
+    <Build Include="dw\Views\dw.DimUnit.sql" />
+    <Build Include="dw\Views\dw.DimTypeOfScrap.sql" />
+    <Build Include="dw\Views\dw.DimTime.sql" />
+    <Build Include="dw\Views\dw.DimSteelgrade.sql" />
+    <Build Include="dw\Views\dw.DimCustomer.sql" />
+    <Build Include="dw\Views\dw.DimCrew.sql" />
+    <Build Include="dw\Views\dw.FactEvent.sql" />
+    <Build Include="dw\Views\dw.DimShiftDefinition.sql" />
+    <Build Include="dw\Views\dw.DimShift.sql" />
+    <Build Include="dw\Views\dw.DimProductCatalogue.sql" />
+    <Build Include="dw\Views\dw.DimHour.sql" />
+    <Build Include="dw\Views\dw.DimHeat.sql" />
+    <Build Include="dw\Views\dw.DimFeature.sql" />
+    <Build Include="dw\Views\dw.DimEventType.sql" />
+    <Build Include="dw\Views\dw.DimWorkOrderStatus.sql" />
+    <Build Include="dw\Views\dw.DimWorkOrder.sql" />
+    <Build Include="dw\Views\dw.DimUser.sql" />
+    <Build Include="dbo\Functions\dbo.FNGetKPIValueWO.sql" />
+    <Build Include="dbo\Functions\dbo.FNGetDurationOfEvent.sql" />
+    <Build Include="dbo\Functions\dbo.FNTGetMeasurementByFeatureId.sql" />
+    <Build Include="dbo\Functions\dbo.FNTGetAvgMeasurementByFeatureId.sql" />
+    <Build Include="dbo\Functions\dbo.FNTGet10DistrSamplesByFeatureId.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPWorkOrdersOnProductYards.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPSetupSent.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPSetupInstructions.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPRawMaterialsInFurnace.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPRawMaterialsInArea.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPL3L1MaterialAssignment.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPKPIWriteToTable.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPKPIOEE.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPImportFromExcel.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPGetErrorInfo.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPGetAliasValue.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPFeatureCustoms.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPExecSqlWithLog.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPCreateWorkOrderSIM.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPClearTestWorkOrderDetails.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPClearGhostRawMaterials.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPClearAlarms.sql" />
+    <Build Include="dbo\User Defined Types\dbo.TRK_RM_Id_List.sql" />
+    <Build Include="Security\tool.sql" />
+    <Build Include="Security\tmp.sql" />
+    <Build Include="Security\report.sql" />
+    <Build Include="Security\prj.sql" />
+    <Build Include="Security\hmi.sql" />
+    <Build Include="Security\dw.sql" />
+    <Build Include="Security\bak.sql" />
+    <Build Include="dbo\Tables\dbo.TRKRawMaterialsInFurnace.sql" />
+    <Build Include="smf\Tables\smf.Modules.sql" />
+    <Build Include="smf\Tables\smf.AlarmMessages.sql" />
+    <Build Include="smf\Tables\smf.AlarmDefinitionsToRoles.sql" />
+    <Build Include="smf\Tables\smf.AlarmDefinitionParams.sql" />
+    <Build Include="hmi\Views\hmi.V_ScheduleSummary.sql" />
+    <Build Include="hmi\Views\hmi.V_QualityExpertSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_QERating.sql" />
+    <Build Include="hmi\Views\hmi.V_Alarms.sql" />
+    <Build Include="dw\Views\dw.FactRating.sql" />
+    <Build Include="dbo\Functions\dbo.FNTGetAliasValue.sql" />
+    <Build Include="dbo\Functions\dbo.FNTGetSamplesForFeatureName.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPWorkOrderTransferFromExcel.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPWorkOrderSummary.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPUserMenu.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPRawMaterialGenealogy.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPMaterialSteps.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPMaterialMeasurements.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPLastGradingOnAssets.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPKPIWorkOrderCompletion.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPKPITestTimePercentageOfTotal.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPKPIScrapPercentage.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPKPIQualityYield.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPKPIProductionPlanVariance.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPKPIMetallicYield.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPGetKPIValue.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPGetAliasValuesToTable.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPGetAlarmsByLanguage.sql" />
+    <Build Include="smf\Tables\smf.AccessUnits.sql" />
+    <Build Include="hmi\Views\hmi.V_TrackingInstructions.sql" />
+    <Build Include="Security\xfr_1.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPKPIMeanTimeOfDelay.sql" />
+    <Build Include="Security\xfrprj.sql" />
+    <Build Include="dbo\Tables\dbo.ZPCZebraTemplates.sql" />
+    <Build Include="dbo\Tables\dbo.ZPCZebraPrinters.sql" />
+    <Build Include="dbo\Tables\dbo.TRKRawMaterialRelations.sql" />
+    <Build Include="dbo\Tables\dbo.TRKLayerRelations.sql" />
+    <Build Include="dbo\Tables\dbo.TRKLayerRawMaterialRelations.sql" />
+    <Build Include="dw\Views\dw.FactRatingRootCause.sql" />
+    <Build Include="dw\Views\dw.FactRatingCompensation.sql" />
+    <Build Include="dw\Views\dw.DimRule.sql" />
+    <Build Include="dbo\Tables\dbo.EVTShiftCrewPattern.sql" />
+    <Build Include="hmi\Views\hmi.V_TimeLine.sql" />
+    <Build Include="hmi\Views\hmi.V_EventTypeSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_EventGroupSearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_EventCategorySearchGrid.sql" />
+    <Build Include="hmi\Views\hmi.V_EventCatalogueSearchGrid.sql" />
+    <Build Include="dw\Views\dw.DimProduct.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPGetMeasure4WOAndFeature.sql" />
+    <Build Include="dbo\Tables\dbo.TRKMillControlDatas.sql" />
+    <Build Include="dbo\Tables\dbo.MVHFeatureTemplates.sql" />
+    <Build Include="dbo\Tables\dbo.MVHAssetTemplates.sql" />
+    <Build Include="dbo\Tables\dbo.MVHAssetFeatureTemplates.sql" />
+    <Build Include="dbo\Tables\dbo.L1ARaisedBypasses.sql" />
+    <Build Include="dbo\Tables\dbo.L1ABypassTypes.sql" />
+    <Build Include="dbo\Tables\dbo.L1ABypassInstances.sql" />
+    <Build Include="dbo\Tables\dbo.L1ABypassConfigurations.sql" />
+    <Build Include="dbo\Tables\dbo.DBLogProcsExecute.sql" />
+    <Build Include="report\Views\report.V_RollGrooveReport.sql" />
+    <Build Include="dw\Views\dw.FactShift.sql" />
+    <Build Include="dw\Views\dw.DimRawMaterial.sql" />
+    <Build Include="dbo\Functions\dbo.fnCalculateDistance.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPRenumberAssets.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPLogProcsExecute.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPDBTableSizes.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPBypassReport.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPAddLanguageToAlarmMessages.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPActualBypassWidget.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.sp_BlitzWho.sql" />
+    <Build Include="dbo\User Defined Types\dbo.AssetId_List.sql" />
+    <Build Include="dbo\Synonyms\dbo.DBDatabases.sql" />
+    <Build Include="xfr\Tables\xfr.L2L3ProductReport.sql" />
+    <Build Include="dbo\Tables\dbo.MVHFeatureCalculated.sql" />
+    <Build Include="dbo\Tables\dbo.MNTMaintenanceSchedules.sql" />
+    <Build Include="dbo\Tables\dbo.MNTMaintenanceActions.sql" />
+    <Build Include="dbo\Tables\dbo.MNTEquipmentSuppliers.sql" />
+    <Build Include="dbo\Tables\dbo.MNTEquipments.sql" />
+    <Build Include="dbo\Tables\dbo.MNTEquipmentHistory.sql" />
+    <Build Include="dbo\Tables\dbo.MNTEquipmentGroups.sql" />
+    <Build Include="dbo\Tables\dbo.EVTShiftLayouts.sql" />
+    <Build Include="new\Tables\new.MNTMembers.sql" />
+    <Build Include="new\Tables\new.MNTMemberRoles.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentSetOnAssets.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentCategories.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentSetTemplates.sql" />
+    <Build Include="new\Tables\new.MNTCrewMembers.sql" />
+    <Build Include="new\Tables\new.MNTTools.sql" />
+    <Build Include="new\Tables\new.MNTIncidentTriggers.sql" />
+    <Build Include="new\Tables\new.MNTActionTypes.sql" />
+    <Build Include="new\Tables\new.MNTLimitCounterTemplates.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentRLS.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentRLSTypes.sql" />
+    <Build Include="new\Tables\new.MNTLimitCounters.sql" />
+    <Build Include="new\Tables\new.MNTQuantityTypes.sql" />
+    <Build Include="new\Tables\new.MNTActions.sql" />
+    <Build Include="new\Tables\new.MNTIncidents.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentSets.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentLocalizations.sql" />
+    <Build Include="new\Tables\new.MNTAssetsWithEquipmentTypes.sql" />
+    <Build Include="new\Tables\new.MNTIncidentTemplates.sql" />
+    <Build Include="new\Tables\new.MNTEquipments.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentTypes.sql" />
+    <Build Include="new\Tables\new.MNTIncidentTypes.sql" />
+    <Build Include="new\Tables\new.MNTSuppliers.sql" />
+    <Build Include="hmi\Views\hmi.V_QualityBundlesInspectionSearchGrid.sql" />
+    <Build Include="new\Views\new.V_Equipments.sql" />
+    <Build Include="Security\new.sql" />
+    <Build Include="new\Tables\new.MNTToolTypes.sql" />
+    <Build Include="new\Tables\new.MNTRecommendedActions.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentToEquipmentCategories.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentAttachments.sql" />
+    <Build Include="dbo\Tables\dbo.DBAttachmentTypes.sql" />
+    <Build Include="hmi\Views\hmi.V_BundleSearchGrid.sql" />
+    <Build Include="new\Tables\new.MNTEquipmentCategoryGroups.sql" />
+    <Build Include="new\Views\new.V_EquipmentSets.sql" />
+    <Build Include="new\Views\new.V_EquipmentCategories.sql" />
+    <Build Include="hmi\Views\hmi.V_MaterialLocations.sql" />
+    <Build Include="dbo\Functions\dbo.FNCamelCase.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPUpdateShiftCalendar.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPProfileReport.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPKPICorrectivePreventiveMaintenance.sql" />
+    <Build Include="dbo\User Defined Types\dbo.Date_ShiftLayoutId_List.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPTemperatureReport.sql" />
+    <Build Include="dbo\Stored Procedures\dbo.SPSpeedReport.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ProductionSchemaCompare.scmp" />
+    <None Include="PE_Standard.bacpac" />
+  </ItemGroup>
+</Project>

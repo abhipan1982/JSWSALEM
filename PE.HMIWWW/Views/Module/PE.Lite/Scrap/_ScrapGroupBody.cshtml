@@ -1,0 +1,17 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.ScrapGroup.VM_ScrapGroup
+
+<div class="row h-100">
+    <div class="col">
+        @(Html.Kendo().TabStrip()
+            .Name("ScrapGroupBody")
+            .Animation(false)
+            .Scrollable(false)
+            .Items(tabstrip =>
+            {
+                tabstrip.Add().Text(VM_Resources.NAME_ScrapGroupDetails)
+                    .Selected(true).Content(Html.Partial("~/Views/Module/PE.Lite/Scrap/_ScrapGroupDetails.cshtml", Model).ToHtmlString()).ContentHtmlAttributes(new {@class = "partialHeight"});
+            })
+            .Events(e => { e.Select("saveTabStripState"); })
+            )
+    </div>
+</div>

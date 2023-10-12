@@ -1,0 +1,97 @@
+﻿@model List<PE.HMIWWW.ViewModel.Module.Lite.Setup.VM_Filters>
+@using  PE.HMIWWW.ViewModel.Module.Lite.Setup
+
+@if (Model.Any(x => x.ParameterNameTranslated != null))
+{
+    <div class="k-widget w-100 mb-2" style="height:13%">
+        <div class="header p-1">
+            @VM_Resources.NAME_Filters
+        </div>
+        <div class="p-2 filters" id="filters-pane">
+            @foreach (var item in Model)
+            {
+                <div class="mr-4">
+                    <div class="label">
+                        @item.ParameterNameTranslated
+                    </div>
+                    @Html.Kendo().TextBoxFor(x => item.ParameterValueName).Enable(false).HtmlAttributes(new { Name = item.ParameterName.Replace(" ", "") })
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<div class="w-100 SetupPropertiesGridBlock" style="height:@ViewBag.SetupPropertiesGridHeight">
+
+    @(Html.Kendo().Grid<VM_SetupValues>()
+        .Name("SetupPropertiesGrid")
+        .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Selectable()
+        .Scrollable()
+        .Pageable(p => p
+        .Refresh(true)
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+        .PageSizes(true))
+        .HtmlAttributes(new { style = @String.Format("height:100%;") })
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.InstructionId).Visible(false);
+            columns.Bound(c => c.InstructionName).ClientTemplate(
+                "<div title='#:InstructionDescription#'>#:InstructionName#</div>").Width(250);
+            columns.Bound(c => c.AssetName);
+            columns.Bound(c => c.IsRequired).ClientTemplate(
+                "#if(IsRequired === true)" +
+                "{" +
+                "#<input class='not-editable k-checkbox' type='checkbox' disabled checked/>#" +
+                "}" +
+                "else" +
+                "{" +
+                "#<input class='not-editable' type='checkbox' disabled />#" +
+                "}#");
+            columns.Bound(c => c.RangeFrom);
+            columns.Bound(c => c.Value).ClientTemplate(
+                "#if(DataType == 'BOOL')" +
+                "{" +
+                "#<input class='k-checkbox not-editable' type='checkbox' disabled #if(Value === '1'){#checked#}#/>#" +
+                "}" +
+                "else" +
+                "{" +
+                "if(Value == null)" +
+                "{" +
+                "#<span></span>#" +
+                "}" +
+                "else" +
+                "{" +
+                "#<span>#:Value#</span>#" +
+                "}" +
+                "}#").Width(150);
+            columns.Bound(c => c.RangeTo);
+            columns.Bound(c => c.UnitSymbol);
+            columns.Command(command =>{ command.Edit().Text("<span class='k-icon edit-button-ico'></span>").IconClass("edit-button-ico");}).Width(70);
+        })
+        .Editable(editable => editable.Mode(GridEditMode.InLine))
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .Model(m =>
+            {
+                m.Id(f => f.InstructionId);
+                m.Field(f => f.InstructionName).Editable(false);
+                m.Field(f => f.UnitSymbol).Editable(false);
+                m.Field(f => f.DataType).Editable(false);
+                m.Field(f => f.Value).Editable(true);
+                m.Field(f => f.RangeFrom).Editable(false);
+                m.Field(f => f.RangeTo).Editable(false);
+                m.Field(f => f.AssetName).Editable(false);
+                m.Field(f => f.IsRequired).Editable(false);
+            })
+            .PageSize(23)
+            .Read(r => r.Action("GetSetupInstructionData", "Setup", new { setupId = @ViewBag.SetupId }))
+            .Update(update => update.Action("UpdateSetup", "Setup"))
+            .Events(e => e.Error("TelerikErrorHandler"))
+        )
+        .Events(e => { e.Save("updateSetupSave"); e.Edit("onEdit"); })
+    )
+
+</div>
+

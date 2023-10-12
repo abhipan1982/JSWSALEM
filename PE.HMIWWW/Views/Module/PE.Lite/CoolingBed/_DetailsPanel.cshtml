@@ -1,0 +1,50 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Visualization.VM_TrackingMaterialOverview
+
+<style>
+  .material_label {
+    width: 100px;
+  }
+</style>
+<div class="details">
+  <div class="material_name form-inline"><div id="material-color"></div><span id="materialName">@Html.DisplayFor(x => x.MaterialName)</span></div>
+  <div class="details_header">
+    @VM_Resources.NAME_Details <span id="materialNameDetails" class="details_header_icon details-icon cursor-pointer"></span>
+  </div>
+  <div class="details_data">
+    <div class="row form-group material-data">
+      <div class="material_label ml-4 text-left">
+        @Html.LabelFor(m => m.WorkOrderName, new { @class = "control-label" })
+      </div>
+      <div class="material_label p-0">
+        <p class="cursor-pointer" id="workOrderName">@Html.DisplayFor(x => x.WorkOrderName)</p>
+      </div>
+    </div>
+
+    <div class="row form-group material-data">
+      <div class="material_label ml-4 text-left">
+        @Html.LabelFor(m => m.HeatName, new { @class = "control-label" })
+      </div>
+      <div class="material_label p-0 w-50" style="display: flex; flex-direction: row; justify-content: space-between">
+        <p class="cursor-pointer" id="heatName">@Html.DisplayFor(x => x.HeatName)</p>
+        <div id="heatConsistent" class="cursor-pointer"></div>
+      </div>
+    </div>
+
+    <div class="row form-group material-data">
+      <div class="material_label ml-4 text-left">
+        @Html.LabelFor(m => m.SteelgradeName, new { @class = "control-label" })
+      </div>
+      <div class="material_label p-0">
+        <p class="cursor-pointer" id="steelgradeName">@Html.DisplayFor(x => x.SteelgradeName)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="measurements">
+  <div class="measurements_header">
+    @VM_Resources.NAME_Measurements <span class="details_header_icon details-icon cursor-pointer" id="measurements_details" onclick="GoToMeasurements()"></span>
+  </div>
+  <div class="measurements_data">
+  </div>
+</div>

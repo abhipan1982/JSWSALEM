@@ -1,0 +1,34 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Setup.VM_SetupConfiguration
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("send_steelgrade_related", "sendSetupConfiguration(true)", false, "NAME_SendSteelgradeRelatedSetups")
+    @Html.ImageButton("telegram_resend", "sendSetupConfiguration(false)", false, "NAME_SendAllSetups")
+    @Html.ImageButton("new", "createSetupConfiguration()", false, "NAME_CreateSetupConfiguration")
+    @Html.ImageButton("edit", "editSetupConfiguration()", false, "NAME_EditSetupConfiguration")
+    @Html.ImageButton("clone", "cloneSetupConfiguration()", false)
+    @Html.ImageButton("new_version", "createSetupConfigurationVersion()", false)
+    @Html.ImageButton("delete", "deleteSetupConfiguration()", false)
+}
+
+<div class="container-fluid p-3">
+    <div class="row">
+        <div class="col-3 grid-filter" id="SetupConfigurationSearchGrid">
+            @await Html.PartialAsync("~/Views/Module/PE.Lite/SetupConfiguration/_ConfigurationSearchGrid.cshtml", Model)
+        </div>
+        <div class="col-9 element-details" id="SetupConfigurationDetails">
+            <div class="row justify-content-center plug">
+                <div class="col-6 align-self-center">
+                    <img src="~/css/Shared/plug.png" />
+                    <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/SetupConfiguration.css" />
+<script src="~/bundles/js/Module/SetupConfiguration.js"></script>

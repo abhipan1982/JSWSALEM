@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dw].[DimTime] (
+    [SourceName]           NVARCHAR (50)  NOT NULL,
+    [SourceTime]           DATETIME       NOT NULL,
+    [DimTimeIsDeleted]     BIT            NOT NULL,
+    [DimTimeHash]          VARBINARY (16) NULL,
+    [DimTimeKey]           BIGINT         NOT NULL,
+    [TimeHour]             INT            NOT NULL,
+    [TimeMinute]           INT            NOT NULL,
+    [TimeSecond]           INT            NOT NULL,
+    [TimeHalfHour]         INT            NOT NULL,
+    [TimeQuarterHour]      INT            NOT NULL,
+    [TimeSecondOfDay]      INT            NOT NULL,
+    [TimeMinuteOfDay]      INT            NOT NULL,
+    [TimeHalfHourOfDay]    INT            NOT NULL,
+    [TimeQuarterHourOfDay] INT            NOT NULL,
+    [TimeString]           VARCHAR (8)    NOT NULL,
+    [TimeString12]         VARCHAR (8)    NOT NULL,
+    [TimeHour12]           INT            NOT NULL,
+    [TimeAmPm]             VARCHAR (2)    NOT NULL,
+    [TimeHourCode]         VARCHAR (2)    NOT NULL,
+    [TimeMinuteCode]       VARCHAR (5)    NOT NULL,
+    [TimeTime]             TIME (0)       NOT NULL,
+    [DimTimeRow]           INT            IDENTITY (1, 1) NOT NULL
+);
+

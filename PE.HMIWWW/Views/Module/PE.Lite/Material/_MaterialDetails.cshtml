@@ -1,0 +1,77 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_MaterialOverview
+
+<div class="row h-100 p-0 pt-3">
+  <div class="col-4 p-0">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.MaterialName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.MaterialName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.WorkOrderName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.WorkOrderName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.SteelgradeName)
+        </div>
+        <div class="col">
+          <span class="link" onclick="_Steelgrade.GoToSteelgrade(@Model.FKSteelgradeId)">
+            @Html.DisplayFor(m => m.SteelgradeName)
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4 p-0">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.IsDummy)
+        </div>
+        <div class="col check-box">
+          @Html.CheckBoxFor(m => m.IsDummy.Value, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.WorkOrderStatus)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.WorkOrderStatus)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.IsAssigned)
+        </div>
+        <div class="col check-box">
+          @Html.CheckBoxFor(m => m.IsAssigned, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.HeatName)
+        </div>
+        <div class="col">
+          <span class="link" onclick="_Heat.GoToHeat(@Model.FKHeatId)">
+            @Html.DisplayFor(m => m.HeatName)
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

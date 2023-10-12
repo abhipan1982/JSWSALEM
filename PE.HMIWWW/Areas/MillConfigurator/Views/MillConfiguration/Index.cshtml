@@ -1,0 +1,156 @@
+@using Kendo.Mvc.UI;
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration;
+@using PE.HMIWWW.Core.Extensions
+@using PE.HMIWWW.Core.HtmlHelpers
+@using PE.HMIWWW.Core.Resources
+
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<script>
+
+  function getPageTitleForPDFExport() {
+      let pageTitle = '@(ViewBag.PDFTitle)';
+      getFeaturesPDF(pageTitle);
+  }
+
+</script>
+
+@section module_menu
+  {
+  @Html.ImageButton("add_asset", "createAsset()", false, "NAME_CreateAsset")
+  @Html.ImageButton("add_area", "createArea()", false, "NAME_CreateArea")
+  @Html.ImageButton("add", "createAssetType()", false, "NAME_CreateAssetType")
+  @Html.ImageButton("confirm", "verifyFeatures()", false, "NAME_VerifyFeatures")
+  @Html.ImageButton("create_report", "getPageTitleForPDFExport()", false, "NAME_ExportFeatures")
+  }
+
+  <script id="icons-template-assigned" type="text/kendo-tmpl">
+
+    <a href="javascript:editAsset(#:AssetId#);" title = @Html.Raw(VM_Resources.NAME_EditAsset)><img alt=@Html.Raw(VM_Resources.NAME_EditAsset) border = "0" class="image-button" onmouseout = "this.src='/css/functions/small/edit.png'" onmouseover = "this.src='/css/functions/small/edit_hover.png'" src = "/css/functions/small/edit.png" /></a>
+    <a href="javascript:cloneAsset(#:AssetId#);" title = @Html.Raw(VM_Resources.NAME_CloneAsset)><img alt=@Html.Raw(VM_Resources.NAME_CloneAsset) border = "0" class="image-button" onmouseout = "this.src='/css/functions/small/clone.png'" onmouseover = "this.src='/css/functions/small/clone_hover.png'" src = "/css/functions/small/clone.png" /></a>
+    <a href="javascript:createFeature(#:AssetId#);" title = @Html.Raw(VM_Resources.BUTTON_add_feature)><img alt=@Html.Raw(VM_Resources.BUTTON_add_feature) border = "0" class="image-button" onmouseout = "this.src='/css/functions/small/add_feature.png'" onmouseover = "this.src='/css/functions/small/add_feature_hover.png'" src = "/css/functions/small/add_feature.png" /></a>
+    <a href="javascript:assetDetails(#:AssetId#);" title = @Html.Raw(VM_Resources.NAME_Details)><img alt=@Html.Raw(VM_Resources.NAME_Details) border = "0" class="image-button" onmouseout = "this.src='/css/functions/small/details.png'" onmouseover = "this.src='/css/functions/small/details_hover.png'" src = "/css/functions/small/details.png" /></a>
+
+  </script>
+
+  <script id="icons-template-unassigned" type="text/kendo-tmpl">
+    #if(AssetCode !== 0) {#
+    <a href="javascript:editAsset(#:AssetId#);" title = @Html.Raw(VM_Resources.NAME_EditAsset)><img alt=@Html.Raw(VM_Resources.NAME_EditAsset) border = "0" class="image-button" onmouseout = "this.src='/css/functions/small/edit.png'" onmouseover = "this.src='/css/functions/small/edit_hover.png'" src = "/css/functions/small/edit.png" /></a>
+    <a href="javascript:cloneAsset(#:AssetId#);" title = @Html.Raw(VM_Resources.NAME_CloneAsset)><img alt=@Html.Raw(VM_Resources.NAME_CloneAsset) border = "0" class="image-button" onmouseout = "this.src='/css/functions/small/clone.png'" onmouseover = "this.src='/css/functions/small/clone_hover.png'" src = "/css/functions/small/clone.png" /></a>
+    <a href="javascript:createFeature(#:AssetId#);" title = @Html.Raw(VM_Resources.BUTTON_add_feature)><img alt=@Html.Raw(VM_Resources.BUTTON_add_feature) border = "0" class="image-button" onmouseout = "this.src='/css/functions/small/add_feature.png'" onmouseover = "this.src='/css/functions/small/add_feature_hover.png'" src = "/css/functions/small/add_feature.png" /></a>
+    <a href="javascript:deleteAsset(#:AssetId#);" title = @Html.Raw(VM_Resources.BUTTON_delete)><img alt=@Html.Raw(VM_Resources.BUTTON_delete) border = "0" class="image-button" onmouseout = "this.src='/css/functions/small/delete.png'" onmouseover = "this.src='/css/functions/small/delete_hover.png'" src = "/css/functions/small/delete.png" /></a>
+    <a href="javascript:assetDetails(#:AssetId#);" title = @Html.Raw(VM_Resources.NAME_Details)><img alt=@Html.Raw(VM_Resources.NAME_Details) border = "0" class="image-button" onmouseout = "this.src='/css/functions/small/details.png'" onmouseover = "this.src='/css/functions/small/details_hover.png'" src = "/css/functions/small/details.png" /></a>
+    #}#
+  </script>
+
+  <script id="valid-template" type="text/kendo-tmpl">
+        #if(FeaturesAreValid) {#
+        <img src='@("result_true".BuildImageSrc())' /> #=ValidFeatures#/#=L1Features#/#=AllFeatures#
+  #}
+  else{#
+  <img src='@("result_false".BuildImageSrc())' /> #=ValidFeatures#/#=L1Features#/#=AllFeatures#
+  #}#
+</script>
+
+<div class="row mill-grids" style="height: 580px;">
+  <div class="col-8">
+
+    @(Html.Kendo().TreeList<VM_AssetInstance>
+        ()
+        .Name("AssignedAssets")
+        .Columns(columns =>
+        {
+          columns.Add().Field(e => e.OrderSeq).Width(100).HtmlAttributes(new { @class = "nowrap" });
+          columns.Add().Field(e => e.AssetName);
+          columns.Add().Field(e => e.AssetDescription).HtmlAttributes(new { @class = "nowrap" });
+          columns.Add().Field(e => e.AssetCode).HtmlAttributes(new { @class = "nowrap" });
+          columns.Add().Field(e => e.FeaturesAreValid).HtmlAttributes(new { @class = "nowrap" }).Width(100).TemplateId("valid-template");
+          columns.Add().Field(e => e.IsActive).Width(70).Template(
+          "#if(IsActive === true)" +
+          "{" +
+          "#<input class='not-editable' type='checkbox' disabled checked />#" +
+          "}" +
+          "else" +
+          "{" +
+          "#<input class='not-editable' type='checkbox' disabled />#" +
+          "}#");
+          columns.Add().Field(e => e.OrderSeq).Sortable(false).Filterable(false).TemplateId("icons-template-assigned").Title(" ").Width(125);
+        })
+        .Editable(editable =>
+        {
+          editable.Move(move => move.Reorderable(true));
+        })
+        .Filterable()
+        .Sortable()
+        .Events(ev =>
+        {
+          ev.Drag("onAssignedDrag");
+          ev.DragEnd("onAssignedDragEnd");
+        })
+        .DataSource(dataSource => dataSource
+        .Read(r => r.Action("GetAssignedAssetsTreeList", "MillConfiguration", new { Area = "MillConfigurator" }))
+        .ServerOperation(false)
+        .Sort(sort => sort.Add(s => s.OrderSeq).Ascending())
+        .Filter(filter => filter.Add(f => f.IsActive).IsEqualTo(true))
+        .Model(m =>
+        {
+          m.Id(f => f.AssetId);
+          m.ParentId(f => f.ParentAssetId);
+          m.Expanded(true);
+          m.Field(f => f.AssetName);
+          m.Field(f => f.ParentAssetId);
+        })
+        )
+        .HtmlAttributes(new { style = string.Format("height:{0}px;", 700) })
+        )
+
+  </div>
+
+  <div class="col-4">
+
+    @(Html.Kendo().TreeList<VM_AssetInstance>
+        ()
+        .Name("UnassignedAssets")
+        .Columns(columns =>
+        {
+          columns.Add().Field(e => e.AssetName).Width(220);
+          columns.Add().Field(e => e.AssetDescription);
+          columns.Add().Field(e => e.OrderSeq).Sortable(false).Filterable(false).TemplateId("icons-template-unassigned").Title(" ").Width(150);
+        })
+        .Editable(editable =>
+        {
+          editable.Move(move => move.Reorderable(true));
+        })
+        .Filterable()
+        .Sortable()
+        .Events(ev =>
+        {
+          ev.Drag("onUnassignedDrag");
+          ev.DragEnd("onUnassignedDragEnd");
+        })
+        .DataSource(dataSource => dataSource
+        .Read(r => r.Action("GetUnassignedAssetsTreeList", "MillConfiguration", new { Area = "MillConfigurator" }))
+        .ServerOperation(false)
+        .Sort(sort => sort.Add(s => s.OrderSeq).Ascending())
+        .Model(m =>
+        {
+          m.Id(f => f.AssetId);
+          m.ParentId(f => f.FKParentAssetId);
+          m.Expanded(true);
+          m.Field(f => f.AssetName);
+          m.Field(f => f.FKParentAssetId);
+        })
+        )
+        .HtmlAttributes(new { style = string.Format("height:{0}px;", 700) })
+        )
+
+  </div>
+</div>
+
+<div id="PDF-container"></div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/MillConfigurator.css" />
+<link rel="stylesheet" href="~/bundles/css/Module/PDFstyles.css" />
+<script src="~/bundles/js/Module/MillConfiguration.js"></script>

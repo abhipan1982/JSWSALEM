@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PE.BaseCommon\PE.BaseCommon.csproj" />
+    <ProjectReference Include="..\..\PE.BaseInterfaces\PE.BaseInterfaces.csproj" />
+    <ProjectReference Include="..\..\PE.BaseCore\PE.BaseCore.csproj" />
+    <ProjectReference Include="..\..\PE.BaseModule.Core\PE.BaseModule.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="MongoDB.Bson" />
+    <PackageReference Include="MongoDB.Driver" />
+    <PackageReference Include="Nito.AsyncEx" />
+    <PackageReference Include="Polly" />
+    <PackageReference Include="SMF.Core" />
+    <PackageReference Include="SMF.DbEntity" />
+    <PackageReference Include="SMF.Module" />
+    <PackageReference Include="SMF.Startup" />
+  </ItemGroup>
+</Project>

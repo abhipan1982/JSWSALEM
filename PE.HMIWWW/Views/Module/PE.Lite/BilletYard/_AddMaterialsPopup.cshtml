@@ -1,0 +1,120 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_Materials
+@{
+  ViewBag.Title = "_WorkOrderCreatePopup";
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<form asp-controller="BilletYard" asp-action="AddMaterials" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+  @Html.AntiForgeryToken()
+  <div style="height:auto;overflow-x:hidden">
+
+    <div class="row form-group">
+      <div class="col-5 text-right">
+        <label>
+          @Html.LabelFor(x => x.MaterialsNumber)
+        </label>
+      </div>
+      <div class="col-6">
+        @Html.PeKendo().NumericTextBoxFor(x => x.MaterialsNumber).HtmlAttributes(new { @class = "form-control form-control-sm", @style = "width: 150px" }).Min(1).Max(1000).Events(x => x.Change("CalculateMaterialsWeight"))
+        @Html.ValidationMessageFor(x => x.MaterialsNumber)
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-5 text-right">
+        <label>@Html.LabelFor(x => x.MaterialCatalogueId)</label>
+      </div>
+
+      <div class="col-6">
+        @(Html.Kendo().DropDownListFor(x => x.MaterialCatalogueId)
+         .DataTextField("Text")
+         .DataValueField("Value")
+         .HtmlAttributes(new { @class = "form-control form-control-sm popup_input_standard" })
+         .BindTo(new SelectList(@ViewBag.MaterialCataloguesList, "MaterialCatalogueId", "MaterialCatalogueName"))
+         .OptionLabel("-")
+        //.Events(x => x.Change("CalculateMaterialsWeight"))
+        )
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-5 text-right ">
+        <label>@Html.LabelFor(x => x.FKHeatId)</label>
+      </div>
+      <div class="col-6">
+        @Html.HiddenFor(x => x.FKHeatId)
+        @(Html.Kendo().AutoComplete()
+           .HtmlAttributes(new { @style = "width: 300px;" })
+           .Name("Heat")
+           .Filter("contains")
+           .DataTextField("HeatName")
+           .Placeholder(@VM_Resources.GLOB_StartTyping)
+           .DataSource(source =>
+           {
+             source.Read(read =>
+             {
+               read.Action("ServerFiltering_GetHeats", "Heat")
+                   .Data("onAdditionalData");
+             })
+             .ServerFiltering(true);
+           })
+           .Events(events => events.Select("HeatSelected"))
+        //.Template("<div class='heat'>" +
+        //            "<p class='details-row heat-name'><span class='col-7 nowrap'>#: data.HeatName #</span></p>" +
+        //            "<p class='details-row heat-details'><span class='col-3'>" + @VM_Resources.NAME_Steelgrade + ":</span> <span class='col-4 heat-data'> #: data.SteelgradeName # </span> </p>" +
+        //            "</div>")
+        )
+        @Html.ValidationMessageFor(x => x.FKHeatId)
+      </div>
+    </div>
+    @*<div style="display: none;" class="col-2 text-right material-weight">@Html.LabelFor(x => x.TargetOrderWeight)</div>
+      <div style="display: none;" class="col-2 material-weight"><div id="material-weight-value"></div></div>*@
+
+
+
+    <hr>
+
+    <div class="row form-group">
+      <div class="col invalid">
+        <p id="error">
+          <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+        </p>
+      </div>
+      <div class="col text-right">
+        <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+          @VM_Resources.GLOB_Form_Button_Add
+        </button>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<script>
+  $(function () {
+
+    $('#error').css("display", "none");
+    $("#form").kendoValidator().data("kendoValidator");
+
+    $('.k-autocomplete').css("width", "150px");
+
+    $('.k-autocomplete input').keydown(function () {
+      $('.k-autocomplete').animate({
+        width: 210
+      }, 200, function () {
+        // Animation complete.
+      });
+    })
+
+    $('.k-autocomplete input').focusout(function () {
+      $('.k-autocomplete').animate({
+        width: 150
+      }, 400, function () {
+        // Animation complete.
+      });
+    })
+
+
+  });
+</script>

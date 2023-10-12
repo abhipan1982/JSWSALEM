@@ -1,0 +1,25 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.WorkOrder;
+
+<div class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_ProductionSchedule</div>
+@*//example grid data source*@
+@(Html.Kendo().Grid<VM_WorkOrderSummary>()
+    .Name("WOScheduleList")
+    .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 660) })
+    .Filterable()
+    .Scrollable()
+    .Columns(c =>
+    {
+      c.Bound(x => x.WorkOrderId).Visible(false);
+      c.Bound(x => x.ScheduleId).Visible(false);
+      c.Bound(x => x.ScheduleOrderSeq).Width(90);
+      c.Bound(x => x.WorkOrderName);
+      c.Bound(x => x.HeatName).HtmlAttributes(new {@class = "nowrap"});
+      c.Bound(x => x.ProductsWeight);
+    })
+    .DataSource(ds => ds
+       .Ajax()
+       .ServerOperation(true)
+       .Events(e => e.Error("TelerikErrorHandler"))
+       .Read(r => r.Action("GetSchedule", "Schedule"))
+    )
+)

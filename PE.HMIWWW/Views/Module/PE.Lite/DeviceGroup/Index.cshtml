@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("new", "AddNew()")
+}
+
+<div class="container-fluid p-3">
+    <div class="row">
+        <div class="col-3 grid-filter">
+            @Html.Partial("~/Views/Module/PE.Lite/DeviceGroup/_DeviceGroupSearchGrid.cshtml")
+        </div>
+        <div class="col-9 element-details" id="DeviceGroupDetails">
+            <div class="row justify-content-center plug">
+                <div class="col-6 align-self-center">
+                    <img src="~/css/Shared/plug.png"/>
+                    <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/Content/Module/PE.Lite/DeviceGroup.css"/>
+<script src="~/Scripts/Module/DeviceGroup.js"></script>

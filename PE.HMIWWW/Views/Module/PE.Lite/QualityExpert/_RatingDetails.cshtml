@@ -1,0 +1,96 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.QualityExpert.VM_RatingDetailsValue
+<div class="container-fluid p-0 ">
+    <div class="row" style="margin:0">
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.RatingCode)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.RatingCode)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.RatingGroup)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.RatingGroup)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.RatingType)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.RatingType)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.RatingAlarm)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.RatingAlarm)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.CreatedTs)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.CreatedTs)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.ModifiedTs)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.ModifiedTs)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.RatingForcedValue)
+                    </div>
+                    <div class="col">
+                      @if (Model.RatingForcedValue.HasValue) {
+                            @(ViewBag.RatingValuesTypes[Model.RatingForcedValue.Value]);
+                        } 
+                        else
+                        {
+                            @:-
+                        }
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.RatingValue)
+                    </div>
+                    <div class="col">
+                        @(ViewBag.RatingValuesTypes[Model.RatingValue.Value])
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col text-right">
+                        @Html.LabelFor(m => m.RatingCurrentValue)
+                    </div>
+                    <div class="col">
+                        @(ViewBag.RatingValuesTypes[Model.RatingCurrentValue.Value])
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,17 @@
+@using PE.HMIWWW.Core.Helpers;
+@using PE.BaseDbEntity.EnumClasses;
+
+<div class="row">
+  @(Html.Kendo().TabStrip()
+  .Name("ChargingBody")
+  .Animation(false)
+  .Scrollable(false)
+  .Items(async tabstrip =>
+  {
+      tabstrip.Add().Text(VM_Resources.NAME_ChargingList)
+      .Selected(true)
+      .Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Charging/_ChargingGrid.cshtml")).ToHtmlString());
+  })
+  )
+</div>
+

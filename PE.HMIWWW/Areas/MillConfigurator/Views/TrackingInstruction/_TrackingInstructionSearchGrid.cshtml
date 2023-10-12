@@ -1,0 +1,42 @@
+@using Kendo.Mvc.UI;
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.TrackingInstruction;
+@using PE.HMIWWW.Core.Resources;
+
+@(
+    Html.Kendo().Grid<VM_TrackingInstruction>()
+        .Name("SearchGrid")
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+            .Refresh(true)
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+            .PageSizes(true))
+        .Sortable()
+        .Filterable()
+        .Selectable()
+        .Events(e => e.DataBound("selectRow"))
+        .HtmlAttributes(new {style = string.Format("height:{0}px;", ViewBag.FullGridHeight)})
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.TrackingInstructionId).Visible(false);
+            columns.Bound(c => c.FeatureName).ClientTemplate(
+            "<span>#=FeatureName#</span><p class=\"type-name\">#=EnumTrackingInstructionTypeText#</p>").HtmlAttributes(new { @class = "nowrap" });
+            columns.Bound(c => c.AreaName).HtmlAttributes(new { @class = "nowrap" });
+            columns.Bound(c => c.FeatureCode).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+            columns.Bound(c => c.SeqNo).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+            columns.Bound(c => c.PointName).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+            columns.Bound(c => c.TrackingInstructionValue).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+            columns.ForeignKey(o => o.EnumTrackingInstructionType, (SelectList)ViewBag.TrackingInstructionTypeList).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+        })
+        .ToolBar(toolbar => toolbar.ClientTemplateId("SearchGridToolbarTemplate"))
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(17)
+            .Read(r => r.Action("GetTrackingInstructionSearchList", "TrackingInstruction", new { Area = "MillConfigurator" }))
+        )
+        .Events(e =>
+        {
+          e.DataBound("selectRow");
+          e.Change("onElementSelect");
+        })
+)

@@ -1,0 +1,51 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Quality
+@model PE.HMIWWW.ViewModel.Module.Lite.Products.VM_ProductsOverview
+
+<style>
+  .productQualityText {
+    padding: 5px;
+    font-size: 18px;
+    color: #006487;
+    font-weight: 500;
+  }
+</style>
+
+<div class="productQualityText" id="productQualityText"></div>
+
+@(
+  Html.Kendo().Grid<VM_ProductDefect>()
+  .Name("DefectsList")
+  .HtmlAttributes(new {style = "height: 616px;"})
+  .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Sortable()
+  .Filterable()
+  .Selectable()
+  .Scrollable()
+  .Pageable(p => p
+  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Columns(c =>
+  {
+    c.Bound(x => x.ProductId).Visible(false);
+    c.Bound(x => x.DefectId).Visible(false);
+    c.Bound(x => x.DefectCatalogueCode);
+    c.Bound(x => x.DefectCatalogueName);
+  })
+  .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(20)
+    .Read(r => r.Action("GetDefectsByProductId", "ProductQualityMgm", new {productId = Model.ProductId }))
+  )
+)
+
+<script>
+
+  $(document).ready(function () {
+    let quality = '@VM_Resources.NAME_Quality';
+    let qualityName = '@Model.InspectionResultText';
+    let qualityNameText = document.createElement('div');
+    qualityNameText.innerHTML = quality + ': ' + qualityName;
+    $('#productQualityText').append(qualityNameText);
+  });
+
+</script>

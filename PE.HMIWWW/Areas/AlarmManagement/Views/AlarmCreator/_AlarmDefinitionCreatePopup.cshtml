@@ -1,0 +1,270 @@
+@using PE.HMIWWW.Core.Resources;
+@model PE.HMIWWW.Areas.AlarmManagement.ViewModels.VM_AlarmCreator
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<script>
+
+  $(function () {
+
+    $('#error').css("display", "none");
+    $("#form").kendoValidator().data("kendoValidator");
+  });
+
+  function displayMessage() {
+    var validator = $("#form").kendoValidator().data("kendoValidator");
+
+    if (validator.validate()) {
+      $('#error').css("display", "none");
+    } else {
+      $('#error').css("display", "block");
+      $('#popup-footer')
+        .css('display', 'block')
+        .css('background-color', 'rgb(206, 0, 55)');
+    }
+  };
+
+  function isValidDescription(e) {
+    var match = e.key.match(/ /g);
+    return  match ? false : true;
+  }
+
+  function onModuleChangeEvent(e) {
+    onModuleChange(e, this, $('#IsStandard').prop('checked'));
+  }
+
+</script>
+
+<form asp-controller="AlarmCreator" asp-action="CreateAlarmDefinition" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+  @Html.AntiForgeryToken()
+  @Html.HiddenFor(x => x.FKProjectId)
+
+  <div style="height:auto;overflow-x:hidden">
+
+    @{
+      int i = 0;
+    }
+
+    <div class="row form-group">
+
+      @Html.HiddenFor(x => x.DefaultMessage.FKLanguageId)
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label(Model.DefaultMessage.LanguageCode)
+        </label>
+      </div>
+      <div class="col-10">
+        @Html.TextAreaFor(x => x.DefaultMessage.MessageText, new {@class = "form-control form-control-sm k-textbox", style = "width: 910px", required = "required", @maxlength = "255", rows = 3})
+        @Html.ValidationMessageFor(x => x.DefaultMessage.MessageText)
+      </div>
+
+    </div>
+
+    @for (i = 0; i < Model.Messages.Count; i++)
+    {
+      int j = i;
+      <div class="row form-group">
+
+        @Html.HiddenFor(x => x.Messages[j].FKLanguageId)
+        <div class="col-2 text-right">
+          <label>
+            @Html.Label(Model.Messages[j].LanguageCode)
+          </label>
+        </div>
+        <div class="col-10">
+          @Html.TextAreaFor(x => x.Messages[j].MessageText, new {@class = "form-control form-control-sm k-textbox", style = "width: 910px", @id = $"Messages_{j}", @maxlength = "255", rows = 3})
+        </div>
+
+      </div>
+    }
+
+    <hr>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Parameter {0}")
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().TextBoxFor(x => x.Parameter0.ParamName).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.Parameter0.ParamName)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Parameter {1}")
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().TextBoxFor(x => x.Parameter1.ParamName).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.Parameter1.ParamName)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Parameter {2}")
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().TextBoxFor(x => x.Parameter2.ParamName).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.Parameter2.ParamName)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Parameter {3}")
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().TextBoxFor(x => x.Parameter3.ParamName).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        @Html.ValidationMessageFor(x => x.Parameter3.ParamName)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Alarm Type")
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.EnumAlarmType)
+        .BindTo((SelectList) ViewBag.AlarmTypeList)
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        )
+        @Html.ValidationMessageFor(x => x.EnumAlarmType)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Definition Description")
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().TextBoxFor(x => x.DefinitionDescription).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard", required = "required", onkeypress="return isValidDescription(event)"})
+        @Html.ValidationMessageFor(x => x.DefinitionDescription)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Category Code")
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownListFor(x => x.FKAlarmCategoryId)
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard k-state-disabled", @readonly = "readonly"})
+        .BindTo(new SelectList(ViewBag.AlarmCategoryList, "AlarmCategoryId", "CategoryCode"))
+        )
+        @Html.ValidationMessageFor(x => x.FKAlarmCategoryId)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Module")
+        </label>
+      </div>
+      <div class="col-2">
+        @(Html.Kendo().DropDownList()
+        .Name("ModuleId")
+        .BindTo((SelectList) ViewBag.ModuleList)
+        .Events(e =>
+        {
+        e.Select("onModuleChangeEvent");
+        })
+        .HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard"})
+        )
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Code")
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().TextBoxFor(x => x.DefinitionCode).HtmlAttributes(new {@class = "form-control form-control-sm popup_input_standard k-state-disabled", required = "required"})
+        @Html.ValidationMessageFor(x => x.DefinitionCode)
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      @if (@ViewBag.ProjectId == 1)
+      {
+        <div class="col-2 text-right">
+          <label>
+            @Html.Label("Standard")
+          </label>
+        </div>
+        <div class="col-2">
+          @Html.Kendo().CheckBoxFor(x => x.IsStandard).HtmlAttributes(new {@class = "form-control"}).Label(string.Empty)
+          @Html.ValidationMessageFor(x => x.IsStandard)
+        </div>
+      }
+      else
+      {
+        <div class="col-2 text-right">
+          <label>
+            @Html.Label("Standard")
+          </label>
+        </div>
+        <div class="col-2">
+          @Html.Kendo().CheckBoxFor(x => x.IsStandard).HtmlAttributes(new {@class = "form-control"}).Label(string.Empty)
+          @Html.ValidationMessageFor(x => x.IsStandard)
+        </div>
+      }
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Confirm")
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsToConfirm).HtmlAttributes(new {@class = "form-control"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsToConfirm)
+      </div>
+
+      <div class="col-2 text-right">
+        <label>
+          @Html.Label("Show Popup")
+        </label>
+      </div>
+      <div class="col-2">
+        @Html.Kendo().CheckBoxFor(x => x.IsPopupShow).HtmlAttributes(new {@class = "form-control"}).Label(string.Empty)
+        @Html.ValidationMessageFor(x => x.IsPopupShow)
+      </div>
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row form-group">
+    <div class="col invalid">
+      <p id="error">
+        <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+      </p>
+    </div>
+    <div class="col text-right">
+      <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+        @VM_Resources.GLOB_Form_Button_Add
+      </button>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,74 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_RecommendedAction
+
+@{
+    ViewBag.Title = "_IncidentEdit";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+@using (Ajax.BeginForm("UpdateIncidentType", "IncidentType", new AjaxOptions { UpdateTargetId = "formContainer", OnBegin = "OnFormBegin", OnSuccess = "OnFormSuccess", OnFailure = "OnFormError" }, new { @class = "container-fluid", id = "form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.RecommendedActionId)
+
+    <div class="row h-25 p-0 pt-3">
+        <hr />
+        <div class="col-12 p-0">
+            <div class="container-fluid">
+
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.FkActionTypeId)
+                    </div>
+                    <div class="col">
+                        @(Html.Kendo().DropDownListFor(x => x.FkActionTypeId)
+                             .Name("FkActionTypeId")
+                             .DataTextField("Text")
+                             .DataValueField("Value")
+                             //.Events(e=>e.Change("OnIncidentTypeIdChange"))
+                             .HtmlAttributes(new { @class = "form-control form-control-sm" })
+                             .BindTo(new SelectList(@ViewBag.ActionTypesList.Items, "ActionTypeId", "ActionTypeName"))
+                             .OptionLabel("-")
+            )
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.FkIncidentTypeId)
+                    </div>
+                    <div class="col">
+                        @(Html.Kendo().DropDownListFor(x => x.FkIncidentTypeId)
+                                             .Name("FkIncidentTypeId")
+                                             .DataTextField("Text")
+                                             .DataValueField("Value")
+                                             //.Events(e=>e.Change("OnIncidentTypeIdChange"))
+                                             .HtmlAttributes(new { @class = "form-control form-control-sm" })
+                                             .BindTo(new SelectList(@ViewBag.IncidentTypesList.Items, "IncidentTypeId", "IncidentTypeName"))
+                                             .OptionLabel("-")
+            )
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.ActionDescription)
+                    </div>
+                    <div class="col">
+                        @Html.Kendo().TextBoxFor(m => m.ActionDescription)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col invalid">
+            <p id="error">
+                <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+            </p>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+                @VM_Resources.GLOB_Form_Button_Update
+            </button>
+        </div>
+    </div>
+}
+

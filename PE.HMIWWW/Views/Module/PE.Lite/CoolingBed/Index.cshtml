@@ -1,0 +1,163 @@
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+  @Html.ImageButton("legend", "displayLegendWindow()", false, "BUTTON_Legend")
+}
+
+@using PE.BaseDbEntity.EnumClasses;
+
+<link rel="stylesheet" href="~/bundles/css/Module/CoolingBed.css" />
+
+@{
+  Func<int, IHtmlContent> DoubleArea =
+  @<div class="area" data-area="@item">
+    <div class="zone_name">@ResxHelper.GetResxAreaText(item)</div>
+    <div class="zone" id="@item" data-type="double">
+      <div class="zone_header">
+        <div class="materials_number">0</div>
+        <div class="signals">
+        </div>
+      </div>
+      <div class="zone_body">
+        <div class="points_area points_space-between zone_top">
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+        </div>
+        <div class="materials_area materials"></div>
+        <div class="points_area points_space-between zone_bottom">
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+          <span class="point_icon roll-icon" role="img"></span>
+        </div>
+      </div>
+    </div>
+  </div>;
+
+Func<int, IHtmlContent> MultiArea =
+@<div class="area" data-area="@item">
+  <div class="zone_name cursor-pointer" id="@item" onclick="GoToMaterialsInArea(this)">@ResxHelper.GetResxAreaText(item)</div>
+  <div class="zone" id="@item" data-type="multi">
+    <div class="zone_header">
+      <div class="materials_number">0</div>
+      <div class="signals">
+      </div>
+    </div>
+    <div class="zone_body materials multiMaterials_order">
+    </div>
+  </div>
+</div>;
+
+Func<int, IHtmlContent> DoubleAreaWithSignals =
+@<div class="area" data-area="@item">
+  <div class="zone_name">@ResxHelper.GetResxAreaText(item)</div>
+  <div class="zone" id="@item" data-type="double">
+    <div class="zone_header">
+      <div class="materials_number">0</div>
+      <div class="signals">
+        <span class="signal-icon production-icon" title="@VM_Resources.NAME_Production"></span>
+        <span class="signal-icon adjust-icon" title="@VM_Resources.NAME_Adjusting"></span>
+        <span class="signal-icon sim-icon" title="@VM_Resources.NAME_Simulation"></span>
+        <span class="signal-icon start-icon" title="@VM_Resources.NAME_StartedInGroup"></span>
+      </div>
+    </div>
+    <div class="zone_body">
+      <div class="points_area points_space-between zone_top">
+        <span class="point_icon roll-icon" role="img"></span>
+        <span class="point_icon roll-icon" role="img"></span>
+        <span class="point_icon roll-icon" role="img"></span>
+      </div>
+      <div class="materials_area materials"></div>
+      <div class="points_area points_space-between zone_bottom">
+        <span class="point_icon roll-icon" role="img"></span>
+        <span class="point_icon roll-icon" role="img"></span>
+        <span class="point_icon roll-icon" role="img"></span>
+      </div>
+    </div>
+  </div>
+</div>;
+
+Func<int, IHtmlContent> LayersArea =
+@<div class="area" data-area="@item">
+  <div class="zone_name" id="@item">@ResxHelper.GetResxAreaText(item)</div>
+  <div class="zone" id="@item" data-type="layers">
+    <div class="zone_body layers">
+    </div>
+  </div>
+</div>;
+
+Func<int, IHtmlContent> RakeArea =
+@<div class="area" data-area="@item">
+  <div class="zone_name cursor-pointer" id="@item" onclick="GoToMaterialsInArea(this)">@ResxHelper.GetResxAreaText(item)</div>
+  <div class="zone zone-rake" id="@item" data-type="rake">
+    <div class="zone_header">
+      <div class="materials_number">0</div>
+    </div>
+    <div class="zone_body materials rake-materials" id="rake-materials">
+    </div>
+  </div>
+</div>;
+}
+
+<!--LEGEND-->
+<div class="cooling-legend-window" id="coolingnLegend">
+  <div class="row m-1">
+    <div class="square status-empty"></div><div class="legend">@VM_Resources.NAME_IsEmpty</div>
+  </div>
+  <div class="row m-1">
+    <div class="square status-progress"></div><div class="legend">@VM_Resources.NAME_IsForming</div>
+  </div>
+  <div class="row m-1">
+    <div class="square status-ready"></div><div class="legend">@VM_Resources.NAME_IsFormed</div>
+  </div>
+</div>
+
+<div class="row tracking_container">
+  <div class="material_panel col-2" id="materialPanel">
+    @{await Html.RenderPartialAsync("~/Views/Module/PE.Lite/CoolingBed/_DetailsPanel.cshtml"); }
+  </div>
+
+  <div class="col-10">
+    <div class="row">
+      <div class="tracking_visualization">
+
+        <div class="tracking_row leftToRight">
+
+          @DoubleAreaWithSignals(TrackingArea.CB_AREA)
+
+          <div class="direction_sign">
+            <span class="direction-icon arrowRight-icon" role="img"></span>
+          </div>
+          <div class="area-wrapper">
+            @MultiArea(TrackingArea.ENTER_TABLE_AREA)
+            <div class="vertical-arrow arrowDown-icon vertical-arrow  mt-2" role="img"></div>
+          </div>
+
+          <div class="direction_sign">
+          </div>
+
+          <div class="empty-block"></div>
+
+          <div class="direction_sign">
+          </div>
+
+          <div class="empty-block"></div>
+
+          <div class="direction_sign">
+          </div>
+          <div class="area-wrapper">
+            @LayersArea(TrackingArea.LAYER_AREA)
+            <div class="vertical-arrow arrowUp-icon vertical-arrow  mt-2" role="img"></div>
+          </div>
+        </div>
+
+        @RakeArea(TrackingArea.RAKE_AREA)
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="~/bundles/js/Module/CoolingBed.js" />

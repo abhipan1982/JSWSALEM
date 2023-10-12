@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>MVHistory</AssemblyName>
+    <TargetFramework>net6.0</TargetFramework>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AssemblyTitle>PE.MVHistory</AssemblyTitle>
+    <Company>Primetals Technologies Poland Sp. z o.o.</Company>
+    <Product>PE.MVHistory</Product>
+    <Copyright>Copyright © Primetals Technologies 2020</Copyright>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PE.Config\PE.Config.csproj" />
+    <ProjectReference Include="..\..\PE.DbEntity\PE.DbEntity.csproj" />
+    <ProjectReference Include="..\..\PE.Interfaces\PE.Interfaces.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="PE.BaseCore" />
+    <PackageReference Include="PE.BaseHelpers" />
+    <PackageReference Include="PE.MVH.Base" />
+    <PackageReference Include="SMF.Core" />
+    <PackageReference Include="SMF.DbEntity" />
+    <PackageReference Include="SMF.Module" />
+    <PackageReference Include="SMF.Startup" />
+  </ItemGroup>
+</Project>

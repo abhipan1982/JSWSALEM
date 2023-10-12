@@ -1,0 +1,299 @@
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration;
+@using PE.HMIWWW.Core.HtmlHelpers
+@using PE.HMIWWW.Core.Resources;
+@using Kendo.Mvc.UI;
+
+@model long
+
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<style>
+
+  .no-margin {
+    margin-bottom: 0;
+    font-size: 10px;
+  }
+
+  .k-grid td {
+    line-height: 1.2em;
+    padding-left: 5px !important;
+  }
+
+  .k-grouping-row .k-reset{
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 21px;
+    margin-bottom: 8px;
+    color: #00587c;
+  }
+
+  .k-alt, .k-separator {
+     background-color: #fff; 
+     border-bottom: 1px solid #ddd;
+  }
+
+  .feature-row{
+         border-bottom: 1px solid #ddd;
+         background-color: #fff;
+  }
+
+  .k-master-row .k-group-cell{
+/*    display: none;*/
+  }
+
+  .circle{
+      height: 28px;
+      width: 28px;
+      background-color: rgba(0, 107, 187, 0.25);
+      border-radius: 50%;
+  }
+
+  .circle-icon{
+    color: #00587c;
+    padding: 6px 7px;
+  }
+/*
+  .circle:before{
+    content: '';
+    background: url("/css/Functions/Small/telegram_resend.png");
+          height: 28px;
+      width: 28px;
+      display: block;
+      background-repeat: no-repeat;
+      background-position: center;
+  }*/
+
+  .feature-name{
+    color: #666;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .label-name{
+    font-size: 9px;
+    color: #666;
+    font-weight: 500;
+  }
+  .asset-name{
+      font-size: 14px;
+      font-weight: 400;
+      color: #666;
+  }
+  .area-name{
+      font-size: 14px;
+      font-weight: 400;
+      color: #666;
+  }
+
+  .description{
+    font-weight: 400;
+    color: #666;
+    font-size: 11px;
+  }
+
+    .comm{
+/*    font-weight: 500;*/
+    color: #666;
+    font-size: 11px;
+    font-weight: 400;
+  }
+
+  .desc-wrapper{
+    background-color: #f5f5f5
+  }
+
+  .k-master-row td {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+/*    font-size: 12pt !important;*/
+}
+
+.k-button-text{
+      color: #fff;
+    padding: 5px 10px;
+        padding-left: 1px;
+}
+
+.k-button-icon{
+        color: #fff;
+    padding: 5px 10px;
+    padding-right: 1px;
+}
+
+</style>
+
+<script id="template" type="text/kendo-tmpl">
+  <div class="feature-row w-100">
+
+    <div class="row pt-2 px-3">
+      <div class="circle mx-2 my-2">
+             <span class="k-icon k-i-file-config circle-icon"></span>
+      </div>
+      <p class="no-margin k-state-default my-3 feature-name">#: FeatureName #</p>
+    </div>
+
+    <div class="row px-3 pb-3 pt-2">
+      <div class="col-3">
+          <p class="no-margin k-state-default label-name">@VM_Resources.GLOB_NAME_Area</p>
+          <p class="no-margin k-state-default area-name">#: AreaName #</p>
+          <p class="no-margin k-state-default label-name mt-2">@VM_Resources.NAME_Asset</p>
+          <p class="no-margin k-state-default asset-name mb-2">#: AssetName #</p>
+
+           <p class="no-margin k-state-default label-name">@VM_Resources.NAME_Limits</p>
+
+          <p class="no-margin k-state-default comm">
+          #if(MinValue == null && MaxValue == null) {#
+            -
+          #} else {#
+            #if(MinValue != null) {#
+              #=MinValue#
+            #} else {#
+              ?
+            #}#
+            -
+            #if(MaxValue != null) {#
+              #=MaxValue#
+            #} else {#
+              ?
+            #}#
+          #}#
+        </p>
+
+        <p class="no-margin k-state-default label-name mt-2">@VM_Resources.NAME_Unit</p>
+
+        <p class="no-margin k-state-default comm">#: UnitCategoryName # [#: UnitOfMeasureSymbol #]</p>
+      </div>
+      <div class="col-6">
+                  <p class="no-margin k-state-default label-name">@VM_Resources.NAME_CommAttr1</p>
+          <p class="no-margin k-state-default comm">#: CommAttr1 #</p>
+          <p class="no-margin k-state-default mt-2 label-name">@VM_Resources.NAME_CommAttr2</p>
+          <p class="no-margin k-state-default comm">#: CommAttr2 #</p>
+          <p class="no-margin k-state-default mt-2 label-name">@VM_Resources.NAME_CommAttr3</p>
+          <p class="no-margin k-state-default comm">
+            #if(CommAttr3 != null) {#
+              #=CommAttr3#
+            #} else {#
+              -
+            #}#
+
+          </p>
+         
+
+      </div>
+      </div>
+@*          <div class="row px-3 py-3">
+      <div class="col-11">
+
+      </div>
+    </div>*@
+
+    <div class="desc-wrapper w-100 pt-2 pb-3 px-3">
+          <p class="no-margin k-state-default label-name mt-2">@VM_Resources.NAME_FeatureDescription</p>
+          <p class="no-margin k-state-default description">#: FeatureDescription #</p>
+    </div>
+
+  </div>
+</script>
+
+@(
+  Html.Kendo().Grid<VM_FeatureInstance>
+  ()
+  .Name("AssignedFeatures")
+  .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+@*  .Pageable(p => p
+  .Refresh(true)
+  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))*@
+@*  .HtmlAttributes(new {style = string.Format("height:{0}px;", 550)})*@
+  .Columns(columns =>
+  {
+  columns.Bound(c => c.OrderSeq).ClientTemplateId("template").ClientHeaderTemplate("<span>" + @VM_Resources.NAME_Feature + "</span>");
+  columns.Bound(c => c.AssetName).Hidden(true);
+  columns.Bound(c => c.AreaName).Hidden(true);
+  columns.Bound(c => c.FeatureName).Hidden(true);
+  columns.Bound(c => c.IsQETrigger).Hidden(true);
+  columns.Bound(c => c.FeatureDescription).Hidden(true);
+  columns.Bound(c => c.UnitOfMeasureSymbol).Hidden(true);
+  columns.Bound(c => c.UnitCategoryName).Hidden(true);
+  columns.Bound(c => c.DataTypeName).Hidden(true);
+  columns.Bound(c => c.RetentionFactor).Hidden(true);
+  columns.Bound(c => c.MinValue).Hidden(true);
+  columns.Bound(c => c.MaxValue).Hidden(true);
+  columns.Bound(c => c.SampleOffsetTime).Hidden(true);
+  columns.Bound(c => c.IsConsumptionFeature).Hidden(true);
+  columns.Bound(c => c.IsSampledFeature).Hidden(true);
+  columns.Bound(c => c.CommAttr1).Hidden(true);
+  columns.Bound(c => c.CommAttr2).Hidden(true);
+  columns.Bound(c => c.CommAttr3).Hidden(true);
+  columns.Bound(c => c.Shading).Hidden(true);
+  })
+  .ToolBar(tools => {
+  tools.Excel();
+  tools.Pdf();
+  })
+  .Excel(excel => excel
+  .FileName("X.YYYY-ProjectName-PE-T41-L1InterfaceDetails.xlsx")
+  .Filterable(true)
+  .AllPages())
+  .Pdf(pdf => pdf
+  .AllPages()
+  .Title("X.YYYY-ProjectName-PE-T41-L1InterfaceDetails.xlsx")
+  .AvoidLinks()
+  .PaperSize("A4")
+  .Margin("2cm", "1cm", "1cm", "1cm")
+  .RepeatHeaders(false)
+  .FileName("X.YYYY-ProjectName-PE-T41-L1InterfaceDetails.pdf")
+  .ProxyURL(Url.Action("Pdf_Export_Save", "Grid")))
+  .DataSource(d => d
+  .Ajax()
+  .Group(groups => groups.Add(p => p.AssetName))
+  .ServerOperation(true)
+@*  .PageSize(3)*@
+  .Read(r => r.Action("GetAssignedFeaturesList", "MillConfiguration", new { Area = "MillConfigurator" }))
+  )
+  )
+
+<script>
+
+  var columns = ["AssetName", "AreaName", "FeatureName", "IsQETrigger", "FeatureDescription", "UnitOfMeasureSymbol", "UnitCategoryName", "DataType", "RetentionFactor", "MinValue", "MaxValue", "SampleOffsetTime", "IsConsumptionFeature", "IsSampledFeature", "CommAttr1)", "CommAttr2)", "CommAttr3", "Shading"];
+
+  var exportFlag = false;
+  $("#AssignedFeatures").data("kendoGrid").bind("excelExport", function(e) {
+      console.log(e);
+      if (!exportFlag) {
+          columns.forEach(function(element) {
+              e.sender.showColumn(element);
+          });
+          e.preventDefault();
+          exportFlag = true;
+          setTimeout(function() {
+              e.sender.saveAsExcel();
+          });
+      } else {
+          columns.forEach(function(element) {
+              e.sender.hideColumn(element);
+          });
+          exportFlag = false;
+      }
+  });
+
+</script>
+
+<hr />
+
+@*<form data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+  <div class="row form-group">
+    <div class="col text-right">
+      <button class="btn btn-primary popup_button" type="submit">
+        @VM_Resources.BUTTON_close
+      </button>
+    </div>
+  </div>
+
+</form>*@

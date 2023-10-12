@@ -1,0 +1,65 @@
+@using PE.HMIWWW.Areas.AlarmManagement.ViewModels;
+@using PE.HMIWWW.Core.Resources;
+
+@(
+    Html.Kendo().Grid<VM_AlarmDefinition>()
+        .Name("SearchGrid")
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+            .Refresh(true)
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+            .PageSizes(true))
+        .Sortable()
+        .Filterable()
+        .Selectable()
+        .Events(e => e.DataBound("selectRow"))
+        .HtmlAttributes(new {style = string.Format("height:{0}px;", ViewBag.FullGridHeight)})
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.AlarmDefinitionId).Visible(false);
+            columns.Bound(c => c.DefinitionCode).Title("Code");
+            columns.ForeignKey(o => o.FKAlarmCategoryId, (SelectList)ViewBag.AlarmCategoriesList).Title("Category");
+            columns.ForeignKey(o => o.EnumAlarmType, (SelectList)ViewBag.AlarmTypeList).Title("Type");
+            columns.Bound(c => c.DefinitionDescription).Hidden(true).HtmlAttributes(new { @class = "nowrap" });
+            columns.Bound(c => c.DefinitionCreated).Hidden(true).HtmlAttributes(new { @class = "nowrap" }).Title("Created").Format("{0:dd.MM.yyyy HH:mm:ss }");
+            columns.Bound(c => c.IsStandard).Hidden(true).HtmlAttributes(new {@class = "nowrap"}).ClientTemplate(
+              "#if(IsStandard === true)" +
+              "{" +
+              "#<input class='not-editable' type='checkbox' disabled checked />#" +
+              "}" +
+              "else" +
+              "{" +
+              "#<input class='not-editable' type='checkbox' disabled />#" +
+              "}#");
+            columns.Bound(c => c.IsPopupShow).Hidden(true).HtmlAttributes(new {@class = "nowrap"}).ClientTemplate(
+              "#if(IsPopupShow === true)" +
+              "{" +
+              "#<input class='not-editable' type='checkbox' disabled checked />#" +
+              "}" +
+              "else" +
+              "{" +
+              "#<input class='not-editable' type='checkbox' disabled />#" +
+              "}#");
+            columns.Bound(c => c.IsToConfirm).Hidden(true).HtmlAttributes(new {@class = "nowrap"}).ClientTemplate(
+              "#if(IsToConfirm === true)" +
+              "{" +
+              "#<input class='not-editable' type='checkbox' disabled checked />#" +
+              "}" +
+              "else" +
+              "{" +
+              "#<input class='not-editable' type='checkbox' disabled />#" +
+              "}#");
+        })
+        .ToolBar(toolbar => toolbar.ClientTemplateId("SearchGridToolbarTemplate"))
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(26)
+            .Read(r => r.Action("GetAlarmCreatorSearchList", "AlarmCreator", new { Area = "AlarmManagement" }))
+        )
+        .Events(e =>
+        {
+          e.DataBound("selectRow");
+          e.Change("onElementSelect");
+        })
+)

@@ -1,0 +1,161 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.RollSetToCassette.VM_CassetteOverviewWithPositions
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<script>
+
+  function onRollSetSelected(e, index) {
+    $("[name='RollSetss[" + index + "].RollSetId']").val(e.dataItem.RollSetId);
+  }
+
+</script>
+
+<form asp-controller="RollSetToCassette" asp-action="AssembleRollSetAndCassette" ," data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+  @Html.AntiForgeryToken()
+  @Html.HiddenFor(m => m.Id)
+
+
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      @Html.LabelFor(x => x.CassetteName)
+    </div>
+    <div class="col">
+      @Html.DisplayFor(m => m.CassetteName)
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      @Html.LabelFor(x => x.CassetteTypeId)
+    </div>
+    <div class="col">
+      @Html.Raw(((SelectList)ViewBag.CassType).Where(p => p.Value == Model.CassetteTypeId.ToString()).First().Text)
+
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      @Html.LabelFor(x => x.StandStatus)
+    </div>
+    <div class="col">
+      @Html.Raw(((SelectList)ViewBag.CassStatus).Where(p => p.Value == Model.EnumCassetteStatus.ToString()).First().Text)
+
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      <label>@Html.LabelFor(x => x.NumberOfPositions)</label>
+    </div>
+    <div class="col">
+      @Html.DisplayFor(m => m.NumberOfPositions)
+
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-5 text-right align-self-center">
+      @Html.Label(@PE.HMIWWW.Core.Resources.VM_Resources.FIELDNAME_Position)
+    </div>
+    <div class="col">
+      @Html.Label(@PE.HMIWWW.Core.Resources.VM_Resources.FIELDNAME_Rollset)
+    </div>
+  </div>
+
+
+  @for (int i = 0; i < Model.RollSetss.Count; i++)
+  {
+    int y = i;
+    <div class="row form-group">
+      <div class="col-5 text-right align-self-center">
+        @Html.Label((y + 1).ToString())
+      </div>
+      <div class="col">
+        @Html.HiddenFor(x => x.RollSetss[y].RollSetId)
+        @(Html.Kendo().AutoCompleteFor(x => x.RollSetss[y].RollSetName)
+      .HtmlAttributes(new { @style = "width: 244px;", @class = "rollsets" })
+      .Filter("contains")
+      .DataTextField("RollSetName")
+      .Value(Model?.RollSetss[y].RollSetName)
+      .Placeholder(@VM_Resources.GLOB_StartTyping)
+      .HtmlAttributes(new { @id = $"RollSet_{y}" })
+      .DataSource(source =>
+      {
+      source.Read(read =>
+      {
+      read.Action("Filtering_RollSets", "RollsetToCassette").Data(@<text>function onAdditionalData(e) {return { text: $("#RollSet_" + @y).val(), cassetteTypeId: @Model.CassetteTypeId};} </text>);
+      })
+      .ServerFiltering(true);
+      })
+      .Events(events => events.Select("(e) => { onRollSetSelected(e, " + y + ") }"))
+      .Template("<div class=''><span class='col-10 nowrap'>#: data.RollSetName #</span></div>")
+      )
+        @Html.ValidationMessageFor(x => x.RollSetss[y].RollSetId)
+      </div>
+    </div>
+  }
+
+  <hr />
+
+  <div class="row form-group">
+    <div class="col invalid">
+      <p id="error">
+        <span class="k-icon k-i-close-circle error-icon"></span> @VM_Resources.GLOB_Error
+      </p>
+    </div>
+    <div class="col text-right">
+      <button class="btn btn-primary popup_button" onclick="displayMessage()" type="submit">
+        @VM_Resources.GLOB_Form_Button_Update
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<script>
+
+  $(function () {
+
+    $('#error').css("display", "none");
+    $("#form").kendoValidator({
+      rules: {
+        uniqueRolls: function (input) {
+          if (input.is('.rollsets')) {
+            let values = [];
+              $('input.rollsets').each(
+              function () {
+                values.push($(this).val());
+              });
+              let inputCount = $('input.rollsets').length;
+            let uniqueValue = values.filter(function (itm, i, values) {
+              return i == values.indexOf(itm);
+            }).length;
+            if (inputCount !== uniqueValue)
+              return false;
+          }
+          return true;
+        }
+      },
+      messages: {
+        uniqueRolls: Translations["UniqueValue"]
+      }
+    });
+
+    $("#form").kendoValidator().data("kendoValidator");
+  });
+
+  function displayMessage() {
+
+    var validator = $("#form").kendoValidator().data("kendoValidator");
+
+    if (validator.validate()) {
+      $('#error').css("display", "none");
+    } else {
+      $('#error').css("display", "block");
+      $('#popup-footer')
+        .css('display', 'block')
+        .css('background-color', 'rgb(206, 0, 55)');
+    }
+  };
+
+</script>

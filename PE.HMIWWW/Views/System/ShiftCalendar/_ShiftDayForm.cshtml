@@ -1,0 +1,59 @@
+@model IList<PE.HMIWWW.ViewModel.Module.Lite.Shift.VM_ShiftDay>
+
+<form asp-controller="ShiftCalendar" asp-action="GenerateShifts" ," data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="refreshScheduler" data-ajax-failure="OnFormError"
+      class="" target="formContainer" role="form" id="form">
+
+  @Html.AntiForgeryToken()
+
+<div class="shiftDayList dynamic-form mb-1">
+
+        @if(Model.Count() > 0)
+        {
+          <div class="row">
+            <div class="form-group col-6 mb-1">
+              @Html.LabelFor(m => Model[0].Date, new { @class = "mb-1"})
+            </div>
+
+            <div class="form-group col-6 mb-1">
+              @Html.LabelFor(m => Model[0].ShiftLayout, new { @class = "mb-1"})
+            </div>
+          </div>
+        }
+
+        @if (Model != null)
+        {
+            for (var i = 0; i < Model.Count(); i++)
+            {
+                <div class="row">
+                    <div class="form-group col-6">
+                          @Html.Kendo().DatePickerFor(x => Model[i].Date).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDate_FORMAT_Picker).HtmlAttributes(new { @class = "form-control form-control-sm", @readonly = "readonly"})
+                    </div>
+                    <div class="form-group col-6">
+                        @Html.DropDownListFor(m => Model[i].ShiftLayout, (SelectList)ViewBag.ShiftLayouts, "-", new { @class = "form-control form-control-sm w-100 radius-0"} )
+                    </div>                                          
+                </div>
+            }
+        }
+</div>
+
+  <div class="row form-group">
+    <div class="col text-right">
+      <button class="btn btn-primary popup_button" type="submit">
+        @VM_Resources.BUTTON_SubmitForm
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<script>
+
+  function refreshScheduler(res){
+    $("#scheduler").data("kendoScheduler").dataSource.read();
+    $("#scheduler").data("kendoScheduler").refresh();
+    OnFormSuccess(res);
+  }
+
+</script>
+

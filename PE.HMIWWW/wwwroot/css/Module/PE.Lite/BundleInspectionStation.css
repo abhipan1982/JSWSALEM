@@ -1,0 +1,132 @@
+﻿#SearchGrid tr {
+    cursor: pointer;
+}
+
+.attach-info::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 75px solid transparent;
+    border-bottom: 75px solid transparent;
+    border-right: 55px solid #006487;
+    position: absolute;
+    /* top: calc(112% - 75px); */
+    left: 45%;
+    transform: rotate(-90deg);
+}
+
+.fh-ts {
+    min-height: 616px;
+}
+
+.loading-overlay::before {
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    background-image: url(/css/System/Img/loading_2x.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(255,255,255,.6);
+}
+
+.button_scrap {
+    margin-bottom: 30px;
+    padding-left: 90%;
+}
+
+div.k-tabstrip {
+    border: none;
+}
+
+    div.k-tabstrip:focus {
+        box-shadow: none;
+    }
+
+.k-tabstrip-items
+.k-state-active
+.k-link {
+    font-weight: 500;
+    color: #425563;
+}
+
+.refreshBtnContainer {
+    float: right;
+}
+/*fix {} items of {} not visible in telerik 2019.3.1024*/
+.k-pager-wrap.k-pager-md .k-pager-info,
+.k-pager-wrap.k-pager-sm .k-pager-info {
+    display: flex;
+}
+
+.show-hide-categories {
+    /*background-color: #006487;*/
+    min-width: 130px;
+    position: relative;
+    /*left: -10px;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #006487;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0px;
+    cursor: pointer;
+}
+
+i.arrow-categories {
+    border: solid;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+i.arrow-yellow {
+    border-color: #f2a900;
+}
+
+i.arrow-white {
+    border-color: #ffffff;
+}
+
+i.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+i.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.k-header {
+    background-color: #fafafa;
+}
+
+.arrow {
+    margin-top: 2px;
+    font-size: 28px;
+}
+
+
+.quality-title {
+    font-weight: 500;
+    font-size: 17px;
+    color: #00587c;
+    margin-bottom: 0px;
+}
+
+/*fix for pagination*/
+.k-pager-wrap {
+    position: absolute !important;
+    width: 99%;
+    bottom: 0px !important;
+}
+
+.defect-data {
+    height: 340px;
+}

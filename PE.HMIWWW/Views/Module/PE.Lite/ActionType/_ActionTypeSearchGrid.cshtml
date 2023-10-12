@@ -1,0 +1,47 @@
+﻿@using PE.HMIWWW.ViewModel.Module.Lite.Maintenance
+@(
+        Html.Kendo().Grid<VM_ActionType>()
+            .Name("SearchGrid")
+            .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+            .Pageable(p => p
+                .Refresh(true)
+                .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+                .PageSizes(true))
+            .Sortable()
+            .Filterable()
+            .Selectable()
+            .HtmlAttributes(new {style = string.Format("height:{0}px;", 746)})
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.ActionTypeId).Visible(false);
+                columns.Bound(c => c.ActionTypeCode).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(c => c.ActionTypeName).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(c => c.ActionTypeDescription).Hidden(true);
+                columns.Bound(c => c.CreatedTs).Format(VM_Resources.GLOB_ShortDateTime_FORMAT).Hidden(true).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(c => c.LastUpdateTs).Format(VM_Resources.GLOB_ShortDateTime_FORMAT).Hidden(true).HtmlAttributes(new {@class = "nowrap"});
+                columns.Bound(p => p.ActionTypeId).HtmlAttributes(new {@class = "nowrap"}).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(60)
+                    .ClientTemplate(Html.ImageButton("edit", "EditActionType(#:ActionTypeId#)")
+                                    + Html.ImageButton("delete", "DeleteActionType(#:ActionTypeId#)").ToString());
+            })
+            .ToolBar(toolbar => { toolbar.ClientTemplateId("toolBarTemplate"); })
+            .DataSource(d => d
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(26)
+                .Sort(sort => sort.Add("ActionTypeId").Descending())
+                .Read(r => r.Action("GetActionTypeList", "ActionType"))
+                .Events(e => e.Change("dataSourceChange"))
+            )
+            .Events(e => { e.Change("onElementSelect"); })
+    )
+
+<script id="toolBarTemplate" type="text/x-kendo-template">
+    <text>
+     <div class="refreshBtnContainer" onclick="showHideCategories()">
+                            <p class="k-link off show-hide-categories m-0">
+                                                <span class="filters-text more">@VM_Resources.NAME_MoreFilters</span> <span class="filters-text less">@VM_Resources.NAME_LessFilters</span>
+                                <span class="arrow arrow-categories arrow-white k-icon k-i-arrow-right"></span>
+                            </p>
+                    </div>
+    </text>
+</script>

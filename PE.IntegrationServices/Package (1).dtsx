@@ -1,0 +1,600 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/27/2009 12:40:12 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="TYDS02"
+  DTS:CreatorName="TYDS02\Tim Mitchell"
+  DTS:DTSID="{AB04BAAF-7977-4279-9EC4-FBF3DC9499F6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.375"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{ECEC12DE-0B05-4F70-8749-9EDFAD57E496}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[148.56.68.82.PE_Aperam.sa1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5F27BC8C-FA0A-41E8-8CEC-730ABAE93ABC}"
+      DTS:ObjectName="148.56.68.82.PE_Aperam.sa1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=148.56.68.82;User ID=sa;Initial Catalog=PE_Aperam;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAtJwL5Cmlw0SD3/QqPmdN2AAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAA9sOhM734LEraNTKlgK/jTAAAAAASAAACgAAAAEAAAAP/ow+6rJMAFi387qsQTPRgYAAAAojwPqcgXEDa5OCP2YGo7qkdp5tGNFhvrFAAAAIUKyRbVCqV1EHZcU/54urRdESQ7</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.TestDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{524568AC-33EC-4E08-AFB0-4A9863C8830C}"
+      DTS:ObjectName="LocalHost.TestDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=TestDB;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-Package-{524568AC-33EC-4E08-AFB0-4A9863C8830C}LocalHost.TestDB;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[output file]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{EF853472-9FF9-4695-BB4D-9288C23780E1}"
+      DTS:ObjectName="output file">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::OutputFolder] 
++  "VENDOR" + @[User::TheVendor] + "_" 
++ RIGHT("0000" + (DT_STR, 4, 1252)DATEPART("YEAR", GETDATE()), 4)
++ RIGHT("00" + ((DT_STR, 2, 1252)DATEPART("MONTH", GETDATE())), 2)
++ RIGHT("00" + ((DT_STR, 2, 1252)DATEPART("DAY", GETDATE())), 2)
++ ".txt"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="c:\VENDOR_20200520.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="InvoiceID"
+              DTS:DTSID="{7C482ED4-F8B8-41B6-A730-533664EF02AB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StatusName"
+              DTS:DTSID="{B724AAE1-1E03-447B-B9C2-025533B92595}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="InvoiceDate"
+              DTS:DTSID="{F86D16D2-4726-4CB0-B08D-8A00100AC5C7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="131"
+              DTS:DataPrecision="10"
+              DTS:DataScale="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="InvoiceAmount"
+              DTS:DTSID="{9EE11690-4A4D-4DA6-B6FB-3AE9096920C2}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{60686602-BCCB-4B5F-B7CC-EE9D30CB473D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OutputFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">c:\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A13D619C-D9A0-40EC-8996-B62F8DF63AB3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TheVendor">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F3C9F150-65D4-4838-83FB-52C89A94306C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Vendors">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{3643F0B1-1A3E-4F9D-8D3A-04CFC4B7D0EF}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{71EE592F-9892-4089-A0C3-C39B6A9E5D77}"
+        DTS:ObjectName="{71EE592F-9892-4089-A0C3-C39B6A9E5D77}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::Vendors" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{F330691A-1ED6-43EA-8A55-6FB899A32FF0}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Data Flow Task\Output file"
+                  componentClassID="Microsoft.FlatFileDestination"
+                  contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Flat File Destination"
+                  localeId="1033"
+                  name="Output file">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether the data will overwrite or append to the destination file."
+                      name="Overwrite">true</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the text to write to the destination file before any data is written."
+                      expressionType="Notify"
+                      name="Header" />
+                    <property
+                      dataType="System.Boolean"
+                      description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                      name="EscapeQualifier">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Data Flow Task\Output file.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[output file]"
+                      connectionManagerRefId="Package.ConnectionManagers[output file]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input]"
+                      hasSideEffects="true"
+                      name="Flat File Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].Columns[InvoiceID]"
+                          cachedDataType="i4"
+                          cachedName="InvoiceID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].ExternalColumns[InvoiceID]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[InvoiceID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].Columns[StatusName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="StatusName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].ExternalColumns[StatusName]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[StatusName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].Columns[InvoiceDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="InvoiceDate"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].ExternalColumns[InvoiceDate]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[InvoiceDate]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].Columns[InvoiceAmount]"
+                          cachedDataType="numeric"
+                          cachedName="InvoiceAmount"
+                          cachedPrecision="10"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].ExternalColumns[InvoiceAmount]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[InvoiceAmount]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].ExternalColumns[InvoiceID]"
+                          dataType="i4"
+                          name="InvoiceID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].ExternalColumns[StatusName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="StatusName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].ExternalColumns[InvoiceDate]"
+                          dataType="dbTimeStamp"
+                          name="InvoiceDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input].ExternalColumns[InvoiceAmount]"
+                          dataType="numeric"
+                          name="InvoiceAmount"
+                          precision="10"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Retrieve invoices for one vendor"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT InvoiceID, StatusName, InvoiceDate, InvoiceAmount
+FROM Invoices i
+INNER JOIN InvoiceStatus s ON i.InvoiceStatus = s.StatusID
+WHERE VendorID = ?</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"Parameter0",{A13D619C-D9A0-40EC-8996-B62F8DF63AB3};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[LocalHost.TestDB]"
+                      connectionManagerRefId="Package.ConnectionManagers[LocalHost.TestDB]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[InvoiceID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].ExternalColumns[InvoiceID]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[InvoiceID]"
+                          name="InvoiceID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[StatusName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].ExternalColumns[StatusName]"
+                          length="20"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[StatusName]"
+                          name="StatusName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[InvoiceDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].ExternalColumns[InvoiceDate]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[InvoiceDate]"
+                          name="InvoiceDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[InvoiceAmount]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].ExternalColumns[InvoiceAmount]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].Columns[InvoiceAmount]"
+                          name="InvoiceAmount"
+                          precision="10"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].ExternalColumns[InvoiceID]"
+                          dataType="i4"
+                          name="InvoiceID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].ExternalColumns[StatusName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="StatusName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].ExternalColumns[InvoiceDate]"
+                          dataType="dbTimeStamp"
+                          name="InvoiceDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output].ExternalColumns[InvoiceAmount]"
+                          dataType="numeric"
+                          name="InvoiceAmount"
+                          precision="10"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[InvoiceID]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[InvoiceID]"
+                          name="InvoiceID" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[StatusName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[StatusName]"
+                          name="StatusName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[InvoiceDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[InvoiceDate]"
+                          name="InvoiceDate" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[InvoiceAmount]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[InvoiceAmount]"
+                          name="InvoiceAmount"
+                          precision="10"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Data Flow Task.Paths[OLE DB Source Output]"
+                  endId="Package\Foreach Loop Container\Data Flow Task\Output file.Inputs[Flat File Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{0344BB4E-ED4F-4FC6-AAF0-D14A41E3893E}"
+          DTS:ObjectName="{0344BB4E-ED4F-4FC6-AAF0-D14A41E3893E}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::TheVendor" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get list of vendors having invoices"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{251D9385-9B2A-4B29-B93A-21A7F0320E6B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get list of vendors having invoices"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5F27BC8C-FA0A-41E8-8CEC-730ABAE93ABC}"
+          SQLTask:SqlStatementSource="SELECT CAST(WorkOrderId AS VARCHAR(20))&#xA;FROM PRMWorkOrders"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::Vendors" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7372A845-CAA4-4899-97F7-6EBDA54491F5}"
+      DTS:From="Package\Get list of vendors having invoices"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Foreach Loop Container\Data Flow Task"
+          TopLeft="48.9056603773585,19.9056603773585" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="233,88"
+          Size="233,132"
+          Id="Package\Foreach Loop Container"
+          TopLeft="5.5,106.254716981132" />
+        <NodeLayout
+          Size="163,44"
+          Id="Package\Get list of vendors having invoices"
+          TopLeft="23.5377358490566,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="104.896226415094,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.9056603773585,56.8301886792453"
+              Start="0,0"
+              End="16.9056603773585,49.3301886792453">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.4150943396227" />
+                  <mssgle:LineSegment
+                    End="16.9056603773585,28.4150943396227" />
+                  <mssgle:LineSegment
+                    End="16.9056603773585,49.3301886792453" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="148,44"
+          Id="Package\Foreach Loop Container\Data Flow Task\Retrieve invoices for one vendor"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Foreach Loop Container\Data Flow Task\Output file"
+          TopLeft="187.198113207547,117.311320754717" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="79.3490566037736,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="175.735849056604,67.8867924528302"
+              Start="0,0"
+              End="175.735849056604,60.3867924528302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.9245283018868" />
+                  <mssgle:LineSegment
+                    End="175.735849056604,33.9245283018868" />
+                  <mssgle:LineSegment
+                    End="175.735849056604,60.3867924528302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,63 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.WorkOrder.VM_WorkOrderSummary
+
+<div class="navigate-icon text-right">
+  @Html.ImageButton("edit", "_WorkOrder_SendL3.selectRejectsTab()")
+</div>
+<div class="table text-right">
+  <div class="table-row table-row_header">
+    <div class="table-cell table-cell_label">
+
+    </div>
+    <div class="table-cell text-center">
+      @VM_Resources.ENUM_RejectLocation_AfterFurnace
+    </div>
+  </div>
+  <div class="table-row">
+    <div class="table-cell table-cell_label">
+      <div class="form-group">
+        <div class="text-right">
+          <label>@VM_Resources.NAME_Shape</label>
+        </div>
+      </div>
+    </div>
+    <div class="table-cell">
+      <div class="form-group">
+        <div class="text-left">
+          @Html.DisplayFor(x => x.MaterialShapeName)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-row">
+    <div class="table-cell table-cell_label">
+      <div class="form-group">
+        <div class="text-right">
+          <label>@VM_Resources.NAME_Weight</label>
+        </div>
+      </div>
+    </div>
+    <div class="table-cell">
+      <div class="form-group">
+        <div class="text-left">
+          @Html.DisplayFor(x => x.MaterialsRejectedWeightAfterFurnace)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-row">
+    <div class="table-cell table-cell_label">
+      <div class="form-group">
+        <div class="text-right">
+          <label>@VM_Resources.NAME_NumberOfRejectedBillets</label>
+        </div>
+      </div>
+    </div>
+    <div class="table-cell">
+      <div class="form-group">
+        <div class="text-left">
+          @Html.DisplayFor(x => x.MaterialsRejectedWeightAfterFurnace)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

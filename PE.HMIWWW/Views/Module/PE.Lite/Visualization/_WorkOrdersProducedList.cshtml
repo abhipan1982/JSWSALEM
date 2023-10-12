@@ -1,0 +1,29 @@
+﻿
+@(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.WorkOrder.VM_WorkOrderOverview>()
+                .Name("WorkOrdersProducedList")
+                .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+                .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 230) })
+                .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                .Filterable()
+                .Scrollable()
+                .Sortable()
+                .Columns(columns =>
+                {
+                  columns.Bound(c => c.WorkOrderId).Visible(false);
+                  columns.Bound(c => c.WorkOrderName).Visible(true);
+                  columns.Bound(c => c.HeatName);
+                  columns.Bound(c => c.ToBeCompletedBeforeTs).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT);
+                  columns.Bound(c => c.TargetOrderWeight).Format(PE.HMIWWW.Core.Resources.VM_Resources.FORMAT_OrderWeight);
+                  columns.Bound(c => c.MetallicYield).Format(PE.HMIWWW.Core.Resources.VM_Resources.FORMAT_MetallicYield);
+                  columns.Bound(x => x.WorkOrderId).Filterable(false).ClientTemplate(Html.ImageButton("details", "_WorkOrder.GoToWorkOrder(#:WorkOrderId#)").ToString()).Width(40).Title(String.Empty);
+                })
+                .DataSource(ds => ds
+                                    .Ajax()
+                                    .ServerOperation(true)
+                                    .PageSize(8)
+                                    .Events(e => e
+                                        .Error("TelerikErrorHandler"))
+                                    .Read(r => r.Action("GetWorkOrdersProducedList", "Visualization"))
+                           )
+)

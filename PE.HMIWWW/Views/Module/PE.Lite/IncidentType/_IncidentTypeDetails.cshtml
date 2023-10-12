@@ -1,0 +1,100 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_IncidentType
+
+    <div class="row h-100 p-0 pt-3">
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.IncidentTypeName)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.IncidentTypeName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.IncidentTypeCode)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.IncidentTypeCode)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.IncidentTypeDescription)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.IncidentTypeDescription)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.CreatedTs)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.CreatedTs)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.LastUpdateTs)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.LastUpdateTs)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-0">
+            <div class="container-fluid">
+                <div class="form-group row">
+                    <div class="col-4 text-right">
+                        @Html.LabelFor(m => m.DefaultEnumSeverity)
+                    </div>
+                    <div class="col">
+                        @Html.DisplayFor(m => m.DefaultEnumSeverity)
+                    </div>
+                </div>
+            </div>
+        </div>
+        @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_RecommendedAction>()
+                    .Name("RecommendedActions" + Guid.NewGuid().ToString())
+                    .NoRecords(VM_Resources.GLOB_GRID_NO_DATA)
+                    .Sortable()
+                    .Filterable()
+                          .ToolBar(toolbar =>
+            {
+            toolbar.Template(
+                  @<text>
+                    <div class="refreshBtnContainer">
+                      @Html.ImageButton("add", "AddRecommendedAction(" + Model.IncidentTypeId + ")", false)
+                    </div>
+                  </text>);
+            })
+                    .Scrollable()
+                    .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                    .HtmlAttributes(new { style = "height: 500px;" })
+                    .Columns(c =>
+                    {
+                        c.Bound(x => x.RecommendedActionId).Visible(false);
+                        c.Bound(x => x.ActionDescription);
+                        c.ForeignKey(p => p.FkIncidentTypeId, (SelectList)ViewBag.IncidentTypesList);
+                        c.ForeignKey(p => p.FkActionTypeId, (SelectList)ViewBag.ActionTypesList);
+                        c.Bound(p => p.RecommendedActionId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(90)
+                                     .ClientTemplate(@Html.ImageButton("details", "GoToRecomendedAction(#:RecommendedActionId#)").ToString()
+                                     + @Html.ImageButton("edit", "EditRecommendedAction(#:RecommendedActionId#)").ToString()
+                                     + @Html.ImageButton("delete", "DeleteRecommendedAction(#:RecommendedActionId#)").ToString());
+
+                    })
+                    .DataSource(d => d
+                        .Ajax()
+                        .ServerOperation(true)
+                        .PageSize(24)
+                        .Read(r => r.Action("GetRecommendedActionsList", "IncidentType", new { incidentTypeId = Model.IncidentTypeId }))
+                        ))
+    </div>

@@ -1,0 +1,53 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.GrindingTurning.VM_RollSetTurningHistory
+
+<style>
+  .h_dotted_ln {
+      border-bottom: 1px dashed black;
+      width: 100%;
+  }
+
+  .h_dotted_right_ln {
+      border-right: 1px solid rgba(0,0,0,.1);
+  }
+
+  .h_blank_ln {
+      width: 100%;
+      height: 20px;
+  }
+
+  .v_blank_ln {
+      width: 20px;
+  }
+
+  .table-roll-details label {
+      font-weight: bold;
+      font-style: normal;
+  }
+
+  .table-roll-details td {
+      font-weight: normal;
+      font-style: italic;
+  }
+
+  .form0 {
+      position: absolute;
+      left: 10px;
+  }
+</style>
+
+
+<div class="row h-100">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+    .Name("RollSetHistory")
+    .Animation(false)
+    .HtmlAttributes(new { style = "width: 100%;" })
+    .Scrollable(false)
+    .Items(async tabstrip =>
+    {
+    tabstrip.Add().Text(VM_Resources.NAME_RollSetName)
+    .Selected(true).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/GrindingTurning/_RollSetHistoryDetailsDropDown.cshtml", Model)).ToHtmlString());
+    })
+    )
+  </div>
+</div>

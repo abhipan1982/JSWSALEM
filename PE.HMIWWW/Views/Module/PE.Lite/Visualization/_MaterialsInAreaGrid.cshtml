@@ -1,0 +1,47 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Material;
+@model PE.HMIWWW.ViewModel.Module.Lite.Asset.VM_Asset
+
+<script>
+
+  function getMaterialsInArea()
+  {
+    let dataToSend = {
+      materials: JSON.parse('@Html.Raw(Json.Serialize(@Model))').MaterialsInArea
+    }
+
+    return dataToSend;
+  }
+
+</script>
+
+@(Html.Kendo().Grid<VM_RawMaterialOverview>()
+                .Name(Model.AreaName)
+                .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+                .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 620) })
+                .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                .Filterable()
+                .Scrollable()
+                .Sortable()
+                .Columns(columns =>
+                {
+                  columns.Bound(c => c.OrderSeq).Width(120);
+                  columns.Bound(c => c.RawMaterialName);
+                  columns.Bound(c => c.Weight).Width(120);
+                  columns.Bound(c => c.Length).Width(120);
+                  columns.Bound(c => c.WorkOrderName);
+                  columns.Bound(c => c.SteelgradeCode).Width(120);
+                  columns.Bound(c => c.HeatName);
+                  columns.Bound(p => p.RawMaterialId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+                      .ClientTemplate(@Html.ImageButton("arrow_right", "onMaterialSelectOutsideTracking(#:RawMaterialId#, " + Model.AreaCode + ")", false, "NAME_Select").ToString()).Title(" ");
+                })
+                //.Events(e => e.DataBound("getDelaysFromGrid"))
+              .DataSource(ds => ds
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(20)
+                .Events(e => e
+                    .Error("TelerikErrorHandler"))
+                .Read(r => r.Action("GetMaterialsInArea", "Visualization").Data("getMaterialsInArea")))
+              
+)

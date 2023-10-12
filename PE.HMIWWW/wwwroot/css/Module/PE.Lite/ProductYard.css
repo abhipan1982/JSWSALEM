@@ -1,0 +1,560 @@
+﻿#SearchGrid table tr {
+    cursor: pointer;
+}
+
+.yard {
+    width: 100%;
+    height: 708px;
+}
+
+.yard_area {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-column-gap: 10px;
+    grid-row-gap: 15px;
+    padding: 6px;
+    border: 1px solid #ddd;
+}
+
+.area {
+    width: 100%;
+    height: 100%;
+    padding: 6px;
+    border: 1px solid #ddd;
+}
+
+
+.location {
+    background-color: #fafafa;
+    border: 1px solid #bbb;
+    text-align: center;
+}
+
+.location-actions {
+    position: relative;
+    height: 25px;
+    width: 100%;
+    background-color: #fdfdfd;
+    border-bottom: 1px solid #dadada;
+}
+
+.location-action {
+    position: absolute;
+    right: 0;
+}
+
+.location-name {
+}
+
+.k-pager-wrap.k-pager-md .k-pager-info,
+.k-pager-wrap.k-pager-sm .k-pager-info {
+    display: flex;
+}
+
+.yards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.k-card {
+    width: 285px;
+    height: 250px;
+    margin: 30px 20px;
+    border-radius: 0px;
+    background-color: #fcfcfc;
+    border: 1px solid #d2d2d2;
+    font-size: 14px;
+}
+
+.k-card-header {
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.k-card-title {
+    font-size: 14px;
+    margin: 0;
+}
+
+.k-card-label {
+    width: 150px;
+}
+
+.k-card-btn {
+    background-color: #006487;
+    color: #fff;
+    text-align: center;
+    padding: 2px 0;
+}
+
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+    .cursor-pointer:hover {
+        opacity: 0.8;
+    }
+
+.stack-container {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 5px solid #808080;
+    border-left: 5px solid #808080;
+    border-right: 5px solid #808080;
+}
+
+.stack-view {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.stack-wrapper {
+    align-self: center;
+}
+
+.heats-legend {
+    align-self: center;
+}
+
+.heats-legend-square {
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+
+.stack-layer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: auto;
+    height: auto;
+}
+
+.stack-space {
+    width: 60px;
+    height: 60px;
+    margin: 2px;
+    background-color: #fafafa;
+    border: 1px solid #bbb;
+}
+
+.details-panel {
+    width: 90%;
+    height: auto;
+    background-color: #fcfcfc;
+    border: 1px solid #d2d2d2;
+}
+
+.details-panel-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    height: 35px;
+    border-bottom: 1px solid #d2d2d2;
+    align-items: center;
+}
+
+.details-panel-name {
+    width: 100%;
+    height: 35px;
+    background-color: #fff;
+    line-height: 35px;
+    font-size: 15px;
+    padding: 0 10px;
+}
+
+.details-panel-header {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid #d2d2d2;
+    border-bottom: 1px solid #006486;
+    line-height: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #006486;
+    text-align: center;
+}
+
+.header-icon {
+    position: absolute;
+    right: 10px;
+}
+
+.details-panel-label {
+    width: 100px;
+}
+
+.loading-overlay::before {
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 11;
+  background-image: url(/css/System/Img/loading_2x.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(255,255,255,.6);
+}
+
+
+/*heat autocomplete*/
+.dropdown-header {
+    border-width: 0 0 1px 0;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+}
+
+    .dropdown-header:hover {
+        background-color: #879baa;
+        color: white;
+    }
+
+    .dropdown-header > span {
+        display: inline-block;
+        text-align: center;
+    }
+
+.disabled-input:hover {
+    border: 1px solid #dbdbdb;
+}
+
+.heat {
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    /*width: 400px;*/
+}
+
+#FKHeatIdRef_listbox .k-state-hover {
+    background-image: none;
+    background-color: #f2f2f2;
+}
+
+.details-row {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+.heat-data {
+    font-weight: 500;
+}
+
+.heat-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #006487;
+}
+
+.heat-details {
+    font-size: 13px;
+    line-height: 18px;
+    color: #666;
+}
+
+.k-i-close {
+    color: #666;
+}
+
+.k-autocomplete {
+    z-index: 1;
+}
+
+.partial-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+}
+
+    .partial-actions a {
+        margin-right: 10px;
+    }
+
+.available {
+    background-color: #ebffc7;
+}
+
+.recommended {
+    background-color: #baf774;
+}
+
+.unavailable {
+    background-color: #dedede;
+}
+
+    .unavailable:hover {
+        background-color: #dedede !important;
+    }
+
+
+#materialPanel .form-group, #heatPanel .form-group {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+
+/*#ProductsInLocationsList .k-grouping-row .k-grid td {*/
+/*  border-style: none !important;*/
+/*border-color: transparent !important;
+}
+
+#ProductsInLocationsList .k-grid td {*/
+/*  border-style: none !important;*/
+/*border-color: transparent !important;
+}
+
+#ProductsInLocationsList .k-grouping-row + tr td {
+  border-top-width: 0px !important;
+  border-left-width: 0px !important;
+}*/
+
+#ProductsInLocationsList .k-grouping-row {
+    border-top-width: 0px !important;
+    /*  border-left-width: 0px !important;*/
+    border-width: 0px !important;
+}
+
+/*#ProductsInLocationsList .k-grouping-row td, .k-group-footer td, .k-grid-footer td {
+  border-left-color: #dadada;
+}*/
+
+.k-grouping-row td, .k-group-footer td, .k-grid-footer td {
+    color: #006487;
+    font-weight: 600;
+}
+
+#ProductsInLocationsList .k-group-cell {
+    border-width: 0px !important;
+}
+
+
+#ProductsInLocationsList td {
+    border-style: none !important;
+    cursor: pointer;
+}
+/*darkgoldenrod;*/
+/*.k-grouping-row{
+
+}
+
+/*#ProductsInLocationsList .k-grouping-row td, .k-group-footer td, .k-grid-footer td {
+  border-color: #fff !important;
+}
+*/
+.cursor-blocked {
+    pointer-events: none;
+}
+
+.grid-title {
+    width: 100%;
+    color: #757575;
+    font-weight: 500;
+}
+
+.grid-title-icon {
+    font-size: 21px;
+}
+
+.between-grids-arrow-center {
+    position: absolute;
+    right: 48.6%;
+    color: #bbb;
+    top: 50%;
+    font-size: 39px;
+    cursor: default;
+}
+
+.asset-card {
+    width: 270px;
+    height: 295px;
+    margin: 30px 30px;
+    background-color: #fcfcfc;
+    border: 1px solid #dfdfdf;
+    text-align: center;
+}
+
+.asset-card-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-header-title {
+    font-size: 20px;
+    color: #000;
+}
+
+.asset-card-body {
+    width: 100%;
+    height: 105px;
+}
+
+.card-body-number {
+    font-size: 44px;
+    color: #006487;
+}
+
+.card-body-label {
+    font-size: 16px;
+    color: #565656;
+}
+
+.asset-card-footer {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-footer-btn {
+    width: 130px;
+    padding: 6px;
+    background-color: #006487;
+    color: #fff;
+}
+
+/*grid no records fix*/
+.k-grid-norecords {
+    height: auto !important;
+}
+
+#LocationsScheduleList tr {
+    cursor: row-resize;
+}
+
+#WOReadyGrid {
+    cursor: pointer;
+}
+
+.selected-row {
+    color: #ffffff;
+    background-color: #f2a900;
+    border-color: #f2a900;
+}
+
+    .selected-row:hover {
+        background-image: none !important;
+        background-image: none, none !important;
+        /*    background-position: 50% 50%;*/
+        color: #ffffff;
+        background-color: #f2a900 !important;
+        border-color: #f2a900;
+    }
+
+
+.nowrap-text {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#dispatchLocationsFiltered {
+    display: none;
+}
+
+.popup-top-actions {
+    position: absolute;
+    right: 40px;
+}
+
+.legend {
+    font-size: 14px;
+}
+
+.popup-top-actions {
+    position: absolute;
+    right: 40px;
+}
+
+.legend-window {
+    width: auto;
+    height: auto;
+    padding: 0px 10px 0px 5px;
+    background-color: rgba(255,255,255,0.9);
+    display: none;
+    position: absolute;
+    z-index: 10;
+    box-shadow: 0 3px 10px #CCCCCC;
+}
+
+.popup-legend-window {
+    top: 55px;
+    right: 32px;
+}
+
+.yardMap-legend-window {
+    top: 30px;
+    right: 15px;
+}
+
+.square {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    margin-top: 4px;
+}
+
+.square-border {
+    border: 1px solid #aaa;
+}
+
+.map-actions {
+    position: absolute;
+    right: 20px;
+}
+
+.scale-color-0 {
+    background-color: #fafafa;
+}
+
+.scale-color-25 {
+    background-color: #deecf8;
+}
+
+.scale-color-50 {
+    background-color: #9ecae1;
+    color: #000;
+}
+
+.scale-color-75 {
+    background-color: #6baed6;
+    color: #000;
+}
+
+.scale-color-100 {
+    background-color: #4292c6;
+    color: #fff;
+}
+
+.scale-color-full {
+    background: repeating-linear-gradient( 45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 10px, rgba(255, 255, 255, 0.1) 10px, rgba(255, 255, 255, 0.1) 22px );
+    background-repeat: no-repeat;
+    background-color: #4292c6;
+    color: #fff;
+}
+
+.scale-border {
+    border: 1px solid #dbdbdb;
+}
+
+.location-active {
+    background-color: #e6fccf;
+    color: #000;
+}

@@ -1,0 +1,80 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.QualityExpert
+@model VM_QualityExpertOverview
+
+@(Html.Kendo().Tooltip()
+        .For("#materials-bar")
+        .Filter("#mateiral")
+        .Position(TooltipPosition.Top)
+    )
+    
+<div class="row">
+  <div class="col-9">
+    @if (Model.ChildMaterials == 0)
+    {
+      <strong>@Model.HeaderRawMaterial.RawMaterialName</strong>
+    }
+    else
+    {
+      <a href="#" id="@Model.HeaderRawMaterial.RawMaterialId" onclick="onChildInfoSelect(this)">
+        <strong>@Model.HeaderRawMaterial.RawMaterialName</strong>
+      </a>
+    }
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-9">
+      <div class="container-fluid">
+        <div id="materials-bar" class="row mt-4">
+            @foreach (var material in Model.RawMaterials)
+            {
+                var icon = "<i class=\"material-icons md-light material-grading-icon\">report_off</i>";
+
+                switch (material.LastGrading)
+                {
+                    case 1:
+                    case 2:
+                        icon = "<i class=\"material-icons md-light material-grading-icon\">check_circle</i>";
+                        break;
+                    case 3:
+                        icon = "<i class=\"material-icons md-light material-grading-icon\">report_problem</i>";
+                        break;
+                    case 4:
+                    case 5:
+                        icon = "<i class=\"material-icons md-light material-grading-icon\">remove_circle</i>";
+                        break;
+                }
+
+                <div id="mateiral" class="col p-0" title="@material.RawMaterialName">
+                    <div id="@material.RawMaterialId" class="material-vis @if(material.RawMaterialId == Model.CurrentRawMaterial.RawMaterialId){@("active-material-vis");}" data-materialName="@material.RawMaterialName" onclick="onChildInfoSelect(this)">
+                        <div class="material-body text-center">
+                          @if (Model.ChildMaterials == 0)
+                          {
+                              @(material.RawMaterialName); 
+                          }
+                          else
+                          {
+                              @(material.CuttingSeqNo); 
+                          }
+                        </div>
+                        <div class="material-info material-info-bg-@material.LastGrading">
+                            @Html.Raw(icon)
+                            <div class="text-center">@material.LastGrading</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+      </div>
+    </div>
+
+    <div id="SpecifiedGradingValue" class="col-3" style="min-height: 130px"
+         data-url="@Url.Action(action: "GetMaterialGrading", controller: "QualityExpert", new { RawMaterialId = Model.CurrentRawMaterial.RawMaterialId })">
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-12">
+        @await Html.PartialAsync("~/Views/Module/PE.Lite/QualityExpert/_MaterialGradingDetails.cshtml", Model.CurrentRawMaterial)
+    </div>
+</div>

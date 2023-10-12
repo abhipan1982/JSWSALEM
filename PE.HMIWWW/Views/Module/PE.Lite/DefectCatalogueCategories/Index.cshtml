@@ -1,0 +1,43 @@
+﻿@using PE.HMIWWW.ViewModel.Module.Lite.Defect
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("new", "DefectCatalogueCategoriesAddPopup()")
+}
+
+@(Html.Kendo().Grid<VM_DefectCatalogueCategory>()
+    .Name("DefectCatalogueCategoriesList")
+    .HtmlAttributes(new {style = string.Format(" height:{0}px;", ViewBag.FullGridHeight)})
+    .Scrollable()
+    .Pageable(p => p
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Filterable()
+    .Columns(c =>
+    {
+        c.Bound(x => x.DefectCatalogueCategoryCode).ClientTemplate("#= DefectCatalogueCategoryCode # # if(IsDefault) {#(" + VM_Resources.NAME_IsDefault + ")#}#");
+        ;
+        c.Bound(x => x.DefectCatalogueCategoryName);
+        c.Bound(x => x.DefectCatalogueCategoryDescription);
+        c.Bound(x => x.DefectCategoryGroupCode).Filterable(false);
+        c.Bound(x => x.IsDefault).Filterable(false);
+        c.ForeignKey(o => o.EnumAssignmentTypeId, (SelectList) ViewBag.EnumAssignmentType).Filterable(false);
+        c.Bound(x => x.Id)
+            .Filterable(false)
+            .ClientTemplate(Html.ImageButton("edit", "DefectCatalogueCategoriesEditPopup(#:Id#)") + Html.ImageButton("details", "GoToDetails(#:Id#)").ToString()
+                            + Html.ImageButton("delete", "Delete(#=Id#)"))
+            .Width(100)
+            .Title(" ");
+    })
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(30)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetDefectCatalogueCategoriesList", "DefectCatalogueCategories"))
+    )
+    )
+
+<script src="~/js/Module/PE.Lite/DefectCatalogueCategories.js"></script>

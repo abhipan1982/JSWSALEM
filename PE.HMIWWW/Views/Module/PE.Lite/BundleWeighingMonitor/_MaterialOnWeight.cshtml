@@ -1,0 +1,66 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialOverview
+
+<div class="weight">
+  <div class="row p-0 pr-3 h-100">
+    <div class="col-3 form-group">
+      <div class="text-left pt-4 pl-5">
+        <label>@Html.LabelFor(x => x.RawMaterialName)</label>
+      </div>
+      <div class="text-left pl-5">
+        @if (@Model.RawMaterialId.HasValue)
+        {
+          <span class="link" onclick="_RawMaterial.GoToRawMaterial(@Model.RawMaterialId)">
+            @Html.DisplayFor(m => m.RawMaterialName)
+          </span>
+        }
+        else
+        {
+          @Html.DisplayFor(m => m.RawMaterialName)
+        }
+      </div>
+    </div>
+    <div class="col-3 form-group">
+      <div class="text-left pt-4 pl-5">
+        <label>@Html.LabelFor(x => x.WorkOrderName)</label>
+      </div>
+      <div class="text-left pl-5">
+        @if (Model.WorkOrderId != null)
+        {
+          <span class="link" onclick="_WorkOrder.GoToWorkOrder(@Model.WorkOrderId)">
+            @Html.DisplayFor(m => m.WorkOrderName)
+          </span>
+        }
+        else
+        {
+          @Html.DisplayFor(x => x.WorkOrderName)
+        }
+      </div>
+    </div>
+    <div class="col-3 form-group">
+      <div class="text-left pt-4 pl-5">
+        <label>@Html.LabelFor(x => x.HeatName)</label>
+      </div>
+      <div class="text-left pl-5">
+        @if (Model.HeatId != null)
+        {
+          <span class="link" onclick="_Heat.GoToHeat(@Model.HeatId)">
+            @Html.DisplayFor(m => m.HeatName)
+          </span>
+        }
+        else
+        {
+          @Html.DisplayFor(x => x.HeatName)
+        }
+      </div>
+    </div>
+    <div class="col-3 form-group m-0 p-0" style="    background-color: #f7f7f7;
+    border-left: 1px solid #dbdbdb;">
+      <div class="text-left pt-4 pl-5">
+        <label>@Html.LabelFor(x => x.Weight)</label>
+      </div>
+      <div class="text-left pl-5">
+        @Html.DisplayFor(x => x.Weight)
+      </div>
+    </div>
+  </div>
+</div>

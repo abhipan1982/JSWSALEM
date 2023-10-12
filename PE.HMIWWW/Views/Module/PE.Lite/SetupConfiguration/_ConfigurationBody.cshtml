@@ -1,0 +1,17 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Setup.VM_SetupConfiguration
+
+<div class="row h-100">
+    <div class="col">
+        @(Html.Kendo().TabStrip()
+                .Name("ConfigurationBody")
+                .Animation(false)
+                .HtmlAttributes(new {style = "width: 100%;"})
+                .Scrollable(false)
+                .Items(async tabstrip =>
+                {
+                    tabstrip.Add().Text(VM_Resources.NAME_SetupConfiguration)
+                        .Selected(true).LoadContentFrom("SetupConfigurationsView", "SetupConfiguration", new { configurationId = Model.ConfigurationId });
+                })
+            )
+    </div>
+</div>

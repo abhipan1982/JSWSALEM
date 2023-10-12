@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Start server": {
+      "commandName": "Project",
+      "commandLineArgs": "-s"
+    },
+    "Get triggers": {
+      "commandName": "Project",
+      "commandLineArgs": "-t"
+    }
+  }
+}

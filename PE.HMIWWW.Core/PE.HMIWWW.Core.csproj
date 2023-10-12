@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyTitle>PE.HMIWWW.Core</AssemblyTitle>
+    <Company>Primetals Technologies Poland Sp. z o.o.</Company>
+    <Product>PE.HMIWWW.Core</Product>
+    <Copyright>Copyright © Primetals Technologies 2020</Copyright>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="Resources\VM_Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VM_Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\VM_Resources.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\VM_Resources.en-US.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\VM_Resources.pl-PL.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\VM_Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VM_Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PE.Interfaces\PE.Interfaces.csproj" />
+    <ProjectReference Include="..\PE.DbEntity\PE.DbEntity.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="PE.BaseCommon" />
+    <PackageReference Include="PE.BaseCore" />
+    <PackageReference Include="PE.BaseInterfaces" />
+    <PackageReference Include="Polybioz.HtmlRenderer.PdfSharp.Core" />
+    <PackageReference Include="SMF.Core" />
+    <PackageReference Include="SMF.DbEntity" />
+    <PackageReference Include="SMF.HMI" />
+    <PackageReference Include="SMF.HMIWWW" />
+    <PackageReference Include="SMF.Module" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" />
+    <PackageReference Include="Microsoft.FeatureManagement" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Communication\HmiExternalAdapter.cs" />
+    <Compile Remove="Signalr\SignalRBroadcast.cs" />
+    <Compile Remove="Signalr\SignalRClient.cs" />
+    <Compile Remove="ViewModel\VM_BaseList.cs" />
+  </ItemGroup>
+</Project>

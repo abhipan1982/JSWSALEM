@@ -1,0 +1,53 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.WorkOrder.VM_WorkOrderOverview
+
+<div class="row h-100">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+      .Name("WorkOrderBody")
+      .Animation(false)
+      .HtmlAttributes(new {style = "width: 100%;"})
+      .Scrollable(false)
+      .Items(async tabstrip =>
+      {
+        tabstrip.Add().Text(VM_Resources.NAME_WorkOrderDetails)
+            .Selected(true).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderDetails.cshtml", Model)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_ProductCatalogue)
+            .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_ProductCatalogueDetails.cshtml", Model)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_BilletCatalogue)
+            .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Material/_BilletCatalogueDetails.cshtml", Model)).ToHtmlString());
+        if (Model.Heat.HC != null)
+        {
+          tabstrip.Add().Text(VM_Resources.NAME_HeatChemAnalysis)
+              .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Heat/_HeatChemAnalysis.cshtml", Model.Heat)).ToHtmlString());
+        }
+        tabstrip.Add().Text(VM_Resources.NAME_MaterialsList)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderMaterialsListForPopup.cshtml", Model.WorkOrderId)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Products)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderProductsList.cshtml", Model.WorkOrderId)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Events)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderEventsList.cshtml", Model.WorkOrderId)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Delays)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderDelaysList.cshtml", Model.WorkOrderId)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Defects)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderDefectsList.cshtml", Model.WorkOrderId)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Rejects)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderRejectsList.cshtml", Model.WorkOrderId)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Scraps)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderScrapsList.cshtml", Model.WorkOrderId)).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_Quality)
+          .Selected(false).Content((await @Html.PartialAsync("~/Views/Module/PE.Lite/WorkOrder/_WorkOrderInspection.cshtml", Model.WorkOrderId)).ToHtmlString());
+         tabstrip.Add().Text(VM_Resources.NAME_KPI)
+          .Selected(false).LoadContentFrom("GetWorkOrderKPIs", "PerformanceWorkOrderMonitor", new { workOrderId = Model.WorkOrderId });
+      })
+    )
+  </div>
+</div>
+
+<script>
+  function GoToMaterial(materialId) {
+    let dataToSend = {
+      MaterialId: materialId
+    };
+    openSlideScreen('Material', 'ElementDetails', dataToSend);
+  }
+</script>

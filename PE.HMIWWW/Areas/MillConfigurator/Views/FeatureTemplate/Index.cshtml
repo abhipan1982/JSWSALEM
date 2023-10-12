@@ -1,0 +1,33 @@
+@using PE.HMIWWW.Core.HtmlHelpers
+@using PE.HMIWWW.Core.Resources
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.FeatureTemplate.VM_FeatureTemplate
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+  @Html.ImageButton("add_feature", "createFeatureTemplate()", false, "NAME_CreateFeatureTemplate")
+  @Html.ImageButton("edit", "editFeatureTemplate()", false, "NAME_EditFeatureTemplate")
+  @Html.ImageButton("clone", "cloneFeatureTemplate()", false, "NAME_CloneFeatureTemplate")
+  @Html.ImageButton("delete", "deleteFeatureTemplate()", false, "NAME_DeleteFeatureTemplate")
+}
+
+<div class="container-fluid p-3">
+  <div class="row">
+    <div class="col-3 grid-filter" id="FeatureTemplateSearchGrid">
+      @await Html.PartialAsync("~/Areas/MillConfigurator/Views/FeatureTemplate/_FeatureTemplateSearchGrid.cshtml", Model)
+    </div>
+    <div class="col-9 element-details" id="FeatureTemplateDetails">
+      <div class="row justify-content-center plug">
+        <div class="col-6 align-self-center">
+          <img src="~/css/Shared/plug.png" />
+          <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/MillConfigurator.css" />
+<script src="~/bundles/js/Module/FeatureTemplate.js"></script>

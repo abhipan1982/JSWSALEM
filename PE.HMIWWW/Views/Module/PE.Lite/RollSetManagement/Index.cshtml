@@ -1,0 +1,52 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.RollsetManagement
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_RollSetManagement_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+  @Html.ImageButton("new", "AddNew()", false)
+}
+
+<script src="~/bundles/js/Module/RollSetManagement.js"></script>
+
+@(Html.Kendo().Grid<VM_RollSetOverviewFull>()
+  .Name("RollSetManagementGrid")
+  .HtmlAttributes(new { style = @String.Format(" height:{0}px;", ViewBag.FullGridHeight) })
+  .Scrollable()
+  .Pageable(p => p
+  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Filterable()
+  .Sortable()
+  .Columns(columns =>
+  {
+    columns.Bound(p => p.RollSetId).Visible(false);
+    columns.ForeignKey(o => o.RollSetType, (SelectList)ViewBag.RollsetTypes).Width(150);
+    columns.Bound(p => p.RollSetName).Width(150);
+    columns.ForeignKey(o => o.EnumRollSetStatus, (SelectList)ViewBag.RollSetStatus).Width(150);
+    columns.Bound(p => p.UpperRollName).Width(130);
+    columns.Bound(p => p.BottomRollName).Width(130);
+    columns.Bound(p => p.MountedTs).Width(170).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT"));
+    columns.Bound(p => p.DismountedTs).Width(170).Format(VM_Resources.ResourceManager.GetString("GLOB_LongDateTime_FORMAT"));
+    columns.Bound(p => p.CassetteName).Width(120);
+    columns.Bound(p => p.StandName).Width(100).HtmlAttributes(new { style = "text-align: right;" });
+    columns.Bound(p => p.GrooveTemplateName).Width(120);
+    columns.Bound(p => p.RollSetDescription).HtmlAttributes(new { style = "text-align: left;" });
+    columns.Bound(p => p.RollSetStatus).Width(120).Sortable(false).Groupable(false).Filterable(false).Title(" ")
+    .ClientTemplate(@Html.ImageButton("rollset_details", "RollSetInfo(#= RollSetId #)", false).ToString() +
+      "# if (Editable) {#" + @Html.ImageButton("edit", "EditData(#= RollSetId #)", false).ToString() + "#}#" + "  " +
+      "# if (Assemblable) {#" + @Html.ImageButton("rolls_assemble", "AssembleRs(#= RollSetId #)", false).ToString() + "#}#" +
+      "# if (Disassemblable) {#" + @Html.ImageButton("rolls_disassemble", "DisassembleRs(#= RollSetId #)", false).ToString() + "#}#" +
+      "# if (PassGrooveChangeable) {#" + @Html.ImageButton("pass_change", "PassChangeGroove(#= RollSetId #)", false).ToString() + 
+      @Html.ImageButton("rolls_dismount_rollset", "DismountRollSet(#= RollSetId #, #= PositionInCassette #)", false).ToString() + "#}#" +
+      "# if (Removable) {#" + @Html.ImageButton("delete", "Delete(#= RollSetId #)", false).ToString() + "#}#");
+  })
+  .DataSource(ds => ds
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(27)
+    .Events(e => e.Error("TelerikErrorHandler"))
+    .Read(r => r.Action("GetRollsetData", "RollsetManagement"))
+  )
+)

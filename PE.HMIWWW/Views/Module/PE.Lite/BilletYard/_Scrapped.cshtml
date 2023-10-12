@@ -1,0 +1,40 @@
+﻿@{
+  Layout = "~/Views/Shared/_TabLayout.cshtml";
+}
+
+<div class="yard">
+  <div class="map-actions">
+    @Html.ImageButton("arrow_left", "GoToYardsList()", false, "BUTTON_back")
+  </div>
+  <div class="w-100 text-center">@VM_Resources.NAME_Scrapped</div>
+  <div class="area mt-2">
+    @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_HeatsOnYards>()
+          .Name("ScrappedGrid")
+          .Events(e => e.DataBound("ColorSearchedHeatScrapped"))
+          .HtmlAttributes(new { @style = "height: 680px;" })
+          .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+          .Sortable()
+          .Filterable()
+          .Scrollable()
+          .Pageable(p => p
+                  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+          .Columns(c =>
+          {
+            c.Bound(x => x.HeatName);
+            c.Bound(x => x.HeatId).Visible(false);
+            c.Bound(x => x.YardId ).Visible(false);
+            c.Bound(x => x.NumberOfMaterials);
+            c.Bound(p => p.HeatId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+                .ClientTemplate(@Html.ImageButton("up", "UnscrapMaterials(#:HeatId#, #:NumberOfMaterials#, #:YardId#) ", false, "NAME_Unscrap").ToString());
+          })
+          .DataSource(d => d
+              .Ajax()
+              .ServerOperation(true)
+              .PageSize(23)
+              .Read(r => r.Action("GetHeatsInScrap", "BilletYard"))
+              //.Read(r => r.Action("GetHeatsInReception", "BilletYard"))
+              )
+    )
+  </div>
+</div>
+

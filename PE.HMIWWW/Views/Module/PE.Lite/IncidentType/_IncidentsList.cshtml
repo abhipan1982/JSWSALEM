@@ -1,0 +1,50 @@
+﻿@model PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_IncidentType
+
+    <div class="row h-100 p-0 pt-3">
+        <div class="col-12 p-0 pt-3">
+            @*<h8>@Html.Label(VM_Resources.NAME_Search)</h8>*@
+            <div class="col-8 p-0">
+                <div class="container-fluid">
+                    @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Maintenance.VM_Incident>()
+                    .Name("IncidentGrid")
+                    .NoRecords(VM_Resources.GLOB_GRID_NO_DATA)
+                    .Sortable()
+                    .Filterable()
+                    .ToolBar(toolbar =>
+            {
+            toolbar.Template(
+                  @<text>
+                    <div class="refreshBtnContainer">
+                      @Html.ImageButton("add", "AddNewIncident(" + Model.IncidentTypeId + ")", false)
+                    </div>
+                  </text>);
+            })
+                    .Scrollable()
+                    .Pageable(p => p
+                    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+                    .HtmlAttributes(new { style = "height: 300px; width:1330px" })
+                    .Columns(c =>
+                    {
+                        c.Bound(x => x.IncidentId).Visible(false);
+                        c.ForeignKey(p => p.FKIncidentTypeId, (SelectList)ViewBag.IncidentTypesList);
+                        c.ForeignKey(p => p.IsPlanned, (SelectList)ViewBag.NoYes);
+                        c.Bound(x => x.StartTime).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+                        c.Bound(x => x.EndTime).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+                        c.Bound(x => x.IncidentDescription);
+                        c.Bound(p => p.IncidentId).Sortable(false).Groupable(false).Filterable(false).Title("").Width(90)
+                            
+                                     .ClientTemplate(@Html.ImageButton("new", "AddNewAction(#:IncidentId#)").ToString() + @Html.ImageButton("edit", "ModifyIncidentDetails(#:IncidentId#)").ToString()
+                                     + @Html.ImageButton("delete", "ModifyIncidentDetails(#:IncidentId#)").ToString());
+
+                    })
+                    .DataSource(d => d
+                        .Ajax()
+                        .ServerOperation(false)
+                        .PageSize(24)
+                        .Sort(x => x.Add("EndTime").Descending())
+                        .Read(r => r.Action("GetAllIncidentsForTypeList", "IncidentType", new { incidentTypeId = Model.IncidentTypeId }))
+                        ))
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,92 @@
+﻿@model List<string>
+@using PE.HMIWWW.ViewModel.Module.Lite.Setup
+
+<style>
+    #SetupPropertiesSearchGrid .k-grid-header {
+        padding-right: 0px !important;
+    }
+
+    #SetupPropertiesSearchGrid .k-grid-content {
+        overflow: hidden !important;
+    }
+</style>
+
+@(Html.Kendo().Grid<VM_Setup>()
+    .Name("SearchGrid")
+    .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Pageable(p => p
+    .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Sortable()
+    .Scrollable()
+    .Filterable()
+    .Selectable()
+    .HtmlAttributes(new { style = @String.Format("height:{0}px;", ViewBag.FullGridHeight) })
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.SetupId).Visible(false);
+        columns.Bound(c => c.SetupName);
+        foreach (var item in Model)
+        {
+            columns.Bound(item.Replace(" ", "_"));
+        }
+        columns.Bound(c => c.IsActive).ClientTemplate(
+            "#if(IsActive === true)" +
+            "{" +
+            "#<input class='not-editable' type='checkbox' disabled checked />#" +
+            "}" +
+            "else" +
+            "{" +
+            "#<input class='not-editable' type='checkbox' disabled />#" +
+            "}#");
+        columns.Bound(c => c.IsSteelgradeRelated).ClientTemplate(
+            "#if(IsSteelgradeRelated === true)" +
+            "{" +
+            "#<input class='not-editable' type='checkbox' disabled checked />#" +
+            "}" +
+            "else" +
+            "{" +
+            "#<input class='not-editable' type='checkbox' disabled />#" +
+            "}#");
+    })
+    .ToolBar(toolbar => { toolbar.ClientTemplateId("SearchGridToolbarTemplate"); })
+    .DataSource(d => d
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(28)
+        .Read(r => r.Action("GetSetupParametersSearchGridData", "Setup", new { setupType = ViewBag.SetupType })))
+    .Events(e => {
+        e.Change("onSetupSelect");
+        e.DataBound("SelectLastRow");
+        })
+)
+
+
+@if (Model.Count > 5)
+{
+    <style>
+        #SetupPropertiesSearchGrid .k-filter-row > th:first-child,
+        #SetupPropertiesSearchGrid tbody td:first-child,
+        #SetupPropertiesSearchGrid tfoot td:first-child,
+        #SetupPropertiesSearchGrid .k-grid-header th.k-header:first-child {
+            width: 150px;
+        }
+    </style>
+}
+
+<script>
+
+  $(document).ready(function () {
+    if (@Model.Count > 5) {
+        var grid = $("#SearchGrid").getKendoGrid();
+      grid.thead.kendoTooltip({
+      filter: "th",
+        content: function (e) {
+          var target = $(e.target)
+          return target[0].dataset.title;
+        }
+      })
+    }
+
+  });
+
+</script>

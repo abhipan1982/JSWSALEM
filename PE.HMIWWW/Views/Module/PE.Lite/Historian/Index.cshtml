@@ -1,0 +1,71 @@
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<link rel="stylesheet" href="~/bundles/css/Module/Historian.css" />
+
+
+<div class="row">
+  <div class="col-2">
+    
+
+    <div class="measurements">
+      <div class="measurements_header">
+        Features <span class="details_header_icon details-icon cursor-pointer" id="measurements_details" onclick="OpenFeatureGridPopup()"></span>
+      </div>
+      <div class="measurements_data" id="selected_features">
+      </div>
+    </div>
+
+     @*<div class="measurements">
+      <div class="measurements_header">
+        Materials 
+         <span class="details_header_icon details-icon cursor-pointer" onclick="OpenMaterialGridPopup()"></span>
+      </div>
+      <div class="measurements_data" id="selected_materials">
+      </div>
+    </div>*@
+
+  </div>
+  <div class="col-10">
+      <div class="options-bar">
+        <div class="options">
+        <div class="form-group mt-2 ml-5">
+          <label>Start date</label>
+          @(Html.Kendo().DateTimePicker()
+                .Name("start")
+                .Value(DateTime.Today)
+                .Max(DateTime.Now)
+                .Format(VM_Resources.GLOB_LongDateTime_FORMAT_Picker)
+                .TimeFormat("HH:mm")
+                .Events(e => e.Change("startChange"))
+                .HtmlAttributes(new { style = "width:100%;" })
+          )
+        </div>
+        <div class="form-group mt-2 ml-5">
+          <label>End date</label>
+          @(Html.Kendo().DateTimePicker()
+              .Name("end")
+              .Value(DateTime.Now)
+              .Min(DateTime.Today)
+              .Max(DateTime.Now)
+              .Format(VM_Resources.GLOB_LongDateTime_FORMAT_Picker)
+              .TimeFormat("HH:mm")
+              .Events(e => e.Change("endChange"))
+              .HtmlAttributes(new { style = "width:100%;" })
+          )
+        </div>
+        </div>
+        <div class="mr-2 mt-3" id="chart_legend" title="Show/Hide Legend"></div>
+      </div>
+
+      <div style="position: relative">
+          <div class="chart" id="chartdiv"></div>
+          <div class="chart" id="legenddiv"></div>
+      </div>
+
+@*       <div id="chart-nodata" class="msg-container"></div>*@
+  </div>
+</div>
+
+<script src="~/bundles/js/Module/Historian.js"></script>

@@ -1,0 +1,29 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.ProductYard;
+
+<div class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_WOsReadyForShipment</div>
+
+@(Html.Kendo().Grid<VM_WorOrdersOnYards>()
+    .Name("WOReadyGrid")
+    .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 660) })
+    .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Filterable()
+    .Selectable()
+    .Scrollable()
+    .Columns(c =>
+    {
+      c.Bound(x => x.WorkOrderId).Visible(false);
+      c.Bound(x => x.WorkOrderName);
+      c.Bound(x => x.HeatName);
+      c.Bound(x => x.ProductsWeight);
+      c.Bound(x => x.ToBeCompletedBeforeTs).Title(VM_Resources.NAME_Shipment).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDate_FORMAT).Width(100);
+      c.Bound(x => x.IsOverrun).Title(" ").Filterable(false).Width(30).HtmlAttributes(new { style = "text-align: center"})
+        .ClientTemplate("#if(IsOverrun){# <img src='/css/Functions/Small/result_warn.png'> #}#");
+    })
+    .DataSource(ds => ds
+       .Ajax()
+       .ServerOperation(true)
+       .Events(e => e.Error("TelerikErrorHandler"))
+       .Read(r => r.Action("GetFinishedWorkOrders", "ProductYard"))
+    )
+    .Events(e => e.Change("OnReadyWOSelect"))
+)

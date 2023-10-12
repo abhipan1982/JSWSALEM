@@ -1,0 +1,24 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.QualityExpert
+@model VM_RatingDetailsValue
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<div class="mb-2">
+    @(Html.Kendo().TabStrip()
+      .Name("RatingDetails")
+      .Animation(false)
+      .HtmlAttributes(new { style = "width: 100%;"})
+      .Scrollable(false)
+      .Items(async tabstrip =>
+      {
+          tabstrip.Add().Text(VM_Resources.NAME_RatingDetails)
+          .Selected(true).Content((await @Html.PartialAsync("_RatingDetails", Model)).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_RootCauseDetails)
+          .Content((await @Html.PartialAsync("_RootCauseDetails", Model.RatingId)).ToHtmlString());
+          tabstrip.Add().Text(VM_Resources.NAME_CompensationDetails)
+          .Content((await @Html.PartialAsync("_CompensationDetails", Model.RatingId)).ToHtmlString());
+
+      })
+    )
+</div>

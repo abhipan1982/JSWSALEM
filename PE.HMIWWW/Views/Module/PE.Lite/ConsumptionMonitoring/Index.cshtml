@@ -1,0 +1,54 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.ConsumptionMonitoring.VM_Feature
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@*@section module_menu
+{
+  <div class="row pl-2 date-selector">
+    <div class="datepicker-container row">
+      <div class="dateRangeError"></div>
+      <div class="datepicker demo-section k-content">
+        @(Html.Kendo().DateTimePicker()
+            .Name("datetimepicker-from")
+            .Value(DateTime.Now)
+            .HtmlAttributes(new { style = "width: 200px", title = "datetimepicker", @class = "range-datepicker" })
+            .DateInput()
+            )
+        -
+      </div>
+      <div class="datepicker demo-section k-content">
+        @(Html.Kendo().DateTimePicker()
+            .Name("datetimepicker-to")
+            .Value(DateTime.Now)
+            .HtmlAttributes(new { style = "width: 200px", title = "datetimepicker", @class = "delays-datepicker" })
+            .DateInput()
+            )
+      </div>
+    </div>
+
+    <div class="action-icons">
+      @Html.ImageButton("calendar", "getDelaysSummaryForRange()", false, "NAME_DateRange")
+    </div>
+  </div>
+}*@
+
+<div class="container-fluid p-3">
+  <div class="row">
+    <div class="col-3 grid-filter">
+      @await Html.PartialAsync("~/Views/Module/PE.Lite/ConsumptionMonitoring/_ConsumptionMonitoringGrid.cshtml", Model)
+    </div>
+    <div class="col-9 element-details" id="MeasurementDetails">
+      <div class="row justify-content-center plug">
+        <div class="col-6 align-self-center">
+          <img src="~/css/Shared/plug.png" />
+          <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/ConsumptionMonitoring.css" />
+<script src="~/bundles/js/Module/ConsumptionMonitoring.js"></script>
+

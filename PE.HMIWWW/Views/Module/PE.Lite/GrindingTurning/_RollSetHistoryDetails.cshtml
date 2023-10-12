@@ -1,0 +1,298 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.GrindingTurning.VM_RollSetTurningHistory
+@{
+  int columns = Model.GrooveActualRollUpper.Count;
+}
+
+<style>
+  .scale {
+      transform: scale(1);
+  }
+
+  .horizontal-scroll-except-first-column {
+      width: 100%;
+      overflow: auto;
+      padding-bottom: 10px;
+  }
+
+      .horizontal-scroll-except-first-column > table {
+          margin-left: 200px;
+      }
+
+          .horizontal-scroll-except-first-column > table > * > tr > th:first-child,
+          .horizontal-scroll-except-first-column > table > * > tr > td:first-child {
+              position: absolute;
+              width: 200px;
+              margin-left: -200px;
+              background: white;
+              z-index: 100;
+          }
+
+          .horizontal-scroll-except-first-column > table > * > tr > th,
+          .horizontal-scroll-except-first-column > table > * > tr > td {
+              /* Without this, if a cell wraps onto two lines, the first column
+                 * will look bad, and may need padding.
+                      white-space: nowrap; */
+          }
+
+              .horizontal-scroll-except-first-column > table > * > tr > th:first-child {
+                  height: 3.7rem;
+              }
+
+  .last-desc {
+      height: 3.2rem !important;
+  }
+
+  .roll {
+      position: relative;
+  }
+
+  .number {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      font-size: 24px;
+      color: #000;
+      transform: translate(-50%,-50%);
+      opacity: 0.8;
+      z-index: 1;
+  }
+
+  .header-row {
+      position: relative;
+      height: 22px;
+  }
+
+  .header-data {
+      position: absolute;
+      margin-left: 2px;
+  }
+
+  th label {
+      color: #00587c;
+      font-weight: 500;
+      font-size: 14px;
+  }
+
+  .section {
+      color: #6d8292;
+      font-weight: 500;
+      font-size: 14px;
+  }
+</style>
+
+@if (Model.GrooveActualRollUpper.Any())
+{
+  <div class="horizontal-scroll-except-first-column">
+    <table>
+      <tbody>
+        @* UPPER ROLL BEGIN*@
+        <tr>
+          <th class="section">@VM_Resources.NAME_RollName</th>
+          <td colspan="@(columns+2)"><hr /></td>
+        </tr>
+        <tr class="header-row">
+          <th style="min-width:200px;">@Html.LabelFor(m => m.UpperRollName)</th>
+          <td colspan="@(columns+2)" class="header-data">@Html.DisplayFor(m => m.UpperRollName)</td>
+        </tr>
+        <tr class="header-row">
+          <th>@Html.LabelFor(m => m.ActualUpperDiameter)</th>
+          <td colspan="@(columns+2)" class="header-data">@Html.DisplayFor(m => m.ActualUpperDiameter)</td>
+        </tr>
+        <tr class="header-row">
+          <th>@Html.LabelFor(m => m.BottomRollName)</th>
+          <td colspan="@(columns+2)" class="header-data">@Html.DisplayFor(m => m.BottomRollName)</td>
+        </tr>
+        <tr class="header-row">
+          <th>@Html.LabelFor(m => m.ActualBottomDiameter)</th>
+          <td colspan="@(columns+2)" class="header-data">@Html.DisplayFor(m => m.ActualBottomDiameter)</td>
+        </tr>
+
+        <tr style="height:2vh"></tr>
+        <tr>
+          <th class="section">@VM_Resources.PAGE_TITLE_Limit_Index</th>
+          <td colspan="@(columns+2)"><hr /></td>
+        </tr>
+
+        <tr>
+          <th>@Html.LabelFor(m => m.AccWeightLimitLabel)</th>
+          <td></td>
+          @{
+            foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+            {
+              <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccWeightLimit)</td>
+            }
+          }
+          <td></td>
+        </tr>
+        <tr>
+          <th>@Html.LabelFor(m => m.AccBilletCntLimitLabel)</th>
+          <td></td>
+          @{
+            foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+            {
+              <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccBilletCntLimit)</td>
+            }
+          }
+          <td></td>
+        </tr>
+
+        <tr>
+          <th>@Html.LabelFor(m => m.AccWeight)</th>
+          <td></td>
+          @{
+            foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+            {
+              if (rollUpper.AccWeight > rollUpper.AccWeightLimit)
+              {
+                <td align="center" class="h_dotted_right_ln" style="background-color:lightpink">@Html.DisplayFor(m => rollUpper.AccWeight)</td>
+              }
+              else
+              {
+                <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccWeight)</td>
+              }
+            }
+          }
+          <td></td>
+        </tr>
+        <tr>
+          <th>@Html.LabelFor(m => m.AccWeightWithCoeff)</th>
+          <td></td>
+          @{
+            foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+            {
+              if (rollUpper.AccWeightWithCoeff > rollUpper.AccWeightLimit)
+              {
+                <td align="center" class="h_dotted_right_ln" style="background-color:lightpink">@Html.DisplayFor(m => rollUpper.AccWeightWithCoeff)</td>
+              }
+              else
+              {
+                <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccWeightWithCoeff)</td>
+              }
+            }
+          }
+          <td></td>
+        </tr>
+        <tr>
+          <th>@Html.LabelFor(m => m.AccBilletCnt)</th>
+          <td></td>
+          @{
+            foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+            {
+              if (rollUpper.AccBilletCnt > rollUpper.AccBilletCntLimit)
+              {
+                <td align="center" class="h_dotted_right_ln" style="background-color:lightpink">@Html.DisplayFor(m => rollUpper.AccBilletCnt)</td>
+              }
+              else
+              {
+                <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.AccBilletCnt)</td>
+              }
+            }
+          }
+          <td></td>
+        </tr>
+
+        <tr>
+          <th>@Html.LabelFor(m => m.GrooveRemark)</th>
+          <td></td>
+          @{
+            foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+            {
+              <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.GrooveRemark)</td>
+            }
+          }
+          <td></td>
+        </tr>
+
+        @* UPPER ROLL END *@
+        <tr>
+          <th style="height:150px;"></th>
+          <td align="center"><img class="scale" src="~/css/System/img/roll-profille-left.png"></td>
+          @{
+            int grooveNumber = 1;
+            string grooveNumberStr = "";
+            foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper.OrderBy(z => z.GrooveNumber))
+            {
+
+              if (grooveNumber < 10)
+              {
+                grooveNumberStr = "0" + grooveNumber.ToString();
+              }
+              else
+              {
+                grooveNumberStr = grooveNumber.ToString();
+              }
+
+              if (rollUpper.GrooveShortName == "Flat")
+              {
+                if (rollUpper.EnumGrooveSetting == 1)
+                {
+                  <td align="center" class="roll"><div class="number">@grooveNumberStr</div><img class="scale" src="~/css/System/img/roll-profille-full-1.png"></td>
+                }
+                else if (rollUpper.EnumGrooveSetting == 2)
+                {
+                  <td align="center" class="roll"><div class="number">@grooveNumberStr</div><img class="scale" src="~/css/System/img/roll-profille-full-2.png"></td>
+                }
+                else if (rollUpper.EnumGrooveSetting == 3)
+                {
+                  <td align="center" class="roll"><div class="number">@grooveNumberStr</div><img class="scale" src="~/css/System/img/roll-profille-full-2.png"></td>
+                }
+                else
+                {
+                  <td align="center" class="roll"><div class="number">@grooveNumberStr</div><img class="scale" src="~/css/System/img/roll-profille-full.png"></td>
+                }
+              }
+              else
+              {
+                if (rollUpper.EnumGrooveSetting == 1)
+                {
+                  <td align="center" class="roll"><div class="number">@grooveNumberStr</div><img class="scale" src="~/css/System/img/roll-profille-rd60-1.png"></td>
+                }
+                else if (rollUpper.EnumGrooveSetting == 2)
+                {
+                  <td align="center" class="roll"><div class="number">@grooveNumberStr</div><img class="scale" src="~/css/System/img/roll-profille-rd60-2.png"></td>
+                }
+                else if (rollUpper.EnumGrooveSetting == 3)
+                {
+                  <td align="center" class="roll"><div class="number">@grooveNumberStr</div><img class="scale" src="~/css/System/img/roll-profille-rd60-3.png"></td>
+                }
+                else
+                {
+                  <td align="center" class="roll"><div class="number">@grooveNumberStr</div><img class="scale" src="~/css/System/img/roll-profille-rd60.png"></td>
+                }
+              }
+              grooveNumber++;
+            }
+          }
+          <td align="center"><img class="scale" src="~/css/System/img/roll-profille-right.png"></td>
+        </tr>
+        <tr>
+          <th class="last-desc">@Html.LabelFor(m => m.GrooveTemplateName)</th>
+          <td></td>
+          @{
+            foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+            {
+              <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.GrooveTemplateName)</td>
+            }
+          }
+          <td></td>
+        </tr>
+        <tr>
+          <th class="last-desc">@Html.LabelFor(m => m.GrooveCondition)</th>
+          <td></td>
+          @{
+            foreach (PE.HMIWWW.ViewModel.Module.VM_GroovesRoll rollUpper in Model.GrooveActualRollUpper)
+            {
+              <td align="center" class="h_dotted_right_ln">@Html.DisplayFor(m => rollUpper.GrooveRemark)</td>
+            }
+          }
+          <td></td>
+        </tr>
+        <tr style="height:2vh"></tr>
+      </tbody>
+    </table>
+  </div>
+}
+else
+{
+  <label>@VM_Resources.GLOB_GRID_NO_DATA</label>
+}

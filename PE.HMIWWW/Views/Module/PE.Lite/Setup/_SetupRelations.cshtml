@@ -1,0 +1,43 @@
+﻿@model long?
+
+<div class="container-fluid p-3">
+    <div class="row">
+        <div class="col-11 pb-2">
+            @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Setup.VM_SetupGroup>()
+              .Name("SetupRelationsGrid")
+              .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+              .Columns(columns =>
+              {
+                  columns.Bound(c => c.SetupId).Visible(false);
+                  columns.Bound(c => c.RelationType).HtmlAttributes(new { style = "background-color: rgb(0,100,135); color: white" });
+                  columns.Bound(c => c.Work_Order);
+                  columns.Bound(c => c.CalculationTs).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT);
+                  columns.Bound(c => c.Product_Size);
+                  columns.Bound(c => c.Steelgrade);
+                  columns.Bound(c => c.Layout);
+                  columns.Bound(c => c.Issue);
+                  columns.Bound(c => c.Heat_Number);
+              })
+              .DataSource(d => d
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(3)
+                .Read(r => r.Action("GetSetupRelationDetails", "Setup", new { workOrderId = Model }))
+              )
+            )
+        </div>
+    </div>
+  <div class="row">
+    <div class="col-4">
+      @Html.Partial("~/Views/Module/PE.Lite/Setup/_SetupRelationSearchGridForWorkOrder.cshtml", Model)
+    </div>
+    <div class="col-7" id="SetupRelations">
+      <div class="row justify-content-center plug">
+        <div class="col-6 align-self-center">
+          <img src="~/css/Shared/plug.png" />
+          <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

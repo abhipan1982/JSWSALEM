@@ -1,0 +1,144 @@
+@model List<PE.HMIWWW.ViewModel.Module.Lite.EventCalendar.VM_ShiftDefinition>
+
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<link rel="stylesheet" href="~/bundles/css/Module/EventCalendar.css" />
+
+@section module_menu {
+<div id="refreshSelect" class="demo-section k-content mr-3 track-status">
+  <div class="status-label">Refresh:</div>
+  <input type="checkbox" id="refreshSelectBtn" aria-label="Switch" />
+</div>
+<input class="mt-1 mr-2 select_shift" id="select_shift"/>
+}
+
+<div class="parent-pane" >
+    <div class="filter-pane" style="margin-right: 10px; width: 19%;">
+        @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.EventCalendar.VM_EventList>()
+        .Name("filters")
+        .HtmlAttributes(new { style = @String.Format(" height:{0}px;", ViewBag.FullGridHeight) })
+        .Columns(columns =>
+        {
+        columns.Bound(p => p.EventColor).Title("").Width(40).ClientTemplate("<span class='event-tag' style='border-left-color:#:EventColor.split(',')[0]#'>");
+        columns.Bound(p => p.EventName).HtmlAttributes(new { style = "text-align: left; height: 27px;" }).HtmlAttributes(new { @class = "nowrap" });
+        columns.Bound(p => p.EventIcon).Title("").Width(40).ClientTemplate("<img title='#:EventName#' src='/css/Functions/Small/" + "#:EventIcon#" + "'>");
+        })
+        //.Pageable()
+        .Sortable()
+        .Selectable()
+        .Scrollable()
+        .Events(ev => ev.Change("onEventSelect"))
+        .PersistSelection()
+        .ToolBar(toolbar => { toolbar.ClientTemplateId("SearchGridToolbarTemplateCalendar"); })
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("GetEventTypes", "EventCalendar"))
+        )
+        )
+        <!--MULTISELECT END-->
+    </div>
+
+    <script id="SearchGridToolbarTemplateCalendar" type="text/x-kendo-template">
+        <div class="refreshBtnContainer" onclick="showHideCategories()">
+          <p class="k-link on show-hide-categories m-0">
+            <span class="arrow arrow-categories arrow-white k-icon k-i-arrow-left"></span>
+          </p>
+        </div>
+    </script>
+
+
+    <div id="event_calendar" style="width: 80%;">
+        <div id="example" class="k-content">
+            <div id="">
+
+                @(Html.Kendo().Scheduler<PE.HMIWWW.ViewModel.Module.Lite.EventCalendar.VM_EventCalendar_Scheduler>()
+                .Name("scheduler")
+                .Date(DateTime.Now)
+                .StartTime(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 00, 00, 00))
+                .MajorTick(60)
+                .Editable(false)
+                .Events(e =>
+                {
+                    @*e.DataBinding("scheduler_dataBinding");*@
+                e.DataBound("scheduler_databound");
+                e.Navigate("scheduler_navigate");
+                })
+                .Views(views =>
+                {
+                views.TimelineView(timeline =>
+                {
+                //timeline.MajorTick(60);
+                timeline.EventHeight(30);
+                timeline.ColumnWidth(30);
+                timeline.SlotTemplate("<div style='background:#=getColorBasedOnHour(date)#; height: 100%;width: 100%;'></div>");
+                });
+                    @*      views.TimelineWeekView(timeline => timeline.EventHeight(30));
+                        views.TimelineWorkWeekView(timeline => timeline.EventHeight(30));
+                        views.TimelineMonthView(timeline =>
+                        {
+                        //timeline.MajorTick(500);
+                        timeline.EventHeight(30);
+                        });*@
+                })
+                .Timezone("Etc/GMT-1")
+                .Group(group => group.Resources("Events").Orientation(SchedulerGroupOrientation.Vertical))
+                .Resources(resource =>
+                {
+                resource.Add(m => m.EventTypeId)
+                .Title("Event")
+                .Name("Events")
+                .DataTextField("Text")
+                .DataValueField("Value")
+                .DataColorField("Color")
+                .BindTo(new[] {
+                new { Text = "", Value = 0, Color = "" }
+                });
+                })
+                .DataSource(d => d
+                .Model(m =>
+                {
+                m.Id(f => f.EventId);
+                m.Field(f => f.Title).DefaultValue("No title");
+                m.Field(f => f.EventTypeId).DefaultValue(1);
+                m.RecurrenceId(f => f.RecurrenceID);
+                })
+                .Read("GetEventCalendarSchedulerData", "EventCalendar")
+                )
+                )
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="template" type="text/x-kendo-template">
+    #var uid = target.attr("data-uid");#
+    #var scheduler = target.closest("[data-role=scheduler]").data("kendoScheduler");#
+    #var model = scheduler.occurrenceByUid(uid);#
+
+    #if(model) {#
+    @* <strong>event start:</strong> #=kendo.format('{0:d}',model.start)#<br />*@
+        <strong>Event start:</strong> #=kendo.toString(model.start,'MM/dd/yyyy HH:mm:ss')#<br />
+        # if(model.isOngoing){ #
+          <strong>Event end:</strong> - <br />
+        # } else { #
+          <strong>Event end:</strong> #=kendo.toString(model.end,'MM/dd/yyyy HH:mm:ss')#<br />
+        # } #
+        <strong>Event description:</strong> #=model.description#<br />
+        <strong>Asset:</strong> #=model.description#<br />
+    #} else {#
+        <strong>No event data is available</strong>
+    #}#
+</script>
+
+
+<script src="~/bundles/js/Module/EventCalendarScheduler.js" />
+
+<script>
+
+    var version = kendo.version;
+    $.getScript( 'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js');
+</script>
+

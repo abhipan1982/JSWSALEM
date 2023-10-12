@@ -1,0 +1,24 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialOverview
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<link rel="stylesheet" href="~/bundles/css/Module/Layer.css" />
+
+<div class="container-fluid p-3">
+    <div class="row">
+        <div class="col-3 grid-filter" id="LayerSearchGrid">
+            @await Html.PartialAsync("~/Views/Module/PE.Lite/Layer/_LayerSearchGrid.cshtml", Model)
+        </div>
+        <div class="col-9 element-details" id="LayerDetails">
+            <div class="row justify-content-center plug">
+                <div class="col-6 align-self-center">
+                    <img src="~/css/Shared/plug.png" />
+                    <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/bundles/js/Module/Layer.js"></script>

@@ -1,0 +1,42 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.RollType;
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_RollType_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+  @Html.ImageButton("new", "AddNew()", false)
+}
+
+<script src="~/bundles/js/Module/RollType.js"></script>
+
+@(Html.Kendo().Grid<VM_RollType>()
+  .Name("RollTypesGrid")
+  .HtmlAttributes(new { style = @String.Format(" height:{0}px;", ViewBag.FullGridHeight) })
+  .Scrollable()
+  .Pageable(p => p
+  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Filterable()
+  .Sortable()
+  .Columns(columns =>
+  {
+    columns.Bound(p => p.RollTypeId).Visible(false);
+    columns.Bound(p => p.RollTypeName).Width(200);
+    columns.Bound(p => p.DiameterMin).Width(200).HtmlAttributes(new { style = "text-align: right;" });
+    columns.Bound(p => p.DiameterMax).Width(200).HtmlAttributes(new { style = "text-align: right;" });
+    columns.Bound(p => p.RollLength).Width(150).HtmlAttributes(new { style = "text-align: right;" });
+    columns.Bound(p => p.RollTypeDescription);
+    columns.Bound(p => p.RollTypeId)
+      .Width(70).Sortable(false).Groupable(false).Filterable(false).Title(" ")
+      .ClientTemplate(@Html.ImageButton("edit", "EditData(#= RollTypeId #)", false).ToString()
+        + "#if (!IsInUse) {#" + @Html.ImageButton("delete", "Delete(#= RollTypeId #)", false).ToString() + "#}#");
+  })
+  .DataSource(ds => ds
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(27)
+    .Events(e => e.Error("TelerikErrorHandler"))
+    .Read(r => r.Action("GetRollTypeData", "RollType"))
+  )
+)

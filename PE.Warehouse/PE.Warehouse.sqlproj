@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>PE.Warehouse</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{c7d25c01-7058-4a4e-a0a2-9bef39753b72}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql140DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>PE.Warehouse</RootNamespace>
+    <AssemblyName>PE.Warehouse</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dw\" />
+    <Folder Include="dw\Tables\" />
+    <Folder Include="stage\" />
+    <Folder Include="stage\Tables\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="External Resources\" />
+    <Folder Include="dbo\External Tables\" />
+    <Folder Include="Storage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\alphareg.sql" />
+    <Build Include="dw\Tables\DimAsset.sql" />
+    <Build Include="dw\Tables\DimCrew.sql" />
+    <Build Include="dbo\Tables\DBDatabases.sql" />
+    <Build Include="dw\Tables\DimCustomer.sql" />
+    <Build Include="dw\Tables\DimDate.sql" />
+    <Build Include="dw\Tables\DimDefectCatalogue.sql" />
+    <Build Include="dw\Tables\DimEventCatalogue.sql" />
+    <Build Include="dw\Tables\DimEventType.sql" />
+    <Build Include="dw\Tables\DimFeature.sql" />
+    <Build Include="dw\Tables\DimHeat.sql" />
+    <Build Include="dw\Tables\DimHour.sql" />
+    <Build Include="dw\Tables\DimInspectionResult.sql" />
+    <Build Include="dw\Tables\DimMaterial.sql" />
+    <Build Include="dw\Tables\DimMaterialCatalogue.sql" />
+    <Build Include="dw\Tables\DimMaterialStatus.sql" />
+    <Build Include="dw\Tables\DimProductCatalogue.sql" />
+    <Build Include="dw\Tables\DimRule.sql" />
+    <Build Include="dw\Tables\DimShift.sql" />
+    <Build Include="dw\Tables\DimShiftDefinition.sql" />
+    <Build Include="dw\Tables\DimSteelgrade.sql" />
+    <Build Include="dw\Tables\DimTime.sql" />
+    <Build Include="dw\Tables\DimTypeOfScrap.sql" />
+    <Build Include="dw\Tables\DimUnit.sql" />
+    <Build Include="dw\Tables\DimUser.sql" />
+    <Build Include="dw\Tables\DimWorkOrder.sql" />
+    <Build Include="dw\Tables\DimWorkOrderStatus.sql" />
+    <Build Include="dw\Tables\DimYear.sql" />
+    <Build Include="dw\Tables\FactEvent.sql" />
+    <Build Include="dw\Tables\FactMaterial.sql" />
+    <Build Include="dw\Tables\FactRating.sql" />
+    <Build Include="dw\Tables\FactRatingCompensation.sql" />
+    <Build Include="dw\Tables\FactRatingRootCause.sql" />
+    <Build Include="dw\Tables\FactWorkOrder.sql" />
+    <Build Include="dbo\Tables\DBStageTables.sql" />
+    <Build Include="dbo\Tables\DBLogs.sql" />
+    <Build Include="stage\Tables\Events.sql" />
+    <Build Include="stage\Tables\Measurements.sql" />
+    <Build Include="stage\Tables\Samples.sql" />
+    <Build Include="stage\Tables\Materials.sql" />
+    <Build Include="stage\Tables\MaterialSteps.sql" />
+    <Build Include="stage\Tables\Products.sql" />
+    <Build Include="stage\Tables\ProductSteps.sql" />
+    <Build Include="stage\Tables\WorkOrders.sql" />
+    <Build Include="stage\Tables\Defects.sql" />
+    <Build Include="stage\Tables\QualityInspections.sql" />
+    <Build Include="stage\Tables\RawMaterials.sql" />
+    <Build Include="stage\Tables\RawMaterialsSteps.sql" />
+    <Build Include="Security\dw.sql" />
+    <Build Include="Security\dw_1.sql" />
+    <Build Include="dbo\Stored Procedures\SPLoadingDW.sql" />
+    <Build Include="dbo\Stored Procedures\SPGenerateMergeSCD2SQL.sql" />
+    <Build Include="dbo\Stored Procedures\SPRandomNumbers.sql" />
+    <Build Include="dbo\Stored Procedures\SPLogDB.sql" />
+    <Build Include="dbo\Stored Procedures\SPExecSqlWithLog.sql" />
+    <Build Include="dbo\Stored Procedures\SPGenerateDWTables.sql" />
+    <Build Include="dbo\Stored Procedures\SPGenerateMergeSQL.sql" />
+    <Build Include="Security\dw_2.sql" />
+    <Build Include="Security\stage.sql" />
+    <Build Include="dw\Tables\DimProduct.sql" />
+    <Build Include="dw\Tables\FactShift.sql" />
+    <Build Include="dw\Tables\DimRawMaterial.sql" />
+    <Build Include="Storage\FG_FactMaterial.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="WarehouseSchemaCompare.scmp" />
+  </ItemGroup>
+</Project>

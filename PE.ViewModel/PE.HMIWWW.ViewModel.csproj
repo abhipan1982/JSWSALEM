@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyTitle>PE.HMIWWW.ViewModel</AssemblyTitle>
+    <Company>Primetals Technologies Poland Sp. z o.o.</Company>
+    <Product>PE.HMIWWW.ViewModel</Product>
+    <Copyright>Copyright © Primetals Technologies 2020</Copyright>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PE.DbEntity\PE.DbEntity.csproj" />
+    <ProjectReference Include="..\PE.HMIWWW.Core\PE.HMIWWW.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" />
+    <PackageReference Include="SMF.Core" />
+    <PackageReference Include="SMF.DbEntity" />
+    <PackageReference Include="SMF.HMI" />
+    <PackageReference Include="SMF.HMIWWW" />
+    <PackageReference Include="SMF.Module" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="System\VM_L3L2SteelgradeDefinition.cs" />
+    <Compile Remove="System\V_WidgetConfigurations.cs" />
+    <Compile Remove="Module\Lite\EquipmentGroups\VM_EquipmentGroups.cs" />
+    <Compile Remove="Module\Lite\Measurements\VM_RawMaterialTemp.cs" />
+  </ItemGroup>
+</Project>

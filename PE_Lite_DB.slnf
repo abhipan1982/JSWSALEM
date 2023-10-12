@@ -1,0 +1,11 @@
+{
+  "solution": {
+    "path": "PE_Lite_Dev.sln",
+    "projects": [
+      "PE.Database\\PE.Database.sqlproj",
+      "PE.HMIWWW.Core\\PE.HMIWWW.Core.csproj",
+      "PE.Reports\\PE.Reports.rptproj",
+      "PE.Warehouse\\PE.Warehouse.sqlproj"
+    ]
+  }
+}

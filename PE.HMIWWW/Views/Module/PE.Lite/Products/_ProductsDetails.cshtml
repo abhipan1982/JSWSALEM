@@ -1,0 +1,57 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Products.VM_ProductsOverview
+
+<div class="row p-0 pt-3">
+    <div class="col-4 p-0">
+        <div class="container-fluid">
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.ProductName)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.ProductName)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.ProductCreatedTs)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.ProductCreatedTs)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 p-0">
+        <div class="container-fluid">
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.IsAssigned)
+                </div>
+                <div class="col check-box">
+                    @Html.CheckBoxFor(m => m.IsAssigned, new {disabled = "disabled"})
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.ProductWeight)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.ProductWeight)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4 p-0">
+        <div class="container-fluid">
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.WorkOrderName)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.WorkOrderName)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

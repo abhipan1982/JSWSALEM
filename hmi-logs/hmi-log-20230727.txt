@@ -1,0 +1,1039 @@
+14:02:10.892 [INF] User profile is available. Using 'C:\Users\IN221057\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+14:02:11.745 [INF] Limit Controller reload
+LimitGroup |                           Name |    LowerValue    <-->    UpperValue |     Unit
+-------------------------------------------------------------------------------------------------
+   Default |                   BilletLength |           0.8    <-->           2.2 |        m
+   Default |                BilletThickness |          0.25    <-->          0.45 |        m
+   Default |                   BilletWeight |           390    <-->        390000 |       kg
+   Default |                    BilletWidth |          0.25    <-->          0.45 |        m
+   Default |                   ChemAnalysis |             0    <-->             1 |      0_1
+   Default |                   MillCapacity |        0.2778    <-->       27.7778 |     kg/s
+   Default |                 OvenRecipeTemp |           800    <-->          1100 |       °C
+   Default |                        Percent |             0    <-->             1 |      0_1
+   Default |                  ProductLength |             1    <-->           100 |        m
+   Default |               ProductThickness |         0.005    <-->         0.075 |        m
+   Default |                  ProductWeight |           100    <-->          4500 |       kg
+   Default |                   ProductWidth |         0.005    <-->         0.075 |        m
+   Default |                  SteelDensity  |          7500    <-->          7900 |    kg/m³
+
+
+14:02:11.753 [ERR] Error during reading Limits from the DB.
+System.TypeInitializationException: The type initializer for 'SMF.Module.Core.ModuleController' threw an exception.
+ ---> System.IO.IOException: The handle is invalid.
+   at System.ConsolePal.GetBufferInfo(Boolean throwOnNoConsole, Boolean& succeeded)
+   at System.ConsolePal.SetWindowSize(Int32 width, Int32 height)
+   at System.Console.SetWindowSize(Int32 width, Int32 height)
+   at SMF.Module.Core.ModuleController..cctor() in D:\a\1\s\SRC\SMF.Module\Core\ModuleController.cs:line 64
+   --- End of inner exception stack trace ---
+   at SMF.Module.Core.ModuleController.LimitsUpdated(String groupName) in D:\a\1\s\SRC\SMF.Module\Core\ModuleController.cs:line 302
+   at SMF.Module.Limit.LimitController.ReadLimits(String requestGroup, String infoText) in D:\a\1\s\SRC\SMF.Module\Limit\LimitController.cs:line 69
+14:02:13.109 [INF] Application started. Press Ctrl+C to shut down.
+14:02:13.110 [INF] Hosting environment: Development
+14:02:13.110 [INF] Content root path: D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW
+14:02:13.149 [INF] Request starting HTTP/1.1 GET http://localhost:18935/ - -
+14:02:13.285 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW)'
+14:02:13.298 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+14:02:13.304 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+14:02:13.305 [INF] Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+14:02:13.310 [INF] Executing ChallengeResult with authentication schemes ([]).
+14:02:13.348 [INF] AuthenticationScheme: Identity.Application was challenged.
+14:02:13.353 [INF] Executed action PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW) in 51.3024ms
+14:02:13.355 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW)'
+14:02:13.375 [INF] Request finished HTTP/1.1 GET http://localhost:18935/ - - - 302 - - 231.7319ms
+14:02:13.383 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Account/Login?ReturnUrl=%2F - -
+14:02:13.393 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AccountController.Login (PE.HMIWWW)'
+14:02:13.406 [INF] Route matched with {action = "Login", controller = "Account", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Login(System.String) on controller PE.HMIWWW.Controllers.AccountController (PE.HMIWWW).
+14:02:13.506 [INF] Executing action method PE.HMIWWW.Controllers.AccountController.Login (PE.HMIWWW) - Validation state: "Valid"
+14:02:13.518 [INF] Executed action method PE.HMIWWW.Controllers.AccountController.Login (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ViewResult in 6.4975ms.
+14:02:24.081 [INF] Executing ViewResult, running view Login.
+14:02:28.877 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'EVTTriggersFeature'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'MVHAssetLayout'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'MVHAssetsLocation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'MVHFeatureCalculated'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'MVHFeatureCustom'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'MVHMeasurement'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'PRFKPIDefinition' has a global query filter defined and is the required end of a relationship with the entity 'PRFKPIValue'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'PRMMaterialStep'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'PRMProductStep'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'TRKRawMaterial' has a global query filter defined and is the required end of a relationship with the entity 'TRKLayerRawMaterialRelation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'TRKRawMaterial' has a global query filter defined and is the required end of a relationship with the entity 'TRKLayerRelation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKRawMaterialLocation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKRawMaterialsCut'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKRawMaterialsStep'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.878 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKTrackingInstruction'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+14:02:28.972 [INF] Entity Framework Core 6.0.0 initialized 'PEContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:02:29.273 [INF] Executed ViewResult - view Login executed in 15752.5431ms.
+14:02:29.278 [INF] Executed action PE.HMIWWW.Controllers.AccountController.Login (PE.HMIWWW) in 15872.0235ms
+14:02:29.279 [INF] Executed endpoint 'PE.HMIWWW.Controllers.AccountController.Login (PE.HMIWWW)'
+14:02:29.352 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Account/Login?ReturnUrl=%2F - - - 200 - text/html;+charset=utf-8 15968.8661ms
+14:02:29.380 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/kendo.common.min.css?v=sSA8RF03Nfl3qnreBh5mmkkR2g0R8x6PBVHSTHeiyRA - -
+14:02:29.383 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/kendo.uniform.min.css?v=470c0n7gpV3NFUM5VercOgO21VDcsb67PTfxVJVGkYo - -
+14:02:29.391 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/bootstrap/bootstrap.min.css?v=azvvU9xKluwHFJ0Cpgtf0CYzK7zgtOznnzxV4924X1w - -
+14:02:29.391 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/kendo/TelerikSkin.css?v=aGC4x6_RziUIPshh-p0vXPMhVr-NDH7ID7UXliYmmZc - -
+14:02:29.394 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/kendo.dataviz.default.min.css?v=DuJglZByxxfln9Oqzf1j8ufBZ8ENcE9Self_1GTnRmo - -
+14:02:29.395 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/kendo.dataviz.min.css?v=0KV9ZyHaKjMyM6xL1Lvh6RODVbeipv7AYVyoturZFXE - -
+14:02:29.418 [INF] Sending file. Request path: '/css/kendo/2020.2.617/kendo.dataviz.default.min.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\kendo\2020.2.617\kendo.dataviz.default.min.css'
+14:02:29.418 [INF] Sending file. Request path: '/css/kendo/2020.2.617/kendo.dataviz.min.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\kendo\2020.2.617\kendo.dataviz.min.css'
+14:02:29.423 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/kendo.dataviz.default.min.css?v=DuJglZByxxfln9Oqzf1j8ufBZ8ENcE9Self_1GTnRmo - - - 200 4281 text/css 31.9741ms
+14:02:29.424 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/kendo.dataviz.min.css?v=0KV9ZyHaKjMyM6xL1Lvh6RODVbeipv7AYVyoturZFXE - - - 200 4273 text/css 28.6496ms
+14:02:29.429 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/sweetalert.css?v=wrPqiOLe6LN-bVK-ZiR5gYHHI5pwIyibAQLgFVhv4n0 - -
+14:02:29.429 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/peekabar.css?v=H1h1vRMjLF2FQf28oJiqMIJyrBqAlFnxv5Wel1ju304 - -
+14:02:29.435 [INF] Sending file. Request path: '/css/peekabar.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\peekabar.css'
+14:02:29.436 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/peekabar.css?v=H1h1vRMjLF2FQf28oJiqMIJyrBqAlFnxv5Wel1ju304 - - - 200 151 text/css 7.0351ms
+14:02:29.436 [INF] Sending file. Request path: '/css/kendo/2020.2.617/kendo.uniform.min.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\kendo\2020.2.617\kendo.uniform.min.css'
+14:02:29.436 [INF] Sending file. Request path: '/css/kendo/2020.2.617/kendo.common.min.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\kendo\2020.2.617\kendo.common.min.css'
+14:02:29.436 [INF] Sending file. Request path: '/css/bootstrap/bootstrap.min.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\bootstrap\bootstrap.min.css'
+14:02:29.436 [INF] Sending file. Request path: '/css/sweetalert.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\sweetalert.css'
+14:02:29.436 [INF] Sending file. Request path: '/css/kendo/TelerikSkin.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\kendo\TelerikSkin.css'
+14:02:29.437 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/sweetalert.css?v=wrPqiOLe6LN-bVK-ZiR5gYHHI5pwIyibAQLgFVhv4n0 - - - 200 23121 text/css 8.6144ms
+14:02:29.442 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/kendo/TelerikSkin.css?v=aGC4x6_RziUIPshh-p0vXPMhVr-NDH7ID7UXliYmmZc - - - 200 44842 text/css 49.6403ms
+14:02:29.442 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/bootstrap/bootstrap.min.css?v=azvvU9xKluwHFJ0Cpgtf0CYzK7zgtOznnzxV4924X1w - - - 200 153182 text/css 51.2169ms
+14:02:29.449 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/Shared/navigation.css?v=pCmtZsKu8kMGnnF3R9q053mH4I60xLdH0BSkkOEV4hE - -
+14:02:29.449 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/kendo.uniform.min.css?v=470c0n7gpV3NFUM5VercOgO21VDcsb67PTfxVJVGkYo - - - 200 123986 text/css 69.6986ms
+14:02:29.449 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/popup.css?v=SudZpiAJrKbckgQ5SbTUM1vxwkQcfkvJWAn6Lf02RjQ - -
+14:02:29.456 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/jquery-ui/jquery-ui.css?v=p6xU9YulB7E2Ic62_PX-h59ayb3PBJ0WFTEQxq0EjHw - -
+14:02:29.456 [INF] Sending file. Request path: '/css/popup.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\popup.css'
+14:02:29.456 [INF] Sending file. Request path: '/css/Shared/navigation.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Shared\navigation.css'
+14:02:29.456 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/popup.css?v=SudZpiAJrKbckgQ5SbTUM1vxwkQcfkvJWAn6Lf02RjQ - - - 200 5342 text/css 7.1051ms
+14:02:29.457 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/Shared/navigation.css?v=pCmtZsKu8kMGnnF3R9q053mH4I60xLdH0BSkkOEV4hE - - - 200 2781 text/css 7.4052ms
+14:02:29.457 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/kendo.common.min.css?v=sSA8RF03Nfl3qnreBh5mmkkR2g0R8x6PBVHSTHeiyRA - - - 200 411895 text/css 77.3036ms
+14:02:29.461 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/site.css?v=TCjCTdWK1DouHvRTF-_SG5nR4iPMkCi7u7XLEonejs0 - -
+14:02:29.462 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/jQueryFixes.js?v=jXBEAJHfMi1QHbqkJ-NrsnXwqGjZwkJ2Strfya-chHE - -
+14:02:29.463 [INF] Sending file. Request path: '/css/jquery-ui/jquery-ui.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\jquery-ui\jquery-ui.css'
+14:02:29.468 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\site.css'
+14:02:29.469 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/site.css?v=TCjCTdWK1DouHvRTF-_SG5nR4iPMkCi7u7XLEonejs0 - - - 200 7545 text/css 8.0681ms
+14:02:29.470 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/jquery-ui/jquery-ui.css?v=p6xU9YulB7E2Ic62_PX-h59ayb3PBJ0WFTEQxq0EjHw - - - 200 37326 text/css 14.2195ms
+14:02:29.474 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/timer.js?v=Bk0Y-n5OAIm0nm2gXSfWtSqSQkFGKKrHhT4GNndTAdQ - -
+14:02:29.474 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Defect.js?v=h0EOKXco07__kb3DUn7NkF3ATaMRW9enCq9jWD_lp-I - -
+14:02:29.475 [INF] Sending file. Request path: '/js/jQueryFixes.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\jQueryFixes.js'
+14:02:29.476 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/jQueryFixes.js?v=jXBEAJHfMi1QHbqkJ-NrsnXwqGjZwkJ2Strfya-chHE - - - 200 703 application/javascript 14.5703ms
+14:02:29.476 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Charging.js?v=7IB0oqHyd2DCV3cmAWFnWf2IfxNjNTcsY1ZL_A6sxKc - -
+14:02:29.481 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Heat.js?v=6vqT47Kbzlv5Hm6C_CXNPhTvmANNI9AEmN_Zshyh3rM - -
+14:02:29.482 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Measurement.js?v=B2y83o8V9TK6RC_EiZLl8yZvC2DguYK6IgLQDKbWDl0 - -
+14:02:29.482 [INF] Sending file. Request path: '/js/timer.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\timer.js'
+14:02:29.482 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/timer.js?v=Bk0Y-n5OAIm0nm2gXSfWtSqSQkFGKKrHhT4GNndTAdQ - - - 200 900 application/javascript 8.8030ms
+14:02:29.483 [INF] Sending file. Request path: '/js/Shared/Partial/_Defect.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Defect.js'
+14:02:29.483 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Defect.js?v=h0EOKXco07__kb3DUn7NkF3ATaMRW9enCq9jWD_lp-I - - - 200 687 application/javascript 9.0078ms
+14:02:29.484 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Delay.js?v=THQbuBDELqZ2EvGi-HMti56mztDS0GaWf33hMS-tFQg - -
+14:02:29.487 [INF] Sending file. Request path: '/js/Shared/Partial/_Heat.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Heat.js'
+14:02:29.488 [INF] Sending file. Request path: '/js/Shared/Partial/_Measurement.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Measurement.js'
+14:02:29.489 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Heat.js?v=6vqT47Kbzlv5Hm6C_CXNPhTvmANNI9AEmN_Zshyh3rM - - - 200 250 application/javascript 8.1191ms
+14:02:29.489 [INF] Sending file. Request path: '/js/Shared/Partial/_Charging.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Charging.js'
+14:02:29.489 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Measurement.js?v=B2y83o8V9TK6RC_EiZLl8yZvC2DguYK6IgLQDKbWDl0 - - - 200 566 application/javascript 7.3345ms
+14:02:29.489 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Charging.js?v=7IB0oqHyd2DCV3cmAWFnWf2IfxNjNTcsY1ZL_A6sxKc - - - 200 843 application/javascript 12.9646ms
+14:02:29.493 [INF] Sending file. Request path: '/js/Shared/Partial/_Delay.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Delay.js'
+14:02:29.493 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Delay.js?v=THQbuBDELqZ2EvGi-HMti56mztDS0GaWf33hMS-tFQg - - - 200 874 application/javascript 9.0110ms
+14:02:29.499 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_vs/browserLink - -
+14:02:29.500 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Steelgrade.js?v=8gFz9K8l8_QikUCKm9_24CX3ix2SSIM9r2lkJ2NeNIc - -
+14:02:29.500 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Product.js?v=G8WnCtpgje42krIFyQHMvERRR2LLRBx6cHgLFMT_sHI - -
+14:02:29.501 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Reject.js?v=M3hEjhE8J8Wb9vt-DLvgbiP8UCFOUdFbBMVEZcU8ObI - -
+14:02:29.507 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - -
+14:02:29.508 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/jquery-validation/dist/jquery.validate.min.js?v=F6h55Qw6sweK-t7SiOJX-2bpSAa3b_fnlrVCJvmEj1A - -
+14:02:29.509 [INF] Sending file. Request path: '/js/Shared/Partial/_Steelgrade.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Steelgrade.js'
+14:02:29.509 [INF] Sending file. Request path: '/js/Shared/Partial/_Product.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Product.js'
+14:02:29.509 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Steelgrade.js?v=8gFz9K8l8_QikUCKm9_24CX3ix2SSIM9r2lkJ2NeNIc - - - 200 288 application/javascript 9.6908ms
+14:02:29.510 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Product.js?v=G8WnCtpgje42krIFyQHMvERRR2LLRBx6cHgLFMT_sHI - - - 200 584 application/javascript 10.2874ms
+14:02:29.515 [INF] Sending file. Request path: '/lib/jquery-validation/dist/jquery.validate.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js'
+14:02:29.516 [INF] Sending file. Request path: '/js/Shared/Partial/_Reject.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Reject.js'
+14:02:29.517 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Reject.js?v=M3hEjhE8J8Wb9vt-DLvgbiP8UCFOUdFbBMVEZcU8ObI - - - 200 953 application/javascript 16.0071ms
+14:02:29.520 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js?v=fuBWW3_dt8xnFx0_eD0rVXYP0XgpLhbFheovo5YdZIk - -
+14:02:29.520 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/jquery-validation/dist/jquery.validate.min.js?v=F6h55Qw6sweK-t7SiOJX-2bpSAa3b_fnlrVCJvmEj1A - - - 200 23261 application/javascript 12.1754ms
+14:02:29.521 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 12.8830ms
+14:02:29.529 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js?v=WvlnOsOrkHJhYS0O414BzMYm1RFiD1YdkjR2ZJwPq6c - -
+14:02:29.529 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/jquery/jquery-3.4.1.min.js?v=CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo - -
+14:02:29.529 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/matchmedia/respond.js?v=ghmTf7XUDqNyD7VnAcX1W0YqD3exkHQZCy0VJCxcrq8 - -
+14:02:29.529 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js?v=4xJOkIkaeBplN5tlcvxnCbBz34o5_kzpXcpjNkonVos - -
+14:02:29.535 [INF] The file /lib/jquery/jquery-3.4.1.min.js was not modified
+14:02:29.536 [INF] Sending file. Request path: '/lib/matchmedia/respond.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\lib\matchmedia\respond.js'
+14:02:29.536 [INF] Sending file. Request path: '/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js'
+14:02:29.537 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/jquery/jquery-3.4.1.min.js?v=CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo - - - 304 - application/javascript 7.0979ms
+14:02:29.544 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/matchmedia/respond.js?v=ghmTf7XUDqNyD7VnAcX1W0YqD3exkHQZCy0VJCxcrq8 - - - 200 8536 application/javascript 14.4009ms
+14:02:29.544 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js?v=4xJOkIkaeBplN5tlcvxnCbBz34o5_kzpXcpjNkonVos - - - 200 5867 application/javascript 14.3711ms
+14:02:29.545 [INF] Sending file. Request path: '/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\lib\jquery-ajax-unobtrusive\dist\jquery.unobtrusive-ajax.min.js'
+14:02:29.546 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js?v=63MmnfWJqSSNJtj6eg8b61nuZEbeHo8DhgXJdr5SnF4 - -
+14:02:29.546 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js?v=fuBWW3_dt8xnFx0_eD0rVXYP0XgpLhbFheovo5YdZIk - - - 200 4046 application/javascript 26.0713ms
+14:02:29.550 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.aspnetmvc.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.aspnetmvc.min.js'
+14:02:29.552 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js?v=WvlnOsOrkHJhYS0O414BzMYm1RFiD1YdkjR2ZJwPq6c - - - 200 19574 application/javascript 21.3053ms
+14:02:29.573 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/service.js?v=0a-j4LyTPbT-pzr7SgVMjp_gkzXMxeS-cEJ9In_djCI - -
+14:02:29.573 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/popup.js?v=dwcRydspoiZ5zA7vQTE1nNRlti9SqxTWS9ojP8yHzh0 - -
+14:02:29.574 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js?v=QKA2aEgwM6IwcK1H0JlJJY-hhZY4uvMEeLXMBz6WhKg - -
+14:02:29.574 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Notifications.js?v=3kNCQix_PgKZ3wLXMVwUkLQczUgXpDPGyICP7opMjAE - -
+14:02:29.574 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.pl-PL.min.js'
+14:02:29.575 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js?v=63MmnfWJqSSNJtj6eg8b61nuZEbeHo8DhgXJdr5SnF4 - - - 200 5475 application/javascript 28.9786ms
+14:02:29.581 [INF] Sending file. Request path: '/js/popup.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\popup.js'
+14:02:29.582 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/popup.js?v=dwcRydspoiZ5zA7vQTE1nNRlti9SqxTWS9ojP8yHzh0 - - - 200 6029 application/javascript 8.8765ms
+14:02:29.582 [INF] Sending file. Request path: '/js/service.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\service.js'
+14:02:29.582 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.tr-TR.min.js'
+14:02:29.583 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/service.js?v=0a-j4LyTPbT-pzr7SgVMjp_gkzXMxeS-cEJ9In_djCI - - - 200 14565 application/javascript 10.0067ms
+14:02:29.583 [INF] Sending file. Request path: '/js/Notifications.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Notifications.js'
+14:02:29.583 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js?v=QKA2aEgwM6IwcK1H0JlJJY-hhZY4uvMEeLXMBz6WhKg - - - 200 5442 application/javascript 9.0240ms
+14:02:29.583 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Notifications.js?v=3kNCQix_PgKZ3wLXMVwUkLQczUgXpDPGyICP7opMjAE - - - 200 4737 application/javascript 9.3866ms
+14:02:29.585 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/refreshHandler.js?v=2A8yqWU5htDpPqkfKqbV0OS_qh-lJET744mjF9T_goU - -
+14:02:29.591 [INF] Sending file. Request path: '/js/refreshHandler.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\refreshHandler.js'
+14:02:29.591 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/jquery.popup.min.js?v=Ht67GQJjXAgk1hTNgjqB1WqFa7Q9HVGpT8IY5KFbFFA - -
+14:02:29.592 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/refreshHandler.js?v=2A8yqWU5htDpPqkfKqbV0OS_qh-lJET744mjF9T_goU - - - 200 2651 application/javascript 7.0281ms
+14:02:29.592 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/peekabar.js?v=YgXkojUKVfTJhhTlp6Ovbb66QI6TBbB6dybV-BEUNkA - -
+14:02:29.592 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/sweetalert/sweetalert.min.js?v=69eSJ9LZNs4_T2LbGsVXiowaE-ryJHUmU4M3Tiet4g0 - -
+14:02:29.593 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/System/navigation.js?v=yFOyKiS3mDJ_yd4Jy2zLTLI8ks-YRzqiOr_ca3S-Ms4 - -
+14:02:29.600 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/contents.js?v=TbcAL0ARneLvqpP6YaBzD3cBFE7KVrDfU2QzsL8WK9U - -
+14:02:29.600 [INF] Sending file. Request path: '/lib/jquery.popup.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\lib\jquery.popup.min.js'
+14:02:29.600 [INF] Sending file. Request path: '/lib/peekabar.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\lib\peekabar.js'
+14:02:29.601 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/peekabar.js?v=YgXkojUKVfTJhhTlp6Ovbb66QI6TBbB6dybV-BEUNkA - - - 200 3570 application/javascript 8.8164ms
+14:02:29.601 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/jquery.popup.min.js?v=Ht67GQJjXAgk1hTNgjqB1WqFa7Q9HVGpT8IY5KFbFFA - - - 200 6009 application/javascript 9.4142ms
+14:02:29.602 [INF] Sending file. Request path: '/lib/sweetalert/sweetalert.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\lib\sweetalert\sweetalert.min.js'
+14:02:29.605 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/sweetalert/sweetalert.min.js?v=69eSJ9LZNs4_T2LbGsVXiowaE-ryJHUmU4M3Tiet4g0 - - - 200 46299 application/javascript 12.8693ms
+14:02:29.606 [INF] Sending file. Request path: '/js/System/navigation.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\System\navigation.js'
+14:02:29.606 [INF] Sending file. Request path: '/js/contents.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\contents.js'
+14:02:29.606 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/System/navigation.js?v=yFOyKiS3mDJ_yd4Jy2zLTLI8ks-YRzqiOr_ca3S-Ms4 - - - 200 7666 application/javascript 13.0603ms
+14:02:29.607 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/contents.js?v=TbcAL0ARneLvqpP6YaBzD3cBFE7KVrDfU2QzsL8WK9U - - - 200 3298 application/javascript 6.9880ms
+14:02:29.619 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Material.js?v=dISQUaRR92KJTM46MfJGM9iMAtgbWcVnX5ByWP2FCZk - -
+14:02:29.619 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/shared.js?v=oB7y2WkNW6Y7nZ8auz3ylKRDFgfEWuaeUxYcRRZZVhc - -
+14:02:29.625 [INF] Sending file. Request path: '/js/Shared/Partial/_Material.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Material.js'
+14:02:29.625 [INF] Sending file. Request path: '/js/Shared/shared.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\shared.js'
+14:02:29.625 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Material.js?v=dISQUaRR92KJTM46MfJGM9iMAtgbWcVnX5ByWP2FCZk - - - 200 2996 application/javascript 6.3974ms
+14:02:29.625 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/shared.js?v=oB7y2WkNW6Y7nZ8auz3ylKRDFgfEWuaeUxYcRRZZVhc - - - 200 1072 application/javascript 6.5591ms
+14:02:29.635 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 135.6754ms
+14:02:29.645 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Scrap.js?v=EDfq8vPxqfyt1MJtSCkr1Tapt4S6jJgeP528LWrt8Hk - -
+14:02:29.646 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_RawMaterial.js?v=vQZk5ims1KMDhqs6-dsaUb5ck24TtNg4P81fS9D39NQ - -
+14:02:29.651 [INF] Sending file. Request path: '/js/Shared/Partial/_Scrap.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Scrap.js'
+14:02:29.651 [INF] Sending file. Request path: '/js/Shared/Partial/_RawMaterial.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_RawMaterial.js'
+14:02:29.651 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Scrap.js?v=EDfq8vPxqfyt1MJtSCkr1Tapt4S6jJgeP528LWrt8Hk - - - 200 1838 application/javascript 5.7499ms
+14:02:29.651 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_RawMaterial.js?v=vQZk5ims1KMDhqs6-dsaUb5ck24TtNg4P81fS9D39NQ - - - 200 5488 application/javascript 5.5934ms
+14:02:29.665 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_WorkOrder.js?v=k9avPCDBoAesP3ACnETz3F8DZX0d5swTqAdN0EEk3yQ - -
+14:02:29.665 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Visualization.js?v=rDrgjXQPvyx2sk5Aj69XWOxICt3I90XOIHYKBf721kc - -
+14:02:29.672 [INF] Sending file. Request path: '/js/Shared/Partial/_Visualization.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Visualization.js'
+14:02:29.672 [INF] Sending file. Request path: '/js/Shared/Partial/_WorkOrder.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_WorkOrder.js'
+14:02:29.673 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/jquery/jquery-ui.min.js?v=KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM - -
+14:02:29.673 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Visualization.js?v=rDrgjXQPvyx2sk5Aj69XWOxICt3I90XOIHYKBf721kc - - - 200 3144 application/javascript 7.6636ms
+14:02:29.673 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/microsoft-signalr/signalr.min.js?v=xB2AS3kctE6oJ9rjRJIKwpaqsHZ_buXSn1qMtOhbY_U - -
+14:02:29.673 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_WorkOrder.js?v=k9avPCDBoAesP3ACnETz3F8DZX0d5swTqAdN0EEk3yQ - - - 200 3133 application/javascript 8.2156ms
+14:02:29.674 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/bootstrap/bootstrap.js?v=xsNVQlcp3ybHY-jGlS4whE2OmoVNgGdWEwGc5S0qoyY - -
+14:02:29.674 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/jszip/jszip.min.js?v=yeSlK6wYruTz-Q0F-8pgP1sPW_HOjEXmC7TtOiyy7YY - -
+14:02:29.676 [INF] The file /lib/microsoft-signalr/signalr.min.js was not modified
+14:02:29.676 [INF] The file /lib/jszip/jszip.min.js was not modified
+14:02:29.676 [INF] The file /lib/jquery/jquery-ui.min.js was not modified
+14:02:29.677 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/microsoft-signalr/signalr.min.js?v=xB2AS3kctE6oJ9rjRJIKwpaqsHZ_buXSn1qMtOhbY_U - - - 304 - application/javascript 3.3230ms
+14:02:29.677 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/jszip/jszip.min.js?v=yeSlK6wYruTz-Q0F-8pgP1sPW_HOjEXmC7TtOiyy7YY - - - 304 - application/javascript 2.6716ms
+14:02:29.677 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/jquery/jquery-ui.min.js?v=KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM - - - 304 - application/javascript 4.0668ms
+14:02:29.677 [INF] The file /lib/bootstrap/bootstrap.js was not modified
+14:02:29.678 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/bootstrap/bootstrap.js?v=xsNVQlcp3ybHY-jGlS4whE2OmoVNgGdWEwGc5S0qoyY - - - 304 - application/javascript 3.7949ms
+14:02:29.682 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/System/img/expert-logo.png - -
+14:02:29.683 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/flag/china.png - -
+14:02:29.684 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/flag/turkey.png - -
+14:02:29.684 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/System/img/primetals.png - -
+14:02:29.686 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/flag/united-states-of-america.png - -
+14:02:29.687 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/flag/poland.png - -
+14:02:29.692 [INF] Sending file. Request path: '/css/flag/turkey.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\flag\turkey.png'
+14:02:29.694 [INF] Sending file. Request path: '/css/System/img/primetals.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\System\Img\primetals.png'
+14:02:29.694 [INF] Sending file. Request path: '/css/System/img/expert-logo.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\System\Img\expert-logo.png'
+14:02:29.695 [INF] Sending file. Request path: '/css/flag/china.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\flag\china.png'
+14:02:29.695 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/flag/turkey.png - - - 200 322 image/png 11.1405ms
+14:02:29.695 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/flag/china.png - - - 200 1086 image/png 11.4540ms
+14:02:29.695 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/System/img/expert-logo.png - - - 200 24112 image/png 13.7084ms
+14:02:29.695 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/System/img/primetals.png - - - 200 2961 image/png 11.0543ms
+14:02:29.700 [INF] Sending file. Request path: '/css/flag/united-states-of-america.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\flag\united-states-of-america.png'
+14:02:29.700 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/flag/united-states-of-america.png - - - 200 333 image/png 14.3641ms
+14:02:29.703 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js?v=GFj9shmi_RRi6YNNsjF6f3aUlGW3I7xblmvCcqyTef0 - -
+14:02:29.705 [INF] The file /js/kendo/2020.2.617/kendo.all.min.js was not modified
+14:02:29.707 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js?v=GFj9shmi_RRi6YNNsjF6f3aUlGW3I7xblmvCcqyTef0 - - - 304 - application/javascript 3.1881ms
+14:02:29.707 [INF] Sending file. Request path: '/css/flag/poland.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\flag\poland.png'
+14:02:29.708 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/flag/poland.png - - - 200 155 image/png 21.1293ms
+14:02:30.511 [INF] Request starting HTTP/1.1 GET http://localhost:18935/favicon.ico - -
+14:02:30.536 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\favicon.ico'
+14:02:30.536 [INF] Request finished HTTP/1.1 GET http://localhost:18935/favicon.ico - - - 200 32038 image/x-icon 24.7706ms
+14:02:30.653 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/System/Img/loginBackground.jpg - -
+14:02:30.700 [INF] Sending file. Request path: '/css/System/Img/loginBackground.jpg'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\System\Img\loginBackground.jpg'
+14:02:30.705 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/System/Img/loginBackground.jpg - - - 200 587163 image/jpeg 51.4331ms
+14:02:32.522 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+14:02:32.559 [INF] Executing endpoint '/hmihub/negotiate'
+14:02:32.578 [INF] Executed endpoint '/hmihub/negotiate'
+14:02:32.579 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 56.8040ms
+14:02:32.619 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=z19haCLlZuo-dGKG7rw2IQ - -
+14:02:32.621 [INF] Executing endpoint '/hmihub'
+14:02:32.699 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+14:02:32.701 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:02:32.703 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+14:02:32.703 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+14:02:32.703 [INF] Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+14:02:32.704 [INF] Executing ChallengeResult with authentication schemes ([]).
+14:02:32.704 [INF] AuthenticationScheme: Identity.Application was challenged.
+14:02:32.704 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 1.4646ms
+14:02:32.704 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:02:32.707 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 401 - - 8.4988ms
+14:04:18.108 [INF] Request starting HTTP/1.1 POST http://localhost:18935/Account/Login?ReturnUrl=%2F application/x-www-form-urlencoded 253
+14:04:18.108 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+14:04:18.113 [INF] Executing endpoint '/hmihub/negotiate'
+14:04:18.118 [INF] Executed endpoint '/hmihub/negotiate'
+14:04:18.118 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 10.4205ms
+14:04:18.122 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AccountController.Login (PE.HMIWWW)'
+14:04:18.124 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=PGG4dZ5enUHeDaYPyhVewA - -
+14:04:18.125 [INF] Executing endpoint '/hmihub'
+14:04:18.132 [INF] Route matched with {action = "Login", controller = "Account", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] Login(PE.HMIWWW.ViewModel.System.LoginViewModel, System.String) on controller PE.HMIWWW.Controllers.AccountController (PE.HMIWWW).
+14:04:18.134 [INF] Executed endpoint '/hmihub'
+14:04:18.134 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=z19haCLlZuo-dGKG7rw2IQ - - - 101 - - 105513.1886ms
+14:04:18.135 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+14:04:18.137 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:04:18.137 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+14:04:18.138 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+14:04:18.138 [INF] Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+14:04:18.138 [INF] Executing ChallengeResult with authentication schemes ([]).
+14:04:18.138 [INF] AuthenticationScheme: Identity.Application was challenged.
+14:04:18.138 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 0.3502ms
+14:04:18.138 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:04:18.139 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 401 - - 3.8188ms
+14:04:18.172 [INF] Executing action method PE.HMIWWW.Controllers.AccountController.Login (PE.HMIWWW) - Validation state: "Valid"
+14:04:18.220 [INF] Entity Framework Core 6.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:18.304 [INF] Executed DbCommand (44ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[HMIViewOrientation], [u].[LanguageId], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [smf].[Users] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0
+14:04:18.424 [INF] Executed DbCommand (5ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[ClaimType], [u].[ClaimValue], [u].[UserId]
+FROM [smf].[UserClaims] AS [u]
+WHERE [u].[UserId] = @__user_Id_0
+14:04:18.448 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Name]
+FROM [smf].[UserRoles] AS [u]
+INNER JOIN [smf].[Roles] AS [r] ON [u].[RoleId] = [r].[Id]
+WHERE [u].[UserId] = @__userId_0
+14:04:18.458 [INF] AuthenticationScheme: Identity.Application signed in.
+14:04:18.462 [INF] Executed action method PE.HMIWWW.Controllers.AccountController.Login (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 290.1663ms.
+14:04:18.465 [INF] Executing RedirectResult, redirecting to /.
+14:04:18.466 [INF] Executed action PE.HMIWWW.Controllers.AccountController.Login (PE.HMIWWW) in 333.2417ms
+14:04:18.466 [INF] Executed endpoint 'PE.HMIWWW.Controllers.AccountController.Login (PE.HMIWWW)'
+14:04:18.467 [INF] Request finished HTTP/1.1 POST http://localhost:18935/Account/Login?ReturnUrl=%2F application/x-www-form-urlencoded 253 - 302 - - 359.3327ms
+14:04:18.470 [INF] Request starting HTTP/1.1 GET http://localhost:18935/ - -
+14:04:18.478 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW)'
+14:04:18.478 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+14:04:19.295 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW) - Validation state: "Valid"
+14:04:19.295 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.1233ms.
+14:04:19.686 [INF] Executing ViewResult, running view Index.
+14:04:21.425 [INF] Entity Framework Core 6.0.0 initialized 'PEContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:21.824 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:21.867 [INF] Executed DbCommand (23ms) [Parameters=[@userName='?' (Size = 26), @isAdmin='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPUserMenu] @userName, @isAdmin
+14:04:22.233 [INF] Executed DbCommand (9ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [h].[WidgetConfigurationId], [h].[AUDCreatedTs], [h].[AUDLastUpdatedTs], [h].[AUDUpdatedBy], [h].[FKUserId], [h].[FKWidgetId], [h].[IsActive], [h].[IsBeforeCommit], [h].[IsDeleted], [h].[OrderSeq], [h].[WidgetFileName], [h].[WidgetName], [h0].[WidgetId], [h0].[AUDCreatedTs], [h0].[AUDLastUpdatedTs], [h0].[AUDUpdatedBy], [h0].[IsBeforeCommit], [h0].[IsDeleted], [h0].[WidgetFileName], [h0].[WidgetName]
+FROM [HMIWidgetConfigurations] AS [h]
+INNER JOIN [HMIWidgets] AS [h0] ON [h].[FKWidgetId] = [h0].[WidgetId]
+WHERE [h].[FKUserId] = @__userId_0
+ORDER BY [h].[OrderSeq]
+14:04:22.689 [INF] Executed ViewResult - view Index executed in 3394.0306ms.
+14:04:22.689 [INF] Executed action PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW) in 4211.1291ms
+14:04:22.690 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW)'
+14:04:23.019 [INF] Request finished HTTP/1.1 GET http://localhost:18935/ - - - 200 - text/html;+charset=utf-8 4548.7139ms
+14:04:23.032 [INF] Executed endpoint '/hmihub'
+14:04:23.033 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=PGG4dZ5enUHeDaYPyhVewA - - - 101 - - 4908.3876ms
+14:04:23.067 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/site.css?v=TCjCTdWK1DouHvRTF-_SG5nR4iPMkCi7u7XLEonejs0&v=TCjCTdWK1DouHvRTF-_SG5nR4iPMkCi7u7XLEonejs0 - -
+14:04:23.071 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\site.css'
+14:04:23.071 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/site.css?v=TCjCTdWK1DouHvRTF-_SG5nR4iPMkCi7u7XLEonejs0&v=TCjCTdWK1DouHvRTF-_SG5nR4iPMkCi7u7XLEonejs0 - - - 200 7545 text/css 4.2028ms
+14:04:23.079 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/main.png - -
+14:04:23.079 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/System/img/head.png - -
+14:04:23.081 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/system.png - -
+14:04:23.084 [INF] Sending file. Request path: '/css/menu/main.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\main.png'
+14:04:23.085 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/alarms.png - -
+14:04:23.085 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/watchdog.png - -
+14:04:23.085 [INF] Sending file. Request path: '/css/System/img/head.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\System\Img\head.png'
+14:04:23.085 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/main.png - - - 200 3103 image/png 6.5120ms
+14:04:23.085 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/parameters.png - -
+14:04:23.085 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/System/img/head.png - - - 200 599 image/png 6.5789ms
+14:04:23.093 [INF] Sending file. Request path: '/css/menu/watchdog.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\watchdog.png'
+14:04:23.093 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/watchdog.png - - - 200 3051 image/png 8.2664ms
+14:04:23.093 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/users.png - -
+14:04:23.093 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/limits.png - -
+14:04:23.093 [INF] Sending file. Request path: '/css/menu/parameters.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\parameters.png'
+14:04:23.093 [INF] Sending file. Request path: '/css/menu/system.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\system.png'
+14:04:23.094 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/parameters.png - - - 200 3194 image/png 8.3005ms
+14:04:23.094 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/system.png - - - 200 3112 image/png 12.5366ms
+14:04:23.098 [INF] Sending file. Request path: '/css/menu/alarms.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\alarms.png'
+14:04:23.100 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/alarms.png - - - 200 3033 image/png 15.4648ms
+14:04:23.101 [INF] Sending file. Request path: '/css/menu/limits.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\limits.png'
+14:04:23.101 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/limits.png - - - 200 3095 image/png 8.3434ms
+14:04:23.101 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/Module/PE.Lite/MainPage.css?v=V0io4FHFxA1hVvlqI-Km-xVl7zI-pKB1LFHDVtZmOp0 - -
+14:04:23.101 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - -
+14:04:23.101 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/jquery-validation/dist/jquery.validate.min.js?v=F6h55Qw6sweK-t7SiOJX-2bpSAa3b_fnlrVCJvmEj1A - -
+14:04:23.102 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js?v=4xJOkIkaeBplN5tlcvxnCbBz34o5_kzpXcpjNkonVos - -
+14:04:23.108 [INF] Sending file. Request path: '/css/menu/users.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\users.png'
+14:04:23.109 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/users.png - - - 200 3104 image/png 15.6647ms
+14:04:23.109 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/popup.js?v=dwcRydspoiZ5zA7vQTE1nNRlti9SqxTWS9ojP8yHzh0 - -
+14:04:23.116 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/refreshHandler.js?v=2A8yqWU5htDpPqkfKqbV0OS_qh-lJET744mjF9T_goU - -
+14:04:23.116 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/service.js?v=0a-j4LyTPbT-pzr7SgVMjp_gkzXMxeS-cEJ9In_djCI - -
+14:04:23.116 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Notifications.js?v=3kNCQix_PgKZ3wLXMVwUkLQczUgXpDPGyICP7opMjAE - -
+14:04:23.122 [INF] Sending file. Request path: '/css/Module/PE.Lite/MainPage.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Module\PE.Lite\MainPage.css'
+14:04:23.125 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 22.7596ms
+14:04:23.126 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/Module/PE.Lite/MainPage.css?v=V0io4FHFxA1hVvlqI-Km-xVl7zI-pKB1LFHDVtZmOp0 - - - 200 3242 text/css 24.7601ms
+14:04:23.131 [INF] Sending file. Request path: '/js/refreshHandler.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\refreshHandler.js'
+14:04:23.131 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/refreshHandler.js?v=2A8yqWU5htDpPqkfKqbV0OS_qh-lJET744mjF9T_goU - - - 200 2651 application/javascript 15.3168ms
+14:04:23.132 [INF] Sending file. Request path: '/js/popup.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\popup.js'
+14:04:23.132 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/popup.js?v=dwcRydspoiZ5zA7vQTE1nNRlti9SqxTWS9ojP8yHzh0 - - - 200 6029 application/javascript 23.0581ms
+14:04:23.137 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Material.js?v=dISQUaRR92KJTM46MfJGM9iMAtgbWcVnX5ByWP2FCZk - -
+14:04:23.137 [INF] Request starting HTTP/1.1 GET http://localhost:18935/lib/sweetalert/sweetalert.min.js?v=69eSJ9LZNs4_T2LbGsVXiowaE-ryJHUmU4M3Tiet4g0 - -
+14:04:23.138 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Heat.js?v=6vqT47Kbzlv5Hm6C_CXNPhTvmANNI9AEmN_Zshyh3rM - -
+14:04:23.142 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Charging.js?v=7IB0oqHyd2DCV3cmAWFnWf2IfxNjNTcsY1ZL_A6sxKc - -
+14:04:23.157 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Defect.js?v=h0EOKXco07__kb3DUn7NkF3ATaMRW9enCq9jWD_lp-I - -
+14:04:23.157 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/shared.js?v=oB7y2WkNW6Y7nZ8auz3ylKRDFgfEWuaeUxYcRRZZVhc - -
+14:04:23.160 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Delay.js?v=THQbuBDELqZ2EvGi-HMti56mztDS0GaWf33hMS-tFQg - -
+14:04:23.173 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/contents.js?v=TbcAL0ARneLvqpP6YaBzD3cBFE7KVrDfU2QzsL8WK9U - -
+14:04:23.174 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Product.js?v=G8WnCtpgje42krIFyQHMvERRR2LLRBx6cHgLFMT_sHI - -
+14:04:23.215 [INF] Sending file. Request path: '/lib/sweetalert/sweetalert.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\lib\sweetalert\sweetalert.min.js'
+14:04:23.215 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/sweetalert/sweetalert.min.js?v=69eSJ9LZNs4_T2LbGsVXiowaE-ryJHUmU4M3Tiet4g0 - - - 0 46299 application/javascript 78.7057ms
+14:04:23.215 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Steelgrade.js?v=8gFz9K8l8_QikUCKm9_24CX3ix2SSIM9r2lkJ2NeNIc - -
+14:04:23.239 [INF] Sending file. Request path: '/lib/jquery-validation/dist/jquery.validate.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js'
+14:04:23.239 [INF] Sending file. Request path: '/js/Shared/Partial/_Material.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Material.js'
+14:04:23.243 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/jquery-validation/dist/jquery.validate.min.js?v=F6h55Qw6sweK-t7SiOJX-2bpSAa3b_fnlrVCJvmEj1A - - - 0 23261 application/javascript 142.2917ms
+14:04:23.243 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Material.js?v=dISQUaRR92KJTM46MfJGM9iMAtgbWcVnX5ByWP2FCZk - - - 200 2996 application/javascript 110.1009ms
+14:04:23.244 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Visualization.js?v=rDrgjXQPvyx2sk5Aj69XWOxICt3I90XOIHYKBf721kc - -
+14:04:23.372 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/grindingturning.png - -
+14:04:23.373 [INF] Sending file. Request path: '/js/Notifications.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Notifications.js'
+14:04:23.372 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_RawMaterial.js?v=vQZk5ims1KMDhqs6-dsaUb5ck24TtNg4P81fS9D39NQ - -
+14:04:23.372 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Measurement.js?v=B2y83o8V9TK6RC_EiZLl8yZvC2DguYK6IgLQDKbWDl0 - -
+14:04:23.376 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Notifications.js?v=3kNCQix_PgKZ3wLXMVwUkLQczUgXpDPGyICP7opMjAE - - - 0 4737 application/javascript 260.0027ms
+14:04:23.376 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/roll-change.png - -
+14:04:23.377 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_WorkOrder.js?v=k9avPCDBoAesP3ACnETz3F8DZX0d5swTqAdN0EEk3yQ - -
+14:04:23.378 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Reject.js?v=M3hEjhE8J8Wb9vt-DLvgbiP8UCFOUdFbBMVEZcU8ObI - -
+14:04:23.386 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Scrap.js?v=EDfq8vPxqfyt1MJtSCkr1Tapt4S6jJgeP528LWrt8Hk - -
+14:04:23.386 [INF] Sending file. Request path: '/js/Shared/Partial/_Charging.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Charging.js'
+14:04:23.386 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Charging.js?v=7IB0oqHyd2DCV3cmAWFnWf2IfxNjNTcsY1ZL_A6sxKc - - - 0 843 application/javascript 243.6880ms
+14:04:23.386 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/calendar.png - -
+14:04:23.396 [INF] Sending file. Request path: '/js/service.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\service.js'
+14:04:23.396 [INF] Sending file. Request path: '/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js'
+14:04:23.397 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/groove-template.png - -
+14:04:23.397 [INF] Request finished HTTP/1.1 GET http://localhost:18935/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js?v=4xJOkIkaeBplN5tlcvxnCbBz34o5_kzpXcpjNkonVos - - - 0 5867 application/javascript 295.0915ms
+14:04:23.397 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/shiftManagement.png - -
+14:04:23.397 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/service.js?v=0a-j4LyTPbT-pzr7SgVMjp_gkzXMxeS-cEJ9In_djCI - - - 0 14565 application/javascript 280.9580ms
+14:04:23.397 [INF] Sending file. Request path: '/js/Shared/Partial/_Defect.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Defect.js'
+14:04:23.397 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/rollsettocassette.png - -
+14:04:23.397 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Defect.js?v=h0EOKXco07__kb3DUn7NkF3ATaMRW9enCq9jWD_lp-I - - - 0 687 application/javascript 240.4158ms
+14:04:23.399 [INF] Sending file. Request path: '/js/Shared/Partial/_Heat.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Heat.js'
+14:04:23.400 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Heat.js?v=6vqT47Kbzlv5Hm6C_CXNPhTvmANNI9AEmN_Zshyh3rM - - - 200 250 application/javascript 261.7054ms
+14:04:23.407 [INF] Sending file. Request path: '/js/Shared/Partial/_Product.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Product.js'
+14:04:23.407 [INF] Sending file. Request path: '/js/Shared/Partial/_Delay.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Delay.js'
+14:04:23.408 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Product.js?v=G8WnCtpgje42krIFyQHMvERRR2LLRBx6cHgLFMT_sHI - - - 0 584 application/javascript 233.5294ms
+14:04:23.408 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Delay.js?v=THQbuBDELqZ2EvGi-HMti56mztDS0GaWf33hMS-tFQg - - - 0 874 application/javascript 248.1505ms
+14:04:23.411 [INF] Sending file. Request path: '/js/Shared/Partial/_Reject.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Reject.js'
+14:04:23.411 [INF] Sending file. Request path: '/js/Shared/Partial/_Steelgrade.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Steelgrade.js'
+14:04:23.411 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Reject.js?v=M3hEjhE8J8Wb9vt-DLvgbiP8UCFOUdFbBMVEZcU8ObI - - - 0 953 application/javascript 32.8419ms
+14:04:23.411 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Steelgrade.js?v=8gFz9K8l8_QikUCKm9_24CX3ix2SSIM9r2lkJ2NeNIc - - - 0 288 application/javascript 195.6798ms
+14:04:23.417 [INF] Sending file. Request path: '/js/contents.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\contents.js'
+14:04:23.418 [INF] Sending file. Request path: '/js/Shared/Partial/_RawMaterial.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_RawMaterial.js'
+14:04:23.418 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/contents.js?v=TbcAL0ARneLvqpP6YaBzD3cBFE7KVrDfU2QzsL8WK9U - - - 0 3298 application/javascript 244.6813ms
+14:04:23.418 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_RawMaterial.js?v=vQZk5ims1KMDhqs6-dsaUb5ck24TtNg4P81fS9D39NQ - - - 0 5488 application/javascript 45.8332ms
+14:04:23.422 [INF] Sending file. Request path: '/js/Shared/Partial/_Measurement.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Measurement.js'
+14:04:23.422 [INF] Sending file. Request path: '/js/Shared/Partial/_Visualization.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Visualization.js'
+14:04:23.422 [INF] Sending file. Request path: '/js/Shared/shared.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\shared.js'
+14:04:23.422 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Visualization.js?v=rDrgjXQPvyx2sk5Aj69XWOxICt3I90XOIHYKBf721kc - - - 0 3144 application/javascript 178.4650ms
+14:04:23.422 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Measurement.js?v=B2y83o8V9TK6RC_EiZLl8yZvC2DguYK6IgLQDKbWDl0 - - - 0 566 application/javascript 49.9376ms
+14:04:23.422 [INF] Sending file. Request path: '/js/Shared/Partial/_WorkOrder.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_WorkOrder.js'
+14:04:23.422 [INF] Sending file. Request path: '/css/menu/roll-change.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\roll-change.png'
+14:04:23.422 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/shared.js?v=oB7y2WkNW6Y7nZ8auz3ylKRDFgfEWuaeUxYcRRZZVhc - - - 0 1072 application/javascript 265.2822ms
+14:04:23.423 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_WorkOrder.js?v=k9avPCDBoAesP3ACnETz3F8DZX0d5swTqAdN0EEk3yQ - - - 0 3133 application/javascript 45.5081ms
+14:04:23.422 [INF] Sending file. Request path: '/js/Shared/Partial/_Scrap.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\Shared\Partial\_Scrap.js'
+14:04:23.423 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/Shared/Partial/_Scrap.js?v=EDfq8vPxqfyt1MJtSCkr1Tapt4S6jJgeP528LWrt8Hk - - - 0 1838 application/javascript 38.6279ms
+14:04:23.425 [INF] Sending file. Request path: '/css/menu/grindingturning.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\grindingturning.png'
+14:04:23.425 [INF] Sending file. Request path: '/css/menu/rollsettocassette.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\rollsettocassette.png'
+14:04:23.425 [INF] Sending file. Request path: '/css/menu/shiftManagement.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\shiftManagement.png'
+14:04:23.425 [INF] Sending file. Request path: '/css/menu/calendar.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\calendar.png'
+14:04:23.425 [INF] Sending file. Request path: '/css/menu/groove-template.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\groove-template.png'
+14:04:23.425 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/shiftManagement.png - - - 200 3104 image/png 28.4349ms
+14:04:23.425 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/rollsettocassette.png - - - 200 1730 image/png 28.2009ms
+14:04:23.425 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/calendar.png - - - 200 1651 image/png 39.4463ms
+14:04:23.426 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/grindingturning.png - - - 200 3105 image/png 53.7809ms
+14:04:23.426 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/roll-change.png - - - 200 3145 image/png 49.4628ms
+14:04:23.426 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/groove-template.png - - - 200 3051 image/png 29.5314ms
+14:04:23.427 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_vs/browserLink - -
+14:04:23.446 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/productYard.png - -
+14:04:23.446 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/maintenance.png - -
+14:04:23.446 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/billetYard.png - -
+14:04:23.446 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/module.png - -
+14:04:23.446 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/crew.png - -
+14:04:23.455 [INF] Sending file. Request path: '/css/menu/billetYard.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\billetYard.png'
+14:04:23.455 [INF] Sending file. Request path: '/css/menu/module.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\module.png'
+14:04:23.455 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/billetYard.png - - - 200 3033 image/png 9.3943ms
+14:04:23.456 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/module.png - - - 200 3130 image/png 9.8621ms
+14:04:23.458 [INF] Sending file. Request path: '/css/menu/crew.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\crew.png'
+14:04:23.460 [INF] Sending file. Request path: '/css/menu/productYard.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\productYard.png'
+14:04:23.461 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/productYard.png - - - 200 3063 image/png 14.8878ms
+14:04:23.460 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/crew.png - - - 200 3148 image/png 14.3784ms
+14:04:23.475 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/materialTracking.png - -
+14:04:23.475 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/measuredValueArchive.png - -
+14:04:23.475 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/rolling.png - -
+14:04:23.475 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/tracking.png - -
+14:04:23.476 [INF] Sending file. Request path: '/css/menu/maintenance.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\maintenance.png'
+14:04:23.476 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/maintenance.png - - - 200 567 image/png 30.3965ms
+14:04:23.483 [INF] Sending file. Request path: '/css/menu/tracking.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\tracking.png'
+14:04:23.483 [INF] Sending file. Request path: '/css/menu/measuredValueArchive.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\measuredValueArchive.png'
+14:04:23.483 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/tracking.png - - - 200 3001 image/png 8.6451ms
+14:04:23.484 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/measuredValueArchive.png - - - 200 3019 image/png 9.1618ms
+14:04:23.484 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/trackingManagement.png - -
+14:04:23.492 [INF] Sending file. Request path: '/css/menu/trackingManagement.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\trackingManagement.png'
+14:04:23.492 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/trackingManagement.png - - - 200 3001 image/png 8.0532ms
+14:04:23.494 [INF] Sending file. Request path: '/css/menu/rolling.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\rolling.png'
+14:04:23.495 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/rolling.png - - - 200 3098 image/png 20.1740ms
+14:04:23.496 [INF] Sending file. Request path: '/css/menu/materialTracking.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\materialTracking.png'
+14:04:23.496 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/materialTracking.png - - - 200 3153 image/png 21.1472ms
+14:04:23.505 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 78.7148ms
+14:04:23.524 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/communication.png - -
+14:04:23.525 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/orderProcessing.png - -
+14:04:23.525 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/fonts/glyphs/WebComponentsIcons.ttf?gedxeo - -
+14:04:23.530 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/ControllerIcon/header_Home.png - -
+14:04:23.531 [INF] Sending file. Request path: '/css/menu/communication.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\communication.png'
+14:04:23.531 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/system/img/clock.png - -
+14:04:23.531 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/communication.png - - - 200 3115 image/png 7.1848ms
+14:04:23.531 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/Functions/Big/schedule_.png - -
+14:04:23.535 [INF] Sending file. Request path: '/css/menu/orderProcessing.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\orderProcessing.png'
+14:04:23.535 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/orderProcessing.png - - - 200 3139 image/png 10.3583ms
+14:04:23.538 [INF] Sending file. Request path: '/css/system/img/clock.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\System\Img\clock.png'
+14:04:23.538 [INF] Sending file. Request path: '/css/Functions/Big/schedule_.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Big\schedule_.png'
+14:04:23.542 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/Functions/Big/schedule_.png - - - 200 3448 image/png 10.7087ms
+14:04:23.543 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/system/img/clock.png - - - 200 1687 image/png 12.5673ms
+14:04:23.544 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/Functions/Big/tracking_.png - -
+14:04:23.544 [INF] Sending file. Request path: '/css/ControllerIcon/header_Home.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\ControllerIcon\header_home.png'
+14:04:23.545 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/ControllerIcon/header_Home.png - - - 200 486 image/png 14.7873ms
+14:04:23.545 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/Functions/Big/furnace_.png - -
+14:04:23.547 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/Functions/Big/products_.png - -
+14:04:23.555 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+14:04:23.560 [INF] Sending file. Request path: '/css/Functions/Big/products_.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Big\products_.png'
+14:04:23.561 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/Functions/Big/products_.png - - - 200 3157 image/png 13.4925ms
+14:04:23.560 [INF] Sending file. Request path: '/css/Functions/Big/furnace_.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Big\furnace_.png'
+14:04:23.561 [INF] Sending file. Request path: '/css/Functions/Big/tracking_.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Big\tracking_.png'
+14:04:23.562 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/Functions/Big/furnace_.png - - - 200 3506 image/png 16.3452ms
+14:04:23.562 [INF] Executing endpoint '/hmihub/negotiate'
+14:04:23.562 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/Functions/Big/tracking_.png - - - 200 2363 image/png 18.0195ms
+14:04:23.564 [INF] Executed endpoint '/hmihub/negotiate'
+14:04:23.566 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 10.9437ms
+14:04:23.572 [INF] Sending file. Request path: '/css/kendo/2020.2.617/fonts/glyphs/WebComponentsIcons.ttf'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\kendo\2020.2.617\fonts\glyphs\WebComponentsIcons.ttf'
+14:04:23.573 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/telegram.png - -
+14:04:23.576 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/tools.png - -
+14:04:23.576 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/fonts/glyphs/WebComponentsIcons.ttf?gedxeo - - - 200 130964 application/x-font-ttf 51.4180ms
+14:04:23.577 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/raports.png - -
+14:04:23.577 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/mill.png - -
+14:04:23.580 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/Functions/Big/delay_.png - -
+14:04:23.583 [INF] Sending file. Request path: '/css/menu/mill.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\mill.png'
+14:04:23.583 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/mill.png - - - 200 3103 image/png 6.6972ms
+14:04:23.584 [INF] Sending file. Request path: '/css/menu/telegram.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\telegram.png'
+14:04:23.584 [INF] Sending file. Request path: '/css/menu/raports.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\raports.png'
+14:04:23.584 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/telegram.png - - - 200 3115 image/png 11.3097ms
+14:04:23.584 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/raports.png - - - 200 3157 image/png 7.9551ms
+14:04:23.585 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/language.png - -
+14:04:23.597 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/back.png - -
+14:04:23.597 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/logout.png - -
+14:04:23.597 [INF] Sending file. Request path: '/css/Functions/Big/delay_.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Big\delay_.png'
+14:04:23.598 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/refresh.png - -
+14:04:23.599 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/Functions/Big/delay_.png - - - 200 3461 image/png 19.4040ms
+14:04:23.600 [INF] Sending file. Request path: '/css/menu/tools.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\tools.png'
+14:04:23.601 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/tools.png - - - 200 3112 image/png 24.6554ms
+14:04:23.603 [INF] Sending file. Request path: '/css/functions/small/back.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\back.png'
+14:04:23.604 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/back.png - - - 200 2970 image/png 7.3206ms
+14:04:23.606 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/print.png - -
+14:04:23.607 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/alarms.png - -
+14:04:23.608 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/heatingMonitor.png - -
+14:04:23.609 [INF] Sending file. Request path: '/css/menu/language.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\language.png'
+14:04:23.610 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/language.png - - - 200 2947 image/png 25.2994ms
+14:04:23.610 [INF] Sending file. Request path: '/css/functions/small/refresh.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\refresh.png'
+14:04:23.615 [INF] Sending file. Request path: '/css/functions/small/alarms.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\alarms.png'
+14:04:23.616 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/alarms.png - - - 200 3038 image/png 8.9353ms
+14:04:23.617 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/furnance-tracking.png - -
+14:04:23.620 [INF] Sending file. Request path: '/css/menu/logout.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\logout.png'
+14:04:23.621 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/refresh.png - - - 200 3106 image/png 23.0473ms
+14:04:23.621 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/logout.png - - - 200 2988 image/png 23.7547ms
+14:04:23.632 [INF] Sending file. Request path: '/css/menu/furnance-tracking.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\furnance-tracking.png'
+14:04:23.632 [INF] Sending file. Request path: '/css/menu/heatingMonitor.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\heatingMonitor.png'
+14:04:23.632 [INF] Sending file. Request path: '/css/functions/small/print.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\print.png'
+14:04:23.633 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/furnance-tracking.png - - - 200 3100 image/png 15.4458ms
+14:04:23.633 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/heatingMonitor.png - - - 200 3117 image/png 24.8805ms
+14:04:23.633 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/print.png - - - 200 3118 image/png 26.9718ms
+14:04:23.635 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/labelPrinter.png - -
+14:04:23.635 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/weighing-monitor.png - -
+14:04:23.637 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/asset.png - -
+14:04:23.660 [INF] Sending file. Request path: '/css/menu/asset.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\asset.png'
+14:04:23.661 [INF] Sending file. Request path: '/css/menu/weighing-monitor.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\weighing-monitor.png'
+14:04:23.661 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/asset.png - - - 200 1791 image/png 23.8336ms
+14:04:23.661 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/features.png - -
+14:04:23.661 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/weighing-monitor.png - - - 200 3070 image/png 26.4178ms
+14:04:23.662 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/data_analysis.png - -
+14:04:23.662 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/roles.png - -
+14:04:23.678 [INF] Sending file. Request path: '/css/menu/features.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\features.png'
+14:04:23.679 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/features.png - - - 200 2158 image/png 17.6758ms
+14:04:23.694 [INF] Sending file. Request path: '/css/menu/labelPrinter.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\labelPrinter.png'
+14:04:23.694 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/labelPrinter.png - - - 200 6220 image/png 59.7426ms
+14:04:23.698 [INF] Sending file. Request path: '/css/menu/data_analysis.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\data_analysis.png'
+14:04:23.700 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/data_analysis.png - - - 200 3019 image/png 37.9498ms
+14:04:23.702 [INF] Sending file. Request path: '/css/menu/roles.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\roles.png'
+14:04:23.704 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/roles.png - - - 200 3111 image/png 41.3222ms
+14:04:23.708 [INF] Request starting HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0
+14:04:23.711 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/data.png - -
+14:04:23.711 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=3VmIKxQB-wghkkqK04fy8w - -
+14:04:23.716 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/L3Communication.png - -
+14:04:23.716 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/steel-group.png - -
+14:04:23.716 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/telegrams.png - -
+14:04:23.718 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/steel-grades.png - -
+14:04:23.718 [INF] Sending file. Request path: '/css/menu/data.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\data.png'
+14:04:23.720 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/data.png - - - 200 2975 image/png 8.3546ms
+14:04:23.729 [INF] Sending file. Request path: '/css/menu/steel-grades.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\steel-grades.png'
+14:04:23.730 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/steel-grades.png - - - 200 3115 image/png 12.0949ms
+14:04:23.731 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+14:04:23.731 [INF] Executing endpoint '/hmihub'
+14:04:23.735 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/product-catalogue.png - -
+14:04:23.735 [INF] Sending file. Request path: '/css/menu/steel-group.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\steel-group.png'
+14:04:23.739 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/billet-catalogue.png - -
+14:04:23.739 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/steel-group.png - - - 200 2956 image/png 23.5296ms
+14:04:23.740 [INF] Sending file. Request path: '/css/menu/telegrams.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\telegrams.png'
+14:04:23.740 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/telegrams.png - - - 200 3081 image/png 23.8332ms
+14:04:23.740 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/scrap-group.png - -
+14:04:23.746 [INF] Sending file. Request path: '/css/menu/L3Communication.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\L3Communication.png'
+14:04:23.747 [INF] Sending file. Request path: '/css/menu/product-catalogue.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\product-catalogue.png'
+14:04:23.747 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/delay-category.png - -
+14:04:23.747 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/L3Communication.png - - - 200 3081 image/png 31.2325ms
+14:04:23.747 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/product-catalogue.png - - - 200 2847 image/png 11.6943ms
+14:04:23.747 [INF] Route matched with {action = "GetLastShortAlarmData", controller = "Alarm", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetLastShortAlarmData(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.AlarmController (PE.HMIWWW).
+14:04:23.751 [INF] Sending file. Request path: '/css/menu/billet-catalogue.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\billet-catalogue.png'
+14:04:23.752 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/billet-catalogue.png - - - 200 3155 image/png 12.5357ms
+14:04:23.757 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/delay.png - -
+14:04:23.757 [INF] Sending file. Request path: '/css/menu/scrap-group.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\scrap-group.png'
+14:04:23.761 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/defects.png - -
+14:04:23.762 [INF] Sending file. Request path: '/css/menu/delay-category.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\delay-category.png'
+14:04:23.762 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/delay-category.png - - - 200 397 image/png 15.5069ms
+14:04:23.762 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/scrap-group.png - - - 200 3081 image/png 21.6531ms
+14:04:23.762 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+14:04:23.764 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/heat-manager.png - -
+14:04:23.779 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:04:23.779 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+14:04:23.781 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+14:04:23.781 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/workordermanager.png - -
+14:04:23.781 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.4064ms.
+14:04:23.781 [INF] Sending file. Request path: '/css/menu/defects.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\defects.png'
+14:04:23.785 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/defects.png - - - 200 2405 image/png 24.7190ms
+14:04:23.787 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+14:04:23.788 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 9.2606ms
+14:04:23.789 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:04:23.792 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 29.2880ms
+14:04:23.793 [INF] Sending file. Request path: '/css/menu/delay.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\delay.png'
+14:04:23.794 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/delay.png - - - 200 397 image/png 37.1264ms
+14:04:23.794 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/production.png - -
+14:04:23.796 [INF] Sending file. Request path: '/css/menu/heat-manager.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\heat-manager.png'
+14:04:23.797 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/heat-manager.png - - - 200 3117 image/png 32.8049ms
+14:04:23.798 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/delay-group.png - -
+14:04:23.805 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/quality.png - -
+14:04:23.808 [INF] Sending file. Request path: '/css/menu/workordermanager.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\workordermanager.png'
+14:04:23.808 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/workordermanager.png - - - 200 3139 image/png 27.0924ms
+14:04:23.809 [INF] Sending file. Request path: '/css/menu/production.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\production.png'
+14:04:23.810 [INF] Sending file. Request path: '/css/menu/delay-group.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\delay-group.png'
+14:04:23.810 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/production.png - - - 200 3100 image/png 15.8486ms
+14:04:23.810 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/delay-group.png - - - 200 397 image/png 11.9692ms
+14:04:23.816 [INF] Sending file. Request path: '/css/menu/quality.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\quality.png'
+14:04:23.816 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/quality.png - - - 200 1959 image/png 15.4013ms
+14:04:23.816 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/schedule.png - -
+14:04:23.816 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/rolltype.png - -
+14:04:23.817 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/grill.png - -
+14:04:23.823 [INF] Sending file. Request path: '/css/menu/schedule.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\schedule.png'
+14:04:23.823 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/rollShopManagement.png - -
+14:04:23.823 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/schedule.png - - - 200 3142 image/png 6.9595ms
+14:04:23.826 [INF] Sending file. Request path: '/css/menu/grill.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\grill.png'
+14:04:23.828 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/grill.png - - - 200 3153 image/png 10.7229ms
+14:04:23.828 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/cassettemanagement.png - -
+14:04:23.828 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/performanceMonitor.png - -
+14:04:23.828 [INF] Sending file. Request path: '/css/menu/rolltype.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\rolltype.png'
+14:04:23.829 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/rolltype.png - - - 200 3068 image/png 12.3107ms
+14:04:23.829 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/cassette-type.png - -
+14:04:23.832 [INF] Sending file. Request path: '/css/menu/rollShopManagement.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\rollShopManagement.png'
+14:04:23.834 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/rollShopManagement.png - - - 200 3137 image/png 10.7296ms
+14:04:23.835 [INF] Sending file. Request path: '/css/menu/performanceMonitor.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\performanceMonitor.png'
+14:04:23.835 [INF] Sending file. Request path: '/css/menu/cassette-type.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\cassette-type.png'
+14:04:23.835 [INF] Sending file. Request path: '/css/menu/cassettemanagement.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\cassettemanagement.png'
+14:04:23.836 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/performanceMonitor.png - - - 200 3019 image/png 7.8254ms
+14:04:23.836 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/rollsetmanagement.png - -
+14:04:23.836 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/cassette-type.png - - - 200 3186 image/png 6.9165ms
+14:04:23.836 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/cassettemanagement.png - - - 200 3146 image/png 8.7210ms
+14:04:23.838 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/menu/rollsmanagement.png - -
+14:04:23.841 [INF] Sending file. Request path: '/css/menu/rollsetmanagement.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\rollsetmanagement.png'
+14:04:23.841 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/rollsetmanagement.png - - - 200 3121 image/png 5.3870ms
+14:04:23.847 [INF] Sending file. Request path: '/css/menu/rollsmanagement.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\menu\rollsmanagement.png'
+14:04:23.848 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/menu/rollsmanagement.png - - - 200 3137 image/png 10.0093ms
+14:04:23.908 [INF] Executing action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) - Validation state: "Valid"
+14:04:23.915 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:23.988 [INF] Executed DbCommand (70ms) [Parameters=[@LanguageId='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPGetAlarmsByLanguage] @LanguageId
+14:04:24.011 [INF] Executed action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 103.424ms.
+14:04:24.013 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:04:24.030 [INF] Executed action PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) in 282.8349ms
+14:04:24.030 [INF] Executed endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+14:04:24.030 [INF] Request finished HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0 - 200 - application/json;+charset=utf-8 321.9816ms
+14:04:24.034 [INF] Request starting HTTP/1.1 GET http://localhost:18935/favicon.ico - -
+14:04:24.041 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\favicon.ico'
+14:04:24.042 [INF] Request finished HTTP/1.1 GET http://localhost:18935/favicon.ico - - - 200 32038 image/x-icon 7.5782ms
+14:04:36.972 [INF] Executed endpoint '/hmihub'
+14:04:36.972 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=3VmIKxQB-wghkkqK04fy8w - - - 101 - - 13260.9393ms
+14:04:36.975 [INF] Request starting HTTP/1.1 GET http://localhost:18935/L3CommStatus - -
+14:04:36.976 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+14:04:36.977 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW)'
+14:04:36.978 [INF] Executing endpoint '/hmihub/negotiate'
+14:04:36.979 [INF] Executed endpoint '/hmihub/negotiate'
+14:04:36.979 [INF] Route matched with {action = "Index", controller = "L3CommStatus", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+14:04:36.980 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 3.8516ms
+14:04:36.985 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=FKSW-K0hXTww6yJSAtfDcg - -
+14:04:36.987 [INF] Executing endpoint '/hmihub'
+14:04:36.992 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW) - Validation state: "Valid"
+14:04:36.993 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.2519ms.
+14:04:36.997 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+14:04:36.998 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:04:36.999 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+14:04:36.999 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+14:04:36.999 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.0103ms.
+14:04:36.999 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+14:04:37.000 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 1.3093ms
+14:04:37.000 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:04:37.000 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 3.7964ms
+14:04:37.405 [INF] Executing ViewResult, running view ~/Views/System/L3CommStatus/Index.cshtml.
+14:04:39.037 [INF] Entity Framework Core 6.0.0 initialized 'PEContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:39.042 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:39.046 [INF] Executed DbCommand (3ms) [Parameters=[@userName='?' (Size = 26), @isAdmin='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPUserMenu] @userName, @isAdmin
+14:04:39.076 [INF] Executed ViewResult - view ~/Views/System/L3CommStatus/Index.cshtml executed in 2083.2806ms.
+14:04:39.077 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW) in 2097.021ms
+14:04:39.077 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW)'
+14:04:39.090 [INF] Request finished HTTP/1.1 GET http://localhost:18935/L3CommStatus - - - 200 - text/html;+charset=utf-8 2115.6487ms
+14:04:39.100 [INF] Executed endpoint '/hmihub'
+14:04:39.100 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=FKSW-K0hXTww6yJSAtfDcg - - - 101 - - 2114.9914ms
+14:04:39.135 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/System/L3TransferTableWorkOrder.css?v=8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U - -
+14:04:39.135 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/filter.png - -
+14:04:39.135 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/bottom.png - -
+14:04:39.136 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/new.png - -
+14:04:39.136 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/clear-filters.png - -
+14:04:39.142 [INF] Sending file. Request path: '/css/functions/small/filter.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\filter.png'
+14:04:39.142 [INF] Sending file. Request path: '/css/functions/small/bottom.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\bottom.png'
+14:04:39.143 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/bottom.png - - - 200 3063 image/png 7.4300ms
+14:04:39.143 [INF] Sending file. Request path: '/css/System/L3TransferTableWorkOrder.css'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\System\L3TransferTableWorkOrder.css'
+14:04:39.143 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/System/L3TransferTableCommStatus.js?v=Alf-2HMJCPdWjONG2pj1sSQ3kpHWHKJ2gs6dCAhohKs - -
+14:04:39.145 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/System/L3TransferTableWorkOrder.css?v=8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U - - - 200 3 text/css 9.9346ms
+14:04:39.146 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/filter.png - - - 200 348 image/png 10.7099ms
+14:04:39.151 [INF] Sending file. Request path: '/js/System/L3TransferTableCommStatus.js'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\System\L3TransferTableCommStatus.js'
+14:04:39.152 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_vs/browserLink - -
+14:04:39.152 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/System/L3TransferTableCommStatus.js?v=Alf-2HMJCPdWjONG2pj1sSQ3kpHWHKJ2gs6dCAhohKs - - - 200 5259 application/javascript 9.1804ms
+14:04:39.154 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - -
+14:04:39.154 [INF] Sending file. Request path: '/css/functions/small/new.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\new.png'
+14:04:39.155 [INF] Sending file. Request path: '/css/functions/small/clear-filters.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\clear-filters.png'
+14:04:39.156 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 2.3768ms
+14:04:39.156 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/clear-filters.png - - - 200 398 image/png 20.3879ms
+14:04:39.157 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/new.png - - - 200 2975 image/png 20.8017ms
+14:04:39.180 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 28.3605ms
+14:04:39.435 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/ControllerIcon/header_L3CommStatus.png - -
+14:04:39.440 [INF] Sending file. Request path: '/css/ControllerIcon/header_L3CommStatus.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\ControllerIcon\header_L3CommStatus.png'
+14:04:39.441 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/ControllerIcon/header_L3CommStatus.png - - - 200 3217 image/png 5.7592ms
+14:04:39.446 [INF] Request starting HTTP/1.1 GET http://localhost:18935/favicon.ico - -
+14:04:39.449 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\favicon.ico'
+14:04:39.450 [INF] Request finished HTTP/1.1 GET http://localhost:18935/favicon.ico - - - 0 32038 image/x-icon 3.5439ms
+14:04:39.450 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+14:04:39.452 [INF] Executing endpoint '/hmihub/negotiate'
+14:04:39.452 [INF] Executed endpoint '/hmihub/negotiate'
+14:04:39.453 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 2.7831ms
+14:04:39.522 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableGeneralList application/x-www-form-urlencoded;+charset=UTF-8 52
+14:04:39.524 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/Uniform/loading-image.gif - -
+14:04:39.524 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW)'
+14:04:39.528 [INF] Route matched with {action = "GetL3TransferTableGeneralList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableGeneralList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+14:04:39.531 [INF] Sending file. Request path: '/css/kendo/2020.2.617/Uniform/loading-image.gif'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\kendo\2020.2.617\Uniform\loading-image.gif'
+14:04:39.531 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/kendo/2020.2.617/Uniform/loading-image.gif - - - 200 1924 image/gif 6.7579ms
+14:04:39.541 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW) - Validation state: "Valid"
+14:04:39.548 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderList application/x-www-form-urlencoded;+charset=UTF-8 39
+14:04:39.556 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW)'
+14:04:39.557 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderReports application/x-www-form-urlencoded;+charset=UTF-8 39
+14:04:39.558 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=CGnqRSrOc3FJg_8uGsRVdg - -
+14:04:39.558 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW)'
+14:04:39.559 [INF] Executing endpoint '/hmihub'
+14:04:39.560 [INF] Route matched with {action = "GetL3TransferTableWorkOrderList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableWorkOrderList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+14:04:39.564 [INF] Route matched with {action = "GetL3TransferTableWorkOrderReports", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableWorkOrderReports(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+14:04:39.565 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW) - Validation state: "Valid"
+14:04:39.565 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW) - Validation state: "Valid"
+14:04:39.573 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:39.573 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:39.573 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:39.592 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L2L3WorkOrderReport] AS [l]
+14:04:39.592 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L3L2WorkOrderDefinition] AS [l]
+14:04:39.595 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[V_L3L2TransferTablesSummary] AS [v]
+14:04:39.601 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+14:04:39.601 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+14:04:39.602 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+14:04:39.602 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+14:04:39.609 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableProductReports application/x-www-form-urlencoded;+charset=UTF-8 39
+14:04:39.611 [INF] Executed DbCommand (3ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Counter], [l].[AUDCreatedTs], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[CrewName], [l].[DelayDuration], [l].[HeatName], [l].[InputThickness], [l].[InputWidth], [l].[IsUpdated], [l].[IsWorkOrderFinished], [l].[MaterialCatalogueName], [l].[NumberOfChargedMaterials], [l].[NumberOfPiecesRejectedInLocation1], [l].[NumberOfPlannedMaterials], [l].[NumberOfProducts], [l].[NumberOfRejectedMaterials], [l].[NumberOfRolledMaterials], [l].[NumberOfScrappedMaterials], [l].[OutputThickness], [l].[OutputWidth], [l].[ProductCatalogueName], [l].[ShiftName], [l].[SteelgradeCode], [l].[TargetWorkOrderWeight], [l].[TotalWeightOfMaterials], [l].[TotalWeightOfProducts], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WeightOfPiecesRejectedInLocation1], [l].[WorkOrderEnd], [l].[WorkOrderName], [l].[WorkOrderStart]
+FROM [xfr].[L2L3WorkOrderReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+14:04:39.611 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW)'
+14:04:39.612 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[CounterId], [l].[AUDCreatedTs], [l].[BilletLength], [l].[BilletWeight], [l].[BundleWeightMax], [l].[BundleWeightMin], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[CustomerName], [l].[ExternalWorkOrderName], [l].[HeatName], [l].[InputShapeSymbol], [l].[InputThickness], [l].[InputWidth], [l].[IsUpdated], [l].[MaterialCatalogueName], [l].[NumberOfBillets], [l].[OrderDeadline], [l].[OutputShapeSymbol], [l].[OutputThickness], [l].[OutputWidth], [l].[PreviousWorkOrderName], [l].[ProductCatalogueName], [l].[SteelgradeCode], [l].[TargetWorkOrderWeight], [l].[TargetWorkOrderWeightMax], [l].[TargetWorkOrderWeightMin], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WorkOrderName]
+FROM [xfr].[L3L2WorkOrderDefinition] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+14:04:39.618 [INF] Route matched with {action = "GetL3TransferTableProductReports", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableProductReports(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+14:04:39.620 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW) - Validation state: "Valid"
+14:04:39.624 [INF] Executed DbCommand (15ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [v].[OrderSeq], [v].[StatusInProc], [v].[StatusNew], [v].[StatusOK], [v].[StatusProcErr], [v].[StatusValErr], [v].[TransferTableName]
+FROM [xfr].[V_L3L2TransferTablesSummary] AS [v]
+ORDER BY [v].[OrderSeq] DESC
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+14:04:39.628 [INF] Request starting HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0
+14:04:39.631 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:39.632 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 91.1682ms.
+14:04:39.633 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:04:39.635 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+14:04:39.635 [INF] Route matched with {action = "GetLastShortAlarmData", controller = "Alarm", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetLastShortAlarmData(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.AlarmController (PE.HMIWWW).
+14:04:39.636 [INF] Executing action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) - Validation state: "Valid"
+14:04:39.637 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L2L3ProductReport] AS [l]
+14:04:39.639 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+14:04:39.639 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+14:04:39.641 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+14:04:39.644 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW) in 116.1377ms
+14:04:39.644 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW)'
+14:04:39.644 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableGeneralList application/x-www-form-urlencoded;+charset=UTF-8 52 - 200 - application/json;+charset=utf-8 122.2787ms
+14:04:39.645 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:04:39.645 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:04:39.646 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+14:04:39.646 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+14:04:39.646 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.014ms.
+14:04:39.646 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+14:04:39.648 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 2.6218ms
+14:04:39.649 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:04:39.649 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 7.8478ms
+14:04:39.651 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Counter], [l].[AUDCreatedTs], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[HeatName], [l].[InspectionResult], [l].[IsUpdated], [l].[OutputPieces], [l].[OutputThickness], [l].[OutputWeight], [l].[OutputWidth], [l].[ProductName], [l].[ProductType], [l].[SequenceInWorkOrder], [l].[ShiftName], [l].[SteelgradeCode], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WorkOrderName]
+FROM [xfr].[L2L3ProductReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+14:04:39.687 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 121.7958ms.
+14:04:39.687 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:04:39.689 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 124.4457ms.
+14:04:39.690 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:04:39.690 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 69.8396ms.
+14:04:39.690 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:04:39.701 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW) in 136.3947ms
+14:04:39.701 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW)'
+14:04:39.701 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderReports application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 144.7148ms
+14:04:39.702 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW) in 82.78ms
+14:04:39.702 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW)'
+14:04:39.702 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableProductReports application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 93.0074ms
+14:04:39.703 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW) in 142.435ms
+14:04:39.703 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW)'
+14:04:39.703 [INF] Executed DbCommand (50ms) [Parameters=[@LanguageId='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPGetAlarmsByLanguage] @LanguageId
+14:04:39.703 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderList application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 154.7009ms
+14:04:39.704 [INF] Executed action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 68.3434ms.
+14:04:39.704 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:04:39.705 [INF] Executed action PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) in 70.2028ms
+14:04:39.705 [INF] Executed endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+14:04:39.706 [INF] Request finished HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0 - 200 - application/json;+charset=utf-8 77.6874ms
+14:04:39.745 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/details.png - -
+14:04:39.751 [INF] Sending file. Request path: '/css/functions/small/details.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\details.png'
+14:04:39.751 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/details.png - - - 200 3029 image/png 6.4679ms
+14:04:43.226 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/System/Img/loading.gif - -
+14:04:43.242 [INF] Sending file. Request path: '/css/System/Img/loading.gif'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\System\Img\loading.gif'
+14:04:43.242 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/System/Img/loading.gif - - - 200 1456 image/gif 15.8005ms
+14:04:53.404 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/new_hover.png - -
+14:04:53.409 [INF] Sending file. Request path: '/css/functions/small/new_hover.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\new_hover.png'
+14:04:53.410 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/new_hover.png - - - 200 2961 image/png 6.2329ms
+14:04:54.823 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/clear-filters_hover.png - -
+14:04:54.829 [INF] Sending file. Request path: '/css/functions/small/clear-filters_hover.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\clear-filters_hover.png'
+14:04:54.830 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/clear-filters_hover.png - - - 200 424 image/png 6.6485ms
+14:04:58.603 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/filter_hover.png - -
+14:04:58.608 [INF] Sending file. Request path: '/css/functions/small/filter_hover.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\filter_hover.png'
+14:04:58.609 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/filter_hover.png - - - 200 368 image/png 5.7071ms
+14:05:00.318 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/bottom_hover.png - -
+14:05:00.323 [INF] Sending file. Request path: '/css/functions/small/bottom_hover.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\bottom_hover.png'
+14:05:00.324 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/bottom_hover.png - - - 200 3067 image/png 6.0600ms
+14:05:02.415 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/back_hover.png - -
+14:05:02.430 [INF] Sending file. Request path: '/css/functions/small/back_hover.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\back_hover.png'
+14:05:02.431 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/back_hover.png - - - 200 2972 image/png 15.6011ms
+14:05:04.169 [INF] Executed endpoint '/hmihub'
+14:05:04.169 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=CGnqRSrOc3FJg_8uGsRVdg - - - 101 - - 24608.1402ms
+14:05:04.174 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+14:05:04.175 [INF] Executing endpoint '/hmihub/negotiate'
+14:05:04.176 [INF] Executed endpoint '/hmihub/negotiate'
+14:05:04.177 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 3.6732ms
+14:05:04.213 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - -
+14:05:04.215 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 2.6491ms
+14:05:04.459 [INF] Request starting HTTP/1.1 GET http://localhost:18935/favicon.ico - -
+14:05:04.462 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\favicon.ico'
+14:05:04.462 [INF] Request finished HTTP/1.1 GET http://localhost:18935/favicon.ico - - - 0 32038 image/x-icon 3.1184ms
+14:05:04.483 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+14:05:04.485 [INF] Executing endpoint '/hmihub/negotiate'
+14:05:04.486 [INF] Executed endpoint '/hmihub/negotiate'
+14:05:04.486 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 3.5176ms
+14:05:04.534 [INF] Request starting HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0
+14:05:04.536 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=TfwTmUFC5_V82CEbFihH_g - -
+14:05:04.536 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+14:05:04.536 [INF] Route matched with {action = "GetLastShortAlarmData", controller = "Alarm", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetLastShortAlarmData(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.AlarmController (PE.HMIWWW).
+14:05:04.537 [INF] Executing endpoint '/hmihub'
+14:05:04.542 [INF] Executing action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) - Validation state: "Valid"
+14:05:04.545 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:05:04.547 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+14:05:04.549 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:05:04.549 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+14:05:04.549 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+14:05:04.549 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.0095ms.
+14:05:04.550 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+14:05:04.550 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 1.2111ms
+14:05:04.550 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:05:04.551 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 4.3092ms
+14:05:08.364 [INF] Executed endpoint '/hmihub'
+14:05:08.364 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=TfwTmUFC5_V82CEbFihH_g - - - 101 - - 3828.0597ms
+14:05:08.368 [INF] Request starting HTTP/1.1 GET http://localhost:18935/L3CommStatus - -
+14:05:08.369 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+14:05:08.370 [INF] Executing endpoint '/hmihub/negotiate'
+14:05:08.370 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW)'
+14:05:08.371 [INF] Route matched with {action = "Index", controller = "L3CommStatus", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+14:05:08.371 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW) - Validation state: "Valid"
+14:05:08.371 [INF] Executed endpoint '/hmihub/negotiate'
+14:05:08.371 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0127ms.
+14:05:08.371 [INF] Executing ViewResult, running view ~/Views/System/L3CommStatus/Index.cshtml.
+14:05:08.372 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 2.6314ms
+14:05:08.378 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=dn9A-Wdvx61xVy1WFiOt0w - -
+14:05:08.380 [INF] Executing endpoint '/hmihub'
+14:05:08.388 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+14:05:08.389 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:05:08.389 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+14:05:08.390 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+14:05:08.390 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.0094ms.
+14:05:08.390 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+14:05:08.390 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 1.0463ms
+14:05:08.391 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:05:08.391 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 3.1186ms
+14:05:08.544 [INF] Entity Framework Core 6.0.0 initialized 'PEContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:05:08.545 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:05:08.560 [INF] Executed DbCommand (15ms) [Parameters=[@userName='?' (Size = 26), @isAdmin='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPUserMenu] @userName, @isAdmin
+14:05:08.878 [INF] Executed ViewResult - view ~/Views/System/L3CommStatus/Index.cshtml executed in 506.92ms.
+14:05:08.879 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW) in 507.8248ms
+14:05:08.879 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW)'
+14:05:08.900 [INF] Request finished HTTP/1.1 GET http://localhost:18935/L3CommStatus - - - 200 - text/html;+charset=utf-8 531.9882ms
+14:05:08.909 [INF] Executed endpoint '/hmihub'
+14:05:08.909 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=dn9A-Wdvx61xVy1WFiOt0w - - - 101 - - 530.9424ms
+14:05:08.947 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_vs/browserLink - -
+14:05:08.949 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - -
+14:05:08.953 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 4.1421ms
+14:05:08.977 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 30.1911ms
+14:05:09.252 [INF] Request starting HTTP/1.1 GET http://localhost:18935/favicon.ico - -
+14:05:09.255 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\favicon.ico'
+14:05:09.255 [INF] Request finished HTTP/1.1 GET http://localhost:18935/favicon.ico - - - 0 32038 image/x-icon 2.4607ms
+14:05:09.265 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+14:05:09.267 [INF] Executing endpoint '/hmihub/negotiate'
+14:05:09.267 [INF] Executed endpoint '/hmihub/negotiate'
+14:05:09.268 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 3.1043ms
+14:05:09.310 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableGeneralList application/x-www-form-urlencoded;+charset=UTF-8 52
+14:05:09.312 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW)'
+14:05:09.312 [INF] Route matched with {action = "GetL3TransferTableGeneralList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableGeneralList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+14:05:09.313 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW) - Validation state: "Valid"
+14:05:09.315 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:05:09.323 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[V_L3L2TransferTablesSummary] AS [v]
+14:05:09.333 [INF] Executed DbCommand (8ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [v].[OrderSeq], [v].[StatusInProc], [v].[StatusNew], [v].[StatusOK], [v].[StatusProcErr], [v].[StatusValErr], [v].[TransferTableName]
+FROM [xfr].[V_L3L2TransferTablesSummary] AS [v]
+ORDER BY [v].[OrderSeq] DESC
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+14:05:09.333 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 20.023ms.
+14:05:09.333 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:05:09.334 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW) in 22.1085ms
+14:05:09.334 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW)'
+14:05:09.334 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableGeneralList application/x-www-form-urlencoded;+charset=UTF-8 52 - 200 - application/json;+charset=utf-8 24.4067ms
+14:05:09.346 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderList application/x-www-form-urlencoded;+charset=UTF-8 39
+14:05:09.348 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW)'
+14:05:09.348 [INF] Route matched with {action = "GetL3TransferTableWorkOrderList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableWorkOrderList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+14:05:09.349 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW) - Validation state: "Valid"
+14:05:09.351 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:05:09.352 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L3L2WorkOrderDefinition] AS [l]
+14:05:09.354 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[CounterId], [l].[AUDCreatedTs], [l].[BilletLength], [l].[BilletWeight], [l].[BundleWeightMax], [l].[BundleWeightMin], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[CustomerName], [l].[ExternalWorkOrderName], [l].[HeatName], [l].[InputShapeSymbol], [l].[InputThickness], [l].[InputWidth], [l].[IsUpdated], [l].[MaterialCatalogueName], [l].[NumberOfBillets], [l].[OrderDeadline], [l].[OutputShapeSymbol], [l].[OutputThickness], [l].[OutputWidth], [l].[PreviousWorkOrderName], [l].[ProductCatalogueName], [l].[SteelgradeCode], [l].[TargetWorkOrderWeight], [l].[TargetWorkOrderWeightMax], [l].[TargetWorkOrderWeightMin], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WorkOrderName]
+FROM [xfr].[L3L2WorkOrderDefinition] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+14:05:09.355 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 5.9516ms.
+14:05:09.355 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:05:09.356 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW) in 7.7687ms
+14:05:09.356 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW)'
+14:05:09.356 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderList application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 10.0195ms
+14:05:09.361 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderReports application/x-www-form-urlencoded;+charset=UTF-8 39
+14:05:09.362 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW)'
+14:05:09.362 [INF] Route matched with {action = "GetL3TransferTableWorkOrderReports", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableWorkOrderReports(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+14:05:09.363 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW) - Validation state: "Valid"
+14:05:09.364 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:05:09.366 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L2L3WorkOrderReport] AS [l]
+14:05:09.368 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Counter], [l].[AUDCreatedTs], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[CrewName], [l].[DelayDuration], [l].[HeatName], [l].[InputThickness], [l].[InputWidth], [l].[IsUpdated], [l].[IsWorkOrderFinished], [l].[MaterialCatalogueName], [l].[NumberOfChargedMaterials], [l].[NumberOfPiecesRejectedInLocation1], [l].[NumberOfPlannedMaterials], [l].[NumberOfProducts], [l].[NumberOfRejectedMaterials], [l].[NumberOfRolledMaterials], [l].[NumberOfScrappedMaterials], [l].[OutputThickness], [l].[OutputWidth], [l].[ProductCatalogueName], [l].[ShiftName], [l].[SteelgradeCode], [l].[TargetWorkOrderWeight], [l].[TotalWeightOfMaterials], [l].[TotalWeightOfProducts], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WeightOfPiecesRejectedInLocation1], [l].[WorkOrderEnd], [l].[WorkOrderName], [l].[WorkOrderStart]
+FROM [xfr].[L2L3WorkOrderReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+14:05:09.368 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 5.3146ms.
+14:05:09.368 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:05:09.370 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW) in 7.1269ms
+14:05:09.370 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW)'
+14:05:09.370 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderReports application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 8.9636ms
+14:05:09.376 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableProductReports application/x-www-form-urlencoded;+charset=UTF-8 39
+14:05:09.377 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=3c2_68I1Z-V_2BfaKhTs7g - -
+14:05:09.377 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW)'
+14:05:09.377 [INF] Route matched with {action = "GetL3TransferTableProductReports", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableProductReports(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+14:05:09.378 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW) - Validation state: "Valid"
+14:05:09.378 [INF] Executing endpoint '/hmihub'
+14:05:09.380 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:05:09.382 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L2L3ProductReport] AS [l]
+14:05:09.385 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Counter], [l].[AUDCreatedTs], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[HeatName], [l].[InspectionResult], [l].[IsUpdated], [l].[OutputPieces], [l].[OutputThickness], [l].[OutputWeight], [l].[OutputWidth], [l].[ProductName], [l].[ProductType], [l].[SequenceInWorkOrder], [l].[ShiftName], [l].[SteelgradeCode], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WorkOrderName]
+FROM [xfr].[L2L3ProductReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+14:05:09.385 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 6.7265ms.
+14:05:09.385 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:05:09.387 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW) in 9.1403ms
+14:05:09.387 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW)'
+14:05:09.387 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableProductReports application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 11.5128ms
+14:05:09.437 [INF] Request starting HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0
+14:05:09.438 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+14:05:09.438 [INF] Route matched with {action = "GetLastShortAlarmData", controller = "Alarm", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetLastShortAlarmData(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.AlarmController (PE.HMIWWW).
+14:05:09.439 [INF] Executing action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) - Validation state: "Valid"
+14:05:09.441 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+14:05:09.441 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+14:05:09.443 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:05:09.443 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+14:05:09.443 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+14:05:09.443 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.0064ms.
+14:05:09.444 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+14:05:09.444 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 0.8954ms
+14:05:09.444 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+14:05:09.445 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 3.2862ms
+14:05:11.643 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/refresh_hover.png - -
+14:05:11.658 [INF] Sending file. Request path: '/css/functions/small/refresh_hover.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\refresh_hover.png'
+14:05:11.658 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/refresh_hover.png - - - 200 3059 image/png 15.4969ms
+14:05:12.760 [INF] Request starting HTTP/1.1 GET http://localhost:18935/css/functions/small/print_hover.png - -
+14:05:12.765 [INF] Sending file. Request path: '/css/functions/small/print_hover.png'. Physical path: 'D:\L2_PROJECTS\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\css\Functions\Small\print_hover.png'
+14:05:12.766 [INF] Request finished HTTP/1.1 GET http://localhost:18935/css/functions/small/print_hover.png - - - 200 3120 image/png 5.5365ms
+14:05:16.202 [INF] Executed DbCommand (6,759ms) [Parameters=[@LanguageId='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPGetAlarmsByLanguage] @LanguageId
+14:05:16.202 [INF] Executed DbCommand (11,654ms) [Parameters=[@LanguageId='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPGetAlarmsByLanguage] @LanguageId
+14:05:16.204 [INF] Executed action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 6764.0981ms.
+14:05:16.204 [INF] Executed action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 11659.7493ms.
+14:05:16.204 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:05:16.204 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+14:05:16.205 [INF] Executed action PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) in 6766.4065ms
+14:05:16.205 [INF] Executed endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+14:05:16.206 [INF] Request finished HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0 - 200 - application/json;+charset=utf-8 6768.4264ms
+14:05:16.207 [INF] Executed action PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) in 11669.4949ms
+14:05:16.207 [INF] Executed endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+14:05:16.208 [INF] Request finished HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0 - 0 - application/json;+charset=utf-8 11672.1075ms

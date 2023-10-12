@@ -1,0 +1,37 @@
+﻿<div class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_ChargingGrid</div>
+@(
+      Html.Kendo()
+          .Grid<PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_ScheduleTask>()
+          .Name("ChargingSearchGrid")
+          //.Events(e => e.DataBound("SelectChargingGridFirstWO"))
+          .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+          .Pageable(p => p
+                  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+          //.Sortable()
+          //.Filterable()
+          .Selectable()
+          .HtmlAttributes(new { style = "height: 660px; cursor: pointer" })
+          .Columns(c =>
+          {
+            c.Bound(x => x.WorkOrderId).Visible(false);
+            c.Bound(x => x.ScheduleOrderSeq);
+            c.Bound(x => x.WorkOrderName);
+            c.Bound(x => x.HeatName);
+            c.Bound(x => x.Steelgrade);
+            //c.Bound(x => x.TargetMaterialNumber);
+            c.Bound(x => x.OnChargingMaterialsNumber);
+            c.Bound(x => x.HeatId).Visible(false);
+          })
+
+    .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(26)
+    .Sort(r => r.Add(s => s.ScheduleOrderSeq))
+    .Read(r => r.Action("GetCharginGridHeatsGrid", "BilletYard"))
+    //.Events(e => e.Change("dataSourceChange"))
+    )
+.Events(e => e.Change("onSelectChargingGridtWO"))
+)
+
+

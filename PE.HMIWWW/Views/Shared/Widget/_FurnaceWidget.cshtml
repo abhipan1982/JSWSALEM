@@ -1,0 +1,85 @@
+﻿<style>
+  .furnace-chart {
+    height: 170px;
+  }
+</style>
+<div class="widget-body">
+    <div class="widget-card">
+        <div class="widget-title">
+            <img class="widget-title-icon" src="~/Content/menu/furnance-tracking.png"/> @VM_Resources.NAME_Furnace
+        </div>
+        <div class="widget-line"></div>
+        <div class="widget-data" style="padding-bottom: 0px;">
+            <div id="furnace-chart" class="furnace-chart">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+  $(document).ready(createFurnaceChart);
+
+  function createFurnaceChart() {
+    let urlAction = '/Measurements/GetFurnaceTemperatures';
+    let data = GetTemperaturesData(urlAction);
+    if (data) {
+      let tempChartData = [];
+      let categories = [];
+      for (let i = 0; i < data.length; i += 6) {
+        tempChartData.push(data[i].Temperature);
+        categories.push(data[i].OrderSeq)
+      }
+      displayFurnaceChart(tempChartData, categories);
+    }
+  }
+
+  function GetTemperaturesData(urlAction) {
+    let data = AjaxGetDataHelper(urlAction);
+    if (data) return data;
+    return null;
+  }
+
+  function displayFurnaceChart(data, categories) {
+    $("#furnace-chart").kendoChart({
+      legend: {
+        position: "bottom"
+      },
+      seriesDefaults: {
+        type: "area",
+        area: {
+          line: {
+            style: "smooth"
+          }
+        }
+      },
+      series: [{
+        name: Translations["NAME_Temperature"] + " [" + Translations["UNIT_Temperature"] + "]",
+        data: data
+      }],
+      valueAxis: {
+        labels: {
+          format: "{0} "
+        },
+        line: {
+          visible: false
+        },
+        axisCrossingValue: -10
+      },
+      categoryAxis: {
+        majorGridLines: {
+          visible: false
+        },
+        categories: categories,
+        labels: {
+          rotation: "auto"
+        }
+      },
+      tooltip: {
+        visible: true,
+        format: "{0}",
+        template: "#= value # "
+      }
+    });
+  }
+</script>

@@ -1,0 +1,36 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.BilletYard;
+
+<div class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_HeatsInLocations</div>
+@(
+  Html.Kendo().Grid<VM_HeatsOnYards>
+  ()
+  .Name("HeatsInLocationsList")
+  .Events(e => e.DataBound("ColorHeatListByQueueFlag"))
+  .HtmlAttributes(new { @style = "height: 660px; cursor: pointer" })
+  .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Sortable()
+  .Filterable()
+  .Selectable()
+  .Scrollable()
+  .Columns(c =>
+  {
+    c.Bound(x => x.AreaName).Title(VM_Resources.NAME_Yard).Hidden(true);
+    c.Bound(x => x.HeatName);
+    c.Bound(x => x.SteelgradeName);
+    c.Bound(x => x.AssetDescription);
+    c.Bound(x => x.HeatId).Visible(false);
+    c.Bound(x => x.AssetId).Visible(false);
+    c.Bound(x => x.IsFirstInQueue).Visible(false);
+    c.Bound(x => x.YardId).Visible(false);
+    c.Bound(x => x.NumberOfMaterials).Filterable(false).Width(70);
+  })
+  .DataSource(d => d
+  .Ajax()
+  .Group(g => g.Add(c => c.AreaDescription))
+  .Group(g => g.Add(c => c.AssetDescription))
+  .ServerOperation(true)
+  .Read(r => r.Action("GetHeatGroupsInLocations", "BilletYard"))
+  )
+  .Events(e => e.Change("onSelectHeatInLocationGridEl"))
+  )
+

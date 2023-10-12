@@ -1,0 +1,30 @@
+﻿@model IEnumerable<PE.HMIWWW.Core.Signalr.Hubs.Client>
+
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@(Html.Kendo().Grid<PE.HMIWWW.Core.Signalr.Hubs.Client>()
+  .Name("Sessions")
+  .HtmlAttributes(new { style = @String.Format("border:none !important; height:{0}px;", ViewBag.FullGridHeight) })
+  .Sortable().Filterable(filtering => filtering.Enabled(true))
+  .Groupable()
+  .Filterable()
+  .Scrollable()
+  .Pageable(p => p
+    .PreviousNext(false)
+    .Refresh(true)
+    .Numeric(false)
+    .Info(true)
+  )
+  .DataSource(ds => ds.Custom()
+    .PageSize(1000))
+  .BindTo(Model)
+  .Columns(columns =>
+  {
+    columns.Bound(p => p.Name).Width(250);
+    columns.Bound(p => p.ConnectionId).Width(250);
+    columns.Bound(p => p.ConnectionDate).Width(250).Format(VM_Resources.GLOB_ShortDateTime_FORMAT);
+    columns.Bound(p => p.Path).Width(250);
+    columns.Bound(p => p.IpAddress).Width(250);
+  }))

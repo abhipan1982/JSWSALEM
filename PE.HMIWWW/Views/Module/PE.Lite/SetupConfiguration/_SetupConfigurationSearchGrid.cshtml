@@ -1,0 +1,84 @@
+﻿@model long?
+@using PE.HMIWWW.ViewModel.Module.Lite.Setup
+
+<script>
+    var initialContent = null;
+
+    function onSetupConfigurationSelect(e) {
+        let grid = $('#SetupConfigurationsSearchGrid').data('kendoGrid');
+        let selectedRow = grid.select();
+        let selectedConfiguration = grid.dataItem(selectedRow);
+
+        if (!initialContent) {
+            initialContent = $('#SetupConfigurations').html();
+        }
+        if (!selectedConfiguration.SetupId) {
+            $('#SetupConfigurations').html(initialContent);
+            return;
+        }
+
+        let dataToSend = {
+            setupId: selectedConfiguration.SetupId,
+            setupConfigurationId: selectedConfiguration.SetupConfigurationId,
+            setupTypeId: selectedConfiguration.SetupTypeId
+        };
+        let url = "/SetupConfiguration/FindSetupInstruction";
+        AjaxReqestHelperSilentWithoutDataType(url, dataToSend, setElementRelationsPartialViewSetup, onError);
+    }
+
+    function setElementRelationsPartialViewSetup(partialView) {
+        $('#SetupConfigurations').removeClass('loading-overlay');
+        $('#SetupConfigurations').html(partialView);
+    }
+    function onError(ex) {
+        console.error(ex);
+    }
+</script>
+
+@(Html.Kendo().Grid<VM_SetupConfigurations>()
+    .Name("SetupConfigurationsSearchGrid")
+    .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Selectable()
+    .Pageable(p => p
+        .Refresh(true)
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+        .PageSizes(true))
+    .HtmlAttributes(new { style = @String.Format("height:{0}px;", 580) })
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.ConfigurationId).Visible(false);
+        columns.Bound(c => c.SetupConfigurationId).Visible(false);
+        columns.Bound(c => c.SetupTypeId).Visible(false);
+        columns.Bound(c => c.SetupTypeName);
+        columns.Bound(c => c.SetupName);
+        columns.Bound(c => c.IsRequired).ClientTemplate(
+            "#if(IsRequired === true)" +
+            "{" +
+            "#<input class='not-editable' type='checkbox' disabled checked />#" +
+            "}" +
+            "else" +
+            "{" +
+            "#<input class='not-editable' type='checkbox' disabled />#" +
+            "}#");
+        columns.Bound(c => c.IsSteelgradeRelated).ClientTemplate(
+            "#if(IsSteelgradeRelated === true)" +
+            "{" +
+            "#<input class='not-editable' type='checkbox' disabled checked />#" +
+            "}" +
+            "else" +
+            "{" +
+            "#<input class='not-editable' type='checkbox' disabled />#" +
+            "}#");
+        columns.Bound(c => c.SetupConfigurationLastSentTs).Visible(false).Format(PE.HMIWWW.Core.Resources.VM_Resources.GLOB_ShortDateTime_FORMAT);
+    })
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+    .DataSource(d => d
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(28)
+        .Read(r => r.Action("GetSetupConfigurationsSearchGridData", "SetupConfiguration", new { configurationId = Model }))
+        .Events(e => e.Error("TelerikErrorHandler")))
+    .Events(e => {
+        e.Change("onSetupConfigurationSelect");
+    })
+)

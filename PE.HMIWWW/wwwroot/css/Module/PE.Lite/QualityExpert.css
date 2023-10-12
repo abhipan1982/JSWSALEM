@@ -1,0 +1,158 @@
+﻿.material-vis {
+    flex: 0 0 auto;
+    margin: 1px;
+    background-color: #717274;
+    transition: 0.5s;
+    display: flex;
+    color: #fff;
+    justify-content: space-between;
+}
+
+    .material-vis:hover {
+        background-color: #C8D6E1;
+        cursor: pointer;
+        color: #006486;
+    }
+
+.active-material-vis {
+    background-color: #006486;
+}
+
+.material-body {
+    padding: 10px 0;
+    display: block;
+    font-size: .9rem;
+    flex: 1 0 0;
+    line-height: 2;
+    font-weight: 300;
+}
+
+.material-info {
+    display: block;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    flex: 0 0 auto;
+    margin: 0 auto;
+    width: 28px;
+}
+
+.material-grading-icon {
+    font-size: 22px;
+    position: relative;
+    display: block;
+    width: 80%;
+    height: 50%;
+    margin: 0 auto;
+    padding-top: 2px;
+}
+
+.material-info > div {
+    display: block;
+    height: 50%;
+    line-height: 1;
+}
+
+.material-info-bg-0 {
+    background-color: #D8D8D8;
+}
+
+.material-info-bg-1, .material-info-bg-2 {
+    background-color: #99CE80;
+}
+
+.material-info-bg-3 {
+    background-color: #F6C758;
+}
+
+.material-info-bg-4, .material-info-bg-5 {
+    background-color: #F95554;
+}
+
+.specified-grading-color-1, .specified-grading-color-2 {
+    color: #99ce80;
+}
+
+.specified-grading-color-3 {
+    color: #f6c758;
+}
+
+.specified-grading-color-4, .specified-grading-color-5 {
+    color: #f95554;
+}
+
+.grading-status-grid {
+    font-size: 22px;
+    padding: 2px;
+    color: #fff;
+    display: block;
+}
+
+.compensation-selected {
+    color: #99ce80;
+    cursor: pointer
+}
+
+.compensation-not-selected {
+    cursor: pointer
+}
+
+.specified-grading-number-value {
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: -10px;
+}
+
+.specified-grading-icon {
+    position: relative;
+    display: block;
+    font-size: 60px;
+    margin: 0 auto;
+}
+
+
+.specified-grading-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #006486;
+}
+
+.specified-grading-text-value {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.grading-text-value {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.specified-grading-text-value img {
+    margin: 0 auto;
+    display: block;
+}
+
+.specified-grading-bg {
+    background-color: #E9EEF2;
+}
+
+.forcedValueIcon::after {
+    display: block;
+    font-size: 34px;
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    color: #717274;
+    content: 'lock';
+}
+
+.altValueIcon::after {
+    display: block;
+    font-size: 34px;
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    color: #717274;
+    content: 'build';
+}

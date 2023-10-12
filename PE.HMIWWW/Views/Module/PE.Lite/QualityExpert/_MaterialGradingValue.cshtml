@@ -1,0 +1,52 @@
+@using PE.BaseDbEntity.EnumClasses
+@using PE.HMIWWW.ViewModel.Module.Lite.QualityExpert
+@model VM_MaterialGrading
+
+@{
+    var icon = "<i class=\"material-icons md-light specified-grading-icon\">report_off</i>";
+    var lockClass = "";
+    
+    if (Model.GradingSource == GradingSource.ForcedValue)
+    {
+        lockClass = " forcedValueIcon";
+    }
+    if (Model.GradingSource == GradingSource.Alternative)
+    {
+        lockClass = " altValueIcon";
+    }
+    switch (Model.Grading)
+    {
+        case 1:
+        case 2:
+            icon = "<i class=\"material-icons md-light specified-grading-icon" + lockClass + "\">check_circle</i>";
+            break;
+        case 3:
+            icon = "<i class=\"material-icons md-light specified-grading-icon" + lockClass + "\">report_problem</i>";
+            break;
+        case 4:
+        case 5:
+            icon = "<i class=\"material-icons md-light specified-grading-icon" + lockClass + "\">remove_circle</i>";
+            break;
+    }
+}
+
+<div class="container-fluid">
+    <div class="row text-center text-uppercase specified-grading-title">
+        <div class="col ">@VM_Resources.LABEL_MaterialEvaluation</div>
+    </div>
+    <div class="row mx-2 pt-2 specified-grading-bg specified-grading-color-@Model.Grading">
+        <div class="col-6 text-right  specified-grading-number-value">
+            @Model.Grading
+        </div>
+        <div class="col-6 specified-grading-text-value text-uppercase">
+            @Html.Raw(icon)
+        </div>
+    </div>
+    <div class="row mx-2 specified-grading-bg specified-grading-color-@Model.Grading">
+        <div class="col text-center pb-2 grading-text-value">
+            @ViewBag.RatingValuesTypes[Model.Grading]
+        </div>
+    </div>
+</div>
+
+

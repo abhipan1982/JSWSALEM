@@ -1,0 +1,104 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.WorkOrder.VM_WorkOrderOverview
+
+<div class="row">
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.WorkOrderName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.WorkOrderName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.WorkOrderStatus)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.WorkOrderStatus)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.HeatName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.HeatName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.IsTestOrder)
+        </div>
+        <div class="col check-box">
+          @Html.CheckBoxFor(m => m.IsTestOrder, new { @id = "is_test", disabled = "disabled" })
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.Steelgrade)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.Steelgrade)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.TargetOrderWeight)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.TargetOrderWeight)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.TargetOrderWeightMin)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.TargetOrderWeightMin)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.TargetOrderWeightMax)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.TargetOrderWeightMax)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.WorkOrderCreatedInL3Ts)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.WorkOrderCreatedInL3Ts)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.ToBeCompletedBeforeTs)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ToBeCompletedBeforeTs)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(m => m.TargetMaterialNumber)
+        </div>
+        <div class="col check-box">
+          @Html.DisplayFor(m => m.TargetMaterialNumber)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

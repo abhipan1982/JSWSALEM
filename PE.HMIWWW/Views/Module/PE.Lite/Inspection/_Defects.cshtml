@@ -1,0 +1,29 @@
+﻿@model long?
+@using PE.HMIWWW.ViewModel.Module.Lite.Inspection
+
+<div>
+    <p class="quality-title">@VM_Resources.NAME_Defects</p>
+</div>
+<div>
+    @(Html.Kendo().Grid<VM_Defect>()
+        .Name("DefectsGrid")
+        .HtmlAttributes(new { style = "height: 300px; margin-top: 10px" })
+        .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Sortable()
+        .Filterable()
+        .Pageable(p => p
+            .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+        .Columns(c =>
+        {
+            c.Bound(x => x.DefectId).Visible(false);
+            c.Bound(x => x.DefectCatalogueId).Visible(false);
+            c.Bound(x => x.DefectCatalogueName).Sortable(true);
+            c.Bound(x => x.AssetName);
+        })
+        .DataSource(d => d
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(6)
+            .Read(r => r.Action("GetDefectsByRawMaterialId", "InspectionStation", new { rawMaterialId = Model }))
+            ))
+</div>

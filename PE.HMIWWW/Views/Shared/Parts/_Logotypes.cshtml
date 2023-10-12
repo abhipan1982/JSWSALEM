@@ -1,0 +1,16 @@
+@using SMF.Core
+@using Microsoft.EntityFrameworkCore
+@using PE.HMIWWW.Core.Parameter
+@inject PE.BaseDbEntity.PEContext.PEContext Context
+@{
+    string info =
+            "SMF version: " + @Framework.GetFrameworkVersion() + "\r\n" +
+             "Publish Date: " + @ApplicationInformation.CompileDate + "\r\n" +
+             "SQL: " + @Context.Database.GetDbConnection().DataSource + " (" + @Context.Database.GetDbConnection().Database + ")";
+}
+<div class="logos-box">
+    <img alt="Primetals logo" class="logo prime" src="~/css/System/img/primetals.png"/>
+    <img alt="Expert logo" class="logo" title="@info" src="~/css/System/img/expert-logo.png"/>
+    @*<img alt="Customer logo" style="float: right; max-width: 30%; height: 30px;padding-left: 30px;" src="~/Content/System/img/customer.png" />*@
+</div>
+<div class="clearfix"></div>

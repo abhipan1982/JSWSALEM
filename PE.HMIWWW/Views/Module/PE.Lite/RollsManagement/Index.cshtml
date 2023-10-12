@@ -1,0 +1,79 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.RollsManagement;
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_RollsManagement_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+  @Html.ImageButton("new", "AddNew()", false)
+}
+
+<link rel="stylesheet" href="~/bundles/css/Module/RollsManagement.css" />
+<script src="~/bundles/js/Module/RollsManagement.js"></script>
+
+@(Html.Kendo().Grid<VM_RollsWithTypes>()
+  .Name("RollsManagementGrid")
+  .Events(e => e.DataBound("ColorRowInTable"))
+  .HtmlAttributes(new { style = @String.Format(" height:{0}px;", ViewBag.FullGridHeight) })
+  .Scrollable()
+  .Pageable(p => p
+  .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Filterable()
+  .Sortable()
+  .Columns(columns =>
+  {
+    columns.Bound(p => p.RollId).Visible(false);
+    columns.Bound(p => p.RollName).Width(200);
+    columns.ForeignKey(o => o.RollTypeId, (SelectList)ViewBag.RollTypes).Width(150);
+    columns.ForeignKey(o => o.EnumRollStatus, (SelectList)ViewBag.RollStatus).Width(120);
+    columns.Bound(p => p.RollSetName).Width(150);
+    columns.Bound(p => p.InitialDiameter).HtmlAttributes(new { style = "text-align: right;" }).Width(200);
+    columns.Bound(p => p.ActualDiameter).HtmlAttributes(new { style = "text-align: right;" }).Width(200);
+    columns.Bound(p => p.DiameterMin).HtmlAttributes(new { style = "text-align: right;" }).Width(200);
+    columns.Bound(p => p.DiameterMax).HtmlAttributes(new { style = "text-align: right;" }).Width(200);
+    columns.Bound(p => p.Supplier).Width(150);
+    columns.Bound(p => p.RollDescription);
+    columns.Bound(p => p.RollId).Width(90).Sortable(false).Groupable(false).Filterable(false).Title(" ")
+    .ClientTemplate(@Html.ImageButton("edit", "EditData(#= RollId #)", false).ToString() +
+      "#if (Editable) {#" + @Html.ImageButton("scrap", "ScrapRoll(#= RollId #)", false).ToString() + "#}#" +
+      "#if (Removable) {#" + @Html.ImageButton("delete", "Delete(#= RollId #)", false).ToString() + "#}#");
+  })
+  .DataSource(ds => ds
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(27)
+    .Events(e => e.Error("TelerikErrorHandler"))
+    .Read(r => r.Action("GetRollData", "RollsManagement"))
+  )
+)
+
+<script>
+
+    function ColorRowInTable() {
+      let parameter = @Html.Raw(Json.Serialize(ViewBag.WarningThreshold.ValueInt));
+      let coeff = ((100 - parameter) / 100);
+
+      var grid = $("#RollsManagementGrid").data("kendoGrid");
+      var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "ActualDiameter" + "]").index();
+      var gridData = grid.dataSource.view();
+
+      for (var i = 0; i < gridData.length; i++) {
+        let value = gridData[i].ActualDiameter;
+        let maxDiameter = gridData[i].DiameterMax;
+        let minDiameter = gridData[i].DiameterMin;
+
+        var currentUid = gridData[i].uid;
+        var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+
+        if (value < minDiameter) {
+          var cell = currenRow.children().eq(columnIndex);
+          $(cell).addClass('warningParameter');
+        } else if (value < (((maxDiameter - minDiameter) * coeff) + minDiameter)) {
+                  var cell = currenRow.children().eq(columnIndex);
+            $(cell).addClass('warningDiameter');
+        }
+    }
+  }
+
+</script>

@@ -1,0 +1,133 @@
+@model List<PE.HMIWWW.ViewModel.System.VM_WidgetConfigurations>
+
+@{
+  foreach (var element in Model)
+  {
+    if (element.WidgetFileName == "_PlannedDelaysWidget")
+    {
+      @await Component.InvokeAsync(typeof(PlannedDelaysWidgetViewComponent))
+    } else if (element.WidgetFileName == "_ActiveBypassesWidget")
+    {
+     <div id="activeBypassesWidget">
+          @await Component.InvokeAsync(typeof(ActiveBypassesWidgetViewComponent))
+     </div>
+    }
+    else
+    {
+      await Html.RenderPartialAsync("~/Views/Shared/Widget/" + element.WidgetFileName + ".cshtml");
+    }
+  }
+}
+
+<style>
+  .nowrap-text {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+  }
+
+  .widget-body {
+      margin-bottom: 10px;
+  }
+
+      /* width */
+    .widget-body ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    /* Track */
+    .widget-body ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    .widget-body ::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    .widget-body ::-webkit-scrollbar-thumb:hover {
+      background: #bbb;
+      cursor: pointer;
+    }
+
+
+  .widget-card {
+      width: 100%;
+      height: auto;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+
+
+  }
+
+  .widget-title {
+      padding: 6px 16px;
+      font-size: 15px;
+      color: #006487;
+      font-weight: 500;
+  }
+
+  .widget-title-icon {
+      position: relative;
+      top: -2px;
+      margin-right: 4px;
+  }
+
+  .widget-data-container {
+      max-height: 300px;
+      overflow-y: auto;
+  }
+
+  .widget-data {
+      padding: 10px 14px;
+      margin: 2px 0px;
+
+  }
+
+  .widget-data-list-el {
+      border-left: 3px solid #006487;
+  }
+
+  .widget-data-label {
+      font-size: 12px;
+      margin-top: 2px;
+      color: rgba(0, 0, 0, 0.6);
+  }
+
+  .widget-data-value {
+      font-size: 14px;
+      color: #000;
+      line-height: 14px;
+  }
+
+  .widget-data-value-large {
+      font-size: 21px;
+      line-height: 18px;
+      margin: 1px 0 7px 0;
+      color: #006487;
+      text-transform: lowercase;
+      overflow-wrap: break-word;
+      font-weight: 500;
+}
+
+  .widget-data-value-lg{
+    font-size: 14px;
+  }
+
+  .widget-data-value-small {
+      font-size: 11px;
+  }
+
+  .widget-line {
+      width: 100%;
+      height: 1px;
+      background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .inline-content {
+      display: flex;
+      flex-direction: row;
+  }
+</style>

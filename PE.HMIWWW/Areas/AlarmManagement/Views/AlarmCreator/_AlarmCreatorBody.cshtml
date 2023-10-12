@@ -1,0 +1,21 @@
+@using PE.HMIWWW.Core.Resources;
+@using PE.HMIWWW.Core.Extensions;
+@model PE.HMIWWW.Areas.AlarmManagement.ViewModels.VM_AlarmDefinition
+
+<div class="row h-100">
+  <div class="col">
+      @(Html.Kendo().TabStrip()
+      .Name("AlarmCreatorBody")
+      .Animation(false)
+      .HtmlAttributes(new {style = "width: 100%;"})
+      .Scrollable(false)
+      .Items(async tabstrip =>
+      {
+      tabstrip.Add().Text(VM_Resources.NAME_Alarm)
+      .Selected(true).LoadContentFrom("AlarmMessagesView", "AlarmCreator", new { Area = "AlarmManagement", alarmDefinitionId = Model.AlarmDefinitionId });
+      tabstrip.Add().Text(VM_Resources.NAME_RoleList)
+      .Selected(false).LoadContentFrom("AlarmRolesView", "AlarmCreator", new { Area = "AlarmManagement", alarmDefinitionId = Model.AlarmDefinitionId });
+      })
+    )
+  </div>
+</div>

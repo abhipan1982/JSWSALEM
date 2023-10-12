@@ -1,0 +1,125 @@
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.FeatureTemplate;
+@using PE.HMIWWW.Core.HtmlHelpers
+@using PE.HMIWWW.Core.Resources;
+@using Kendo.Mvc.UI;
+
+@model long
+
+@{
+  Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<script>
+
+  $(document).ready(function() {
+      var assignedGrid = $("#AssignedGrid").data("kendoGrid");
+      assignedGrid.bind("dataBound", function(e) {
+          if (e.sender.dataSource.total() <= e.sender.dataSource.pageSize()) {
+              e.sender.pager.element.hide();
+          } else {
+              e.sender.pager.element.show();
+          }
+      });
+
+      var unassignedGrid = $("#UnassignedGrid").data("kendoGrid");
+      unassignedGrid.bind("dataBound", function(e) {
+          if (e.sender.dataSource.total() <= e.sender.dataSource.pageSize()) {
+              e.sender.pager.element.hide();
+          } else {
+              e.sender.pager.element.show();
+          }
+      });
+  })
+
+  function getAssetTemplateId() {
+      return { assetTemplateId: @Model };
+  }
+
+</script>
+
+<div class="row" style="height: 650px;">
+  <div class="col-6">
+    <h4>@VM_Resources.NAME_AssignedTemplates</h4>
+    @(
+    Html.Kendo().Grid<VM_FeatureTemplate>()
+    .Name("AssignedGrid")
+    .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Pageable(p => p
+    .Refresh(true)
+    .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+    .PageSizes(true))
+    .Sortable()
+    .Filterable()
+    .HtmlAttributes(new {style = string.Format("height:{0}px;", 580)})
+    .Columns(columns =>
+    {
+    columns.Bound(c => c.FeatureTemplateId).Visible(false);
+    columns.Bound(c => c.FeatureTemplateName).Width(500);
+    columns.ForeignKey(o => o.EnumFeatureType, (SelectList)ViewBag.FeatureTypeList).Width(300);
+    columns.ForeignKey(o => o.FKUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol")).Width(70);
+    columns.ForeignKey(o => o.FKExtUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol")).Width(70);
+    columns.ForeignKey(o => o.FKDataTypeId, new SelectList(ViewBag.DataTypeList, "DataTypeId", "DataTypeName")).Width(70);
+    columns.Bound(p => p.FeatureTemplateId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+    .ClientTemplate(@Html.ImageButton("arrow_right", "assignTemplates(#:FeatureTemplateId#)", false, "NAME_UnassignFeature").ToString());
+    })
+    .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(20)
+    .Read(r => r.Action("GetAssignedFeatureTemplateSearchList", "FeatureTemplate", new { Area = "MillConfigurator" }).Data("getAssetTemplateId()"))
+    )
+    )
+
+  </div>
+
+  <div class="col-6">
+    <h4>@VM_Resources.NAME_UnassignedTemplates</h4>
+    @(
+    Html.Kendo().Grid<VM_FeatureTemplate>()
+    .Name("UnassignedGrid")
+    .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Pageable(p => p
+    .Refresh(true)
+    .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+    .PageSizes(true))
+    .Sortable()
+    .Filterable()
+    .HtmlAttributes(new {style = string.Format("height:{0}px;", 580)})
+    .Columns(columns =>
+    {
+    columns.Bound(p => p.FeatureTemplateId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(30)
+    .ClientTemplate(@Html.ImageButton("arrow_left", "assignTemplates(#:FeatureTemplateId#)", false, "NAME_AssignFeature").ToString());
+    columns.Bound(c => c.FeatureTemplateId).Visible(false);
+    columns.Bound(c => c.FeatureTemplateName).Width(500);
+    columns.ForeignKey(o => o.EnumFeatureType, (SelectList)ViewBag.FeatureTypeList).Width(300);
+    columns.ForeignKey(o => o.FKUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol")).Width(70);
+    columns.ForeignKey(o => o.FKExtUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol")).Width(70);
+    columns.ForeignKey(o => o.FKDataTypeId, new SelectList(ViewBag.DataTypeList, "DataTypeId", "DataTypeNameDotNet")).Width(70);
+    })
+    .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(20)
+    .Read(r => r.Action("GetUnassignedFeatureTemplateSearchList", "FeatureTemplate", new { Area = "MillConfigurator" }).Data("getAssetTemplateId()"))
+    )
+    )
+
+  </div>
+
+</div>
+
+<hr />
+
+<form data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnFormBegin" data-ajax-success="OnFormSuccess" data-ajax-failure="OnFormError"
+      class="container-fluid" target="formContainer" role="form" id="form">
+
+  <div class="row form-group">
+    <div class="col text-right">
+      <button class="btn btn-primary popup_button" type="submit">
+        @VM_Resources.BUTTON_close
+      </button>
+    </div>
+  </div>
+
+</form>

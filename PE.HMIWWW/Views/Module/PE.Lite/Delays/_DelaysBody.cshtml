@@ -1,0 +1,17 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Shift.VM_ShiftWorkOrderModel
+
+<div class="row h-100">
+    <div class="col">
+        @(Html.Kendo().TabStrip()
+          .Name("DelaysBody")
+          .Animation(false)
+          .HtmlAttributes(new {style = "width: 100%;"})
+          .Scrollable(false)
+          .Items(async tabstrip =>
+          {
+            tabstrip.Add().Text(VM_Resources.NAME_Delays)
+              .Selected(true).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/Delays/_DelaysOverview.cshtml", Model)).ToHtmlString());
+          })
+        )
+    </div>
+</div>

@@ -1,0 +1,72 @@
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration;
+@using PE.HMIWWW.Core.HtmlHelpers
+@using PE.HMIWWW.Core.Resources;
+@using Kendo.Mvc.UI;
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration.VM_AssetType
+
+@{
+  Layout = "~/Views/Shared/_TabLayout.cshtml";
+}
+
+@section TabIncludes
+  {
+  @Html.ImageButton("edit", "editAssetType(" + Model.AssetTypeId + ", () => { try { closeSlideAndRefresh(); } catch(e){} })")
+  @Html.ImageButton("delete", "deleteAssetType(" + Model.AssetTypeId + ", () => { try { closeSlideAndRefresh(); } catch(e){} })")
+}
+
+  <script>
+
+    function getAssetTypeId() {
+        return { assetTypeId: @Model.AssetTypeId };
+    }
+
+  </script>
+
+  <div class="row">
+
+    <div class="col-4 p-0 pt-3">
+      <div class="container-fluid">
+        <div class="form-group row">
+          <div class="col-4 text-right">
+            @Html.LabelFor(x => x.AssetTypeName)
+          </div>
+          <div class="col">
+            @Html.DisplayFor(m => m.AssetTypeName)
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4 text-right">
+            @Html.LabelFor(x => x.AssetTypeDescription)
+          </div>
+          <div class="col">
+            @Html.DisplayFor(m => m.AssetTypeDescription)
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 p-0 pt-3">
+      <div class="container-fluid">
+        <div class="form-group row">
+          <div class="col-4 text-right">
+            @Html.LabelFor(x => x.AssetTypeCode)
+          </div>
+          <div class="col">
+            @Html.DisplayFor(m => m.AssetTypeCode)
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 p-0 pt-3">
+      <div class="container-fluid">
+        <div class="form-group row">
+          <div class="col-4 text-right">
+            @Html.LabelFor(x => x.YardTypeText)
+          </div>
+          <div class="col">
+            @Html.DisplayFor(x => x.YardTypeText)
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>

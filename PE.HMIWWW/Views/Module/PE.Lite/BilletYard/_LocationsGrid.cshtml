@@ -1,0 +1,34 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.BilletYard;
+
+<div class="grid-title"><span class="grid-title-icon k-icon k-i-arrow-45-down-right"></span>@VM_Resources.NAME_Locations</div>
+@(
+  Html.Kendo().Grid<VM_Location>
+  ()
+  .Name("LocationList")
+  .HtmlAttributes(new { @style = "height: 660px;" })
+  .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Sortable()
+  .Filterable()
+  .Scrollable()
+  .Columns(c =>
+  {
+      c.Bound(x => x.AssetId).Visible(false);
+      c.Bound(x => x.ParentAssetId).Visible(false);
+      c.Bound(x => x.HeatIdInLastGroup).Visible(false);
+      c.Bound(x => x.AssetDescription).Width(70);
+      c.Bound(x => x.PieceMaxCapacity).Width(80);
+      c.Bound(x => x.FreeSpace).Width(80);
+      c.Bound(x => x.HeatNameInLastGroup).Width(200);
+      c.Bound(x => x.ParentAssetDescription);
+      c.Bound(p => p.AssetId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(62)
+      .ClientTemplate(@Html.ImageButton("details", "GoToStack(#:AssetId#)", false, "NAME_Location").ToString() + @Html.ImageButton("down", "OnDestinateLocationSelect(#:AssetId#, #:FreeSpace#)", false, "BUTTON_TransferToLocation").ToString());
+
+  })
+  .DataSource(d => d
+  .Ajax()
+  .Group(g => g.Add(c => c.ParentAssetDescription))
+  .ServerOperation(true)
+  .PageSize(23)
+  .Read(r => r.Action("GetLocations", "BilletYard"))
+  )
+  )

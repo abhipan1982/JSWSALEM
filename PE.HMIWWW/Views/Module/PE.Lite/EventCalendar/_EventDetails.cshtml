@@ -1,0 +1,35 @@
+@model  long?
+
+<div class="row h-100">
+    <div class="col">
+        @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.EventCalendar.VM_EventDetails>()
+        .Name("Events")
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Sortable()
+        .Filterable()
+        .Scrollable()
+        .Pageable(p => p
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+        .HtmlAttributes(new { style = @String.Format(" height:{0}px;", ViewBag.FullGridHeight) })
+        .Columns(c =>
+        {
+            c.Bound(x => x.MillEventId).Visible(false);
+            c.Bound(x => x.EventTypeName);
+            c.Bound(x => x.DelayStart).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+            c.Bound(x => x.DelayEnd).Format(VM_Resources.GLOB_LongDateTime_FORMAT);
+            c.Bound(x => x.DelayDuration);
+            c.Bound(x => x.WorkOrderName);
+            c.Bound(x => x.RawMaterialName);
+            c.Bound(x => x.AssetName);
+            c.Bound(x => x.UserComment);
+        })
+        .DataSource(d => d
+        .Ajax()
+        .Sort(x => x.Add(y => y.MillEventId))
+        .ServerOperation(false)
+        .PageSize(25)
+        .Read(r => r.Action("GetEventsByShiftId", "EventCalendar", new { shiftId = Model }))
+        )
+        )
+    </div>
+</div>

@@ -1,0 +1,29 @@
+@model PE.HMIWWW.ViewModel.Module.Lite.Inspection.VM_InspectionOverview
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("quality", "AddQualityPopup()", false, "NAME_SpecifyQuality")
+    @Html.ImageButton("defects", "AssignDefectsPopup()", false, "NAME_AddDefects")
+}
+
+<div class="container-fluid p-3">
+    <div class="row">
+        <div class="col-3 grid-filter" id="InspectionStationSearchGrid">
+            @(await Html.PartialAsync("~/Views/Module/PE.Lite/BundleInspectionStation/_InspectionSearchGrid.cshtml", Model))
+        </div>
+        <div class="col-9 element-details" id="InspectionDetails">
+            <div class="row justify-content-center plug">
+                <div class="col-6 align-self-center">
+                    <img src="~/css/Shared/plug.png" />
+                    <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/BundleInspectionStation.css" />
+<script src="~/bundles/js/Module/BundleInspectionStation.js"></script>

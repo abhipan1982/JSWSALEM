@@ -1,0 +1,15 @@
+﻿<div class="row">
+  @(Html.Kendo().TabStrip()
+      .Name("MeasurementsLists")
+      .Animation(false)
+      .Scrollable(false)
+      .Items(tabstrip =>
+      {
+        tabstrip.Add().Text("RM").Selected(true).Content(@Html.Partial("~/Views/Module/PE.Lite/Visualization/_MeasurementsGrid.cshtml", "RM").ToHtmlString());
+        tabstrip.Add().Text("IM").Selected(false).Content(@Html.Partial("~/Views/Module/PE.Lite/Visualization/_MeasurementsGrid.cshtml", "IM").ToHtmlString());
+        tabstrip.Add().Text("FM").Selected(false).Content(@Html.Partial("~/Views/Module/PE.Lite/Visualization/_MeasurementsGrid.cshtml", "FM").ToHtmlString());
+        tabstrip.Add().Text("PFM").Selected(false).Content(@Html.Partial("~/Views/Module/PE.Lite/Visualization/_MeasurementsGrid.cshtml", "PFM").ToHtmlString());
+        tabstrip.Add().Text("ROD").Selected(false).Content(@Html.Partial("~/Views/Module/PE.Lite/Visualization/_MeasurementsGrid.cshtml", "ROD").ToHtmlString());
+      })
+  )
+</div>

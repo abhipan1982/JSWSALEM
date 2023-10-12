@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("new", "AddActionType()")
+}
+
+<div class="container-fluid p-3">
+    <div class="row">
+        <div class="col-3 grid-filter">
+            @(await Html.PartialAsync("~/Views/Module/PE.Lite/ActionType/_ActionTypeSearchGrid.cshtml"))
+        </div>
+        <div class="col-9 element-details" id="ActionTypeDetails">
+            <div class="row justify-content-center plug">
+                <div class="col-6 align-self-center">
+                    <img src="~/css/Shared/plug.png"/>
+                    <p class="mt-5 plug-info">@VM_Resources.INFO_SelectPlugInfo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/Content/Module/PE.Lite/ActionType.css"/>
+<script src="~/Scripts/Module/ActionType.js"></script>

@@ -1,0 +1,39 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.Maintenance
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_EquipmentGroups_Index;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+  {
+  @Html.ImageButton("new", "addEquipmentGroupPopup()", false)
+}
+
+  @(
+  Html.Kendo().Grid<VM_EquipmentGroup>()
+    .Name("Groups")
+    .HtmlAttributes(new { style = @String.Format(" height:{0}px;", ViewBag.FullGridHeight) })
+    .Scrollable()
+    .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Pageable(p => p
+      .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Filterable()
+    .Sortable()
+    .Columns(c =>
+    {
+      c.Bound(x => x.EquipmentGroupId).Visible(false);
+      c.Bound(x => x.EquipmentGroupCode).Filterable(true).Width(100);
+      c.Bound(x => x.EquipmentGroupName).Filterable(true).Width(370);
+      c.Bound(x => x.EquipmentGroupDescription).Filterable(true);
+      c.Bound(x => x.EquipmentGroupId).Filterable(false).Title(" ").Width(65)
+        .ClientTemplate(Html.ImageButton("edit", "editEquipmentGroupPopup(#:EquipmentGroupId#)").ToString() + Html.ImageButton("delete", "deleteEquipmentGroup(#=EquipmentGroupId#)").ToString());
+    })
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(27)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetEquipmentGroupsList", "EquipmentGroups")))
+)
+
+<script src="~/bundles/js/Module/EquipmentGroups.js"></script>

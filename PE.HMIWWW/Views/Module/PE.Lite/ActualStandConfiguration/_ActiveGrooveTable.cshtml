@@ -1,0 +1,178 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.ActualStandConfiguration
+@model PE.HMIWWW.ViewModel.Module.Lite.RollsetDisplay.VM_RollsetDisplay
+
+@(Html.Kendo().Grid<VM_PassChangeDataActual>()
+    .Name("PassChangeActualData")
+    .Events(e => e.DataBound("ColorRowInTable"))
+    .HtmlAttributes(new { style = @String.Format("border:none !important; height:{0}px;", (ViewBag.FullGridHeight) - 50) })
+    .Pageable().Sortable().Filterable(filtering => filtering.Enabled(true))
+    .Filterable()
+    .Scrollable()
+    .Sortable()
+    .Columns(columns =>
+    {
+      columns.Bound(p => p.StandId).Visible(false).Filterable(false).Sortable(true);
+      columns.Bound(p => p.EnumGrooveSetting).Visible(false).Filterable(false).Sortable(true);
+      columns.Bound(p => p.RollSetType).Visible(false).Filterable(false).Sortable(true);
+      columns.Bound(p => p.StandName).Filterable(true).Width(75);
+      columns.Bound(p => p.GrooveNumber).Visible(true).Filterable(false).Width(65);
+      columns.Bound(p => p.GrooveTemplateName).Visible(true).Filterable(false).Width(300);
+      columns.Bound(p => p.RollSetName).Filterable(true).Sortable(true).Width(200);
+      columns.ForeignKey(o => o.RollSetType, (SelectList)ViewBag.RollsetTypes).Width(120);
+      columns.Bound(p => p.MountedTs).Filterable(true).Sortable(true).Format(VM_Resources.ResourceManager.GetString("GLOB_ShortDateTime_FORMAT")).Width(140);
+      columns.Bound(p => p.AccWeight).Filterable(true).Sortable(true).HtmlAttributes(new { style = "text-align: right;" }).Width(120);
+      columns.Bound(p => p.AccWeightRatio).Filterable(true).Sortable(true).HtmlAttributes(new { style = "text-align: right;" }).Width(100);
+      columns.Bound(p => p.AccBilletCnt).Visible(true).Filterable(true).Sortable(true).HtmlAttributes(new { style = "text-align: right;" }).Width(85);
+      columns.Bound(p => p.AccBilletCntRatio).Visible(true).Sortable(true).Filterable(true).HtmlAttributes(new { style = "text-align: right;" }).Width(100);
+      columns.Bound(p => p.AccWeightWithCoeff).Visible(true).Filterable(true).Sortable(true).HtmlAttributes(new { style = "text-align: right;" }).Width(170);
+      columns.Bound(p => p.AccWeightCoeffRatio).Visible(true).Sortable(true).Filterable(true).HtmlAttributes(new { style = "text-align: right;" }).Width(195);
+      columns.Bound(p => p.RollSetId).Visible(false);
+      columns.Bound(p => p.IsOverdue).Visible(false);
+      columns.Bound(p => p.StandId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(100).ClientTemplate(
+        @Html.ImageButton("rollset_details", "RollSetInfo(#= RollSetId #)", false).ToString() +
+        @Html.ImageButton("cassette_details", "CassetteInfo(#= CassetteId #)", false).ToString() +
+        @Html.ImageButton("pass_change", "PassChangeGroove(#= RollSetId #, #= RollSetType #)", false).ToString()
+      );
+    })
+    .DataSource(dataSource => dataSource
+    .Ajax()
+    .ServerOperation(true)
+    .Model(model =>
+    {
+      model.Id(p => p.StandId);
+    })
+    .PageSize(25)
+    .Sort(sort =>
+    {
+      sort.Add(p => p.Position).Ascending();
+      sort.Add(p => p.StandNo).Ascending();
+    })
+    .Events(events => events.Error("TelerikErrorHandler"))
+    .Read(read => read.Action("GetPassChangeActualData", "ActualStandConfiguration"))
+    ))
+
+<style>
+  .status-1 {
+    background-color: #6ba4b8;
+    color: #fff;
+  }
+
+  .status-2 {
+    background-color: #ffcd00;
+    color: #fff;
+  }
+
+  .status-3 {
+    background-color: #808080;
+    color: #fff;
+  }
+
+  .GrooveSummary {
+    background-color: rgba(255, 255, 255, 1);
+    width: 300px;
+  }
+
+    .GrooveSummary .label {
+      color: #00587c;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+  .overdue {
+    background-color: #ff6347;
+    color: #fff;
+  }
+
+  .k-tooltip {
+    border-radius: 0px !important;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.2) !important;
+  }
+</style>
+
+<script type="text/x-kendo-template" id="GrooveSummaryCalculations">
+  <div class="GrooveSummary pl-2 pr-2 pt-1 pb-1">
+    <div class="summary">
+      <div class="row pt-1 pb-1">
+        <div class="label col-7">@VM_Resources.NAME_BilletsCount </div> #=billetscount#
+      </div>
+      <div class="row pt-1 pb-1">
+        <div class="label col-7">@VM_Resources.NAME_BilletsCountLimit </div> #=billetscountlimit#
+      </div>
+      <div class="row pt-1 pb-1">
+        <div class="label col-7" >@Html.DisplayNameFor(m => m.AccWeightLabel) </div> #=weight#
+      </div>
+      <div class="row pt-1 pb-1">
+        <div class="label col-7">@Html.DisplayNameFor(m => m.AccWeightWithCoeffLabel) </div> #=weightwithcoeff#
+      </div>
+      <div class="row pt-1 pb-1">
+        <div class="label col-7">@Html.DisplayNameFor(m => m.AccWeightLimitLabel) </div> #=weightlimit#
+      </div>
+    </div>
+  </div>
+</script>
+<script>
+  $(document).ready(function () {
+    var template = kendo.template($("#GrooveSummaryCalculations").html());
+    var headerTooltip = $("#PassChangeActualData").kendoTooltip({
+      filter: "th",
+      content: function (e) {
+        var target = $(e.target);
+        console.log(target, target[0].localName, target[0].localName == 'th');
+        if (target[0].localName == 'th') {
+          return target[0].dataset.title;
+        }
+      }
+    }).data("kendoTooltip");
+
+    var rowTooltip = $("#PassChangeActualData").kendoTooltip({
+      filter: "tr",
+      content: function (e) {
+        var target = $(e.target);
+        if (target[0].cells[0].localName != 'th') {
+          var dataItem = $("#PassChangeActualData").data("kendoGrid").dataItem(target.closest("tr"));
+          var data = {
+            billetscount: dataItem.AccBilletCnt,
+            billetscountlimit: dataItem.AccBilletCntLimit,
+            weight: dataItem.AccWeight,
+            weightlimit: dataItem.AccWeightLimit,
+            weightwithcoeff: dataItem.AccWeightWithCoeff,
+            weightwithcoefflimit: dataItem.AccWeightLimit
+          };
+
+          return template(data);
+        }
+      }
+    }).data("kendoTooltip");
+  });
+
+  function ColorRowInTable() {
+
+    var grid = $("#PassChangeActualData").data("kendoGrid");
+
+    var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "GrooveTemplateName" + "]").index();
+    var gridData = grid.dataSource.view();
+
+    for (var i = 0; i < gridData.length; i++) {
+      let value = gridData[i].EnumGrooveSetting;
+      var currentUid = gridData[i].uid;
+      var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+      var cell = currenRow.children().eq(columnIndex);
+
+      var rowColor, rowBgColor;
+      if (gridData[i].IsOverdue) {
+        rowBgColor = 'red';
+        rowColor = 'white';
+
+        $(currenRow).addClass('overdue')
+      }
+
+      if (value == 1) {
+        $(cell).addClass('status-1')
+      } else if (value == 2) {
+        $(cell).addClass('status-2')
+      } else if (value == 3) {
+        $(cell).addClass('status-3')
+      }
+    }
+  }
+</script>

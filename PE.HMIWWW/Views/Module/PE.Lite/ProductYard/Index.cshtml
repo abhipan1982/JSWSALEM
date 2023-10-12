@@ -1,0 +1,27 @@
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+@section module_menu
+{
+  @Html.ImageButton("sort", "OpenLocationSchedulePopup()", false, "NAME_LocationScheduling")
+  @Html.ImageButton("relocate", "OpenRelocationPopup()", false, "NAME_Relocation")
+  @Html.ImageButton("dispatch", "OpenReadyForShipmentPopup()", false, "NAME_ReadyForShipment")
+  @Html.ImageButton("reload", "ClearSearch()", false, "BUTTON_ClearSearch")
+}
+<div class="container-fluid p-3">
+  <div class="row">
+    <div class="col-3 grid-filter">
+      @await Html.PartialAsync("~/Views/Module/PE.Lite/ProductYard/_WorkOrdersSearchGrid.cshtml")
+    </div>
+    <div class="col-9 element-details" id="Yards"></div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+      refreshYard();
+  });
+</script>
+
+<link rel="stylesheet" href="~/bundles/css/Module/ProductYard.css" />
+<script src="~/bundles/js/Module/ProductYard.js"></script>

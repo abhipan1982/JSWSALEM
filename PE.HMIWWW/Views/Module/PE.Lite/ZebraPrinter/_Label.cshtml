@@ -1,0 +1,30 @@
+@using PE.HMIWWW.ViewModel.Module.Lite.LabelPrinter
+
+@model VM_LabelRequest
+
+<div class="text-center">
+    <img height="@Model.ImageHeight" width="@Model.ImageWidth" id="label_picture" />
+</div>
+
+<script>
+    $(document).ready(() => {
+      if (!'@Model.ProductId') {
+        showErrorLabel();
+        return;
+      }
+
+      const url = '/LabelPrinter/LabelPreview';
+      AjaxReqestHelperSilentWithoutDataType(url, {productId: '@Model.ProductId'}, displayLabel);
+    })
+
+    function displayLabel(res) {
+      if (res.ImageBase64)
+        $('#label_picture').first().attr("src", "data:image/png;base64, " + res.ImageBase64);
+      else
+       showErrorLabel();
+    }
+
+    function showErrorLabel() {
+       $('#label_picture').first().attr("src", 'css/Shared/document_error.png');
+    }
+</script>

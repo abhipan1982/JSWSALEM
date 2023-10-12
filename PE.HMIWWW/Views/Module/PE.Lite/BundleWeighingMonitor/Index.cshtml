@@ -1,0 +1,109 @@
+@using PE.BaseDbEntity.EnumClasses
+@model PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialOverview
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu {
+  @Html.ImageButton("new", "createBundle()", false, "BUTTON_CreateBundle")
+  @Html.ImageButton("endoforder", "endOfWorkOrder()", false, "BUTTON_EndOfWorkOrder")
+}
+
+<div class="row container-fluid p-3 pt-4">
+
+  <div class="col-8">
+
+    @(
+        Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Schedule.VM_ScheduleSummary>()
+        .Name("WeighingOverveiwBeforeScale")
+        .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 130) })
+        .Columns(c =>
+        {
+          c.Bound(x => x.WorkOrderId).Visible(false);
+          c.Bound(x => x.WorkOrderName)
+          .ClientTemplate("#if(WorkOrderId) {#<a class='link' style='color: rgb(255,255,255) !important' href='javascript:_WorkOrder.GoToWorkOrder(#:WorkOrderId#);'>#:WorkOrderName#</a>#}#");
+          c.ForeignKey(o => o.EnumWorkOrderStatus, (SelectList)ViewBag.WorkOrderStatusList);
+          c.Bound(x => x.HeatName)
+          .ClientTemplate("#if(HeatId) {#<a class='link' style='color: rgb(255,255,255) !important' href='javascript:_Heat.GoToHeat(#= HeatId #);'>#:HeatName#</a>#}#");
+          c.Bound(x => x.SteelgradeCode)
+          .ClientTemplate("#if(SteelgradeId) {#<a class='link' style='color: rgb(255,255,255) !important' href='javascript:_Steelgrade.GoToSteelgrade(#= SteelgradeId #);'>#:SteelgradeCode#</a>#}#");
+        })
+        .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(4)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetWorkOrdersBeforeWeightList", "BundleWeighingMonitor"))
+        )
+        .Events(e =>
+        {
+          e.DataBound("colorActiveWOrkOrder");
+        })
+        )
+    <div class="text-center mb-4 mt-4">
+      <i class="material-icons text-center" style="    color: #006487;">arrow_downward</i>
+    </div>
+    <div id="material-details-panel">
+    </div>
+    <div class="text-center mb-4 mt-4">
+      <i class="material-icons text-center" style="    color: #006487">arrow_downward</i>
+    </div>
+    @(Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.Material.VM_RawMaterialOverview>()
+        .Name("WeighingOverveiwAfterScale")
+        .HtmlAttributes(new { style = @String.Format(" height:{0}px;", 130) })
+        .Selectable()
+        .Columns(c =>
+        {
+          c.Bound(x => x.RawMaterialId).Visible(false);
+          c.Bound(x => x.RawMaterialName)
+            .ClientTemplate("<a class='link' href='javascript:_RawMaterial.GoToRawMaterial(#:RawMaterialId#);'>#:RawMaterialName#</a>");
+          c.Bound(x => x.WorkOrderName)
+            .ClientTemplate("#if(WorkOrderId) {#<a class='link' href='javascript:_WorkOrder.GoToWorkOrder(#:WorkOrderId#);'>#:WorkOrderName#</a>#}#");
+          c.Bound(x => x.HeatName)
+            .ClientTemplate("#if(WorkOrderId) {#<a class='link' href='javascript:_Heat.GoToHeat(#= HeatId #);'>#:HeatName#</a>#}#");
+          c.ForeignKey(o => o.EnumInspectionResult, (SelectList)ViewBag.InspectionResultList);
+          c.Bound(x => x.Weight);
+          c.Bound(x => x.RawMaterialId).Filterable(false).Width(65).Title(" ").ClientTemplate(
+            Html.ImageButton("quality", "addQualityPopup(#:RawMaterialId#)", false, "NAME_SpecifyQuality").ToString() +
+            Html.ImageButton("defects", "assignDefectsPopup(#:RawMaterialId#)", false, "NAME_AddDefects").ToString());
+        })
+        .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(4)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetRawMaterialsAfterWeightList", "BundleWeighingMonitor").Data("getMaterialOnWeight"))
+        )
+        .Events(e => e.Change("onSelect"))
+        )
+
+  </div>
+
+  <div class="col-4" id="label_wrapper"></div>
+</div>
+
+
+<script src="~/bundles/js/Module/BundleWeighingMonitor.js" />
+
+<style>
+  .weight {
+      border: 1px solid #dbdbdb;
+      height: 120px;
+  }
+
+  .loading-overlay::before {
+      content: "";
+      display: block;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 11;
+      background-image: url(/css/System/Img/loading_2x.gif);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: rgba(255,255,255,.6);
+  }
+
+</style>

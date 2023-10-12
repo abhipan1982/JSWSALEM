@@ -1,0 +1,24 @@
+@{
+  ViewBag.Title = VM_Resources.PAGE_TITLE_ActualStandConfiguration;
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<script src="~/bundles/js/Module/ActualStandConfiguration.js"></script>
+
+<div class="row">
+  <div class="col">
+    @(Html.Kendo().TabStrip()
+      .Name("StandConfig")
+      .Animation(false)
+      .HtmlAttributes(new { style = "width: 100%;" })
+      .Scrollable(false)
+      .Items(async tabstrip =>
+      {
+        tabstrip.Add().Text(VM_Resources.NAME_StandName)
+          .Selected(true).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/ActualStandConfiguration/_StandConfigurationTable.cshtml")).ToHtmlString());
+        tabstrip.Add().Text(VM_Resources.NAME_ActiveGrooves)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/Module/PE.Lite/ActualStandConfiguration/_ActiveGrooveTable.cshtml")).ToHtmlString());
+      })
+    )
+  </div>
+</div>

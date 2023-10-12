@@ -1,0 +1,39 @@
+﻿@using PE.HMIWWW.ViewModel.Module.Lite.SteelFamily
+@{
+    ViewBag.Title = VM_Resources.PAGE_TITLE_SteelFamilyCatalogue_Index;
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@section module_menu
+{
+    @Html.ImageButton("new", "CreateSteelFamilyPopup()")
+}
+
+@(Html.Kendo().Grid<VM_SteelFamily>()
+    .Name("SteelFamilyList")
+    .HtmlAttributes(new {style = string.Format(" height:{0}px;", ViewBag.FullGridHeight)})
+    .Pageable()
+    .Filterable()
+    .Pageable(p => p
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+    .Columns(c =>
+    {
+        c.Bound(x => x.SteelGroupCode).ClientTemplate("#= SteelGroupCode # # if(IsDefault) {#(" + VM_Resources.NAME_IsDefault + ")#}#");
+        c.Bound(x => x.SteelGroupName);
+        c.Bound(x => x.Description).Filterable(false);
+        c.Bound(x => x.WearCoefficient);
+        c.Bound(x => x.Id)
+            .Filterable(false)
+            .ClientTemplate(Html.ImageButton("edit", "EditSteelFamilyPopup(#:Id#)") + Html.ImageButton("details", "GoToDetails(#:Id#)").ToString() + Html.ImageButton("delete", "Delete(#=Id#)"))
+            .Width(100)
+            .Title(" ");
+    })
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(30)
+        .Events(e => e.Error("TelerikErrorHandler"))
+        .Read(r => r.Action("GetSteelFamilyList", "SteelFamilyCatalogue")))
+    )
+
+<script src="~/js/Module/PE.Lite/SteelFamily.js"></script>

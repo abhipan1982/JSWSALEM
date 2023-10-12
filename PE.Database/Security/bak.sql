@@ -1,0 +1,5 @@
+﻿CREATE SCHEMA [bak]
+    AUTHORIZATION [dbo];
+
+
+

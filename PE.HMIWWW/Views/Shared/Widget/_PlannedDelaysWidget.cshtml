@@ -1,0 +1,29 @@
+@model IEnumerable<PE.HMIWWW.ViewModel.Module.Lite.Delay.VM_Delay>
+
+<div class="widget-body">
+  <div class="widget-card">
+    <div class="widget-title">
+      <img class="widget-title-icon" src="~/css/menu/delay-group.png" />@VM_Resources.NAME_PlannedDelays
+    </div>
+    <div class="widget-line"></div>
+       <div class="widget-data-container">
+    @{
+      var itemIndex = 0;
+      foreach (var delay in Model)
+      {
+        <div class="widget-data widget-data-list-el">
+          <div class="widget-data-value widget-data-value-small">@Html.DisplayFor(x => delay.EventStartTs) - @Html.DisplayFor(x => delay.EventEndTs)</div>
+          <div class="widget-data-value widget-data-value-large">@Html.DisplayFor(x => delay.CatalogueCategoryName)</div>
+          <div class="widget-data-label">@VM_Resources.NAME_Comment</div>
+          <div class="widget-data-value nowrap-text">@Html.DisplayFor(x => delay.UserComment)</div>
+        </div>
+        if (itemIndex < Model.Count() - 1)
+        {
+          <div class="widget-line"></div>
+        }
+        itemIndex++;
+      }
+    }
+    </div>
+  </div>
+</div>

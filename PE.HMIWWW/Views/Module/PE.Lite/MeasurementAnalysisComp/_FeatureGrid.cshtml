@@ -1,0 +1,31 @@
+@model string
+
+@(
+  Html.Kendo().Grid<PE.HMIWWW.ViewModel.Module.Lite.MeasurementsSummary.VM_FeatureMap>()
+  .Name(Model)
+  .HtmlAttributes(new { @style = "height: 620px;" })
+  .NoRecords(n => n.Template(VM_Resources.GLOB_GRID_NO_DATA))
+  .Sortable()
+  .Filterable()
+  .Scrollable()
+  .Selectable()
+  .Pageable(p => p.Messages(m => m.Display(VM_Resources.GLOB_pagination)))
+  .Columns(c =>
+  {
+    c.Bound(x => x.FeatureId).Visible(false);
+    c.Bound(x => x.FeatureName);
+    c.Bound(x => x.AssetName);
+    c.Bound(x => x.UnitSymbol)
+    .Width(100);
+  })
+  .DataSource(d => d
+  .Ajax()
+  .ServerOperation(true)
+  .PageSize(25)
+  .Events(e => e
+    .Error("TelerikErrorHandler"))
+@*  .Read(r => r.Action("GetFeatures", "MeasurementAnalysis", new { areaCode = Model }))*@
+  .Read(r => r.Action("GetFeatures", "MeasurementAnalysis", new { areaCode = Model }).Data("getFeatureType"))
+  )
+  .Events(e => e.Change("onFeatureSelect"))
+)

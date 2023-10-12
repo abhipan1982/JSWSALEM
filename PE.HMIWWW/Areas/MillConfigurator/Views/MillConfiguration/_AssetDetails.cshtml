@@ -1,0 +1,232 @@
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration;
+@using PE.HMIWWW.Core.HtmlHelpers
+@using PE.HMIWWW.Core.Resources;
+@using Kendo.Mvc.UI;
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.MillConfiguration.VM_AssetInstance
+
+<script>
+
+  $(document).ready(function () {
+      var assignedFeaturesList = $("#AssignedFeaturesListView").data("kendoGrid");
+      assignedFeaturesList.bind("dataBound", function (e) {
+          if (e.sender.dataSource.total() <= e.sender.dataSource.pageSize()) {
+              e.sender.pager.element.hide();
+          } else {
+              e.sender.pager.element.show();
+          }
+      });
+  })
+
+  function getAssetId() {
+      return { assetId: @Model.AssetId };
+  }
+
+</script>
+
+<div class="row">
+
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.AssetName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.AssetName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.AssetCode)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.AssetCode)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.OrderSeq)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.OrderSeq)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.AssetDescription)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.AssetDescription)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ParentAssetName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ParentAssetName)
+        </div>
+      </div>
+      @if (Model.FKAssetTypeId.HasValue)
+      {
+        <div class="form-group row">
+          <div class="col-4 text-right">
+            @Html.LabelFor(x => x.AssetType)
+          </div>
+          <div class="col">
+            <span class="link" onclick="assetTypeDetails(@Model.FKAssetTypeId)">
+              @Html.DisplayFor(m => m.AssetType)
+            </span>
+          </div>
+        </div>
+      }
+      else
+      {
+        <div class="form-group row">
+          <div class="col-4 text-right">
+            @Html.LabelFor(x => x.AssetType)
+          </div>
+          <div class="col">
+            @Html.DisplayFor(m => m.AssetType)
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsActive)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsActive, new { disabled = "disabled", id="ia" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsArea)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsArea, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsZone)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsZone, new { disabled = "disabled" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsTrackingPoint)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsTrackingPoint, new { disabled = "disabled", id="itp" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsDelayCheckpoint)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsDelayCheckpoint, new { disabled = "disabled", id="idcp" })
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsPositionBased)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsPositionBased, new { disabled = "disabled", id="ibp" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsReversible)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsReversible, new { disabled = "disabled", id="ir" })
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.EnumTrackingAreaTypeText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(x => x.EnumTrackingAreaTypeText)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.PositionsNumber)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.PositionsNumber)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.VirtualPositionsNumber)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.VirtualPositionsNumber)
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <hr>
+  <div class="pb-2 px-3" style="width: 99.8%">
+    @(
+        Html.Kendo().Grid<VM_FeatureInstance>()
+        .Name("AssignedFeaturesListView")
+        .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+        .Pageable(p => p
+        .Refresh(true)
+        .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+        .PageSizes(true))
+        .Sortable()
+        .Filterable()
+        .Events(e =>
+        {
+          e.DataBound("colorInactiveRecords");
+        })
+        .HtmlAttributes(new { style = string.Format("height:{0}px;", 340) })
+        .Columns(columns =>
+        {
+          columns.Bound(c => c.FeatureId).Visible(false);
+          columns.Bound(c => c.FeatureName);
+          columns.ForeignKey(o => o.EnumFeatureType, (SelectList)ViewBag.FeatureTypeList);
+          columns.ForeignKey(o => o.FKUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol"));
+          columns.ForeignKey(o => o.FKExtUnitOfMeasureId, new SelectList(ViewBag.UnitOfMeasureList, "UnitId", "UnitSymbol"));
+          columns.ForeignKey(o => o.FKDataTypeId, new SelectList(ViewBag.DataTypeList, "DataTypeId", "DataTypeName"));
+          columns.ForeignKey(o => o.EnumCommChannelType, (SelectList)ViewBag.CommChannelTypeList);
+          columns.ForeignKey(o => o.EnumTagValidationResult, (SelectList)ViewBag.TagValidationResultList);
+          columns.ForeignKey(o => o.EnumAggregationStrategy, (SelectList)ViewBag.AggregationStrategyList);
+          columns.Bound(p => p.AssetName).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(110)
+          .ClientTemplate(Html.ImageButton("edit", "editFeature(#:FeatureId#)", false, "NAME_EditFeature")
+          + Html.ImageButton("details", "featureDetails(#:FeatureId#)", false, "NAME_FeatureDetails").ToString()
+          + Html.ImageButton("clone", "cloneFeature(#:FeatureId#)", false, "NAME_CloneFeature").ToString()
+          + Html.ImageButton("delete", "deleteFeature(#=FeatureId#)", false, "NAME_DeleteFeature"));
+        })
+        .DataSource(d => d
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(11)
+        .Read(r => r.Action("GetAssignedFeatureSearchList", "MillConfiguration", new { Area = "MillConfigurator" }).Data("getAssetId()"))
+        )
+        )
+  </div>
+
+</div>

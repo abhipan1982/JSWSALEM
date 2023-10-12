@@ -1,0 +1,189 @@
+@using PE.HMIWWW.Areas.MillConfigurator.ViewModels.TrackingInstruction
+@using PE.HMIWWW.Core.HtmlHelpers
+@using PE.HMIWWW.Core.Resources
+@model PE.HMIWWW.Areas.MillConfigurator.ViewModels.TrackingInstruction.VM_TrackingInstruction
+
+<script>
+
+  $(document).ready(function() {
+      var assignedFeaturesList = $("#RelatedInstructions").data("kendoGrid");
+      assignedFeaturesList.bind("dataBound", function(e) {
+          if (e.sender.dataSource.total() <= e.sender.dataSource.pageSize()) {
+              e.sender.pager.element.hide();
+          } else {
+              e.sender.pager.element.show();
+          }
+      });
+  })
+
+  function getFeatureId() {
+      return { featureId: @Model.FKFeatureId };
+  }
+
+</script>
+
+<div class="row">
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.TrackingInstructionValue)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.TrackingInstructionValue)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsAsync)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsAsync, new { disabled = "disabled", id="ia" })
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4 text-right">
+        @Html.LabelFor(x => x.FeatureCode)
+      </div>
+      <div class="col">
+        @Html.DisplayFor(m => m.FeatureCode)
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.SeqNo)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.SeqNo)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.ChannelId)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.ChannelId)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.IsIgnoredIfSimulation)
+        </div>
+        <div class="col">
+          @Html.CheckBoxFor(m => m.IsIgnoredIfSimulation, new { disabled = "disabled", id="iiis" })
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 p-0 pt-3">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.PointName)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.PointName)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.EnumTrackingInstructionTypeText)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.EnumTrackingInstructionTypeText)
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4 text-right">
+          @Html.LabelFor(x => x.TimeFilter)
+        </div>
+        <div class="col">
+          @Html.DisplayFor(m => m.TimeFilter)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div class="form-group row">
+  <div class="col-1 text-right">
+    @Html.LabelFor(x => x.AreaName)
+  </div>
+  <div class="col">
+    @Html.DisplayFor(m => m.AreaName)
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-1 text-right">
+    @Html.LabelFor(x => x.FeatureName)
+  </div>
+  <div class="col">
+    @Html.DisplayFor(m => m.FeatureName)
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-1 text-right">
+    @Html.LabelFor(x => x.ParentTrackingInstructionName)
+  </div>
+  <div class="col">
+    @Html.DisplayFor(m => m.ParentTrackingInstructionName)
+  </div>
+</div>
+<div class="row">
+
+  <hr>
+  <div class="pb-2 px-3" style="width: 99.8%">
+    @(
+    Html.Kendo().Grid<VM_TrackingInstruction>()
+    .Name("RelatedInstructions")
+    .NoRecords(x => x.Template(VM_Resources.GLOB_GRID_NO_DATA))
+    .Pageable(p => p
+    .Refresh(true)
+    .Messages(m => m.Display(VM_Resources.GLOB_pagination))
+    .PageSizes(true))
+    .Sortable()
+    .Filterable()
+    .Events(e => {
+    e.DataBound("colorSelectedRecord");
+    })
+    .HtmlAttributes(new {style = string.Format("height:{0}px;", 380)})
+    .Columns(columns =>
+    {
+    columns.Bound(c => c.TrackingInstructionId).Visible(false);
+    columns.Bound(c => c.SeqNo);
+    columns.ForeignKey(o => o.FKAreaAssetId, new SelectList(ViewBag.AreaList, "AssetId", "AssetName")).HtmlAttributes(new { @class = "nowrap" });
+    columns.ForeignKey(o => o.FKPointAssetId, new SelectList(ViewBag.AssetList, "AssetId", "AssetName")).HtmlAttributes(new { @class = "nowrap" });
+    columns.Bound(c => c.TrackingInstructionValue);
+    columns.Bound(c => c.ChannelId);
+    columns.Bound(c => c.TimeFilter);
+    columns.Bound(c => c.IsAsync).ClientTemplate(
+    "#if(IsAsync === true)" +
+    "{" +
+    "#<input class='not-editable' type='checkbox' disabled checked />#" +
+    "}" +
+    "else" +
+    "{" +
+    "#<input class='not-editable' type='checkbox' disabled />#" +
+    "}#");
+    columns.ForeignKey(o => o.EnumTrackingInstructionType, (SelectList)ViewBag.TrackingInstructionTypeList).HtmlAttributes(new { @class = "nowrap" });
+    columns.Bound(c => c.TrackingInstructionId).Sortable(false).Groupable(false).Filterable(false).Title(" ").Width(90)
+    .ClientTemplate(Html.ImageButton("edit", "editTrackingInstruction(#:TrackingInstructionId#)", false, "NAME_EditFeature")
+    + Html.ImageButton("clone", "cloneTrackingInstruction(#:TrackingInstructionId#)", false, "NAME_CloneFeature").ToString()
+    + Html.ImageButton("delete", "deleteTrackingInstruction(#=TrackingInstructionId#)", false, "NAME_DeleteFeature"));
+    })
+    .DataSource(d => d
+    .Ajax()
+    .ServerOperation(true)
+    .PageSize(10)
+    .Read(r => r.Action("GetRelatedTrackingInstructionsSearchList", "TrackingInstruction", new { Area = "MillConfigurator" }).Data("getFeatureId()"))
+    )
+    )
+  </div>
+
+</div>

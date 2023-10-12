@@ -1,0 +1,25 @@
+@model IList<PE.HMIWWW.ViewModel.Module.Lite.BilletYard.VM_BilletYard>
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+@section module_menu
+{
+  @Html.ImageButton("down", "OpenRegisterInYardPopup()", false, "NAME_RegisterInYard")
+  @Html.ImageButton("relocate", "OpenRelocationPopup()", false, "NAME_Relocation")
+  @Html.ImageButton("tracking", "OpenSchedulePopup()", false, "NAME_LoadOnChargingGrid")
+  @Html.ImageButton("backToYard", "OpenBackToYardPopup()", false, "BUTTON_BackToYard")
+  @Html.ImageButton("reload", "ClearSearch()", false, "BUTTON_ClearSearch")
+}
+<div class="container-fluid p-3">
+  <div class="row">
+    <div class="col-3 grid-filter">
+      <partial name="~/Views/Module/PE.Lite/BilletYard/_HeatsSearchGrid.cshtml"/>
+    </div>
+    <div class="col-9 element-details" id="Yards">
+      <partial name="~/Views/Module/PE.Lite/BilletYard/_Yards.cshtml" model="Model"/>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/BilletYard.css" />
+<script src="~/bundles/js/Module/BilletYard.js" />

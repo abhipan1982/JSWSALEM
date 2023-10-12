@@ -1,0 +1,93 @@
+@{
+  Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+<link rel="stylesheet" href="~/bundles/css/Module/DataAnalysis.css" />
+
+@section module_menu
+{<div class="row float-left" style="    margin-right: 5px;">
+  @Html.ImageButton("data_analysis", "openChart()", false, "BUTTON_OpenChart")
+  <div id="exportPDF" title="@VM_Resources.NAME_ExportTo PDF"><span class="k-icon k-i-pdf"></span></div>
+  <div id="exportExcel" title="@VM_Resources.NAME_ExportTo Excel"><span class="k-icon k-i-excel"></span></div>
+
+</div>
+}
+
+<div id='configurator-expand' class='pivot-filters-btn'><span onclick='filtersExpand()' id="conf-arrow" class="arrow k-icon k-i-arrow-60-right"></span>@VM_Resources.NAME_Configurator 
+  @*<div class="pivot-chart-btn" title="Chart" onclick="openChart()"><img src="../content/functions/small/data_analysis.png" /></div>*@
+  </div>
+
+@(Html.Kendo().PivotConfigurator()
+    .Name("configurator")
+    .Filterable(true)
+    .Height(720)
+)
+
+@(Html.Kendo().PivotGrid<PE.HMIWWW.ViewModel.Module.Lite.DataAnalysis.VM_DataAnalysisDelay>()
+    .Name("pivotgrid")
+    .Excel(excel => excel
+        .FileName("Delays.xlsx")
+          .Filterable(true)
+          .ProxyURL(Url.Action("Excel_Export_Save", "DataAnalysis")))
+      .Pdf(pdf => pdf
+          .FileName("Delays.pdf")
+          .ProxyURL(Url.Action("Pdf_Export_Save", "DataAnalysis")))
+        .Configurator("#configurator")
+        .ColumnWidth(120)
+        .Filterable(true)
+        .Height(720)
+      //.DataCellTemplateId("dataCellTemplate")
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Transport(transport => transport.Read("GetDelaysDataList", "DataAnalysis"))
+          .Schema(schema => schema
+              .Cube(cube => cube
+                  .Dimensions(dimensions =>
+                  {
+
+                    dimensions.Add(model => model.Category).Caption(VM_Resources.NAME_Categories);
+                    dimensions.Add(model => model.Crew).Caption(VM_Resources.NAME_Crews);
+                    dimensions.Add(model => model.ShiftCode).Caption(VM_Resources.NAME_Shifts);
+                    dimensions.Add(model => model.Day).Caption(VM_Resources.NAME_Days);
+                    dimensions.Add(model => model.Week).Caption(VM_Resources.NAME_Week);
+                    dimensions.Add(model => model.MonthNr).Caption(VM_Resources.NAME_Month);
+                    dimensions.Add(model => model.Year).Caption(VM_Resources.NAME_Year);
+
+                  })
+              .Measures(measures => measures.Add(VM_Resources.NAME_DurationSum + '[' + VM_Resources.UNIT_Second + ']').Format("{0:N2}").Field(model => model.DelayDuration).AggregateName("Sum"))
+              //.Measures(measures => measures.Add(VM_Resources.NAME_DurationSum + '[' + VM_Resources.UNIT_Second + ']').Field(model => model.DelayDuration).Aggregate("Duration_DataSum").Result("SecondsToHMS"))
+              .Measures(measures => measures.Add(VM_Resources.NAME_DelaysCount).Field(model => model.DelayId).AggregateName("count"))
+              ))
+          .Columns(columns =>
+          {
+            columns.Add("Category").Expand(true);
+          })
+          .Rows(rows =>
+          {
+            rows.Add("MonthNr").Expand(true);
+          })
+      .Measures(measures =>
+      {
+        measures.Values(VM_Resources.NAME_DelaysCount);
+      })
+      .Events(e => e.Change("function() { replaceColumnsNames(); }"))
+    )
+)
+
+<script src="~/bundles/js/Module/DataAnalysis.js"></script>
+<script src="~/Scripts/kendo/2020.1.114/jszip.min.js"></script>
+
+<script id="dataCellTemplate" type="text/x-kendo-tmpl">
+  # var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #
+  # var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #
+  @*# var value = kendo.toString(kendo.parseFloat(dataItem.value) || "N/A", "c2"); #*@
+
+  @*# var value = calculateSecondsToHMS(dataItem.value); #*@
+  # var value = dataItem.value; #
+
+  # if (columnMember.children.length || rowMember.children.length) { #
+  <em style="    color: steelblue">#: value # (total)</em>
+  # } else { #
+  #: value #
+  # } #
+</script>
