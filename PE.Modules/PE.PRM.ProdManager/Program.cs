@@ -15,8 +15,8 @@ using PE.BaseDbEntity.PEContext;
 using PE.DbEntity.PEContext;
 using PE.BaseInterfaces.SendOffices.PRM;
 using PE.PRM.Base.Handlers;
+using PE.PRM.ProdManager.Handlers;
 using PE.PRM.Base.Managers;
-using PE.PRM.Managers;
 using Org.BouncyCastle.Asn1.X509.Qualified;
 using PE.Interfaces.Modules;
 
@@ -42,25 +42,29 @@ namespace PE.PRM.ProdManager
 
       //services.AddSingleton<IWorkOrderBaseManager, WorkOrderBaseManager>();
       //services.AddSingleton<ICatalogueBaseManager,d CatalogueBaseManager>();
-       services.AddSingleton<IProductManager, ProductManager>();
-      services.AddSingleton<IWorkOrderManager, WorkOrderManager>();
+      
+      
       services.AddSingleton<IProdManager, ExternalAdapter>();
       //services.AddSingleton<ProductHandlerBase, ProductHandlerBase>();
 
-      //services.AddSingleton<SteelgradeHandlerBase, SteelgradeHandlerBase>();
-      //services.AddSingleton<MaterialCatalogueHandlerBase, MaterialCatalogueHandlerBase>();
-      //services.AddSingleton<ProductCatalogueHandlerBase, ProductCatalogueHandlerBase>();
-      //services.AddSingleton<WorkOrderHandlerBase, WorkOrderHandlerBase>();
-      //services.AddSingleton<HeatHandlerBase, HeatHandlerBase>();
-      //services.AddSingleton<MaterialHandlerBase, MaterialHandlerBase>();
+      services.AddSingleton<SteelgradeHandler, SteelgradeHandler>();
+      services.AddSingleton<MaterialCatalogueHandler, MaterialCatalogueHandler>();
+      services.AddSingleton<ProductCatalogueHandler, ProductCatalogueHandler>();
+      services.AddSingleton<WorkOrderHandler, WorkOrderHandler>();
+      services.AddSingleton<HeatHandler, HeatHandler>();
+      services.AddSingleton<MaterialHandler, MaterialHandler>();
       //services.AddSingleton<ScrapGroupHandlerBase, ScrapGroupHandlerBase>();
-      //services.AddSingleton<SteelFamilyHandlerBase, SteelFamilyHandlerBase>();
-      //services.AddSingleton<BilletYardHandlerBase, BilletYardHandlerBase>();
+      services.AddSingleton<SteelFamilyHandler, SteelFamilyHandler>();
+      services.AddSingleton<BilletYardHandler, BilletYardHandler>();
 
       //services.AddSingleton<ModuleBaseExternalAdapterHandler>();
 
-      services.AddSingleton<ICatalogueManager, CatalogueManager>();//@av      
+      services.AddSingleton<ICatalogueManager, CatalogueManager>();//@av
+      services.AddSingleton<IProductManager, ProductManager>();
+      services.AddSingleton<IWorkOrderManager, BatchDataManager>();
+
       services.AddSingleton<ProductCatalogueHandler>();
+      //services.AddSingleton<MaterialCatalogueHandler>();
       services.AddSingleton<ExternalAdapterHandler>();
     }
   }

@@ -1,21 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>17.5.33627.172</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>17.5.33627.172</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2023-07-27T10:35:13.9073343Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DataProd">
+    <DataSource Name="AV">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>=Parameters!ConnectionString.Value</ConnectString>
+        <ConnectString>Data Source=inccun009dbs;Initial Catalog=PE_JSWSalem</ConnectString>
+        <Prompt>Specify a user name and password for data source AV:</Prompt>
       </ConnectionProperties>
-      <rd:SecurityType>None</rd:SecurityType>
+      <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>6cc3d49a-785d-4992-a96a-af461ea743f0</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="Events">
       <Query>
-        <DataSourceName>DataProd</DataSourceName>
+        <DataSourceName>AV</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@RootEventTypeKey">
             <Value>=Parameters!RootEventTypeKey.Value</Value>
@@ -27,126 +39,107 @@
             <Value>=Parameters!DateToNew.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT EventTypeName, 
-       EventTypeCode, 
-       RootEventTypeCode, 
-       RootEventTypeName, 
-       EventDate, 
-       EventDayShiftCrew, 
-       EventShiftCode, 
-       EventCatalogueCategoryName, 
-       EventCatalogueName, 
-       EventStdTime, 
-       EventStart, 
-       EventEnd, 
-       EventIsOpen, 
-       EventDuration, 
-       DimWorkOrderKey, 
-       WorkOrderName, 
-       DimMaterialKey, 
-       MaterialName, 
-       EventUserComment, 
-       AssetCode, 
-       AssetName
-FROM [dw].[FactEvent]
-WHERE DimRootEventTypeKey IN(@RootEventTypeKey)
-AND (EventStart BETWEEN @DateFromNew AND @DateToNew
-     OR ISNULL(EventEnd, GETDATE()) BETWEEN @DateFromNew AND @DateToNew);</CommandText>
+        <CommandText>SELECT        EventTypeName AS Expr1, EventTypeCode AS Expr2, RootEventTypeCode AS Expr3, RootEventTypeName AS Expr4, EventDate AS Expr5, EventDayShiftCrew AS Expr6, EventShiftCode AS Expr7, 
+                         EventCatalogueCategoryName AS Expr8, EventCatalogueName AS Expr9, EventStdTime AS Expr10, EventStart AS Expr11, EventEnd AS Expr12, EventIsOpen AS Expr13, EventDuration AS Expr14, DimWorkOrderKey AS Expr15, 
+                         WorkOrderName AS Expr16, DimMaterialKey AS Expr17, MaterialName AS Expr18, EventUserComment AS Expr19, AssetCode AS Expr20, AssetName AS Expr21
+FROM            dw.FactEvent
+WHERE        (DimRootEventTypeKey IN (@RootEventTypeKey)) AND (EventStart BETWEEN @DateFromNew AND @DateToNew) OR
+                         (DimRootEventTypeKey IN (@RootEventTypeKey)) AND (ISNULL(EventEnd, GETDATE()) BETWEEN @DateFromNew AND @DateToNew)</CommandText>
       </Query>
       <Fields>
-        <Field Name="EventTypeName">
-          <DataField>EventTypeName</DataField>
+        <Field Name="Expr1">
+          <DataField>Expr1</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EventTypeCode">
-          <DataField>EventTypeCode</DataField>
+        <Field Name="Expr2">
+          <DataField>Expr2</DataField>
           <rd:TypeName>System.Int16</rd:TypeName>
         </Field>
-        <Field Name="RootEventTypeCode">
-          <DataField>RootEventTypeCode</DataField>
+        <Field Name="Expr3">
+          <DataField>Expr3</DataField>
           <rd:TypeName>System.Int16</rd:TypeName>
         </Field>
-        <Field Name="RootEventTypeName">
-          <DataField>RootEventTypeName</DataField>
+        <Field Name="Expr4">
+          <DataField>Expr4</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EventDate">
-          <DataField>EventDate</DataField>
+        <Field Name="Expr5">
+          <DataField>Expr5</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="EventDayShiftCrew">
-          <DataField>EventDayShiftCrew</DataField>
+        <Field Name="Expr6">
+          <DataField>Expr6</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EventCatalogueName">
-          <DataField>EventCatalogueName</DataField>
+        <Field Name="Expr7">
+          <DataField>Expr7</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EventShiftCode">
-          <DataField>EventShiftCode</DataField>
+        <Field Name="Expr8">
+          <DataField>Expr8</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EventStdTime">
-          <DataField>EventStdTime</DataField>
+        <Field Name="Expr9">
+          <DataField>Expr9</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Expr10">
+          <DataField>Expr10</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
         </Field>
-        <Field Name="EventStart">
-          <DataField>EventStart</DataField>
+        <Field Name="Expr11">
+          <DataField>Expr11</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="EventEnd">
-          <DataField>EventEnd</DataField>
+        <Field Name="Expr12">
+          <DataField>Expr12</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="EventCatalogueCategoryName">
-          <DataField>EventCatalogueCategoryName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EventIsOpen">
-          <DataField>EventIsOpen</DataField>
+        <Field Name="Expr13">
+          <DataField>Expr13</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
-        <Field Name="EventDuration">
-          <DataField>EventDuration</DataField>
+        <Field Name="Expr14">
+          <DataField>Expr14</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="DimWorkOrderKey">
-          <DataField>DimWorkOrderKey</DataField>
+        <Field Name="Expr15">
+          <DataField>Expr15</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
-        <Field Name="DimMaterialKey">
-          <DataField>DimMaterialKey</DataField>
+        <Field Name="Expr16">
+          <DataField>Expr16</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Expr17">
+          <DataField>Expr17</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
-        <Field Name="MaterialName">
-          <DataField>MaterialName</DataField>
+        <Field Name="Expr18">
+          <DataField>Expr18</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EventUserComment">
-          <DataField>EventUserComment</DataField>
+        <Field Name="Expr19">
+          <DataField>Expr19</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="WorkOrderName">
-          <DataField>WorkOrderName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="AssetCode">
-          <DataField>AssetCode</DataField>
+        <Field Name="Expr20">
+          <DataField>Expr20</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="AssetName">
-          <DataField>AssetName</DataField>
+        <Field Name="Expr21">
+          <DataField>Expr21</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
     <DataSet Name="EventTypes">
       <Query>
-        <DataSourceName>DataProd</DataSourceName>
-        <CommandText>SELECT [DimEventTypeKey], [EventTypeName]
-FROM [dw].[DimEventType]
-WHERE [DimEventTypeKeyParent] IS NULL
-ORDER BY [EventTypeName]</CommandText>
+        <DataSourceName>AV</DataSourceName>
+        <CommandText>SELECT        DimEventTypeKey, EventTypeName
+FROM            dw.DimEventType
+WHERE        (DimEventTypeKeyParent IS NULL)
+ORDER BY EventTypeName</CommandText>
       </Query>
       <Fields>
         <Field Name="DimEventTypeKey">
@@ -161,7 +154,7 @@ ORDER BY [EventTypeName]</CommandText>
     </DataSet>
     <DataSet Name="ShiftsParam">
       <Query>
-        <DataSourceName>DataProd</DataSourceName>
+        <DataSourceName>AV</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@DateFrom">
             <Value>=Parameters!DateFrom.Value</Value>
@@ -170,13 +163,12 @@ ORDER BY [EventTypeName]</CommandText>
             <Value>=Parameters!DateTo.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT DimShiftKey, 
-       ShiftDateWithCode
-FROM dw.DimShift
-WHERE ShiftStartTime BETWEEN @DateFrom AND @DateTo
-OR ShiftEndTime BETWEEN @DateFrom AND @DateTo
+        <CommandText>SELECT        DimShiftKey, ShiftDateWithCode
+FROM            dw.DimShift
+WHERE        (ShiftStartTime BETWEEN @DateFrom AND @DateTo) OR
+                         (ShiftEndTime BETWEEN @DateFrom AND @DateTo)
 UNION ALL
-SELECT NULL, NULL
+SELECT        NULL AS Expr1, NULL AS Expr2
 ORDER BY 1 DESC</CommandText>
       </Query>
       <Fields>
@@ -192,16 +184,16 @@ ORDER BY 1 DESC</CommandText>
     </DataSet>
     <DataSet Name="ShiftSelected">
       <Query>
-        <DataSourceName>DataProd</DataSourceName>
+        <DataSourceName>AV</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@SelectShift">
             <Value>=Parameters!SelectShift.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT
-ShiftStartTime, ShiftEndTime
-FROM dw.DimShift
-WHERE DimShiftKey = @SelectShift OR @SelectShift IS NULL</CommandText>
+        <CommandText>SELECT        ShiftStartTime, ShiftEndTime
+FROM            dw.DimShift
+WHERE        (DimShiftKey = @SelectShift) OR
+                         (@SelectShift IS NULL)</CommandText>
       </Query>
       <Fields>
         <Field Name="ShiftStartTime">

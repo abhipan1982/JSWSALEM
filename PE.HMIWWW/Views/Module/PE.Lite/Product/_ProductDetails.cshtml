@@ -1,4 +1,4 @@
-﻿@model PE.HMIWWW.ViewModel.Module.Lite.Product.VM_ProductCatalogue
+@model PE.HMIWWW.ViewModel.Module.Lite.Product.VM_ProductCatalogue
 
 <div class="row h-100 p-0 pt-3">
 <div class="col-4 p-0">
@@ -60,6 +60,31 @@
                 @Html.DisplayFor(m => m.StdMetallicYield)
             </div>
         </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.MinDiameter)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.MinDiameter)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.MinSquareness)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.MinSquareness)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.MaxSquareness)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.MaxSquareness)
+                </div>
+            </div>
+
     </div>
 </div>
 <div class="col-4 p-0">
@@ -120,6 +145,22 @@
                 @Html.DisplayFor(m => m.OvalityMax)
             </div>
         </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.MaxDiameter)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.MaxDiameter)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.NegRcsSide)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.NegRcsSide)
+                </div>
+            </div>
     </div>
 </div>
 <div class="col-4 p-0">
@@ -172,6 +213,31 @@
                 @Html.DisplayFor(m => m.WeightMax)
             </div>
         </div>
-    </div>
+
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.MinOvality)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.MinOvality)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.Diameter)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.Diameter)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(m => m.PosRcsSide)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(m => m.PosRcsSide)
+                </div>
+            </div>
+        </div>
 </div>
 </div>

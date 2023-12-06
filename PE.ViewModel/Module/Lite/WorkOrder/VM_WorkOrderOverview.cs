@@ -10,6 +10,10 @@ using PE.HMIWWW.ViewModel.Module.Lite.Product;
 using PE.HMIWWW.ViewModel.Module.Lite.Steelgrade;
 using SMF.HMIWWW.Attributes;
 using SMF.HMIWWW.UnitConverter;
+using PE.DbEntity.EnumClasses;
+using PE.DbEntity.PEContext;
+using PE.DbEntity.Models;
+using PE.DbEntity;
 
 namespace PE.HMIWWW.ViewModel.Module.Lite.WorkOrder
 {
@@ -18,6 +22,7 @@ namespace PE.HMIWWW.ViewModel.Module.Lite.WorkOrder
     public VM_WorkOrderOverview() { }
 
     public VM_WorkOrderOverview(PRMWorkOrder order)
+    //public VM_WorkOrderOverview(PRMWorkOrdersEXT order)
     {
       WorkOrderId = order.WorkOrderId;
       WorkOrderStatus = ResxHelper.GetResxByKey((WorkOrderStatus)order.EnumWorkOrderStatus);
@@ -55,6 +60,8 @@ namespace PE.HMIWWW.ViewModel.Module.Lite.WorkOrder
       {
         PC = new VM_ProductCatalogue(order.FKProductCatalogue);
       }
+
+      
 
       if (order.FKSteelgrade != null)
       {

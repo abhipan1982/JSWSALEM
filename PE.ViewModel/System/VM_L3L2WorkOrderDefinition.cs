@@ -1,6 +1,6 @@
 using System;
-using PE.BaseDbEntity.TransferModels;
-using PE.BaseModels.DataContracts.Internal.DBA;
+using PE.DbEntity.TransferModels;
+using PE.Models.DataContracts.Internal.DBA;
 using PE.HMIWWW.Core.HtmlHelpers;
 using PE.HMIWWW.Core.ViewModel;
 using SMF.HMIWWW.Attributes;
@@ -139,8 +139,8 @@ namespace PE.HMIWWW.ViewModel.System
     #endregion
 
     #region ctor
-
     public VM_L3L2WorkOrderDefinition() { }
+    //public VM_L3L2WorkOrderDefinition(DbEntity.TransferModels.L3L2BatchDataDefinition x) { }
 
     public VM_L3L2WorkOrderDefinition(L3L2WorkOrderDefinition l3L2WorkOrderDefinition)
     {
@@ -184,9 +184,11 @@ namespace PE.HMIWWW.ViewModel.System
 
     #endregion
 
-    public DCL3L2WorkOrderDefinition GetL3L2WorkOrderDefinitionDataContract()
+    //modify by AV
+
+    public DCL3L2WorkOrderDefinitionMOD GetL3L2WorkOrderDefinitionDataContract()
     {
-      return new DCL3L2WorkOrderDefinition()
+      return new DCL3L2WorkOrderDefinitionMOD()
       {
         Counter = this.CounterId,
         CommStatus = this.CommStatusEnum,

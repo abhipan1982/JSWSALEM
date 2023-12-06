@@ -13,6 +13,8 @@ using PE.BaseDbEntity.EnumClasses;
 using PE.DbEntity.HmiModels;
 using PE.BaseDbEntity.PEContext;
 using PE.BaseModels.DataContracts.Internal.PRM;
+using PE.Models.DataContracts.Internal.PRM;
+
 using PE.HMIWWW.Core.Communication;
 using PE.HMIWWW.Core.Resources;
 using PE.HMIWWW.Core.Service;
@@ -32,6 +34,7 @@ using SMF.HMIWWW.UnitConverter;
 using PE.DbEntity.PEContext;
 using PE.DbEntity.EFCoreExtensions;
 using PE.BaseDbEntity.Models;
+using PE.DbEntity.Models;
 
 namespace PE.HMIWWW.Services.Module.PE.Lite
 {
@@ -39,6 +42,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
   {
     private readonly HmiContext _hmiContext;
     private readonly PEContext _peContext;
+    private readonly PECustomContext _peCustomContext;
 
     public WorkOrderService(IHttpContextAccessor httpContextAccessor, HmiContext hmiContext, PEContext peContext) : base(httpContextAccessor)
     {
@@ -129,6 +133,28 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
         return null;
       }
     }
+    //av@
+    //public DataSourceResult GetNoScheduledWorkOrderList(ModelStateDictionary modelState, DataSourceRequest request)
+    //{
+    //  try
+    //  {
+    //    IQueryable<PRMWorkOrdersEXT> workOrderList = _peCustomContext.PRMWorkOrdersEXTs
+    //      .Where(x => x.EnumWorkOrderStatus < WorkOrderStatus.Scheduled.Value && !x.IsBlocked)
+    //      .Include(i => i.FKMaterialCatalogue)
+    //      .Include(i => i.FKSteelgrade)
+    //      .AsQueryable();
+    //    workOrderList.Select(x => x.FKMaterialCatalogue).AsQueryable();
+
+
+    //    return workOrderList.ToDataSourceLocalResult(request, modelState, data => new VM_WorkOrderOverview(data));
+    //  }
+    //  catch (Exception e)
+    //  {
+    //    string ex = e.Message;
+    //    return null;
+    //  }
+    //}
+    //Av@
 
     public async Task<VM_Base> CreateWorkOrder(ModelStateDictionary modelState, VM_WorkOrder workOrder)
     {
@@ -141,7 +167,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref workOrder);
 
-      DCWorkOrder dcWorkOrder = new DCWorkOrder
+      DCWorkOrderEXT dcWorkOrder = new DCWorkOrderEXT
       {
         WorkOrderName = workOrder.WorkOrderName,
         IsTestOrder = workOrder.IsTestOrder,
@@ -171,7 +197,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       if (sendOfficeResult.OperationSuccess)
       {
-        DCMaterial dcMaterial = new DCMaterial
+        DCMaterialEXT dcMaterial = new DCMaterialEXT
         {
           IsTestOrder = workOrder.IsTestOrder,
           FKWorkOrderIdRef = workOrder.WorkOrderName,
@@ -200,7 +226,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref workOrder);
 
-      DCWorkOrder dcWorkOrder = new DCWorkOrder
+      DCWorkOrderEXT dcWorkOrder = new DCWorkOrderEXT
       {
         WorkOrderId = workOrder.WorkOrderId,
         WorkOrderName = workOrder.WorkOrderName,
@@ -225,7 +251,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       if (sendOfficeResult.OperationSuccess)
       {
-        DCMaterial dcMaterial = new DCMaterial
+        DCMaterialEXT dcMaterial = new DCMaterialEXT
         {
           //MaterialId is used only to pass number of materials assigned to work order
           FKWorkOrderIdRef = workOrder.WorkOrderName,
@@ -302,7 +328,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref workOrder);
 
-      DCWorkOrder entryDataContract = new DCWorkOrder { WorkOrderName = workOrder.WorkOrderName };
+      DCWorkOrderEXT entryDataContract = new DCWorkOrderEXT { WorkOrderName = workOrder.WorkOrderName };
 
       SendOfficeResult<DataContractBase> sendOfficeResult = await HmiSendOffice.DeleteWorkOrderAsync(entryDataContract);
 
@@ -337,6 +363,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
     {
       VM_ProductCatalogue result = null;
       PRMProductCatalogue data = await _peContext.PRMProductCatalogues
+
         .Include(i => i.FKShape)
         .Include(i => i.FKProductCatalogueType)
         .Where(w => w.ProductCatalogueId == productCatalogId)
@@ -346,6 +373,23 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       return result;
     }
+    //av@
+    //public async Task<VM_ProductCatalogue> GetProductCatalogueDetails(long productCatalogId)
+    //{
+    //  VM_ProductCatalogue result = null;
+    //  PRMProductCatalogueEXT data = await _peCustomContext.PRMProductCatalogueEXTs
+
+    //    //.Include(i => i.FKShape)
+    //    .Include(i => i.FKProductCatalogueId)
+    //    .Where(w => w.ProductCatalogueId == productCatalogId)
+    //    .SingleOrDefaultAsync();
+
+    //  result = new VM_ProductCatalogue(data);
+
+    //  return result;
+    //}
+    //Av@
+
 
     public async Task<VM_WorkOrderMaterials> GetWorkOrderMaterialsDetails(ModelStateDictionary modelState, long workOrderId)
     {

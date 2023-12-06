@@ -45,6 +45,14 @@ namespace PE.BaseDbEntity.Models
         public double? WeightMin { get; set; }
         public double? WeightMax { get; set; }
         public double? MaxOvality { get; set; }
+        public double? MinOvality { get; set; }
+        public double? Diameter { get; set; }
+        public double? MinDiameter { get; set; }
+        public double? MaxDiameter { get; set; }
+        public double? NegRcsSide { get; set; }
+        public double? PosRcsSide { get; set; }
+        public double? MinSquareness { get; set; }
+        public double? MaxSquareness { get; set; }
         public double StdProductivity { get; set; }
         public double StdMetallicYield { get; set; }
         [Column(TypeName = "datetime")]

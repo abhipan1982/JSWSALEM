@@ -41,6 +41,87 @@ namespace PE.Interfaces.Managers.PRM
     [FaultContract(typeof(ModuleMessage))]
     Task<DataContractBase> UpdateProductCatalogueEXTAsync(DCProductCatalogueEXT productCatalogue);//@Av
 
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> DeleteProductCatalogueEXTAsync(DCProductCatalogueEXT productCatalogue);//@Av
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> UpdateSteelgradeCatalogueAsyncEXT(DCSteelgradeEXT dcSteelgrade);//@Av
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> CreateSteelgradeCatalogueAsyncEXT(DCSteelgradeEXT dcSteelgrade);//@Av
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> DeleteSteelgradeAsyncEXT(DCSteelgradeEXT dcSteelgrade);//@Av
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> UpdateSteelFamilyCatalogueAsyncEXT(DCSteelFamilyEXT dc);//@av
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> CreateSteelFamilyCatalogueAsyncEXT(DCSteelFamilyEXT dc);//@av
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> DeleteSteelFamilyAsyncEXT(DCSteelFamilyEXT dc);//@av
+
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> CreateHeatAsyncEXT(DCHeatEXT dc);//@av
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> EditHeatAsyncEXT(DCHeatEXT dc);//@av
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> UpdateMaterialAsyncEXT(DCMaterialEXT dcMaterial);//@av
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> CreateMaterialCatalogueAsyncEXT(DCMaterialCatalogueEXT dcMaterialCatalogue);//@av
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> UpdateMaterialCatalogueAsyncEXT(DCMaterialCatalogueEXT dcMaterialCatalogue);//@av
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> DeleteMaterialCatalogueAsyncEXT(DCMaterialCatalogueEXT dcMaterialCatalogue);//@av
+
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> DeleteWorkOrderAsyncEXT(DCWorkOrderEXT dcWorkOrder);//@av
+
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> CreateMaterialAsyncEXT(DCMaterialEXT dcMaterial);//@av
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //[FaultContract(typeof(ModuleMessage))]
     //Task<DataContractBase> DeleteProductCatalogueAsync(DCProductCatalogue pCat);
 

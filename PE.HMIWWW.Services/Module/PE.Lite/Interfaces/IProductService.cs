@@ -17,6 +17,8 @@ namespace PE.HMIWWW.Services.Module.PE.Lite.Interfaces
     Task<VM_Base> CreateProductCatalogue(ModelStateDictionary modelState, VM_ProductCatalogue productCatalogue);
     Task<VM_Base> UpdateProductCatalogue(ModelStateDictionary modelState, VM_ProductCatalogue productCatalogue);
     Task<VM_Base> DeleteProductCatalogue(ModelStateDictionary modelState, VM_ProductCatalogue productCatalogue);
+
+    //Task<VM_ProductCatalogue> GetProductDetails(ModelStateDictionary modelState, long id);//@Av
     IList<VM_Steelgrade> GetSteelgradeList();
     IList<VM_Shape> GetShapeList();
     IList<VM_ProductCatalogueType> GetProductCatalogueTypeList();

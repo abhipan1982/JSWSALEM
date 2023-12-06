@@ -1,160 +1,115 @@
-using System;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using PE.BaseModels.DataContracts.Internal.DBA;
-using PE.BaseModels.DataContracts.Internal.EVT;
+using PE.BaseInterfaces.Modules;
 using PE.BaseModels.DataContracts.Internal.PRM;
-using PE.BaseModels.DataContracts.Internal.TRK;
 using PE.Models.DataContracts.Internal.DBA;
+using PE.Models.DataContracts.Internal.PRM;
 using SMF.Core.DC;
-using SMF.Core.Interfaces;
 
 namespace PE.Interfaces.Modules
 {
   [ServiceContract(SessionMode = SessionMode.Allowed)]
-  public interface IProdManager : IBaseModule
+  public interface IProdManager : IProdManagerBase
   {
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DCBatchDataStatus> ProcessBatchDataAsync(DCL3L2BatchData dataToSend);
+    Task<DataContractBase> CreateProductCatalogueEXTAsync(DCProductCatalogueEXT productCatalogue);
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> CreateSteelgradeAsync(DCSteelgrade steelgrade);
+    Task<DataContractBase> UpdateProductCatalogueEXTAsync(DCProductCatalogueEXT productCatalogue);
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateSteelgradeAsync(DCSteelgrade steelgrade);
+    Task<DataContractBase> DeleteProductCatalogueEXTAsync(DCProductCatalogueEXT productCatalogue);
+
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> DeleteSteelgradeAsync(DCSteelgrade steelgradeId);
+    Task<DataContractBase> UpdateSteelgradeAsyncEXT(DCSteelgradeEXT dcSteelgrade);
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> CreateWorkOrderAsync(DCWorkOrder workOrder);
+    Task<DataContractBase> CreateSteelgradeAsyncEXT(DCSteelgradeEXT dcSteelgrade);
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateWorkOrderAsync(DCWorkOrder workOrder);
+    Task<DataContractBase> DeleteSteelgradeAsyncEXT(DCSteelgradeEXT dcSteelgrade);
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> CreateMaterialAsync(DCMaterial dcMaterial);
+    Task<DataContractBase> UpdateSteelFamilyAsyncEXT(DCSteelFamilyEXT dc);
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateMaterialAsync(DCMaterial dcMaterial);
+    Task<DataContractBase> CreateSteelFamilyAsyncEXT(DCSteelFamilyEXT dc);
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> CreateHeatAsync(DCHeat heat);
+    Task<DataContractBase> DeleteSteelFamilyAsyncEXT(DCSteelFamilyEXT dc);
+
+
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> EditHeatAsync(DCHeat heat);
+    Task<DataContractBase> CreateHeatAsyncEXT(DCHeatEXT dcHeat);
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> CreateProductCatalogueAsync(DCProductCatalogue productCatalogue);
+    Task<DataContractBase> EditHeatAsyncEXT(DCHeatEXT dcHeat);
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateProductCatalogueAsync(DCProductCatalogue productCatalogue);
+    Task<DataContractBase> CreateWorkOrderAsyncEXT(DCWorkOrderEXT dcWorkOrder);
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> DeleteProductCatalogueAsync(DCProductCatalogue pCatId);
+    Task<DataContractBase> UpdateWorkOrderAsyncEXT(DCWorkOrderEXT dcWorkOrder);
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> CreateMaterialCatalogueAsync(DCMaterialCatalogue billetCatalogue);
+    Task<DataContractBase> UpdateMaterialAsyncEXT(DCMaterialEXT dcMaterial);
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateMaterialCatalogueAsync(DCMaterialCatalogue billetCatalogue);
+    Task<DataContractBase> CreateMaterialCatalogueAsyncEXT(DCMaterialCatalogueEXT dcMaterialCatalogue);
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> DeleteMaterialCatalogueAsync(DCMaterialCatalogue mCatId);
+    Task<DataContractBase> UpdateMaterialCatalogueAsyncEXT(DCMaterialCatalogueEXT dcMaterialCatalogue);
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> DeleteWorkOrderAsync(DCWorkOrder workOrder);
+    Task<DataContractBase> DeleteMaterialCatalogueAsyncEXT(DCMaterialCatalogueEXT dcMaterialCatalogue);
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> CreateScrapGroupAsync(DCScrapGroup scrapGroup);
+    Task<DataContractBase> DeleteWorkOrderAsyncEXT(DCWorkOrderEXT dcWorkOrder);
+
 
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateScrapGroupAsync(DCScrapGroup scrapGroup);
+    Task<DataContractBase> CreateMaterialAsyncEXT(DCMaterialEXT dcMaterial);
+    Task<DCBatchDataStatus> ProcessBatchDataAsync(DCL3L2BatchDataDefinition dataToSend); //Added by AP
 
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> DeleteScrapGroupAsync(DCScrapGroup scrapGroup);
 
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> CreateSteelFamilyAsync(DCSteelFamily dc);
 
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateSteelFamilyAsync(DCSteelFamily dc);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> DeleteSteelFamilyAsync(DCSteelFamily dc);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> EditMaterialNumberAsync(DCWorkOrderMaterials dc);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> SendWorkOrderReportAsync(DCWorkOrderConfirmation dc);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> SendProductReportAsync(DCRawMaterial dc);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> CheckShiftsWorkOrderStatusses(DCShiftCalendarId message);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DCProductData> ProcessCoilProductionEndAsync(DCCoilData data);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DCProductData> ProcessBundleProductionEndAsync(DCBundleData data);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> ProcessWorkOrderStatus(DCRawMaterial message);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> AddTestWorkOrderToScheduleAsync(DCTestSchedule dc);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateCanceledWorkOrderAsync(DCWorkOrderCancel workOrder);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateUnCanceledWorkOrderAsync(DCWorkOrderCancel workOrder);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateBlockedWorkOrderAsync(DCWorkOrderBlock workOrder);
-
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> UpdateUnBlockedWorkOrderAsync(DCWorkOrderBlock workOrder);
-    [OperationContract]
-    [FaultContract(typeof(ModuleMessage))]
-    Task<DataContractBase> EndOfWorkOrderAsync(WorkOrderId message);
+    //[OperationContract]
+    //[FaultContract(typeof(ModuleMessage))]
+    //Task<DataContractBase> CreateMaterialAsyncEXT(DCMaterialEXT dcMaterial);
   }
+
 }
+
+

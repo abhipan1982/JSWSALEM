@@ -1,4 +1,4 @@
-using PE.DbEntity.HmiModels;
+﻿using PE.DbEntity.HmiModels;
 using PE.HMIWWW.Core.ViewModel;
 using SMF.HMIWWW.Attributes;
 
@@ -35,17 +35,17 @@ namespace PE.HMIWWW.ViewModel.Module.Lite.Setup
     {
     }
 
-    //public VM_SetupRelationValues(V_SetupValue setup)
-    //{
-    //  AssetName = setup.AssetName;
-    //  InstructionId = setup.InstructionId;
-    //  InstructionName = setup.InstructionName;
-    //  CurrentValue = setup.Value;
+    public VM_SetupRelationValues(V_SetupValue setup)
+    {
+      AssetName = setup.AssetName;
+      InstructionId = setup.InstructionId;
+      InstructionName = setup.InstructionName;
+      CurrentValue = setup.Value;
 
-    //  UnitId = setup.UnitId;
-    //  UnitSymbol = setup.UnitSymbol;
-    //  DataType = setup.DataType;
-    //}
+      UnitId = setup.UnitId;
+      UnitSymbol = setup.UnitSymbol;
+      DataType = setup.DataType;
+    }
 
     #endregion
   }

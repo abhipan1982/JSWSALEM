@@ -164,6 +164,7 @@
     <Build Include="dbo\Tables\dbo.MNTMemberRoles.sql" />
     <Build Include="dbo\Tables\dbo.MNTCrewMembers.sql" />
     <Build Include="dbo\Functions\dbo.FNGetEnumKeyword.sql" />
+    <Build Include="dbo\Views\dbo.V_DW_FactDelays.sql" />
     <Build Include="dbo\Stored Procedures\dbo.SPClearRawMaterials.sql" />
     <Build Include="dbo\Functions\dbo.FNTParseIndividualValue.sql" />
     <Build Include="dbo\Functions\dbo.FNTSplitStrings.sql" />

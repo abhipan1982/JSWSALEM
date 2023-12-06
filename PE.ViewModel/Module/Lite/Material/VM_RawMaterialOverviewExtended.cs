@@ -14,7 +14,7 @@ namespace PE.HMIWWW.ViewModel.Module.Lite.Material
     {
     }
 
-    public VM_RawMaterialOverviewExtended(V_L1L3MaterialAssignment data)
+    public VM_RawMaterialOverviewExtended(V_L3L1MaterialAssignment data)
     {
       RawMaterialId = data.RawMaterialId;
       //TODOMN - refactor this

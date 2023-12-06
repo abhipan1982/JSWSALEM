@@ -20,7 +20,6 @@
     <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PE.DbEntity\PE.DbEntity.csproj" />
     <ProjectReference Include="..\..\PE.Interfaces\PE.Interfaces.csproj" />
     <ProjectReference Include="..\..\PE.Config\PE.Config.csproj" />
   </ItemGroup>

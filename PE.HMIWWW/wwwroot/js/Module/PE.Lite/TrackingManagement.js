@@ -6,16 +6,45 @@ for (let key in TrackingAreaKeys) {
   if (hmiArea)
     AreasOnHMI.push(key);
 }
+/*av050723*/
+//for (let key in CustomTrackingAreaKeys ) {
+//  const hmiArea = document.getElementById(key);
+//  if (hmiArea)
+//    AreasOnHMI.push(key);
+//}
 
 for (let i = 0; i < AreasOnHMI.length; i++) {
   const key = AreasOnHMI[i];
   try {
     const areaDetails = _TrackingAreas.GetTrackingAreaByCode(TrackingAreaKeys[key]);
+    
     if (!areaDetails)
       throw ("There is a problem while getting area " + trackingArea.Code + ". It is present on HMI but it cannot be found in AREAS. Check AREAS array.");
+    const x = 36;
+    const y = 33;
+    const elementsInColumn = 31;   //Full column size
+    if (TrackingAreaKeys[key] === TrackingAreaKeys.FCE_AREA_1) {
+      
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        
+        ElementsInColumn: x,
+        Columns: 4,
+        CssClassName: "furnace",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
 
-    const elementsInColumn = 36;   //Full column size
-    if (TrackingAreaKeys[key] === TrackingAreaKeys.FCE_AREA) {
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.FCE_ENTRY_RT_AREA) {
       AREAS.push({
         Name: areaDetails.TrackingAreaName,
         Title: areaDetails.TrackingAreaTitle,
@@ -26,32 +55,14 @@ for (let i = 0; i < AreasOnHMI.length; i++) {
         Positions: areaDetails.TrackingAreaPositions,
         VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
         ElementsInColumn: elementsInColumn,
-        Columns: 2,
-        CssClassName: "furnace",
-        IsDoubleArea: false,
-        IsPositionBased: false,
-        IsExpandable: true
-      });
-    }
-    else if (TrackingAreaKeys[key] === TrackingAreaKeys.LAYER_AREA) {
-      AREAS.push({
-        Name: areaDetails.TrackingAreaName,
-        Title: areaDetails.TrackingAreaTitle,
-        Code: TrackingAreaKeys[key],
-        IsChangeable: true,
-        IsDraggable: true,
-        IsDroppable: true,
-        Positions: areaDetails.TrackingAreaPositions,
-        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
-        ElementsInColumn: 3,
         Columns: 1,
-        CssClassName: "layer",
+        CssClassName: "FURNACE_ROLLER_ENTRY",
         IsDoubleArea: false,
         IsPositionBased: false,
         IsExpandable: true
       });
     }
-    else if (TrackingAreaKeys[key] === TrackingAreaKeys.CHG_AREA) {
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.FCE_EXIT_AREA) {
       AREAS.push({
         Name: areaDetails.TrackingAreaName,
         Title: areaDetails.TrackingAreaTitle,
@@ -61,6 +72,98 @@ for (let i = 0; i < AreasOnHMI.length; i++) {
         IsDroppable: true,
         Positions: areaDetails.TrackingAreaPositions,
         VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "FURNACE_ROLLER_EXIT",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.TBT_AREA) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "TBT_OUT_GRID",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.REV_EXIT_AREA) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "REV_EXIT_AREA",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable:true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.CB1_ENTRY_RT) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "CB1_ENTRY_RT",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.COOL_AREA_1) {
+      AREAS.push({
+       
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 3,
+        CssClassName: "COOL_AREA_1",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.CHG_AREA_1) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        //VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
         ElementsInColumn: elementsInColumn,
         Columns: 1,
         CssClassName: "charging",
@@ -69,7 +172,8 @@ for (let i = 0; i < AreasOnHMI.length; i++) {
         IsExpandable: true
       });
     }
-    else if (TrackingAreaKeys[key] === TrackingAreaKeys.RAKE_AREA) {
+
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.DSC_AREA) {
       AREAS.push({
         Name: areaDetails.TrackingAreaName,
         Title: areaDetails.TrackingAreaTitle,
@@ -79,15 +183,286 @@ for (let i = 0; i < AreasOnHMI.length; i++) {
         IsDroppable: true,
         Positions: areaDetails.TrackingAreaPositions,
         VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
-        ElementsInColumn: 18,
+        ElementsInColumn: 3,
+        Columns: 1,
+        CssClassName: "DESCALER",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.REV_AREA) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: 3,
+        Columns: 1,
+        CssClassName: "REVERSIBLE",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.COOL_AREA_2_S1) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: x,
         Columns: 4,
-        CssClassName: "rake",
-        IsDoubleArea: true,
+        CssClassName: "COOL_2_S1",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.COOL_AREA_2_S2) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: y,
+        Columns: 5,
+        CssClassName: "COOL_2_S2",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.COOL_AREA_3_S1) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: y,
+        Columns: 5,
+        CssClassName: "COOL_3_S1",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.COOL_AREA_3_S2) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: y,
+        Columns: 5,
+        CssClassName: "COOL_3_S2",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.CM_AREA) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "CONTINUOUS",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.BTRT_AREA) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "BTRT",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.HOT_SAW_2) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "SAW",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.HOT_SAW_3A) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "SAW",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.HOT_SAW_3) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "SAW",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.CB2_ENTRY_RT) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "CB2_ENTRY_RT",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.CB2_EXIT_RT) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "CB2_EXIT_RT",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.CB3_EXIT_RT) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "CB3_EXIT_RT",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.CB3_ENTRY_RT) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "CB3_ENTRY_RT",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.SLOW_COOL_AREA) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "slow_cooling",
+        IsDoubleArea: false,
         IsPositionBased: true,
         IsExpandable: true
       });
     }
-    else if (TrackingAreaKeys[key] === TrackingAreaKeys.TRANSPORT_AREA) {
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.COOL_AREA_2) {
       AREAS.push({
         Name: areaDetails.TrackingAreaName,
         Title: areaDetails.TrackingAreaTitle,
@@ -97,15 +472,15 @@ for (let i = 0; i < AreasOnHMI.length; i++) {
         IsDroppable: true,
         Positions: areaDetails.TrackingAreaPositions,
         VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
-        ElementsInColumn: 5,
+        ElementsInColumn: elementsInColumn,
         Columns: 1,
-        CssClassName: "transport",
+        CssClassName: "cool_2",
         IsDoubleArea: false,
         IsPositionBased: false,
-        IsExpandable: false
+        IsExpandable: true
       });
     }
-    else if (TrackingAreaKeys[key] === TrackingAreaKeys.ENTER_TABLE_AREA) {
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.COOL_AREA_3) {
       AREAS.push({
         Name: areaDetails.TrackingAreaName,
         Title: areaDetails.TrackingAreaTitle,
@@ -115,15 +490,15 @@ for (let i = 0; i < AreasOnHMI.length; i++) {
         IsDroppable: true,
         Positions: areaDetails.TrackingAreaPositions,
         VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
-        ElementsInColumn: 3,
+        ElementsInColumn: elementsInColumn,
         Columns: 1,
-        CssClassName: "entry",
+        CssClassName: "cool_3",
         IsDoubleArea: false,
         IsPositionBased: false,
-        IsExpandable: false
+        IsExpandable: true
       });
     }
-    else if (TrackingAreaKeys[key] === TrackingAreaKeys.GARRET_AREA) {
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.A_SAW_ENTRY1) {
       AREAS.push({
         Name: areaDetails.TrackingAreaName,
         Title: areaDetails.TrackingAreaTitle,
@@ -133,50 +508,110 @@ for (let i = 0; i < AreasOnHMI.length; i++) {
         IsDroppable: true,
         Positions: areaDetails.TrackingAreaPositions,
         VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
-        ElementsInColumn: 3,
+        ElementsInColumn: elementsInColumn,
         Columns: 1,
-        CssClassName: "garrets",
+        CssClassName: "A_SAW_ENTRY1",
         IsDoubleArea: false,
         IsPositionBased: false,
-        IsExpandable: false
+        IsExpandable: true
       });
     }
-    else if (TrackingAreaKeys[key] === TrackingAreaKeys.GREY_AREA) {
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.A_SAW_ENTRY_2) {
       AREAS.push({
         Name: areaDetails.TrackingAreaName,
         Title: areaDetails.TrackingAreaTitle,
         Code: TrackingAreaKeys[key],
         IsChangeable: true,
         IsDraggable: true,
-        IsDroppable: false,
+        IsDroppable: true,
         Positions: areaDetails.TrackingAreaPositions,
         VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
-        ElementsInColumn: areaDetails.TrackingAreaPositions,
+        ElementsInColumn: elementsInColumn,
         Columns: 1,
-        CssClassName: "grey",
+        CssClassName: "A_SAW_ENTRY_2",
         IsDoubleArea: false,
         IsPositionBased: false,
-        IsExpandable: false
+        IsExpandable: true
       });
     }
-    else {
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.BUND_AREA_1) {
       AREAS.push({
         Name: areaDetails.TrackingAreaName,
         Title: areaDetails.TrackingAreaTitle,
         Code: TrackingAreaKeys[key],
-        IsChangeable: false,
-        IsDraggable: false,
-        IsDroppable: false,
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
         Positions: areaDetails.TrackingAreaPositions,
         VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
-        ElementsInColumn: 2,
+        ElementsInColumn: elementsInColumn,
         Columns: 1,
-        CssClassName: "unchangeable-area",
+        CssClassName: "Bund_1",
         IsDoubleArea: false,
         IsPositionBased: false,
-        IsExpandable: false
+        IsExpandable: true
       });
     }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.BUND_AREA_2) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "Bund_2",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.A_SAW_ENTRY_AREA) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "SAW_ENTRY",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+    else if (TrackingAreaKeys[key] === TrackingAreaKeys.A_SAW_EXIT_AREA) {
+      AREAS.push({
+        Name: areaDetails.TrackingAreaName,
+        Title: areaDetails.TrackingAreaTitle,
+        Code: TrackingAreaKeys[key],
+        IsChangeable: true,
+        IsDraggable: true,
+        IsDroppable: true,
+        Positions: areaDetails.TrackingAreaPositions,
+        VirtualPositions: areaDetails.TrackingAreaVirtualPositions,
+        ElementsInColumn: elementsInColumn,
+        Columns: 1,
+        CssClassName: "SAW_EXIT",
+        IsDoubleArea: false,
+        IsPositionBased: false,
+        IsExpandable: true
+      });
+    }
+
+ 
+
+
+
+  
   } catch (e) {
     console.error(e);
   }

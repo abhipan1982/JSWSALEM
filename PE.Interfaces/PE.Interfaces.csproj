@@ -17,35 +17,49 @@
     <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="SendOffice\**" />
-    <EmbeddedResource Remove="SendOffice\**" />
-    <None Remove="SendOffice\**" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="Managers\ISetupTelegramSenderManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Managers\DBA\" />
     <Folder Include="Managers\HMI\" />
+    <Folder Include="Managers\L1A\" />
     <Folder Include="Managers\MNT\" />
     <Folder Include="Managers\MVH\" />
     <Folder Include="Managers\PPL\" />
     <Folder Include="Managers\PRF\" />
-    <Folder Include="Managers\PRM\" />
     <Folder Include="Managers\QTY\" />
     <Folder Include="Managers\RLS\" />
     <Folder Include="Managers\SIM\" />
     <Folder Include="Managers\STP\" />
+    <Folder Include="Managers\TCP\" />
     <Folder Include="Managers\TRK\" />
     <Folder Include="Managers\WBF\" />
     <Folder Include="Managers\YRD\" />
     <Folder Include="Managers\ZPC\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PE.Models\PE.Models.csproj" />
+    <Folder Include="SendOffice\DBA\" />
+    <Folder Include="SendOffice\EVT\" />
+    <Folder Include="SendOffice\HMI\" />
+    <Folder Include="SendOffice\L1A\" />
+    <Folder Include="SendOffice\MVH\" />
+    <Folder Include="SendOffice\MNT\" />
+    <Folder Include="SendOffice\YRD\" />
+    <Folder Include="SendOffice\QTY\" />
+    <Folder Include="SendOffice\RLS\" />
+    <Folder Include="SendOffice\PPL\" />
+    <Folder Include="SendOffice\PRF\" />
+    <Folder Include="SendOffice\PRM\" />
+    <Folder Include="SendOffice\SIM\" />
+    <Folder Include="SendOffice\STP\" />
+    <Folder Include="SendOffice\TCP\" />
+    <Folder Include="SendOffice\TRK\" />
+    <Folder Include="SendOffice\WBF\" />
+    <Folder Include="SendOffice\ZPC\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="PE.BaseInterfaces" />
     <PackageReference Include="SMF.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PE.Models\PE.Models.csproj" />
   </ItemGroup>
 </Project>

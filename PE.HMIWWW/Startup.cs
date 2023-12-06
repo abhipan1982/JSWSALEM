@@ -30,6 +30,7 @@ using SMF.HMI.Core;
 using SMF.HMIWWW.Attributes;
 using SMF.HMIWWW.UnitConverter;
 using SMF.Startup;
+using TransferContext = PE.DbEntity.PEContext.TransferContext;
 
 namespace PE.HMIWWW
 {
@@ -58,6 +59,7 @@ namespace PE.HMIWWW
 
       if (Env.IsDevelopment())
       {
+        
         mvcBuilder.AddRazorRuntimeCompilation();
       }
 
@@ -88,15 +90,25 @@ namespace PE.HMIWWW
       services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(
           Configuration.GetConnectionString("SMFContext")));
-
+      //@Av
       services.AddDbContext<TransferContext>(options =>
         options.UseSqlServer(
           Configuration.GetConnectionString("TransferContext")));
 
+      //Av@071123
+      services.AddDbContext<TransferCustomContext>(options =>
+        options.UseSqlServer(
+          Configuration.GetConnectionString("TransferCustomContext")));
+
+
       services.AddDbContext<DWContext>(options =>
         options.UseSqlServer(
           Configuration.GetConnectionString("PEContext")));
-
+      //av@
+      services.AddDbContext<PECustomContext>(options =>
+     options.UseSqlServer(
+       Configuration.GetConnectionString("PECustomContext")));
+      //av@
       services.AddAuthorization(options =>
       {
         options.AddPolicy("AdminOnly", policy => policy.RequireClaim("admin"));
@@ -173,6 +185,7 @@ namespace PE.HMIWWW
       EnumInitializator.Init();
       UnitConverterHelper.Init(VM_Resources.ResourceManager);
       SmfAttributeInitializator.Init(VM_Resources.ResourceManager);
+    
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -184,7 +197,7 @@ namespace PE.HMIWWW
       }
 
       //app.UseHttpsRedirection();
-      
+
       app.UseWebOptimizer();
       app.UseDefaultFiles();
       app.UseStaticFiles();

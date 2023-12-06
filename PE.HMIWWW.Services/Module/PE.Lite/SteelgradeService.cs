@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PE.BaseDbEntity.Models;
 using PE.BaseDbEntity.PEContext;
-using PE.BaseModels.DataContracts.Internal.PRM;
+//using PE.BaseModels.DataContracts.Internal.PRM;
+using PE.Models.DataContracts.Internal.PRM;
 using PE.HMIWWW.Core.Communication;
 using PE.HMIWWW.Core.Resources;
 using PE.HMIWWW.Core.Service;
@@ -95,7 +96,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref steelgrade);
 
-      DCSteelgrade dcSteelgrade = new DCSteelgrade
+      DCSteelgradeEXT dcSteelgrade = new DCSteelgradeEXT
       {
         Id = steelgrade.Id,
         SteelgradeCode = steelgrade.SteelgradeCode,
@@ -198,7 +199,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref steelgrade);
 
-      DCSteelgrade dcSteelgrade = new DCSteelgrade
+      DCSteelgradeEXT dcSteelgrade = new DCSteelgradeEXT
       {
         Id = steelgrade.Id,
         SteelgradeCode = steelgrade.SteelgradeCode,
@@ -301,7 +302,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref steelgrade);
 
-      DCSteelgrade dcSteelgrade = new DCSteelgrade {Id = steelgrade.Id};
+      DCSteelgradeEXT dcSteelgrade = new DCSteelgradeEXT {Id = steelgrade.Id};
 
       //request data from module
       SendOfficeResult<DataContractBase> sendOfficeResult = await HmiSendOffice.SendDeleteSteelgradeAsync(dcSteelgrade);

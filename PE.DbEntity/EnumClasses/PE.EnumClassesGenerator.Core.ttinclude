@@ -1,4 +1,4 @@
-<#
+<#      
 // Copyright (C) Szymon Franczyk 2021
 // v4.0.1
 #>
@@ -37,6 +37,9 @@
       InSummaryBlock,
       AtEndOfField
   };
+
+ 
+
 
   // Settings - edit these in the main <name>.tt file
   string OutputProjectName = "";

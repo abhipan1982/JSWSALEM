@@ -20,15 +20,31 @@ namespace PE.DBA.DataBaseAdapter.Communication
     }
 
     #endregion
-    //Added by Abhishek
-    public virtual Task<DCL3L2BatchData> CreateBatchDataAsync(DCL3L2BatchData dcBatchData)
+    //Added by Abhishek 12/10/2023
+    public virtual Task<DCL3L2BatchDataDefinition> CreateBatchDataAsync(DCL3L2BatchDataDefinition dcBatchData)
     {
       return HandleIncommingMethod(_handler.CreateBatchDataAsync, dcBatchData);
     }
 
-    public virtual Task<DCL3L2BatchData> UpdateBatchDataAsync(DCL3L2BatchData dcBatchData)
+    public virtual Task<DCL3L2BatchDataDefinition> UpdateBatchDataAsync(DCL3L2BatchDataDefinition dcBatchData)
     {
       return HandleIncommingMethod(_handler.UpdateBatchDataAsync, dcBatchData);
+    }
+
+    //Av@
+    public virtual Task<DataContractBase> CreateWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionMOD dcWorkOrderDefinition)
+    {
+      return HandleIncommingMethod(_handler.CreateWorkOrderDefinitionAsyncEXT, dcWorkOrderDefinition);
+    }
+
+    public virtual Task<DataContractBase> UpdateWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionMOD dcWorkOrderDefinition)
+    {
+      return HandleIncommingMethod(_handler.UpdateWorkOrderDefinitionAsyncEXT, dcWorkOrderDefinition);
+    }
+
+    public virtual Task<DataContractBase> DeleteWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionMOD dcWorkOrderDefinition)
+    {
+      return HandleIncommingMethod(_handler.DeleteWorkOrderDefinitionAsyncEXT, dcWorkOrderDefinition);
     }
 
     //public virtual Task<DataContractBase> DeleteWorkOrderDefinitionAsync(DCL3L2BatchData dcBatchData)

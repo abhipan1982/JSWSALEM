@@ -5095,7 +5095,7 @@
     <value>mm</value>
   </data>
   <data name="UNIT_Length" xml:space="preserve">
-    <value>ft</value>
+    <value>m</value>
   </data>
   <data name="UNIT_LoopLength" xml:space="preserve">
     <value>cm</value>
@@ -5110,7 +5110,7 @@
     <value>min</value>
   </data>
   <data name="UNIT_Ovality" xml:space="preserve">
-    <value>x</value>
+    <value>mm</value>
   </data>
   <data name="UNIT_Percent" xml:space="preserve">
     <value>0_1</value>
@@ -5188,7 +5188,7 @@
     <value>gal/h</value>
   </data>
   <data name="UNIT_Weight" xml:space="preserve">
-    <value>lb</value>
+    <value>kg</value>
   </data>
   <data name="UNIT_WeightBig" xml:space="preserve">
     <value>lb</value>
@@ -5197,7 +5197,7 @@
     <value>lb</value>
   </data>
   <data name="UNIT_Width" xml:space="preserve">
-    <value>in</value>
+    <value>mm</value>
   </data>
   <data name="UNIT_WidthSmall" xml:space="preserve">
     <value>in</value>
@@ -9897,11 +9897,17 @@
   <data name="NAME_AREA_0" xml:space="preserve">
     <value>Undefined</value>
   </data>
+  <data name="NAME_AREA_1000000" xml:space="preserve">
+    <value>Billet Area</value>
+  </data>
+  <data name="NAME_AREA_1300000" xml:space="preserve">
+    <value> Billet Yard 1</value>
+  </data>
   <data name="NAME_AREA_5200000" xml:space="preserve">
     <value>Roughing Mill</value>
   </data>
   <data name="NAME_AREA_5300000" xml:space="preserve">
-    <value>Intermediate Mill</value>
+    <value>Intermidiate Mill</value>
   </data>
   <data name="NAME_AREA_5500000" xml:space="preserve">
     <value>Finishing Mill</value>
@@ -9910,7 +9916,7 @@
     <value>Pre-Finishing Mill</value>
   </data>
   <data name="NAME_AREA_5700000" xml:space="preserve">
-    <value>ROD Mill</value>
+    <value>Rod Mill Area</value>
   </data>
   <data name="MESSAGE_outdated" xml:space="preserve">
     <value>Current data is outdated</value>
@@ -12811,13 +12817,13 @@
     <value>Measurement Analysis</value>
   </data>
   <data name="PAGE_TITLE_Sessions_Index" xml:space="preserve">
-      <value>Sessions</value>
+    <value>Sessions</value>
   </data>
   <data name="MESSAGE_PageOutdated" xml:space="preserve">
-      <value>Page is outdated</value>
+    <value>Page is outdated</value>
   </data>
   <data name="MESSAGE_PageOutdatedMessage" xml:space="preserve">
-      <value>New version available. Do you want to reload page now? Otherwise save work and reload manually.</value>
+    <value>New version available. Do you want to reload page now? Otherwise save work and reload manually.</value>
   </data>
   <data name="NAME_RawMaterialCreatedTs" xml:space="preserve">
     <value>Created At</value>
@@ -12857,7 +12863,7 @@
   </data>
   <data name="HMI_MENU_Notebooks" xml:space="preserve">
     <value>Notebooks</value>
-    </data>
+  </data>
   <data name="NAME_UnitOfMeasure" xml:space="preserve">
     <value>Unit</value>
   </data>
@@ -13643,5 +13649,104 @@
   </data>
   <data name="GLOB_ShortDate_FORMAT_Picker" xml:space="preserve">
     <value>MM/dd/yyyy</value>
+  </data>
+  <data name="NAME_AREA_9950000" xml:space="preserve">
+    <value>Discharge</value>
+  </data>
+  <data name="NAME_AREA_3300000" xml:space="preserve">
+    <value>DESCALER</value>
+  </data>
+  <data name="NAME_AREA_6400000" xml:space="preserve">
+    <value>REVERSIBLE MILL</value>
+  </data>
+  <data name="NAME_AREA_6500000" xml:space="preserve">
+    <value>CONTINUOUS MILL</value>
+  </data>
+  <data name="NAME_AREA_6600000" xml:space="preserve">
+    <value>80 M BTRT</value>
+  </data>
+  <data name="NAME_AREA_8200000" xml:space="preserve">
+    <value>HOT SAW2</value>
+  </data>
+  <data name="NAME_AREA_8300000" xml:space="preserve">
+    <value>SLOW COOLING AREA </value>
+  </data>
+  <data name="NAME_AREA_8400000" xml:space="preserve">
+    <value>COOLING BED 2_SECSION-1</value>
+  </data>
+  <data name="NAME_AREA_8450000" xml:space="preserve">
+    <value>COOLING BED 3_SECSION-1</value>
+  </data>
+  <data name="NAME_AREA_8500000" xml:space="preserve">
+    <value>DISCHARGE_2</value>
+  </data>
+  <data name="NAME_AREA_8550000" xml:space="preserve">
+    <value>DISCHARGE_3</value>
+  </data>
+  <data name="NAME_AREA_8600000" xml:space="preserve">
+    <value>ABRASIVE SAW ENTRY AREA </value>
+  </data>
+  <data name="NAME_AREA_8650000" xml:space="preserve">
+    <value>ABRASIVE SAW EXIT AREA</value>
+  </data>
+  <data name="NAME_AREA_8700000" xml:space="preserve">
+    <value>BUNDING AREA 1</value>
+  </data>
+  <data name="NAME_AREA_8750000" xml:space="preserve">
+    <value>BUNDLING AREA 2</value>
+  </data>
+  <data name="NAME_AREA_3400000" xml:space="preserve">
+    <value>CHARGING BED</value>
+  </data>
+  <data name="NAME_AREA_3500000" xml:space="preserve">
+    <value>FURNACE AREA</value>
+  </data>
+  <data name="NAME_AREA_8350000" xml:space="preserve">
+    <value>COOLING_BED_1</value>
+  </data>
+  <data name="NAME_AREA_3450000" xml:space="preserve">
+    <value>furnace entry roller table</value>
+  </data>
+  <data name="NAME_AREA_3550000" xml:space="preserve">
+    <value>FURNACE EXIT AREA</value>
+  </data>
+  <data name="NAME_AREA_3600000" xml:space="preserve">
+    <value>HOT OUT GRID </value>
+  </data>
+  <data name="NAME_AREA_6450000" xml:space="preserve">
+    <value>REVERSIBLE MILL EXIT AREA</value>
+  </data>
+  <data name="NAME_AREA_8230000" xml:space="preserve">
+    <value>HOT SAW 3</value>
+  </data>
+  <data name="NAME_AREA_8240000" xml:space="preserve">
+    <value>HOT SAW 3A</value>
+  </data>
+  <data name="NAME_AREA_8340000" xml:space="preserve">
+    <value>COOLING BED 1 ENTRY ROLLER TABLE</value>
+  </data>
+  <data name="NAME_AREA_8390000" xml:space="preserve">
+    <value>CB_2 ENTRY ROLLER TABLE</value>
+  </data>
+  <data name="NAME_AREA_8410000" xml:space="preserve">
+    <value>COOLING BED 2_SECSION-2</value>
+  </data>
+  <data name="NAME_AREA_8440000" xml:space="preserve">
+    <value>CB_3 ENTRY ROLLER TABLE</value>
+  </data>
+  <data name="NAME_AREA_8460000" xml:space="preserve">
+    <value>COOLING BED 3_SECSION-2</value>
+  </data>
+  <data name="NAME_AREA_8470000" xml:space="preserve">
+    <value>CB2_EXIT_RT</value>
+  </data>
+  <data name="NAME_AREA_8471000" xml:space="preserve">
+    <value>CB3_EXIT_RT</value>
+  </data>
+  <data name="NAME_AREA_8620000" xml:space="preserve">
+    <value>ABRASIVE SAW ENTRY_1 </value>
+  </data>
+  <data name="NAME_AREA_8630000" xml:space="preserve">
+    <value>ABRASIVE SAW ENTRY_2</value>
   </data>
 </root>

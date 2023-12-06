@@ -24,37 +24,37 @@ namespace PE.HMIWWW.ViewModel.Module.Lite.Quality
   {
     public VM_ProductHistory() { }
 
-    //public VM_ProductHistory(V_ProductionHistory r)
-    //{
-    //  FKShapeId = r.FKShapeId;
-    //  HeatId = r.HeatId;
-    //  HeatName = r.HeatName;
-    //  NumDefects = r.NumDefects ?? 0;
-    //  ProductCatalogueId = r.ProductCatalogueId;
-    //  ProductCatalogueName = r.ProductCatalogueName;
-    //  ProductCatalogueTypeId = r.ProductCatalogueTypeId;
-    //  ProductCatalogueTypeName = r.ProductCatalogueTypeName;
-    //  ProductCatalogueTypeCode = r.ProductCatalogueTypeCode;
-    //  ProductCreated = r.ProductCreated;
-    //  ProductId = r.ProductId;
-    //  ProductName = r.ProductName;
-    //  EnumQuality = r.EnumQuality;
-    //  ShapeName = r.ShapeName;
-    //  ShapeCode = r.ShapeCode;
-    //  SteelgradeCode = r.SteelgradeCode;
-    //  SteelgradeId = r.SteelgradeId;
-    //  SteelgradeName = r.SteelgradeName;
-    //  Thickness = r.Thickness;
-    //  ProductWeight = r.ProductWeight;
-    //  Width = r.Width;
-    //  WorkOrderId = r.WorkOrderId;
-    //  WorkOrderName = r.WorkOrderName;
-    //  WorkOrderStatus = r.WorkOrderStatus;
+    public VM_ProductHistory(V_ProductionHistory r)
+    {
+      FKShapeId = r.FKShapeId;
+      HeatId = r.HeatId;
+      HeatName = r.HeatName;
+      NumDefects = r.NumDefects ?? 0;
+      ProductCatalogueId = r.ProductCatalogueId;
+      ProductCatalogueName = r.ProductCatalogueName;
+      ProductCatalogueTypeId = r.ProductCatalogueTypeId;
+      ProductCatalogueTypeName = r.ProductCatalogueTypeName;
+      ProductCatalogueTypeCode = r.ProductCatalogueTypeCode;
+      ProductCreated = r.ProductCreated;
+      ProductId = r.ProductId;
+      ProductName = r.ProductName;
+      EnumQuality = r.EnumQuality;
+      ShapeName = r.ShapeName;
+      ShapeCode = r.ShapeCode;
+      SteelgradeCode = r.SteelgradeCode;
+      SteelgradeId = r.SteelgradeId;
+      SteelgradeName = r.SteelgradeName;
+      Thickness = r.Thickness;
+      ProductWeight = r.ProductWeight;
+      Width = r.Width;
+      WorkOrderId = r.WorkOrderId;
+      WorkOrderName = r.WorkOrderName;
+      WorkOrderStatus = r.WorkOrderStatus;
 
-    //  //UnitConverterHelper.ConvertToLocal(v);
-    //  UnitConverterHelper.ConvertToLocal(this);
-    //  Profile = GenerateProfileCode(Thickness, Width);
-    //}
+      //UnitConverterHelper.ConvertToLocal(v);
+      UnitConverterHelper.ConvertToLocal(this);
+      Profile = GenerateProfileCode(Thickness, Width);
+    }
 
     [SmfDisplay(typeof(VM_ProductHistory), "ProductId", "NAME_ProductId")]
     [DisplayFormat(NullDisplayText = "-", HtmlEncode = false)]

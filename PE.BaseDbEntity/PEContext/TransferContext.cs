@@ -17,13 +17,8 @@ namespace PE.BaseDbEntity.PEContext
         {
         }
 
-        public virtual DbSet<HPS_L2_TcpAlarm> HPS_L2_TcpAlarms { get; set; }
-        public virtual DbSet<HPS_L2_TcpAlarmExt> HPS_L2_TcpAlarmExts { get; set; }
-        public virtual DbSet<HPS_L2_TcpProduct> HPS_L2_TcpProducts { get; set; }
-        public virtual DbSet<HPS_L2_TcpProfile> HPS_L2_TcpProfiles { get; set; }
         public virtual DbSet<L2L3ProductReport> L2L3ProductReports { get; set; }
         public virtual DbSet<L2L3WorkOrderReport> L2L3WorkOrderReports { get; set; }
-        public virtual DbSet<L2_HPS_TcpNewBatch> L2_HPS_TcpNewBatches { get; set; }
         public virtual DbSet<L3L2WorkOrderDefinition> L3L2WorkOrderDefinitions { get; set; }
         public virtual DbSet<V_L3L2TransferTablesSummary> V_L3L2TransferTablesSummaries { get; set; }
 

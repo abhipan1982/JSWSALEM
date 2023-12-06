@@ -5,6 +5,7 @@ using SMF.Core.Communication;
 using PE.Core;
 using PE.Interfaces.Modules;
 using PE.Interfaces.SendOffices.DBA;
+using PE.Interfaces.Managers.PRM;
 
 namespace PE.DBA.DataBaseAdapter.Communication
 {
@@ -12,10 +13,10 @@ namespace PE.DBA.DataBaseAdapter.Communication
   {
     //Added by AP on16082023
     public virtual Task<SendOfficeResult<DCBatchDataStatus>> SendBatchDataToAdapterAsync(
-      DCL3L2BatchData dataToSend)
+      DCL3L2BatchDataDefinition dataToSend)
     {
       string targetModuleName = Constants.SmfAuthorization_Module_ProdManager;
-      IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
+      IWorkOrderManager client = InterfaceHelper.GetFactoryChannel<IWorkOrderManager>(targetModuleName);
 
       return HandleModuleSendMethod(targetModuleName, () => client.ProcessBatchDataAsync(dataToSend));
     }

@@ -1,20 +1,20 @@
-﻿namespace PE.HMIWWW.ViewModel.Module.Lite.Maintenance
+namespace PE.HMIWWW.ViewModel.Module.Lite.Maintenance
 {
   public class VM_ComponentsGroupsTreeListEl
   {
-    public VM_ComponentsGroupsTreeListEl(long? ParentId, long Id, string Name, bool IsDevice, long? DeviceId,
-      bool IsComponent, bool IsGroup, bool IsCounterLimit = false, string Unit = "", double? Value = null)
+    public VM_ComponentsGroupsTreeListEl(long? parentId, long id, string name, bool isDevice, long? deviceId,
+      bool isComponent, bool isGroup, bool isCounterLimit = false, string unit = "", double? value = null)
     {
-      this.Id = Id;
-      this.ParentId = ParentId;
-      this.Name = Name;
-      this.IsDevice = IsDevice;
-      this.DeviceId = DeviceId;
-      this.IsComponent = IsComponent;
-      this.IsGroup = IsGroup;
-      this.IsCounterLimit = IsCounterLimit;
-      this.Unit = Unit;
-      this.Value = Value;
+      this.Id = id;
+      this.ParentId = parentId;
+      this.Name = name;
+      this.IsDevice = isDevice;
+      this.DeviceId = deviceId;
+      this.IsComponent = isComponent;
+      this.IsGroup = isGroup;
+      this.IsCounterLimit = isCounterLimit;
+      this.Unit = unit;
+      this.Value = value;
     }
 
     public long Id { get; set; }

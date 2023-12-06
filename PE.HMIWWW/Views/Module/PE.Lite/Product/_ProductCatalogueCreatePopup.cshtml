@@ -239,6 +239,87 @@
 
 </div>
 
+@*Av@*@
+<div class="row form-group">
+
+    <div class="col text-right">
+        <label>@Html.LabelFor(x => x.MinDiameter)</label>
+    </div>
+    <div class="col">
+        @Html.PeKendo().NumericTextBoxFor(x => x.MinDiameter).HtmlAttributes(new {@class = "form-control form-control-sm", style = "width: 150px"})
+        @Html.ValidationMessageFor(x => x.MinDiameter)
+    </div>
+
+    <div class="col text-right">
+        <label>@Html.LabelFor(x => x.MaxDiameter)</label>
+    </div>
+    <div class="col">
+                @Html.PeKendo().NumericTextBoxFor(x => x.MaxDiameter).HtmlAttributes(new {@class = "form-control form-control-sm", style = "width: 150px"})
+                @Html.ValidationMessageFor(x => x.MaxDiameter)
+    </div>
+
+    <div class="col text-right">
+                <label>@Html.LabelFor(x => x.Diameter)</label>
+    </div>
+    <div class="col">
+                @Html.PeKendo().NumericTextBoxFor(x => x.Diameter).HtmlAttributes(new {@class = "form-control form-control-sm", style = "width: 150px"})
+                @Html.ValidationMessageFor(x => x.Diameter)
+    </div>
+
+</div>
+<div class="row form-group">
+
+    <div class="col text-right">
+        <label>@Html.LabelFor(x => x.MinOvality)</label>
+    </div>
+    <div class="col">
+                @Html.PeKendo().NumericTextBoxFor(x => x.MinOvality).HtmlAttributes(new {@class = "form-control form-control-sm", style = "width: 150px"})
+                @Html.ValidationMessageFor(x => x.MinOvality)
+    </div>
+
+    <div class="col text-right">
+        <label>@Html.LabelFor(x => x.MinSquareness)</label>
+    </div>
+    <div class="col">
+                @Html.PeKendo().NumericTextBoxFor(x => x.MinSquareness).HtmlAttributes(new {@class = "form-control form-control-sm", style = "width: 150px"})
+                @Html.ValidationMessageFor(x => x.MinSquareness)
+    </div>
+
+    <div class="col text-right">
+                <label>@Html.LabelFor(x => x.MaxSquareness)</label>
+    </div>
+    <div class="col">
+                @Html.PeKendo().NumericTextBoxFor(x => x.MaxSquareness).HtmlAttributes(new {@class = "form-control form-control-sm", style = "width: 150px"})
+                @Html.ValidationMessageFor(x => x.MaxSquareness)
+    </div>
+
+</div>
+
+<div class="row form-group">
+
+    <div class="col text-right">
+        <label>@Html.LabelFor(x => x.NegRcsSide)</label>
+    </div>
+    <div class="col">
+                @Html.PeKendo().NumericTextBoxFor(x => x.NegRcsSide).HtmlAttributes(new {@class = "form-control form-control-sm", style = "width: 150px"})
+                @Html.ValidationMessageFor(x => x.NegRcsSide)
+    </div>
+
+    <div class="col text-right">
+        <label>@Html.LabelFor(x => x.PosRcsSide)</label>
+    </div>
+    <div class="col">
+                @Html.PeKendo().NumericTextBoxFor(x => x.PosRcsSide).HtmlAttributes(new {@class = "form-control form-control-sm", style = "width: 150px"})
+                @Html.ValidationMessageFor(x => x.PosRcsSide)
+    </div>
+    <div class="col text-right">
+    </div>
+    <div class="col">
+    </div>
+
+</div>
+@*Av@*@
+
 
 </div>
 

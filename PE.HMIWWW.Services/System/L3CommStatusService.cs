@@ -9,16 +9,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PE.BaseDbEntity.PEContext;
 using PE.BaseDbEntity.TransferModels;
+using PE.DbEntity.TransferModels;
 using PE.BaseModels.DataContracts.Internal.DBA;
+using PE.Models.DataContracts.Internal.DBA;
 using PE.HMIWWW.Core.Communication;
 using PE.HMIWWW.Core.Extensions;
 using PE.HMIWWW.Core.Resources;
 using PE.HMIWWW.Core.Service;
 using PE.HMIWWW.Core.ViewModel;
 using PE.HMIWWW.ViewModel.System;
+using PE.Models.DataContracts.Internal.DBA;
 using SMF.Core.Communication;
 using SMF.Core.DC;
 using SMF.HMIWWW.UnitConverter;
+using PE.DbEntity.PEContext;
 
 namespace PE.HMIWWW.Services.System
 {
@@ -26,6 +30,17 @@ namespace PE.HMIWWW.Services.System
   {
     DataSourceResult GetL3TransferTableWorkOrderList(ModelStateDictionary modelState,
       [DataSourceRequest] DataSourceRequest request);
+
+
+
+    //Av@071123--
+
+    DataSourceResult GetL3L2BatchDataDefinitionList(ModelStateDictionary modelState,
+      [DataSourceRequest] DataSourceRequest request);
+
+
+
+
 
     DataSourceResult GetL3TransferTableGeneralList(ModelStateDictionary modelState,
       [DataSourceRequest] DataSourceRequest request);
@@ -49,6 +64,14 @@ namespace PE.HMIWWW.Services.System
 
     DataSourceResult GetL3TransferTableProductReports(ModelStateDictionary modelState, DataSourceRequest request);
 
+    //Av@021123
+
+    DataSourceResult GetL2L3BatchReport(ModelStateDictionary modelState, DataSourceRequest request);
+
+
+    //DataSourceResult GetL3L2BatchDataDefinition(ModelStateDictionary modelState, long counterId);
+
+
     VM_Base GetProductReport(ModelStateDictionary modelState, long counterId);
 
     Task<VM_Base> ResetProductReport(ModelStateDictionary modelState, VM_L2L3ProductReport productReport);
@@ -58,12 +81,17 @@ namespace PE.HMIWWW.Services.System
 
   public class L3CommStatusService : BaseService, IL3CommStatusService
   {
-    private readonly TransferContext _transferContext;
+    private readonly PE.DbEntity.PEContext.TransferContext _transferContext;
+
+    private readonly TransferCustomContext _transferCustomContext;//AddAv
     private const int MaxNumberOfImportRecords = 100;
 
-    public L3CommStatusService(IHttpContextAccessor httpContextAccessor, TransferContext transferContext) : base(httpContextAccessor)
+    public L3CommStatusService(IHttpContextAccessor httpContextAccessor, DbEntity.PEContext.TransferContext transferContext, TransferCustomContext transferContext1) : base(httpContextAccessor)//AddAv
+    //public L3CommStatusService(IHttpContextAccessor httpContextAccessor, DbEntity.PEContext.TransferContext transferContext) : base(httpContextAccessor)//AddAv
     {
       _transferContext = transferContext;
+
+     _transferCustomContext = transferContext1;//AddAv
     }
 
     public DataSourceResult GetL3TransferTableWorkOrderList(ModelStateDictionary modelState,
@@ -76,6 +104,22 @@ namespace PE.HMIWWW.Services.System
 
       return result;
     }
+
+
+    //Av@071123--
+
+    public DataSourceResult GetL3L2BatchDataDefinitionList(ModelStateDictionary modelState,
+       DataSourceRequest request)
+    {
+      DataSourceResult result = null;
+
+      result = _transferCustomContext.L3L2BatchDataDefinitions
+        .ToDataSourceLocalResult(request, modelState, x => new VM_L3L2BatchDataDefinition(x));
+
+      return result;
+    }
+
+
 
 
     public DataSourceResult GetL3TransferTableGeneralList(ModelStateDictionary modelState,
@@ -103,9 +147,9 @@ namespace PE.HMIWWW.Services.System
       {
         return result;
       }
-      //END OF VALIDATION
+            //END OF VALIDATION
 
-      L3L2WorkOrderDefinition wod = _transferContext.L3L2WorkOrderDefinitions
+            DbEntity.TransferModels.L3L2WorkOrderDefinition wod = _transferContext.L3L2WorkOrderDefinitions
         .SingleOrDefault(x => x.CounterId == counterId);
       result = wod != null ? new VM_L3L2WorkOrderDefinition(wod) : null;
 
@@ -168,7 +212,7 @@ namespace PE.HMIWWW.Services.System
         return result;
       }
 
-      DCL3L2WorkOrderDefinition dcWorkOrderDefinition = new DCL3L2WorkOrderDefinition
+      DCL3L2WorkOrderDefinitionMOD dcWorkOrderDefinition = new DCL3L2WorkOrderDefinitionMOD
       {
         Counter = workOrderDefinition.CounterId
       };
@@ -209,15 +253,14 @@ namespace PE.HMIWWW.Services.System
       {
         return result;
       }
-      //END OF VALIDATION
+            //END OF VALIDATION
 
-      L2L3WorkOrderReport wod = _transferContext.L2L3WorkOrderReports
+            DbEntity.TransferModels.L2L3WorkOrderReport wod = _transferContext.L2L3WorkOrderReports
         .SingleOrDefault(x => x.Counter == counterId);
       result = wod != null ? new VM_L2L3WorkOrderReport(wod) : null;
 
       return result;
     }
-
     public async Task<VM_Base> ResetWorkOrderReport(ModelStateDictionary modelState,
       VM_L2L3WorkOrderReport workOrderDefinition)
     {
@@ -252,6 +295,24 @@ namespace PE.HMIWWW.Services.System
       return result;
     }
 
+
+    //Av@231123
+
+    public DataSourceResult GetL2L3BatchReport(ModelStateDictionary modelState,
+    DataSourceRequest request)
+    {
+      DataSourceResult result = null;
+
+      result = _transferCustomContext.L2L3BatchReports
+        .ToDataSourceLocalResult(request, modelState, x => new VM_L2L3BatchReport(x));
+
+      return result;
+    }
+
+
+
+
+
     public VM_Base GetProductReport(ModelStateDictionary modelState, long counterId)
     {
       VM_L2L3ProductReport result = null;
@@ -266,9 +327,9 @@ namespace PE.HMIWWW.Services.System
       {
         return result;
       }
-      //END OF VALIDATION
+            //END OF VALIDATION
 
-      L2L3ProductReport cr = _transferContext.L2L3ProductReports
+            DbEntity.TransferModels.L2L3ProductReport cr = _transferContext.L2L3ProductReports
         .SingleOrDefault(x => x.Counter == counterId);
       result = cr != null ? new VM_L2L3ProductReport(cr) : null;
 
@@ -302,7 +363,7 @@ namespace PE.HMIWWW.Services.System
     {
       VM_Base result = new VM_Base();
 
-      var records = new List<L3L2WorkOrderDefinition>();
+      var records = new List<DbEntity.TransferModels.L3L2WorkOrderDefinition>();
       var reader = ExcelReaderFactory.CreateReader(fileStream);
 
       int row = 0;
@@ -316,7 +377,7 @@ namespace PE.HMIWWW.Services.System
         {
           AddModelStateError(modelState, string.Format(ResourceController.GetErrorText("IncorrectWOImportFieldCount"), row, reader.FieldCount, 22));
         }
-        var record = new L3L2WorkOrderDefinition();
+        var record = new DbEntity.TransferModels.L3L2WorkOrderDefinition();
 
         int col = 0;
         record.WorkOrderName = reader.GetValue(col++)?.ToString();
@@ -389,6 +450,21 @@ namespace PE.HMIWWW.Services.System
 
       return result;
     }
+    
+    //public Task<VM_Base> CreateWorkOrderDefinition(ModelStateDictionary modelState, VM_L3L2WorkOrderDefinition workOrderDefinition)
+    //{
+    //  throw new NotImplementedException();
+    //}
+
+    //public Task<VM_Base> UpdateWorkOrderDefinition(ModelStateDictionary modelState, VM_L3L2WorkOrderDefinition workOrderDefinition)
+    //{
+    //  throw new NotImplementedException();
+    //}
+
+    //public Task<VM_Base> ResetWorkOrderReport(ModelStateDictionary modelState, VM_L2L3WorkOrderReport workOrderDefinition)
+    //{
+    //  throw new NotImplementedException();
+    //}
   }
 
   public class WorkOrderDefinitionExcelRecord

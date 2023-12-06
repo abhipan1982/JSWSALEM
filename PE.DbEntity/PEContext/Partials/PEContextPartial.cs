@@ -8,16 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 using PE.DbEntity.EnumClasses;
 
+
 namespace PE.DbEntity.PEContext
 {
   partial class PECustomContext : BaseDbEntity.PEContext.PEContext
   {
-    public PECustomContext(DbContextOptions<BaseDbEntity.PEContext.PEContext> options)
-      : base(options)
-    {
-
-    }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       if (!optionsBuilder.IsConfigured)

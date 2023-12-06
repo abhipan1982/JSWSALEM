@@ -21,7 +21,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\PE.Config\PE.Config.csproj" />
-    <ProjectReference Include="..\..\PE.DbEntity\PE.DbEntity.csproj" />
     <ProjectReference Include="..\..\PE.Interfaces\PE.Interfaces.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -33,5 +32,8 @@
     <PackageReference Include="SMF.DbEntity" />
     <PackageReference Include="SMF.Module" />
     <PackageReference Include="SMF.Startup" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>

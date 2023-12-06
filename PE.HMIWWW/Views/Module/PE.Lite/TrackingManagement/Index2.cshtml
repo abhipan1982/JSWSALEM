@@ -1,0 +1,55 @@
+@{
+    ViewBag.Title = VM_Resources.PAGE_TITLE_TrackingManagement_Index2;
+    Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
+}
+
+@using PE.BaseDbEntity.EnumClasses;
+@using PE.DbEntity.EnumClasses;
+
+@section module_menu
+    {
+    <div id="laneProd" class="demo-section k-content mr-3 track-status">
+        <div class="status-label">@VM_Resources.NAME_LaneStopped:</div>
+        <input type="checkbox" id="laneProdBtn" aria-label="Switch" />
+    </div>
+    <div id="slowProd" class="demo-section k-content mr-3 track-status">
+        <div class="status-label">@VM_Resources.NAME_SlowProduction:</div>
+        <input type="checkbox" id="slowProdBtn" aria-label="Switch" />
+    </div>
+    @Html.ImageButton("defects", "assignDefectsPopup()", false, "NAME_AddDefects")
+    @Html.ImageButton("quality", "assignQualityPopup()", false, "NAME_SpecifyQuality")
+    @Html.ImageButton("charge", "_TrackingActions.ChargeIntoChargingGridAction()", false, "BUTTON_ChargeIntoChargingGrid")
+    @Html.ImageButton("uncharge", "_TrackingActions.UnchargeFromChargingGridAction()", false, "BUTTON_UnchargeFromChargingGrid")
+    @Html.ImageButton("furnace_charge", "_TrackingActions.ChargeIntoFurnaceAction()", false, "BUTTON_ChargeIntoFurnace")
+    @Html.ImageButton("furnace_discharge", "_TrackingActions.UnchargeFromFurnaceAction()", false, "BUTTON_UnchargeFromFurnace")
+    @Html.ImageButton("rolling_discharge", "_TrackingActions.DischargeForRollingAction()", false, "BUTTON_DischargeForRolling")
+    @Html.ImageButton("rolling_undischarge", "_TrackingActions.UndischargeFromMillAction()", false, "BUTTON_UndischargeFromRolling")
+    @Html.ImageButton("tracking", "_TrackingActions.ChargeMaterialOnFurnaceExitPopup()", false, "BUTTON_ChargeMaterialOnFurnaceExit")
+}
+
+<div class="tracking-container-1">
+    <div class="mv" style=" margin-top:20px;">
+        <div class="triangle-bottom"></div>
+        <div class="triangle-bottom"></div>
+    </div>
+    <div class="mv" style="margin-left:25px;">
+        <div class="tracking-column-table_10m" id="@CustomTrackingArea.COOL_AREA_2_S2.Name" style="margin-top:0px;"></div>
+        <div style="margin-left:20px;"></div>
+        <div class="tracking-column-table_10m" id="@CustomTrackingArea.COOL_AREA_3_S1.Name" style="margin-top:0px;"></div>
+        <div style="margin-top: 680px;margin-left:-90px; ">
+            <form asp-controller="TrackingManagement" asp-action="Index1">
+                <input type="image" src="~/css/tracking/LeftArrow.png" width="30" height="30" name="Prev" />
+            </form>
+        </div>
+        <div style="margin-top: 680px;margin-left:20px;">
+            <form asp-controller="TrackingManagement" asp-action="Index3">
+                <input type="image" src="~/css/tracking/RightArrow.png" width="30" height="30" name="Next" />
+            </form>
+        </div>
+            
+        
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/bundles/css/Module/TrackingManagement.css" />
+<script src="~/bundles/js/Module/TrackingManagement.js" />

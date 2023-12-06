@@ -19,7 +19,6 @@
     <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PE.DbEntity\PE.DbEntity.csproj" />
     <ProjectReference Include="..\PE.HMIWWW.Core\PE.HMIWWW.Core.csproj" />
   </ItemGroup>
   <ItemGroup>

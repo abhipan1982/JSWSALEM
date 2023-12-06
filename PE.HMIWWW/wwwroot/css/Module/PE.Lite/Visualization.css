@@ -5,7 +5,7 @@
 
 .tracking {
     position: absolute;
-    top: 120px;
+    top: 20px;/*120*/
     min-width: 1520px;
     margin-right: 5px;
     overflow: auto;
@@ -103,7 +103,10 @@
     min-width: 280px;
     min-height: 150px;
 }
-
+.empty-block-1 {
+    min-width: 110px;
+    min-height: 150px;
+}
 .details-icon, .cursor-pointer {
     cursor: pointer;
 }
@@ -115,7 +118,52 @@
 .leftToRight {
     flex-direction: row;
 }
+/*direction arrows*/
+/*av start*/
+.triangle-left,
+.triangle-right,
+.triangle-top,
+.triangle-bottom {
+    width: 0;
+    height: 0;
+    margin: 10px auto;
+}
 
+.triangle-left,
+.triangle-right {
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+}
+
+.triangle-top,
+.triangle-bottom {
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+}
+
+.triangle-right {
+    border-left: 15px solid #bbb;
+}
+
+.triangle-left {
+    border-right: 15px solid #bbb;
+}
+
+
+.triangle-right-action {
+    border-left: 15px solid #3795d5;
+}
+
+
+.triangle-top {
+    border-bottom: 15px solid #bbb;
+}
+
+.triangle-bottom {
+    border-top: 15px solid #bbb;
+}
+
+/*av end*/
 .rightToLeft {
     flex-direction: row-reverse;
     min-height: 0;
@@ -194,6 +242,7 @@
     width: 4px;
     height: 170px;
     background-color: #c2c2c2;
+   
 }
 
 .line-vertical-right {
@@ -205,6 +254,7 @@
     position: relative;
     display: flex;
     flex-direction: row;
+   
 }
 
 .turning-arrow-triangle-right {
@@ -232,7 +282,7 @@
     height: 100%;
     left: 0;
     text-align: center;
-    color: #006486;
+    color: #2db245;
     background-color: #fff;
     border-right: 1px solid #d2d2d2;
     line-height: 24px;
@@ -243,10 +293,10 @@
   position: absolute;
   width: 35px;
   height: 100%;
-  right: 0;
+  right:0;
   top: 0;
   text-align: center;
-  color: #006486;
+  color: #c71e1e;
   background-color: #fff;
   border-left: 1px solid #d2d2d2;
   line-height: 24px;

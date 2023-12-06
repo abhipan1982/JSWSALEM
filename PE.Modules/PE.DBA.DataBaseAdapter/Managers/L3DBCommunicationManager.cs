@@ -43,17 +43,21 @@ namespace PE.DBA.DataBaseAdapter.Managers
 
     protected readonly IDbAdapterSendOffice SendOffice;
     private readonly IContextProvider<TransferCustomContext> _context;
+    private readonly IContextProvider<TransferContext> _context_;//
 
     #endregion
 
     #region ctor
 
-    public L3DBCommunicationManager(IModuleInfo moduleInfo, IDbAdapterSendOffice sendOffice, IContextProvider<TransferCustomContext> context) : base(moduleInfo)
+    public L3DBCommunicationManager(IModuleInfo moduleInfo, IDbAdapterSendOffice sendOffice, IContextProvider<TransferCustomContext> context, IContextProvider<TransferContext> context1) : base(moduleInfo)
+    //public L3DBCommunicationManager(IModuleInfo moduleInfo, IDbAdapterSendOffice sendOffice, IContextProvider<TransferContext> context1) : base(moduleInfo)
     {
       SendOffice = sendOffice;
       _context = context;
       DataTransferHandler = new DataTransferHandler();
+      _context_ = context1;//
     }
+
 
     #endregion
 
@@ -65,18 +69,18 @@ namespace PE.DBA.DataBaseAdapter.Managers
       {
         using (TransferCustomContext ctx = _context.Create())
         {
-          List<DCL3L2BatchData> dcList = await ExtractDataFromTransferTableAsync(ctx);
+          List<DCL3L2BatchDataDefinitionExt> dcList = await ExtractDataFromTransferTableAsync(ctx);
 
-          foreach (DCL3L2BatchData dc in dcList)
+          foreach (DCL3L2BatchDataDefinitionExt dc in dcList)
           {
-            DCL3L2BatchData internalDc = dc.ToInternal() as DCL3L2BatchData;
+            DCL3L2BatchDataDefinition internalDc = dc.ToInternal() as DCL3L2BatchDataDefinition;
             SendOfficeResult<DCBatchDataStatus> result =
               await SendOffice.SendBatchDataToAdapterAsync(internalDc);
 
             if (result.OperationSuccess)
             {
               NotificationController.Info(String.Format("Batch Data: {0} sent to adapter successfully",
-                dc.ProductName));
+                dc.BatchNo));
 
               try
               {
@@ -88,12 +92,12 @@ namespace PE.DBA.DataBaseAdapter.Managers
               {
                 NotificationController.LogException(ex,
                   "Error during Batch Data Definition {BatchDataName} updating after sucess response from PRM",
-                  dc.ProductName);
+                  dc.BatchNo);
               }
             }
             else
             {
-              throw new InternalModuleException($"Error during transfering work order {dc.ProductName} to adapter.", AlarmDefsBase.TransferDataFromTransferTableToAdapter);
+              throw new InternalModuleException($"Error during transfering work order {dc.PoName} to adapter.", AlarmDefsBase.TransferDataFromTransferTableToAdapter);
             }
           }
 
@@ -116,7 +120,7 @@ namespace PE.DBA.DataBaseAdapter.Managers
           $"Error while transfering data from transfer table to adapter");
       }
     }
-
+    //AP29112023
     public virtual async Task UpdateBatchDataWithTimeoutAsync()
     {
       try
@@ -137,9 +141,9 @@ namespace PE.DBA.DataBaseAdapter.Managers
       }
     }
 
-    public virtual async Task<DCL3L2BatchData> CreateBatchDataAsync(DCL3L2BatchData dc)
+    public virtual async Task<DCL3L2BatchDataDefinition> CreateBatchDataAsync(DCL3L2BatchDataDefinitionExt dc)
     {
-      DCL3L2BatchData result = new DCL3L2BatchData();
+      DCL3L2BatchDataDefinition result = new DCL3L2BatchDataDefinition();
 
       try
       {
@@ -172,9 +176,9 @@ namespace PE.DBA.DataBaseAdapter.Managers
       return result;
     }
     //Added by AP on 14-08-2023
-    public virtual async Task<DCL3L2BatchData> UpdateBatchDataAsync(DCL3L2BatchData dc)
+    public virtual async Task<DCL3L2BatchDataDefinition> UpdateBatchDataDefinitionAsync(DCL3L2BatchDataDefinitionExt dc)
     {
-      DCL3L2BatchData result = new DCL3L2BatchData();
+      DCL3L2BatchDataDefinition result = new DCL3L2BatchDataDefinition();
 
       try
       {
@@ -185,9 +189,9 @@ namespace PE.DBA.DataBaseAdapter.Managers
             wod.CommStatus != CommStatus.ValidationError.Value)
         {
           NotificationController.RegisterAlarm(AlarmDefsBase.WorkOrderDefinitionNotUpdatable,
-            $"Work order definition {dc.ProductName} status prevents update", dc.ProductName);
+            $"Work order definition {dc.BatchNo} status prevents update", dc.BatchNo);
           NotificationController.Warn(
-            $"Work order definition {dc.ProductName} status prevents update");
+            $"Work order definition {dc.BatchNo} status prevents update");
           return result;
         }
 
@@ -326,11 +330,11 @@ namespace PE.DBA.DataBaseAdapter.Managers
 
     //#region private
 
-    private async Task<List<DCL3L2BatchData>> ExtractDataFromTransferTableAsync(TransferCustomContext ctx)
+    private async Task<List<DCL3L2BatchDataDefinitionExt>> ExtractDataFromTransferTableAsync(TransferCustomContext ctx)
     {
       IEnumerable<L3L2BatchDataDefinition> toBeTransfered = await DataTransferHandler.GetDataToBeTransfered(ctx);
 
-      List<DCL3L2BatchData> dcList = new List<DCL3L2BatchData>();
+      List<DCL3L2BatchDataDefinitionExt> dcList = new List<DCL3L2BatchDataDefinitionExt>();
 
       foreach (L3L2BatchDataDefinition data in toBeTransfered)
       {
@@ -339,11 +343,11 @@ namespace PE.DBA.DataBaseAdapter.Managers
 
         NotificationController.Debug(string.Format("Preparing WorkOrder {0}.", data.PO_NO));
 
-        DCL3L2BatchData dc = null;
+        DCL3L2BatchDataDefinitionExt dc = null;
 
         try
         {
-          dc = new DCL3L2BatchData(data);
+          dc = new DCL3L2BatchDataDefinitionExt(data);
         }
         catch (Exception ex)
         {
@@ -361,6 +365,135 @@ namespace PE.DBA.DataBaseAdapter.Managers
       await ctx.SaveChangesAsync();
 
       return dcList;
+    }
+
+    //AV@@
+
+
+    public virtual async Task<DataContractBase> CreateWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionExtMOD dc)
+    {
+      DataContractBase result = new DataContractBase();
+
+      try
+      {
+        await using var ctx = _context_.Create();
+        await using var ctx1 = _context_.Create();//
+        L3L2WorkOrderDefinition wod = new L3L2WorkOrderDefinition();
+
+        DataTransferHandler.UpdateWorkOrderDefinitionEXT(wod, dc);
+
+        await ctx1.L3L2WorkOrderDefinitions.AddAsync(wod);//
+        await ctx.SaveChangesAsync();
+
+        HmiRefresh(HMIRefreshKeys.L3TransferTableWorkOrders);
+      }
+      catch (DbUpdateException ex) when (ex.IsDuplicateKeyViolation())
+      {
+        ex.ThrowModuleMessageExceptionWithoutSerialization(ModuleName, MethodHelper.GetMethodName(), AlarmDefsBase.WorkOrderDefinitionUpdateError,
+          $"Unique key violation while updating work order definition.");
+      }
+      catch (DbUpdateException ex) when (ex.IsExistingReferenceViolation())
+      {
+        ex.ThrowModuleMessageExceptionWithoutSerialization(ModuleName, MethodHelper.GetMethodName(), AlarmDefsBase.WorkOrderDefinitionUpdateError,
+          $"Existing reference key violation while updating work order definition.");
+      }
+      catch (Exception ex)
+      {
+        ex.ThrowModuleMessageExceptionWithoutSerialization(ModuleName, MethodHelper.GetMethodName(), AlarmDefsBase.WorkOrderDefinitionUpdateError,
+          $"Unexpected error while updating work order definition.");
+      }
+
+      return result;
+    }
+
+
+
+    //AV
+    public virtual async Task<DataContractBase> UpdateWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionExtMOD dc)
+    {
+      DataContractBase result = new DataContractBase();
+
+      try
+      {
+        await using var ctx1 = _context_.Create();
+        L3L2WorkOrderDefinition wod = await DataTransferHandler.GetWorkOrderDefinitionByIdAsyncEXT(ctx1, dc.Counter);
+
+        if (wod.CommStatus != CommStatus.ProcessingError.Value &&
+            wod.CommStatus != CommStatus.ValidationError.Value)
+        {
+          NotificationController.RegisterAlarm(AlarmDefsBase.WorkOrderDefinitionNotUpdatable,
+            $"Work order definition {dc.WorkOrderName} status prevents update", dc.WorkOrderName);
+          NotificationController.Warn(
+            $"Work order definition {dc.WorkOrderName} status prevents update");
+          return result;
+        }
+
+        DataTransferHandler.UpdateWorkOrderDefinitionEXT(wod, dc);
+
+        await ctx1.SaveChangesAsync();
+
+        HmiRefresh(HMIRefreshKeys.L3TransferTableWorkOrders);
+      }
+      catch (DbUpdateException ex) when (ex.IsDuplicateKeyViolation())
+      {
+        ex.ThrowModuleMessageExceptionWithoutSerialization(ModuleName, MethodHelper.GetMethodName(), AlarmDefsBase.WorkOrderDefinitionUpdateError,
+          $"Unique key violation while updating work order definition.");
+      }
+      catch (DbUpdateException ex) when (ex.IsExistingReferenceViolation())
+      {
+        ex.ThrowModuleMessageExceptionWithoutSerialization(ModuleName, MethodHelper.GetMethodName(), AlarmDefsBase.WorkOrderDefinitionUpdateError,
+          $"Existing reference key violation while updating work order definition.");
+      }
+      catch (Exception ex)
+      {
+        ex.ThrowModuleMessageExceptionWithoutSerialization(ModuleName, MethodHelper.GetMethodName(), AlarmDefsBase.WorkOrderDefinitionUpdateError,
+          $"Unexpected error while updating work order definition.");
+      }
+
+      return result;
+    }
+
+
+    public virtual async Task<DataContractBase> DeleteWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionExtMOD dc)
+    {
+      DataContractBase result = new DataContractBase();
+
+      try
+      {
+        await using var ctx1 = _context_.Create();
+        L3L2WorkOrderDefinition wod = await DataTransferHandler.GetWorkOrderDefinitionByIdAsyncEXT(ctx1, dc.Counter);
+
+        if (wod == null ||
+            (wod.CommStatus != CommStatus.ProcessingError.Value &&
+             wod.CommStatus != CommStatus.ValidationError.Value))
+        {
+          NotificationController.RegisterAlarm(AlarmDefsBase.WorkOrderDefinitionAlreadyProcessed,
+            "Can not remove work order definition which is already processed.");
+          NotificationController.Error($"[CRITICAL] fun {MethodHelper.GetMethodName()} failed.");
+        }
+
+        ctx1.L3L2WorkOrderDefinitions.Remove(wod);
+        await ctx1.SaveChangesAsync();
+
+        HmiRefresh(HMIRefreshKeys.L3TransferTableWorkOrders);
+      }
+      catch (DbUpdateException ex) when (ex.IsDuplicateKeyViolation())
+      {
+        ex.ThrowModuleMessageExceptionWithoutSerialization(ModuleName, MethodHelper.GetMethodName(), AlarmDefsBase.WorkOrderDefinitionDeleteError,
+          $"Unique key violation while removing work order definition.");
+      }
+      catch (DbUpdateException ex) when (ex.IsExistingReferenceViolation())
+      {
+        ex.ThrowModuleMessageExceptionWithoutSerialization(ModuleName, MethodHelper.GetMethodName(), AlarmDefsBase.WorkOrderDefinitionDeleteError,
+          $"Existing reference key violation while removing work order definition.");
+      }
+      catch (Exception ex)
+      {
+        ex.ThrowModuleMessageExceptionWithoutSerialization(ModuleName, MethodHelper.GetMethodName(), AlarmDefsBase.WorkOrderDefinitionDeleteError,
+          $"Unexpected error while removing work order definition.");
+      }
+
+      return result;
     }
 
     #endregion

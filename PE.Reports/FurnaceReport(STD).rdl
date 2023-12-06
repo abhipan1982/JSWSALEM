@@ -1,14 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>17.5.33627.172</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>17.5.33627.172</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2023-07-27T10:35:18.1818226Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataProd">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>=Parameters!ConnectionString.Value</ConnectString>
+        <ConnectString>Data Source=inccun009dbs;Initial Catalog=PE_JSWSalem</ConnectString>
+        <Prompt>Specify a user name and password for data source DataProd:</Prompt>
       </ConnectionProperties>
-      <rd:SecurityType>None</rd:SecurityType>
+      <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>6cc3d49a-785d-4992-a96a-af461ea743f0</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -21,18 +33,9 @@
             <Value>=Parameters!DimWorkOrderKey.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT MaterialSeqNo, 
-       FactMaterialKey, 
-       DimWorkOrderKey,
-       WorkOrderName,
-       MaterialName, 
-       FurnaceExitTemperature, 
-       FurnaceHeatingDuration, 
-       MaterialChargeType, 
-       MaterialCharged, 
-       MaterialDischarged
-FROM dw.FactMaterial
-WHERE DimWorkOrderKey = @DimWorkOrderKey;</CommandText>
+        <CommandText>SELECT        MaterialSeqNo, FactMaterialKey, DimWorkOrderKey, WorkOrderName, MaterialName, FurnaceExitTemperature, FurnaceHeatingDuration, MaterialChargeType, MaterialCharged, MaterialDischarged
+FROM            dw.FactMaterial
+WHERE        (DimWorkOrderKey = @DimWorkOrderKey)</CommandText>
         <rd:DesignerState>
           <QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational">
             <SelectedColumns>
@@ -103,11 +106,11 @@ WHERE DimWorkOrderKey = @DimWorkOrderKey;</CommandText>
     <DataSet Name="LastWorkOrder">
       <Query>
         <DataSourceName>DataProd</DataSourceName>
-        <CommandText>SELECT WorkOrderName,DimWorkOrderKey 
-FROM dw.DimWorkOrder 
-WHERE DimWorkOrderKey = (
-SELECT Max(DimWorkOrderKey) 
-FROM dw.DimWorkOrder)</CommandText>
+        <CommandText>SELECT        WorkOrderName, DimWorkOrderKey
+FROM            dw.DimWorkOrder
+WHERE        (DimWorkOrderKey =
+                             (SELECT        MAX(DimWorkOrderKey) AS Expr1
+                               FROM            dw.DimWorkOrder AS DimWorkOrder_1))</CommandText>
       </Query>
       <Fields>
         <Field Name="WorkOrderName">
@@ -128,10 +131,10 @@ FROM dw.DimWorkOrder)</CommandText>
             <Value>=Parameters!SearchWorkOrder.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT DimWorkOrderKey AS WorkOrderKey, WorkOrderName 
-FROM dw.DimWorkOrder 
-WHERE WorkOrderName LIKE ('%' + @SearchWorkOrder + '%')
-ORDER BY 1 DESC</CommandText>
+        <CommandText>SELECT        DimWorkOrderKey AS WorkOrderKey, WorkOrderName
+FROM            dw.DimWorkOrder
+WHERE        (WorkOrderName LIKE '%' + @SearchWorkOrder + '%')
+ORDER BY WorkOrderKey DESC</CommandText>
       </Query>
       <Fields>
         <Field Name="WorkOrderKey">

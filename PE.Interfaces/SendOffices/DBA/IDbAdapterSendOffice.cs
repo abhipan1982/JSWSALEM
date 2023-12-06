@@ -6,6 +6,6 @@ namespace PE.Interfaces.SendOffices.DBA
 {
   public interface IDbAdapterSendOffice
   {
-    Task<SendOfficeResult<DCBatchDataStatus>> SendBatchDataToAdapterAsync(DCL3L2BatchData dataToSend);
+    Task<SendOfficeResult<DCBatchDataStatus>> SendBatchDataToAdapterAsync(DCL3L2BatchDataDefinition dataToSend);
   }
 }

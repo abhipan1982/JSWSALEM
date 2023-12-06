@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PE.BaseDbEntity.Models;
 using PE.BaseDbEntity.PEContext;
-using PE.BaseModels.DataContracts.Internal.PRM;
+//using PE.BaseModels.DataContracts.Internal.PRM;
+using PE.Models.DataContracts.Internal.PRM;
 using PE.HMIWWW.Core.Communication;
 using PE.HMIWWW.Core.Resources;
 using PE.HMIWWW.Core.Service;
@@ -74,7 +75,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref vm);
 
-      DCSteelFamily dcSteelFamily = new DCSteelFamily
+      DCSteelFamilyEXT dcSteelFamily = new DCSteelFamilyEXT
       {
         SteelFamilyId = vm.Id,
         SteelFamilyCode = vm.SteelGroupCode,
@@ -106,7 +107,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref vm);
 
-      DCSteelFamily dcSteelFamily = new DCSteelFamily
+      DCSteelFamilyEXT dcSteelFamily = new DCSteelFamilyEXT
       {
         SteelFamilyId = vm.Id,
         SteelFamilyCode = vm.SteelGroupCode,
@@ -138,7 +139,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref vm);
 
-      DCSteelFamily dcSteelFamily = new DCSteelFamily {SteelFamilyId = vm.Id};
+      DCSteelFamilyEXT dcSteelFamily = new DCSteelFamilyEXT {SteelFamilyId = vm.Id};
 
       //request data from module
       SendOfficeResult<DataContractBase> sendOfficeResult =

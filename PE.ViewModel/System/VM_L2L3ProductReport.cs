@@ -1,7 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using PE.BaseDbEntity.EnumClasses;
-using PE.BaseDbEntity.TransferModels;
+//using PE.BaseDbEntity.TransferModels;
+using PE.DbEntity.TransferModels;
 using PE.HMIWWW.Core.HtmlHelpers;
 using PE.HMIWWW.Core.ViewModel;
 using SMF.HMIWWW.Attributes;

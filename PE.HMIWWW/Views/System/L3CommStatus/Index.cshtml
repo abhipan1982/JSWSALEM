@@ -28,6 +28,14 @@
           .Selected(false).Content((await Html.PartialAsync("~/Views/System/L3CommStatus/_L3TransferTableWorkOrderReport.cshtml")).ToHtmlString());
           tabstrip.Add().Text(VM_Resources.NAME_L3TransferTable_ProductReports)
           .Selected(false).Content((await Html.PartialAsync("~/Views/System/L3CommStatus/_L3TransferTableProductReport.cshtml")).ToHtmlString());
+
+          //@Av311023
+          tabstrip.Add().Text(VM_Resources.NAME_L3TransferTable_BatchReports)
+          .Selected(false).Content((await Html.PartialAsync("~/Views/System/L3CommStatus/_L2L3BatchReport.cshtml")).ToHtmlString());
+
+          //@Av311023
+                tabstrip.Add().Text(VM_Resources.NAME_L3TransferTable_BatchDataDefinition)
+                .Selected(false).Content((await Html.PartialAsync("~/Views/System/L3CommStatus/_L3L2BatchDataDefinition.cshtml")).ToHtmlString());
         })
         )
   </div>

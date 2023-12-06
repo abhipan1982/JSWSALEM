@@ -4,6 +4,7 @@
 }
 
 @using PE.BaseDbEntity.EnumClasses;
+@using PE.DbEntity.EnumClasses;
 
 @section module_menu
 {
@@ -118,28 +119,26 @@
   </div>
 
   <div class="col-10 tracking_visualization">
-    <div class="text-center">GREY AREA</div>
-    <div class="materials_general" id="area_general">
-    </div>
+    @*<div class="text-center">GREY AREA</div>*@
+    @*<div class="materials_general" id="area_general">
+    </div>*@
     <div class="row">
       <div class=" tracking">
 
         <div class="tracking_row rightToLeft">
 
-          @DoubleAreaWithSignals(TrackingArea.FM_AREA.Value)
+          @DoubleAreaWithSignals(CustomTrackingArea.BTRT_AREA.Value)
 
           <div class="direction_sign">
             <span class="direction-icon arrowRight-icon" role="img"></span>
           </div>
 
-          @DoubleAreaWithSignals(TrackingArea.IM_AREA.Value)
+           @DoubleAreaWithSignals(CustomTrackingArea.CM_AREA.Value)
 
           <div class="direction_sign">
             <span class="direction-icon arrowRight-icon" role="img"></span>
           </div>
-
-          @DoubleAreaWithSignals(TrackingArea.RM_AREA.Value)
-
+             @DoubleAreaWithSignals(CustomTrackingArea.REV_AREA.Value)
           <div class="direction_sign">
             <span class="direction-icon arrowRight-icon" role="img"></span>
           </div>
@@ -155,24 +154,29 @@
           @MultiArea(TrackingArea.CHG_AREA.Value)
 
         </div>
+        <div>
+             <div class="triangle-bottom" style=" margin-left:750px;"></div>
+        </div>
 
         <div class="tracking_row rightToLeft">
 
-          @DoubleAreaWithSignals(TrackingArea.CB_AREA.Value)
+          @*@DoubleAreaWithSignals(TrackingArea.CB_AREA.Value)*@
+          @MultiArea(CustomTrackingArea.COOL_AREA_2_S1.Value)
 
           <div class="direction_sign">
             <span class="direction-icon arrowLeft-icon" role="img"></span>
           </div>
 
-          @MultiArea(TrackingArea.ENTER_TABLE_AREA.Value)
+          @MultiArea(CustomTrackingArea.BUND_AREA_1.Value)
 
-          <div class="direction_sign">
+          @*<div class="direction_sign">
             <span class="direction-icon arrowLeft-icon" role="img"></span>
-          </div>
+          </div>*@
+          <div class="empty-block-1"></div>
 
-          @MultiArea(TrackingArea.RAKE_AREA.Value)
+          @MultiArea(CustomTrackingArea.COOL_AREA_1.Value)
 
-          <div class="direction_sign">
+         @* <div class="direction_sign">
             <span class="direction-icon arrowLeft-icon" role="img"></span>
           </div>
 
@@ -180,38 +184,41 @@
 
           <div class="direction_sign"></div>
 
-          @MultiArea(TrackingArea.GARRET_AREA.Value)
+          @MultiArea(TrackingArea.GARRET_AREA.Value)*@
 
         </div>
 
         <div class="tracking_row rightToLeft">
 
-          @DoubleAreaWithSignals(TrackingArea.PST_FM_AREA.Value)
-
+          @*@DoubleAreaWithSignals(TrackingArea.PST_FM_AREA.Value)*@
+          @MultiArea(CustomTrackingArea.COOL_AREA_3_S2.Value)
           <div class="direction_sign">
             <span class="direction-icon arrowLeft-icon" role="img"></span>
           </div>
 
-          @DoubleAreaWithSignals(TrackingArea.ROD_AREA.Value)
-
-          <div class="direction_sign">
+         @* @DoubleAreaWithSignals(TrackingArea.ROD_AREA.Value)*@
+           @MultiArea(CustomTrackingArea.BUND_AREA_2.Value)
+          @*<div class="direction_sign">
             <span class="direction-icon arrowLeft-icon" role="img"></span>
           </div>
 
-          @MultiArea(TrackingArea.TRANSPORT_AREA.Value)
+          @MultiArea(TrackingArea.TRANSPORT_AREA.Value)*@
 
           <div class="direction_sign"></div>
 
           <div class="empty-block"></div>
 
         </div>
+        <div class ="tracking_row rightToLeft">
+          @MultiArea(CustomTrackingArea.SLOW_COOL_AREA.Value)
+        </div>
 
       </div>
 
       <div class="direction_sign-back">
-        <div class="turning-arrow-wrapper" style="position: absolute; right: 20px; top: 235px;">
+        <div class="turning-arrow-wrapper" style="position: absolute; right: 20px; top: 165px;">
           <div class="line-horizontal"></div>
-          <div class="line-vertical line-vertical-right" style="height: 170px"></div>
+          <div class="line-vertical line-vertical-right" style="height: 110px"></div>
           <div class="line-arrow">
             <span class="arrowLeft-icon turning-arrow-triangle-left"></span>
             <div class="line-horizontal"></div>
@@ -220,7 +227,7 @@
       </div>
 
       <div class="direction_sign-back">
-        <div class="turning-arrow-wrapper" style="position: absolute; right: 20px; top: 235px;">
+        <div class="turning-arrow-wrapper" style="position: absolute; right: 20px; top: 165px;">
           <div class="line-horizontal"></div>
           <div class="line-vertical line-vertical-right" style="height: 340px"></div>
           <div class="line-arrow">
@@ -229,6 +236,17 @@
           </div>
         </div>
       </div>
+
+            <div class="direction_sign-back">
+                <div class="turning-arrow-wrapper" style="position: absolute; right: 20px; top: 165px;">
+                    <div class="line-horizontal"></div>
+                    <div class="line-vertical line-vertical-right" style="height: 480px"></div>
+                    <div class="line-arrow">
+                        <span class="arrowLeft-icon turning-arrow-triangle-left"></span>
+                        <div class="line-horizontal"></div>
+                    </div>
+                </div>
+            </div>
 
     </div>
   </div>

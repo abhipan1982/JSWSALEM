@@ -34,10 +34,17 @@ const _Visualization = new class {
 }
 
 const _TrackingAreas = new class {
+  ////its for basedb area access
+  //GetTrackingAreaByCode(areaCode) {
+  //  return TrackingAreas.find(({ TrackingAreaCode }) => TrackingAreaCode === areaCode);
+  //}
 
+
+  //av06072023start
   GetTrackingAreaByCode(areaCode) {
-    return TrackingAreas.find(({ TrackingAreaCode }) => TrackingAreaCode === areaCode);
+    return CustomTrackingAreas.find(({ TrackingAreaCode }) => TrackingAreaCode === areaCode);
   }
+  //av06072023end
 
   SelectAreaTab(tabItem) {
     let tabsEl = $("#MaterialsInArea");

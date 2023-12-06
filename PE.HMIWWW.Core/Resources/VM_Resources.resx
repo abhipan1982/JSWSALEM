@@ -1819,10 +1819,10 @@
     <value>kg/m3</value>
   </data>
   <data name="UNIT_Length" xml:space="preserve">
-    <value>ft</value>
+    <value>m</value>
   </data>
   <data name="UNIT_Ovality" xml:space="preserve">
-    <value>x</value>
+    <value>mm</value>
   </data>
   <data name="UNIT_Pressure" xml:space="preserve">
     <value>kg/m3</value>
@@ -4608,7 +4608,7 @@
     <value>Edit Roll Set Status</value>
   </data>
   <data name="UNIT_Weight" xml:space="preserve">
-    <value>lb</value>
+    <value>kg</value>
   </data>
   <data name="ENUM_RollGrooveStatus_Undefined" xml:space="preserve">
     <value>Undefined</value>
@@ -9948,7 +9948,7 @@
     <value>Undefined</value>
   </data>
   <data name="NAME_AREA_5200000" xml:space="preserve">
-    <value>Roughing Mill</value>
+    <value>Roughing Mill </value>
   </data>
   <data name="NAME_AREA_5300000" xml:space="preserve">
     <value>Intermediate Mill</value>
@@ -11017,7 +11017,7 @@
     <value>Stand</value>
   </data>
   <data name="NAME_L3TransferTable_WorkOrderReports" xml:space="preserve">
-    <value>Work Order Report</value>
+    <value>L2L3BatchReport</value>
   </data>
   <data name="NAME_ProductionTime" xml:space="preserve">
     <value>Production Time</value>
@@ -12658,7 +12658,7 @@
     <value>Product Catalogue Report</value>
   </data>
   <data name="NAME_AREA_6050000" xml:space="preserve">
-    <value>Garret</value>
+    <value>Garret </value>
   </data>
   <data name="HMI_MENU_HeatReport" xml:space="preserve">
     <value>Heat Report</value>
@@ -13504,7 +13504,7 @@
     <value>Process Expert</value>
   </data>
   <data name="NAME_L3TransferTable_ProductReports" xml:space="preserve">
-    <value>Product Report</value>
+    <value>L3L2BatchData</value>
   </data>
   <data name="NAME_ProductSequenceInWorkOrder" xml:space="preserve">
     <value>Product Seq In Work Order</value>
@@ -13709,5 +13709,53 @@
   </data>
   <data name="BUTTON_Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="PAGE_TITLE_TrackingManagement_Index1" xml:space="preserve">
+    <value>Tracking Management 1</value>
+  </data>
+  <data name="PAGE_TITLE_TrackingManagement_Index2" xml:space="preserve">
+    <value>Tracking Management2</value>
+  </data>
+  <data name="PAGE_TITLE_TrackingManagement_Index3" xml:space="preserve">
+    <value>Tracking Management3</value>
+  </data>
+  <data name="NAME_MaxDiameter" xml:space="preserve">
+    <value>MaxDiameter</value>
+  </data>
+  <data name="NAME_MaxSquareness" xml:space="preserve">
+    <value>MaxSquareness</value>
+  </data>
+  <data name="NAME_MinDiameter" xml:space="preserve">
+    <value>MinDiameter</value>
+  </data>
+  <data name="NAME_MinOvality" xml:space="preserve">
+    <value>MinOvality</value>
+  </data>
+  <data name="NAME_MinSquareness" xml:space="preserve">
+    <value>MinSquareness</value>
+  </data>
+  <data name="NAME_NegRcsSide" xml:space="preserve">
+    <value>NegRcsSide</value>
+  </data>
+  <data name="NAME_PosRcsSide" xml:space="preserve">
+    <value>PosRcsSide</value>
+  </data>
+  <data name="UNIT_SQUARNESS" xml:space="preserve">
+    <value>mm</value>
+  </data>
+  <data name="NAME_L3TransferTable_BatchReports" xml:space="preserve">
+    <value>BatchReport</value>
+  </data>
+  <data name="NAME_L3TransferTable_BatchDataDefinition" xml:space="preserve">
+    <value>BatchDataDefinition</value>
+  </data>
+  <data name="NAME_BATCH_NO" xml:space="preserve">
+    <value>BATCH_NO</value>
+  </data>
+  <data name="NAME_BLOOMS_IN_BUNDLE" xml:space="preserve">
+    <value>BLOOMS_IN_BUNDLE</value>
+  </data>
+  <data name="NAME_PO_NO" xml:space="preserve">
+    <value>PO_NO</value>
   </data>
 </root>

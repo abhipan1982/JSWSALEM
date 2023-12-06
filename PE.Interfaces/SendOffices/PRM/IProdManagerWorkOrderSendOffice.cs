@@ -1,7 +1,7 @@
 using System.ServiceModel;
 using System.Threading.Tasks;
 using PE.BaseModels.DataContracts.Internal.DBA;
-using PE.BaseModels.DataContracts.Internal.PPL;
+using PE.Models.DataContracts.Internal.PPL;
 using PE.BaseModels.DataContracts.Internal.PRM;
 using SMF.Core.Communication;
 using SMF.Core.DC;
@@ -32,5 +32,8 @@ namespace PE.Interfaces.SendOffices.PRM
     [OperationContract]
     [FaultContract(typeof(ModuleMessage))]
     Task<SendOfficeResult<DataContractBase>> SendEndOfWorkShop(DataContractBase dc);
+
+
+ 
   }
 }

@@ -7,6 +7,7 @@ using SMF.Core.DC;
 using PE.Models.DataContracts.Internal.DBA;
 using PE.DBA.Base.Module.Communication;
 using PE.DBA.DataBaseAdapter.Managers;
+using PE.Models.DataContracts.External.DBA;
 
 namespace PE.DBA.DataBaseAdapter.Communication
 {
@@ -25,20 +26,47 @@ namespace PE.DBA.DataBaseAdapter.Communication
     //  _L3DbCommunicationManager = l3DbCommunicationManager;
     //}
 
-    public virtual Task<DCL3L2BatchData> CreateBatchDataAsync(DCL3L2BatchData batchData)
+    public virtual Task<DCL3L2BatchDataDefinition> CreateBatchDataAsync(DCL3L2BatchDataDefinition batchData)
     {
-      DCL3L2BatchData internalDc = new DCL3L2BatchData();
+      DCL3L2BatchDataDefinitionExt internalDc = new DCL3L2BatchDataDefinitionExt();
       internalDc.ToExternal(batchData);
 
       return _L3DbCommunicationManager.CreateBatchDataAsync(internalDc);
     }
 
-    public virtual Task<DCL3L2BatchData> UpdateBatchDataAsync(DCL3L2BatchData batchData)
+    public virtual Task<DCL3L2BatchDataDefinition> UpdateBatchDataAsync(DCL3L2BatchDataDefinition batchData)
     {
-      DCL3L2BatchData externalDc = new DCL3L2BatchData();
+      DCL3L2BatchDataDefinitionExt externalDc = new DCL3L2BatchDataDefinitionExt();
       externalDc.ToExternal(batchData);
 
-      return _L3DbCommunicationManager.UpdateBatchDataAsync(externalDc);
+      return _L3DbCommunicationManager.UpdateBatchDataDefinitionAsync(externalDc);
+    }
+
+    //Av@
+
+    public virtual Task<DataContractBase> CreateWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionMOD workOrderDefinition)
+    {
+      DCL3L2WorkOrderDefinitionExtMOD externalDc = new DCL3L2WorkOrderDefinitionExtMOD();
+      externalDc.ToExternal(workOrderDefinition);
+
+      return _L3DbCommunicationManager.CreateWorkOrderDefinitionAsyncEXT(externalDc);
+    }
+
+    public virtual Task<DataContractBase> UpdateWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionMOD workOrderDefinition)
+    {
+      DCL3L2WorkOrderDefinitionExtMOD externalDc = new DCL3L2WorkOrderDefinitionExtMOD();
+      externalDc.ToExternal(workOrderDefinition);
+
+      return _L3DbCommunicationManager.CreateWorkOrderDefinitionAsyncEXT(externalDc);
+    }
+
+
+    public virtual Task<DataContractBase> DeleteWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionMOD workOrderDefinition)
+    {
+      DCL3L2WorkOrderDefinitionExtMOD externalDc = new DCL3L2WorkOrderDefinitionExtMOD();
+      externalDc.ToExternal(workOrderDefinition);
+
+      return _L3DbCommunicationManager.DeleteWorkOrderDefinitionAsyncEXT(externalDc);
     }
 
     //public virtual Task<DataContractBase> DeleteWorkOrderDefinitionAsync(DCL3L2BatchData workOrderDefinition)

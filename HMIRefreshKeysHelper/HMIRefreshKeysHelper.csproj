@@ -19,9 +19,9 @@
     <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PE.DbEntity\PE.DbEntity.csproj" />
+    <PackageReference Include="PE.BaseCommon" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PE.BaseCommon" />
+    <ProjectReference Include="..\PE.DbEntity\PE.DbEntity.csproj" />
   </ItemGroup>
 </Project>

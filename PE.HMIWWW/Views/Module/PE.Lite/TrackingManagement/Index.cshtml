@@ -4,6 +4,7 @@
 }
 
 @using PE.BaseDbEntity.EnumClasses;
+@using PE.DbEntity.EnumClasses;
 
 @section module_menu
   {
@@ -28,21 +29,42 @@
 
   <div class="tracking-container">
 
-    <div class="tracking-column-table_1" id="@TrackingArea.CHG_AREA.Name"></div>
+    <div class="tracking-column-table_1" id="@CustomTrackingArea.CHG_AREA_1.Name"></div>
 
     <div class="tracking-column-arrows">
       <div class="triangle-right"></div>
       <div class="triangle-left"></div>
     </div>
 
-    <div class="tracking-column-table_2" id="@TrackingArea.FCE_AREA.Name"></div>
+    <div class="tracking-column-table_1A" id="@CustomTrackingArea.FCE_ENTRY_RT_AREA.Name"></div>
+
+    <div class="tracking-column-arrows">
+        <div class="triangle-right"></div>
+        <div class="triangle-left"></div>
+    </div>
+
+    <div class="tracking-column-table_2" id="@CustomTrackingArea.FCE_AREA_1.Name"></div>
 
     <div class="tracking-column-arrows">
       <div class="triangle-right"></div>
     </div>
 
     <div class="tracking-column-table">
-      <div class="table-area" id="@TrackingArea.RM_AREA.Name"></div>
+        <div class="table-area" id="@CustomTrackingArea.FCE_EXIT_AREA.Name"></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.TBT_AREA.Name"></div>
+
+        @*<div class="table-area" id="@CustomTrackingArea.DSC_AREA.Name"></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.REV_AREA.Name"></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.COOL_AREA_1.Name"></div>
+        *@
+        @*<div class="table-area" id="@CustomTrackingArea.CM_AREA.Name"></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.BTRT_AREA.Name"></div>
+        <div class="triangle-bottom"></div>*@
+      @*<div class="table-area" id="@TrackingArea.RM_AREA.Name"></div>
       <div class="triangle-bottom"></div>
       <div class="table-area" id="@TrackingArea.IM_AREA.Name"></div>
       <div class="triangle-bottom"></div>
@@ -53,15 +75,42 @@
       <div class="table-area" id="@TrackingArea.ROD_AREA.Name"></div>
       <div class="triangle-bottom"></div>
       <div class="table-area" id="@TrackingArea.TRANSPORT_AREA.Name"></div>
-      <div class="table-area" id="@TrackingArea.GREY_AREA.Name" style="margin-top: 29px;"></div>
+      <div class="table-area" id="@TrackingArea.GREY_AREA.Name" style="margin-top: 29px;"></div>*@
     </div>
-
     <div class="tracking-column-arrows">
-      <div class="triangle-right" style="margin-top: 193px;"></div>
-      <div class="triangle-right" style="margin-top: 20px;"></div>
+        <div class="triangle-right"></div>
     </div>
-
+  @*  <div class="tracking-column-arrows">
+      <div class="triangle-right" style="margin-top: 150px;"></div>
+      <div class="triangle-right" style="margin-top: 20px;"></div>
+    </div>*@
     <div class="tracking-column-table">
+        <div class="table-area" id="@CustomTrackingArea.DSC_AREA.Name"></div>
+        @*<div class="table-area" id="@CustomTrackingArea.CM_AREA.Name" style="margin-top: 90px;"></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.BTRT_AREA.Name"></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.SAW_AREA.Name"></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.SLOW_COOL_AREA.Name"></div> *@    
+    </div>
+    <div class="tracking-column-arrows">
+        <div class="triangle-right"></div>
+    </div>
+    <div class="tracking-column-table">
+        <div class="table-area" id="@CustomTrackingArea.REV_AREA.Name"></div>
+        <div style="margin-top: 620px; margin-left:100px;">
+            <form asp-controller="TrackingManagement" asp-action="Index1">
+                <input type="image" src="~/css/tracking/RightArrow.png" width="30" height="30" name="Next" />
+            </form>
+
+        </div>
+
+    </div>
+    <div class="tracking-column-arrows">
+        <div class="triangle-right"></div>
+    </div>
+    @*<div class="tracking-column-table">
       <div class="table-area" id="@TrackingArea.GARRET_AREA.Name" style="margin-top: 110px;"></div>
       <div class="table-area" id="@TrackingArea.CB_AREA.Name" style="margin-top: 20px;"></div>
       <div class="triangle-bottom"></div>
@@ -69,15 +118,43 @@
         <div class="table-area" id="@TrackingArea.ENTER_TABLE_AREA.Name"></div>
       </div>
       <div class="table-area" id="@TrackingArea.LAYER_AREA.Name" style="margin-top: 174px;"></div>
-    </div>
-
-    <div class="tracking-column-arrows">
+    </div>*@
+   @* <div class="tracking-column-arrows">
+        <div class="triangle-right" style="margin-top: 365px;"></div>
+        <div class="triangle-right" style="margin-top: 40px;"></div>
+    </div>*@
+    @*<div class="tracking-column-arrows">
       <div class="triangle-right" style="margin-top: 370px;"></div>
       <div class="triangle-left" style="margin-top: 315px;"></div>
+    </div>*@
+
+    @*<div class="tracking-column-table_4" id="@TrackingArea.RAKE_AREA.Name"></div>*@
+    @*<div class="tracking-column-table_4" >
+        <div class="table-area" id="@CustomTrackingArea.COOL_AREA_2.Name" style="margin-top: 90px;" ></div>
+        <div class="table-area" id="@CustomTrackingArea.COOL_AREA_3.Name" style="margin-top: 20px;"></div>
     </div>
-
-    <div class="tracking-column-table_4" id="@TrackingArea.RAKE_AREA.Name"></div>
-
+    <div class="tracking-column-arrows">
+        <div class="triangle-right" style="margin-top: 365px;"></div>
+        <div class="triangle-right" style="margin-top: 40px;"></div>
+    </div>*@
+    @*<div class="tracking-column-table_5">
+        <div class="table-area" id="@CustomTrackingArea.DIS_AREA_2.Name" style="margin-top: 310px;"></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.DIS_AREA_3.Name" ></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.BUND_AREA_1.Name"></div>
+    </div>
+    <div class="tracking-column-arrows">
+        <div class="triangle-right" style="margin-top: 370px;"></div>
+        <div class="triangle-right" style="margin-top: 40px;"></div>
+    </div>*@
+   @* <div class="tracking-column-table_6">
+        <div class="table-area" id="@CustomTrackingArea.A_SAW_ENTRY_AREA.Name" style="margin-top: 360px;"></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.A_SAW_EXIT_AREA.Name"></div>
+        <div class="triangle-bottom"></div>
+        <div class="table-area" id="@CustomTrackingArea.BUND_AREA_2.Name"></div>
+    </div>*@
   </div>
 
   <link rel="stylesheet" href="~/bundles/css/Module/TrackingManagement.css" />

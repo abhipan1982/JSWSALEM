@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using PE.BaseDbEntity.EnumClasses;
 using PE.BaseDbEntity.Models;
 using PE.BaseDbEntity.PEContext;
-using PE.BaseModels.DataContracts.Internal.PRM;
+using PE.Models.DataContracts.Internal.PRM;
 using PE.DbEntity.PEContext;
 using PE.HMIWWW.Core.Communication;
 using PE.HMIWWW.Core.Resources;
@@ -138,7 +138,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref heat);
 
-      DCHeat dCHeat = new DCHeat
+      DCHeatEXT dCHeat = new DCHeatEXT
       {
         HeatName = heat.HeatName,
         FKSteelgradeId = heat.FKSteelgradeId,
@@ -168,7 +168,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref heat);
 
-      DCHeat dCHeat = new DCHeat
+      DCHeatEXT dCHeat = new DCHeatEXT
       {
         HeatName = heat.HeatName,
         FKSteelgradeId = heat.FKSteelgradeId,

@@ -12,16 +12,17 @@ using PE.Interfaces.Modules;
 using PE.Models.DataContracts.Internal.PRM;
 using PE.PRM.Base.Module.Communication;
 using PE.Models.DataContracts.Internal.DBA;
+using System.ServiceModel.Channels;
 
 namespace PE.PRM.ProdManager.Communication
 {
   // public abstract class ExternalAdapter : ModuleBaseExternalAdapter<IProdManager>, IProdManager
   //public class ExternalAdapter<T> : ExternalAdapterBase<T>, IProdManager where T : class, IProdManager
-  public class ExternalAdapter : ExternalAdapterBase<IProdManager>, IProdManager
+  public class ExternalAdapter : ModuleBaseExternalAdapter<IProdManager>, IProdManager
   {
     protected readonly ExternalAdapterHandler HandlerPC;
     #region ctor
-    public ExternalAdapter(ExternalAdapterHandler handler) :base()
+    public ExternalAdapter(ExternalAdapterHandler handler) :base(handler)
     {
       HandlerPC = handler;
     }
@@ -38,6 +39,171 @@ namespace PE.PRM.ProdManager.Communication
       // throw new NotImplementedException();
       return HandleIncommingMethod(HandlerPC.UpdateProductCatalogueEXTAsync, productCatalogue);
     }
+
+
+
+
+
+    public Task<DataContractBase> DeleteProductCatalogueEXTAsync(DCProductCatalogueEXT productCatalogue)
+    {
+      //throw new NotImplementedException();
+      return HandleIncommingMethod(HandlerPC.DeleteProductCatalogueEXTAsync, productCatalogue);
+    }
+
+
+
+    public Task<DataContractBase> UpdateSteelgradeAsyncEXT(DCSteelgradeEXT dcSteelgrade)
+    {
+      return HandleIncommingMethod(HandlerPC.UpdateSteelgradeAsyncEXT, dcSteelgrade);
+    }
+
+
+
+    public Task<DataContractBase> CreateSteelgradeAsyncEXT(DCSteelgradeEXT dcSteelgrade)
+    {
+      return HandleIncommingMethod(HandlerPC.CreateSteelgradeAsyncEXT, dcSteelgrade);
+    }
+
+    public Task<DataContractBase> DeleteSteelgradeAsyncEXT(DCSteelgradeEXT dcSteelgrade)
+    {
+      return HandleIncommingMethod(HandlerPC.DeleteSteelgradeAsyncEXT, dcSteelgrade);
+    }
+
+
+    public Task<DataContractBase> UpdateSteelFamilyAsyncEXT(DCSteelFamilyEXT dc)
+    {
+      return HandleIncommingMethod(HandlerPC.UpdateSteelFamilyAsyncEXT, dc);
+    }
+
+    public Task<DataContractBase> CreateSteelFamilyAsyncEXT(DCSteelFamilyEXT dc)
+    {
+      return HandleIncommingMethod(HandlerPC.CreateSteelFamilyAsyncEXT, dc);
+    }
+
+
+    public Task<DataContractBase> DeleteSteelFamilyAsyncEXT(DCSteelFamilyEXT dc)
+    {
+      return HandleIncommingMethod(HandlerPC.DeleteSteelFamilyAsyncEXT, dc);
+    }
+
+
+    public Task<DataContractBase> CreateHeatAsyncEXT(DCHeatEXT dcHeat)
+    {
+      return HandleIncommingMethod(HandlerPC.CreateHeatAsyncEXT, dcHeat);
+    }
+
+
+    public Task<DataContractBase> EditHeatAsyncEXT(DCHeatEXT dcHeat)
+    {
+      return HandleIncommingMethod(HandlerPC.EditHeatAsyncEXT, dcHeat);
+    }
+
+
+
+
+    public Task<DataContractBase> CreateWorkOrderAsyncEXT(DCWorkOrderEXT dcWorkOrder)
+    {
+      return HandleIncommingMethod(HandlerPC.CreateWorkOrderAsyncEXT, dcWorkOrder);
+    }
+
+
+
+    public Task<DataContractBase> UpdateWorkOrderAsyncEXT(DCWorkOrderEXT dcWorkOrder)
+    {
+      return HandleIncommingMethod(HandlerPC.UpdateWorkOrderAsyncEXT, dcWorkOrder);
+    }
+
+
+
+    public Task<DataContractBase> UpdateMaterialAsyncEXT(DCMaterialEXT dcMaterial)
+    {
+      return HandleIncommingMethod(HandlerPC.UpdateMaterialAsyncEXT, dcMaterial);
+    }
+
+
+    public Task<DataContractBase> CreateMaterialAsyncEXT(DCMaterialEXT dcMaterial)
+    {
+      return HandleIncommingMethod(HandlerPC.CreateMaterialAsyncEXT, dcMaterial);
+    }
+
+
+    public Task<DataContractBase> CreateMaterialCatalogueAsyncEXT(DCMaterialCatalogueEXT dcMaterialCatalogue)
+    {
+      return HandleIncommingMethod(HandlerPC.CreateMaterialCatalogueAsyncEXT, dcMaterialCatalogue);
+    }
+
+    public Task<DataContractBase> UpdateMaterialCatalogueAsyncEXT(DCMaterialCatalogueEXT dcMaterialCatalogue)
+    {
+      return HandleIncommingMethod(HandlerPC.UpdateMaterialCatalogueAsyncEXT, dcMaterialCatalogue);
+    }
+
+    public Task<DataContractBase> DeleteMaterialCatalogueAsyncEXT(DCMaterialCatalogueEXT dcMaterialCatalogue)
+    {
+      return HandleIncommingMethod(HandlerPC.DeleteMaterialCatalogueAsyncEXT, dcMaterialCatalogue);
+    }
+
+
+    public Task<DataContractBase> DeleteWorkOrderAsyncEXT(DCWorkOrderEXT dcWorkOrder)
+    {
+      return HandleIncommingMethod(HandlerPC.DeleteWorkOrderAsyncEXT, dcWorkOrder);
+    }
+
+    public Task<DCBatchDataStatus> ProcessBatchDataAsync(DCL3L2BatchDataDefinition dataToSend)
+    {
+      return HandleIncommingMethod(HandlerPC.ProcessBatchDataAsync, dataToSend);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -400,14 +566,11 @@ namespace PE.PRM.ProdManager.Communication
 
     }
 
-    public virtual Task<DCWorkOrderStatus> ProcessWorkOrderDataAsync(DCL3L2WorkOrderDefinition message)
+    public virtual Task<PE.Models.DataContracts.Internal.DBA.DCWorkOrderStatus> ProcessWorkOrderDataAsync(DCL3L2WorkOrderDefinition message)
     {
       throw new System.NotImplementedException();
     }
 
-    public Task<DCBatchDataStatus> ProcessBatchDataAsync(DCL3L2BatchData dataToSend)
-    {
-      throw new NotImplementedException();
-    }
+   
   }
 }

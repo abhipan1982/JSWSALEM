@@ -28,7 +28,6 @@
   <ItemGroup>
     <ProjectReference Include="..\PE.HMIWWW.Core\PE.HMIWWW.Core.csproj" />
     <ProjectReference Include="..\PE.Interfaces\PE.Interfaces.csproj" />
-    <ProjectReference Include="..\PE.Models\PE.Models.csproj" />
     <ProjectReference Include="..\PE.ViewModel\PE.HMIWWW.ViewModel.csproj" />
   </ItemGroup>
   <ItemGroup>

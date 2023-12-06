@@ -27,11 +27,11 @@ namespace PE.PRM.ProdManager.Handler
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
 
-    public PRMProductCatalogueEXT CreateProductCatalogue(DCProductCatalogueEXT dc)
+    public PRMProductCatalogueEXT CreateProductCatalogue(DCProductCatalogueEXT dc,long temp_id)
     {
       var productCatalogue = new PRMProductCatalogueEXT();
       //@av
-      productCatalogue.FKProductCatalogueId = dc.Id;
+      productCatalogue.FKProductCatalogueId = temp_id;
       productCatalogue.MinOvality = dc.MinOvality;
       productCatalogue.MinDiameter = dc.MinDiameter;
       productCatalogue.MaxDiameter = dc.MaxDiameter;
@@ -151,35 +151,104 @@ namespace PE.PRM.ProdManager.Handler
 
 
 
-    //public async Task<PRMProductCatalogueEXT> GetProductCatalogueByNameEXTAsync(PECustomContext ctx, string productCatalogueName,
-    // bool getDefault = false)
-    //{
+    public async Task<PRMProductCatalogue> GetProductCatalogueByNameEXTAsync1(PECustomContext ctx, string productCatalogueName,
+     bool getDefault = false)
+    {
 
-    //  PRMProductCatalogueEXT productCatalogue = string.IsNullOrWhiteSpace(productCatalogueName)
-    //    ? null
-    //    : await ctx.PRMProductCatalogueEXTs
-    //      .Where(x => x.ProductCatalogueName.ToLower().Equals(productCatalogueName.ToLower()))
+      PRMProductCatalogue productCatalogue = string.IsNullOrWhiteSpace(productCatalogueName)
+       ? null
+
+       : await ctx.PRMProductCatalogues
+          .Where(x => x.ProductCatalogueName.ToLower().Equals(productCatalogueName.ToLower()))
+          .SingleOrDefaultAsync();
+
+      if (productCatalogue == null && getDefault)
+      {
+        productCatalogue = await ctx.PRMProductCatalogues
+          .Where(x => x.IsDefault)
+          .SingleAsync();
+      }
+
+      return productCatalogue;
+    }
+
+
+
+
+
+
+
+
+
+
+    //public async Task<PRMProductCatalogueEXT> GetProductCatalogueByNameEXTAsync(PECustomContext ctx, long productId,
+    //bool getDefault = false)
+    //{
+    //  PRMProductCatalogueEXT productCatalogue = 
+       
+    //    await ctx.PRMProductCatalogueEXTs.Where(x => x.FKProductCatalogueId == productId)
     //      .SingleOrDefaultAsync();
+
+
 
     //  if (productCatalogue == null && getDefault)
     //  {
-    //    productCatalogue = await ctx.PRMProductCatalogueEXTs
-    //      .Where(x => x.IsDefault)
-    //      .SingleAsync();
+    //    //productCatalogue = await ctx.PRMProductCatalogueEXTs
+    //    //  .Where(x => x.IsDefault)
+    //    //  .SingleAsync();
+    //    return null;
     //  }
 
     //  return productCatalogue;
-    //  }
+    //}
 
 
 
 
-     public async Task<PRMProductCatalogueEXT> GetProductCatalogueByIdEXTAsync(PECustomContext ctx, long productId,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public async Task<PRMProductCatalogueEXT> GetProductCatalogueByIdEXTAsync(PECustomContext ctx, long productId,
       bool getDefault = false)
     {
       PRMProductCatalogueEXT productCatalogue =
         await ctx.PRMProductCatalogueEXTs.Where(x => x.FKProductCatalogueId == productId)
-        .SingleOrDefaultAsync();
+          .SingleOrDefaultAsync();
 
       if (productCatalogue == null && getDefault)
       {

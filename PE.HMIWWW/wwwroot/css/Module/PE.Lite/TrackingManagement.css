@@ -12,9 +12,11 @@
 .drag-hover {
   background-color: #fcfaeb !important;
 }
-
+.REVERSIBLE{
+    background-color:blue;
+}
 .charging {
-  background-color: #da66a7;
+    background-color: #da66a7;
 }
 
 .furnace {
@@ -65,12 +67,30 @@
   display: flex;
   flex-direction: row;
 }
-
+.COOL_3_S2{
+    background-color:blue;
+}
+.CB2_EXIT_RT {
+    background-color: blue;
+}
+.CB3_EXIT_RT {
+    background-color: blue;
+}
+.mv {
+    display: flex;
+    flex-direction: row;
+}
 .tracking-container {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 100%;
+}
+.tracking-container-1 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
 .tracking-column-table {
@@ -131,11 +151,13 @@
   /*border-right: 1px solid #cecece;*/
   text-align: center;
 }
-
+.CB1_ENTRY_RT{
+    background-color:blueviolet;
+}
 .material-number {
-  width: 15%;
-  height: 100%;
-  text-align: center;
+    width: 15%;
+    height: 100%;
+    text-align: center;
 }
 
 .tracking-column-table_1 {
@@ -143,15 +165,35 @@
   flex-direction: row;
   width: 200px;
   height: 100%;
-  background-color: #fafafa;
+  /*background-color: #fafafa;*/
 }
-
+.COOL_AREA_1{
+    background-color:chartreuse;
+}
+.tracking-column-table_1x {
+    display: flex;
+    flex-direction: row;
+    width: 515px;
+    height: 100%;
+}
+.tracking-column-table_1A {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    height: 100%;
+    /*background-color: #fafafa;*/
+}
+.bt {
+    display: flex;
+    flex-direction: row;
+    
+}
 .tracking-column-table_2 {
-  display: flex;
-  flex-direction: row;
-  width: 400px;
-  height: 100%;
-  background-color: #fafafa;
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: 100%;
+   /* background-color: #fafafa;*/
 }
 
 .tracking-column-table_3 {
@@ -161,25 +203,86 @@
   height: 100%;
   background-color: #fafafa;
 }
+.vb{
+    display:flex;
+    flex-direction:row;
+}
 
-.tracking-column-table_4 {
+.tracking-column-table_10 {
   display: flex;
   flex-direction: row;
   width: 800px;
   height: 100%;
-  background-color: #fafafa;
+  /*background-color: #fafafa;*/
+}
+.tracking-column-table_10m {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    height: 100%;
+    /*background-color: #fafafa;*/
+}
+.tracking-column-table_10Y {
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: 85%;
+    /*background-color: #fafafa;*/
+}
+.tracking-column-table_11 {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    height: 15%;
+    background-color: #fafafa;
+}
+.tracking-column-table_12 {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    height: 11%;
+    background-color: #fafafa;
+}
+.tracking-column-table_13 {
+    display: flex;
+    flex-direction: column;
+    width: 515px;
+    height: 100%;
+    /*background-color: #fafafa;*/
+}
+.tracking-column-table_4 {
+    width: 200px;
+    height: 100%;
+    
 }
 
+.tracking-column-table_5 {
+    width: 200px;
+    height: 100%;
+    
+}
+.tracking-column-table_6 {
+    width: 200px;
+    height: 100%;
+   
+}
 .tracking-column-arrows {
-  height: 100%;
-  width: 40px;
+    height: 100%;
+    width: 40px;
 }
-
+.tracking-column-arrows-1Z{
+    display:flex;
+    flex-direction:column;
+}
+.nv {
+    display: flex;
+    flex-direction: column;
+}
 /*//*/
 .table-area-container {
-  display: flex;
-  flex-direction: row;
-  width: 200px;
+    display: flex;
+    flex-direction: row;
+    width: 200px;
 }
 
 .table-row {
@@ -500,4 +603,80 @@
 
 .entry {
   background-color: #CC997F;
+}
+.DESCALER{
+    background-color:blue;
+}
+.CONTINUOUS{
+    background-color:blue;
+}
+.BTRT {
+    background-color: blue;
+}
+.COOL_1 {
+    background-color: sandybrown;
+}
+.SAW{
+    background-color:palevioletred;
+}
+.slow_cooling {
+    background-color: forestgreen;
+}
+.cool_2{
+    background-color:sandybrown ;
+}
+.cool_3 {
+    background-color: sandybrown;
+}
+.Bund_1 {
+    background-color: green;
+}
+.Dis_2 {
+    background-color: lawngreen;
+}
+.Dis_3 {
+    background-color: lawngreen;
+}
+.Bund_2 {
+    background-color: green;
+}
+.SAW_ENTRY {
+    background-color: palevioletred;
+}
+.SAW_EXIT {
+    background-color: palevioletred;
+}
+.FURNACE_ROLLER_ENTRY{
+    background-color:cadetblue;
+}
+.FURNACE_ROLLER_EXIT {
+    background-color: cadetblue;
+}
+.TBT_OUT_GRID {
+    background-color: cadetblue;
+}
+.REV_EXIT_AREA {
+    background-color: cadetblue;
+}
+.CB2_ENTRY_RT {
+    background-color: cadetblue;
+}
+.CB3_ENTRY_RT {
+    background-color: cadetblue;
+}
+.COOL_2_S1{
+    background-color:royalblue;
+}
+.COOL_2_S2 {
+    background-color: royalblue;
+}
+.COOL_3_S1 {
+    background-color: royalblue;
+}
+.A_SAW_ENTRY1 {
+    background-color: royalblue;
+}
+.A_SAW_ENTRY_2 {
+    background-color: royalblue;
+}
 }

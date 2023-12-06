@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PE.Interfaces\PE.Interfaces.csproj" />
-    <ProjectReference Include="..\PE.DbEntity\PE.DbEntity.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" />

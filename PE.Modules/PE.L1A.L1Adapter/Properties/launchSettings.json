@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "PE.L1A.L1Adapter": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:61691;http://localhost:61692"
+    }
+  }
+}

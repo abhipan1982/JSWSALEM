@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using PE.BaseDbEntity.TransferModels;
+using PE.DbEntity.TransferModels;
 using PE.HMIWWW.Core.ViewModel;
 using SMF.HMIWWW.Attributes;
 using SMF.HMIWWW.UnitConverter;

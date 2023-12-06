@@ -6,7 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\PE.Interfaces\PE.Interfaces.csproj" />
-    <ProjectReference Include="..\..\PE.Models\PE.Models.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SMF.Module" />

@@ -17,6 +17,8 @@ using PE.Core;
 using PE.Interfaces.Modules;
 using SMF.Core.Communication;
 using SMF.Core.DC;
+using PE.Models.DataContracts.Internal.PRM;
+using PE.Models.DataContracts.Internal.DBA;
 
 namespace PE.HMIWWW.Core.Communication
 {
@@ -500,34 +502,34 @@ namespace PE.HMIWWW.Core.Communication
 
     #region prodManager
 
-    public static Task<SendOfficeResult<DataContractBase>> SendCreateSteelgradeAsync(DCSteelgrade dcSteelgrade)
+    public static Task<SendOfficeResult<DataContractBase>> SendCreateSteelgradeAsync(DCSteelgradeEXT dcSteelgrade)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.CreateSteelgradeAsync(dcSteelgrade));
+      return HandleHMISendMethod(targetModuleName, () => client.CreateSteelgradeAsyncEXT(dcSteelgrade));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> SendSteelgradeAsync(DCSteelgrade dcSteelgrade)
+    public static Task<SendOfficeResult<DataContractBase>> SendSteelgradeAsync(DCSteelgradeEXT dcSteelgrade)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.UpdateSteelgradeAsync(dcSteelgrade));
+      return HandleHMISendMethod(targetModuleName, () => client.UpdateSteelgradeAsyncEXT(dcSteelgrade));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> SendDeleteSteelgradeAsync(DCSteelgrade dcSteelgrade)
+    public static Task<SendOfficeResult<DataContractBase>> SendDeleteSteelgradeAsync(DCSteelgradeEXT dcSteelgrade)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.DeleteSteelgradeAsync(dcSteelgrade));
+      return HandleHMISendMethod(targetModuleName, () => client.DeleteSteelgradeAsyncEXT(dcSteelgrade));
     }
 
     public static Task<SendOfficeResult<DataContractBase>> SendScrapGroupAsync(DCScrapGroup dcScrapgroup)
@@ -560,37 +562,37 @@ namespace PE.HMIWWW.Core.Communication
       return HandleHMISendMethod(targetModuleName, () => client.DeleteScrapGroupAsync(dcScrapgroup));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> SendUpdateSteelFamilyAsync(DCSteelFamily dc)
+    public static Task<SendOfficeResult<DataContractBase>> SendUpdateSteelFamilyAsync(DCSteelFamilyEXT dc)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.UpdateSteelFamilyAsync(dc));
+      return HandleHMISendMethod(targetModuleName, () => client.UpdateSteelFamilyAsyncEXT(dc));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> SendCreateSteelFamilyAsync(DCSteelFamily dc)
+    public static Task<SendOfficeResult<DataContractBase>> SendCreateSteelFamilyAsync(DCSteelFamilyEXT dc)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.CreateSteelFamilyAsync(dc));
+      return HandleHMISendMethod(targetModuleName, () => client.CreateSteelFamilyAsyncEXT(dc));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> SendDeleteSteelFamilyAsync(DCSteelFamily dc)
+    public static Task<SendOfficeResult<DataContractBase>> SendDeleteSteelFamilyAsync(DCSteelFamilyEXT dc)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.DeleteSteelFamilyAsync(dc));
+      return HandleHMISendMethod(targetModuleName, () => client.DeleteSteelFamilyAsyncEXT(dc));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> SendWorkOrderAsync(DCWorkOrder dcWorkOrder)
+    public static Task<SendOfficeResult<DataContractBase>> SendWorkOrderAsync(DCWorkOrderEXT dcWorkOrder)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
@@ -599,159 +601,162 @@ namespace PE.HMIWWW.Core.Communication
       //call method on remote module
       if (dcWorkOrder.WorkOrderId == 0)
       {
-        return HandleHMISendMethod(targetModuleName, () => client.CreateWorkOrderAsync(dcWorkOrder));
+        return HandleHMISendMethod(targetModuleName, () => client.CreateWorkOrderAsyncEXT(dcWorkOrder));
       }
 
-      return HandleHMISendMethod(targetModuleName, () => client.UpdateWorkOrderAsync(dcWorkOrder));
+      return HandleHMISendMethod(targetModuleName, () => client.UpdateWorkOrderAsyncEXT(dcWorkOrder));
     }
 
     public static Task<SendOfficeResult<DataContractBase>> CreateWorkOrderDefinitionAsync(
-      DCL3L2WorkOrderDefinition dcWorkOrderDefinition)
+      DCL3L2WorkOrderDefinitionMOD dcWorkOrderDefinition)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.DBAdapter.Name;
       IDBAdapter client = InterfaceHelper.GetFactoryChannel<IDBAdapter>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.CreateWorkOrderDefinitionAsync(dcWorkOrderDefinition));
+      return HandleHMISendMethod(targetModuleName, () => client.CreateWorkOrderDefinitionAsyncEXT(dcWorkOrderDefinition));//AV@
     }
 
     public static Task<SendOfficeResult<DataContractBase>> UpdateWorkOrderDefinitionAsync(
-      DCL3L2WorkOrderDefinition dcWorkOrderDefinition)
+      DCL3L2WorkOrderDefinitionMOD dcWorkOrderDefinition)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.DBAdapter.Name;
       IDBAdapter client = InterfaceHelper.GetFactoryChannel<IDBAdapter>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.UpdateWorkOrderDefinitionAsync(dcWorkOrderDefinition));
+      return HandleHMISendMethod(targetModuleName, () => client.UpdateWorkOrderDefinitionAsyncEXT(dcWorkOrderDefinition));
     }
 
     public static Task<SendOfficeResult<DataContractBase>> SendDeleteWorkOrderDefinitionAsync(
-      DCL3L2WorkOrderDefinition dcWorkOrderDefinition)
+      DCL3L2WorkOrderDefinitionMOD dcWorkOrderDefinition)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.DBAdapter.Name;
       IDBAdapter client = InterfaceHelper.GetFactoryChannel<IDBAdapter>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.DeleteWorkOrderDefinitionAsync(dcWorkOrderDefinition));
+      return HandleHMISendMethod(targetModuleName, () => client.DeleteWorkOrderDefinitionAsyncEXT(dcWorkOrderDefinition));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> CreateMaterialAsync(DCMaterial dcMaterial)
+    public static Task<SendOfficeResult<DataContractBase>> CreateMaterialAsync(DCMaterialEXT dcMaterial)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.CreateMaterialAsync(dcMaterial));
+      return HandleHMISendMethod(targetModuleName, () => client.CreateMaterialAsyncEXT(dcMaterial));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> UpdateMaterialAsync(DCMaterial dcMaterial)
+    public static Task<SendOfficeResult<DataContractBase>> UpdateMaterialAsync(DCMaterialEXT dCMaterial)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.UpdateMaterialAsync(dcMaterial));
+      return HandleHMISendMethod(targetModuleName, () => client.UpdateMaterialAsyncEXT(dCMaterial));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> DeleteWorkOrderAsync(DCWorkOrder dcWorkOrder)
+    public static Task<SendOfficeResult<DataContractBase>> DeleteWorkOrderAsync(DCWorkOrderEXT dcWorkOrder)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.DeleteWorkOrderAsync(dcWorkOrder));
+      return HandleHMISendMethod(targetModuleName, () => client.DeleteWorkOrderAsyncEXT(dcWorkOrder));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> SendCreateHeatAsync(DCHeat dcHeat)
+    public static Task<SendOfficeResult<DataContractBase>> SendCreateHeatAsync(DCHeatEXT dcHeat)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.CreateHeatAsync(dcHeat));
+      return HandleHMISendMethod(targetModuleName, () => client.CreateHeatAsyncEXT(dcHeat));
     }
 
-    public static Task<SendOfficeResult<DataContractBase>> SendEditHeatAsync(DCHeat dcHeat)
+    public static Task<SendOfficeResult<DataContractBase>> SendEditHeatAsync(DCHeatEXT dcHeat)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.EditHeatAsync(dcHeat));
+      return HandleHMISendMethod(targetModuleName, () => client.EditHeatAsyncEXT(dcHeat));
     }
 
     public static Task<SendOfficeResult<DataContractBase>> SendCreateMaterialCatalogueAsync(
-      DCMaterialCatalogue dcMaterialCatalogue)
+      DCMaterialCatalogueEXT dcMaterialCatalogue)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.CreateMaterialCatalogueAsync(dcMaterialCatalogue));
+      return HandleHMISendMethod(targetModuleName, () => client.CreateMaterialCatalogueAsyncEXT(dcMaterialCatalogue));
     }
 
     public static Task<SendOfficeResult<DataContractBase>> SendMaterialCatalogueAsync(
-      DCMaterialCatalogue dcMaterialCatalogue)
+      DCMaterialCatalogueEXT dcMaterialCatalogue)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.UpdateMaterialCatalogueAsync(dcMaterialCatalogue));
+      return HandleHMISendMethod(targetModuleName, () => client.UpdateMaterialCatalogueAsyncEXT(dcMaterialCatalogue));
     }
 
     public static Task<SendOfficeResult<DataContractBase>> SendDeleteMaterialCatalogueAsync(
-      DCMaterialCatalogue dcMaterialCatalogue)
+      DCMaterialCatalogueEXT dcMaterialCatalogue)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.DeleteMaterialCatalogueAsync(dcMaterialCatalogue));
+      return HandleHMISendMethod(targetModuleName, () => client.DeleteMaterialCatalogueAsyncEXT(dcMaterialCatalogue));
     }
-
+    //Avijit 17082023
     public static Task<SendOfficeResult<DataContractBase>> SendCreateProductCatalogueAsync(
-      DCProductCatalogue dcProductCatalogue)
+      DCProductCatalogueEXT dcProductCatalogue)//Av@
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.CreateProductCatalogueAsync(dcProductCatalogue));
+      return HandleHMISendMethod(targetModuleName, () => client.CreateProductCatalogueEXTAsync(dcProductCatalogue));
     }
+    //Avijit 17082023
 
+
+    //Av@210823
     public static Task<SendOfficeResult<DataContractBase>> SendProductCatalogueAsync(
-      DCProductCatalogue dcProductCatalogue)
+      DCProductCatalogueEXT dcProductCatalogue)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.UpdateProductCatalogueAsync(dcProductCatalogue));
+      return HandleHMISendMethod(targetModuleName, () => client.UpdateProductCatalogueEXTAsync(dcProductCatalogue));
     }
-
+    //Av@210823
     public static Task<SendOfficeResult<DataContractBase>> SendDeleteProductCatalogueAsync(
-      DCProductCatalogue dcProductCatalogue)
+      DCProductCatalogueEXT dcProductCatalogue)
     {
       //prepare target module name and interface
       string targetModuleName = Modules.ProdManager.Name;
       IProdManager client = InterfaceHelper.GetFactoryChannel<IProdManager>(targetModuleName);
 
       //call method on remote module
-      return HandleHMISendMethod(targetModuleName, () => client.DeleteProductCatalogueAsync(dcProductCatalogue));
+      return HandleHMISendMethod(targetModuleName, () => client.DeleteProductCatalogueEXTAsync(dcProductCatalogue));
     }
 
     public static Task<SendOfficeResult<DataContractBase>> EditMaterialNumberAsync(DCWorkOrderMaterials dc)

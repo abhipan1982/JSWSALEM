@@ -9,6 +9,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Configurations>Debug;Release</Configurations>
     <Platforms>AnyCPU</Platforms>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>embedded</DebugType>
@@ -17,14 +18,17 @@
     <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="DataContracts\Internal\PRM\NewFolder\**" />
+    <EmbeddedResource Remove="DataContracts\Internal\PRM\NewFolder\**" />
+    <None Remove="DataContracts\Internal\PRM\NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="DataContracts\Internal\EVT\" />
     <Folder Include="DataContracts\Internal\HMI\" />
     <Folder Include="DataContracts\Internal\L1A\" />
     <Folder Include="DataContracts\Internal\MNT\" />
     <Folder Include="DataContracts\Internal\MVH\" />
-    <Folder Include="DataContracts\Internal\PPL\" />
     <Folder Include="DataContracts\Internal\PRF\" />
-    <Folder Include="DataContracts\Internal\PRM\" />
     <Folder Include="DataContracts\Internal\QTY\" />
     <Folder Include="DataContracts\Internal\RLS\" />
     <Folder Include="DataContracts\Internal\SIM\" />

@@ -1,15 +1,15 @@
-﻿namespace PE.HMIWWW.ViewModel.Module.Lite.Maintenance
+namespace PE.HMIWWW.ViewModel.Module.Lite.Maintenance
 {
   public class VM_AssetTreeListEl
   {
-    public VM_AssetTreeListEl(long? ParentId, long Id, string Name, bool IsDevice, long? DeviceId, bool IsArea)
+    public VM_AssetTreeListEl(long? parentId, long id, string name, bool isDevice, long? deviceId, bool isArea)
     {
-      this.Id = Id;
-      this.ParentId = ParentId;
-      this.Name = Name;
-      this.IsDevice = IsDevice;
-      this.DeviceId = DeviceId;
-      this.IsArea = IsArea;
+      this.Id = id;
+      this.ParentId = parentId;
+      this.Name = name;
+      this.IsDevice = isDevice;
+      this.DeviceId = deviceId;
+      this.IsArea = isArea;
     }
 
     public long Id { get; set; }

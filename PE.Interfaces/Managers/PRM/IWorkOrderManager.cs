@@ -1,9 +1,9 @@
 using System.ServiceModel;
 using System.Threading.Tasks;
 using PE.BaseInterfaces.Managers.PRM;
-using PE.BaseModels.DataContracts.Internal.DBA;
+using PE.Models.DataContracts.Internal.DBA;
 using PE.BaseModels.DataContracts.Internal.EVT;
-using PE.BaseModels.DataContracts.Internal.PRM;
+using PE.Models.DataContracts.Internal.PRM;
 using PE.BaseModels.DataContracts.Internal.TRK;
 using SMF.Core.DC;
 
@@ -11,6 +11,33 @@ namespace PE.Interfaces.Managers.PRM
 {
   public interface IWorkOrderManager : IWorkOrderBaseManager
   {
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> CreateWorkOrderAsyncEXT(DCWorkOrderEXT dcWorkOrder);//@av
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> UpdateWorkOrderAsyncEXT(DCWorkOrderEXT dcWorkOrder);//@av
+
+
+
+
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DCBatchDataStatus> ProcessBatchDataAsync(DCL3L2BatchDataDefinition message);//Av@281123
+
+
+
+
+
+
+
+
+
+
+
+
+
     //[FaultContract(typeof(ModuleMessage))]
     //Task<DCWorkOrderStatus> ProcessWorkOrderDataAsync(DCL3L2WorkOrderDefinition message);
 

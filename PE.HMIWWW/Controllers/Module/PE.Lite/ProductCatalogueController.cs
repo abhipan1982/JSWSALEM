@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
@@ -90,6 +91,19 @@ namespace PE.HMIWWW.Controllers.Module.PE.Lite
         _service.UpdateProductCatalogue(ModelState, productCatalogue));
     }
 
+
+
+
+
+    //Av@
+    //[SmfAuthorization(Constants.SmfAuthorization_Controller_Product, Constants.SmfAuthorization_Module_ProdManager,
+    //  RightLevel.View)]
+    //public async Task<ActionResult> ElementDetails(long id)
+    //{
+    //  return await TaskPrepareJsonResultFromVm<VM_ProductCatalogue, Task<VM_ProductCatalogue>>(() => _service.GetProductDetails(ModelState, id));
+
+    //}
+
     [SmfAuthorization(Constants.SmfAuthorization_Controller_Product, Constants.SmfAuthorization_Module_ProdManager,
       RightLevel.View)]
     public Task<ActionResult> ElementDetails(long id)
@@ -97,6 +111,7 @@ namespace PE.HMIWWW.Controllers.Module.PE.Lite
       return PrepareActionResultFromVm(() => _service.GetProductDetails(ModelState, id),
         "~/Views/Module/PE.Lite/Product/_ProductBody.cshtml");
     }
+
 
     [SmfAuthorization(Constants.SmfAuthorization_Controller_Product, Constants.SmfAuthorization_Module_ProdManager,
       RightLevel.View)]

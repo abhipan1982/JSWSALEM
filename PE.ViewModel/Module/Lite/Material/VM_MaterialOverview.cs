@@ -9,11 +9,14 @@ using PE.HMIWWW.ViewModel.Module.Lite.WorkOrder;
 using SMF.HMIWWW.Attributes;
 using SMF.HMIWWW.UnitConverter;
 
+using PE.DbEntity.Models;
+using PE.DbEntity.PEContext;
 namespace PE.HMIWWW.ViewModel.Module.Lite.Material
 {
   public class VM_MaterialOverview : VM_Base
   {
     public VM_MaterialOverview(PRMMaterial material)
+    //public VM_MaterialOverview(PRMMaterialsEXT material)
     {
       MaterialId = material.MaterialId;
       RawMaterialId = material?.TRKRawMaterials?.FirstOrDefault()?.RawMaterialId;
@@ -46,6 +49,8 @@ namespace PE.HMIWWW.ViewModel.Module.Lite.Material
     }
 
     public VM_MaterialOverview(PRMMaterial material, PRMWorkOrder woo)
+    //public VM_MaterialOverview(PRMMaterial material, PRMWorkOrdersEXT woo)
+
     {
       MaterialId = material.MaterialId;
       IsDummy = material.IsDummy;

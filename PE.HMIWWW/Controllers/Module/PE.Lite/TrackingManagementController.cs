@@ -28,6 +28,30 @@ namespace PE.HMIWWW.Controllers.Module.PE.Lite
       return View("~/Views/Module/PE.Lite/TrackingManagement/Index.cshtml");
     }
 
+
+
+
+    public ActionResult Index1()
+    {
+      return View("~/Views/Module/PE.Lite/TrackingManagement/Index1.cshtml");
+    }
+
+
+
+
+    public ActionResult Index2()
+    {
+      return View("~/Views/Module/PE.Lite/TrackingManagement/Index2.cshtml");
+    }
+
+
+    public ActionResult Index3()
+    {
+      return View("~/Views/Module/PE.Lite/TrackingManagement/Index3.cshtml");
+    }
+
+
+
     [SmfAuthorization(Constants.SmfAuthorization_Controller_TrackingManagement,
       Constants.SmfAuthorization_Module_Tracking, RightLevel.View)]
     public Task<JsonResult> GetTrackingOverview([DataSourceRequest] DataSourceRequest request)

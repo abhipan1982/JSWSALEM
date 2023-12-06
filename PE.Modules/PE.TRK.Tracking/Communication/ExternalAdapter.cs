@@ -7,7 +7,7 @@ using SMF.Core.DC;
 
 namespace PE.TRK.Tracking.Communication
 {
-  public class ExternalAdapter : ModuleBaseExternalAdapter<ITracking>
+  public class ExternalAdapter : ModuleBaseExternalAdapter<ITracking>, ITracking
   {
     #region ctor
 

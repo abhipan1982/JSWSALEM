@@ -5,6 +5,8 @@ using PE.QTY.Base.Module;
 using PE.QTY.Quality.Communication;
 using SMF.Module.Core;
 
+
+
 namespace PE.QTY.Quality
 {
   internal class Program : ProgramBase
@@ -20,6 +22,7 @@ namespace PE.QTY.Quality
       base.RegisterServices(services);
 
       services.AddSingleton<ExternalAdapterHandler>();
+     
     }
   }
 }

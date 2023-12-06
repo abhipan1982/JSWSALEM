@@ -1,5 +1,6 @@
 using PE.BaseInterfaces.Managers;
 using PE.BaseInterfaces.Managers.DBA;
+using PE.Models.DataContracts.External.DBA;
 using PE.Models.DataContracts.Internal.DBA;
 using SMF.Core.DC;
 using System;
@@ -20,12 +21,33 @@ namespace PE.Interfaces.Managers.DBA
     Task TransferBatchDataFromTransferTableToAdapterAsync();
 
     [FaultContract(typeof(ModuleMessage))]
-    Task<DCL3L2BatchData> UpdateBatchDataAsync(DCL3L2BatchData batchData);
+    Task<DCL3L2BatchDataDefinition> UpdateBatchDataDefinitionAsync(DCL3L2BatchDataDefinitionExt batchData);
 
     [FaultContract(typeof(ModuleMessage))]
-    Task<DCL3L2BatchData> CreateBatchDataAsync(DCL3L2BatchData batchData);
+    Task<DCL3L2BatchDataDefinition> CreateBatchDataAsync(DCL3L2BatchDataDefinitionExt batchData);
 
     [FaultContract(typeof(ModuleMessage))]
     Task UpdateBatchDataWithTimeoutAsync();
+
+    //[FaultContract(typeof(ModuleMessage))]
+    //Task<DCL3L2BatchData> ProcessBatchDataAsync(DCL3L2BatchData batchData);
+
+
+
+    //AV@
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> CreateWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionExtMOD workOrderDefinition);
+
+
+    //AV@
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> UpdateWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionExtMOD workOrderDefinition);
+
+
+    //AV@
+    [FaultContract(typeof(ModuleMessage))]
+    Task<DataContractBase> DeleteWorkOrderDefinitionAsyncEXT(DCL3L2WorkOrderDefinitionExtMOD workOrderDefinition);
+
+
   }
 }

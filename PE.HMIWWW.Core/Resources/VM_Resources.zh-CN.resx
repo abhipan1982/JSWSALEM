@@ -5188,7 +5188,7 @@
     <value>gal/h</value>
   </data>
   <data name="UNIT_Weight" xml:space="preserve">
-    <value>lb</value>
+    <value>kg</value>
   </data>
   <data name="UNIT_WeightBig" xml:space="preserve">
     <value>lb</value>
@@ -12811,13 +12811,13 @@
     <value>Measurement Analysis</value>
   </data>
   <data name="PAGE_TITLE_Sessions_Index" xml:space="preserve">
-      <value>Sessions</value>
+    <value>Sessions</value>
   </data>
   <data name="MESSAGE_PageOutdated" xml:space="preserve">
-      <value>Page is outdated</value>
+    <value>Page is outdated</value>
   </data>
   <data name="MESSAGE_PageOutdatedMessage" xml:space="preserve">
-      <value>New version available. Do you want to reload page now? Otherwise save work and reload manually.</value>
+    <value>New version available. Do you want to reload page now? Otherwise save work and reload manually.</value>
   </data>
   <data name="NAME_RawMaterialCreatedTs" xml:space="preserve">
     <value>Created At</value>
@@ -12857,7 +12857,7 @@
   </data>
   <data name="HMI_MENU_Notebooks" xml:space="preserve">
     <value>Notebooks</value>
-    </data>
+  </data>
   <data name="NAME_UnitOfMeasure" xml:space="preserve">
     <value>Unit</value>
   </data>

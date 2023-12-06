@@ -16919,7 +16919,7 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Roughing Mill.
+        ///   Looks up a localized string similar to Roughing Mill .
         /// </summary>
         public static string NAME_AREA_5200000 {
             get {
@@ -16982,7 +16982,7 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Garret.
+        ///   Looks up a localized string similar to Garret .
         /// </summary>
         public static string NAME_AREA_6050000 {
             get {
@@ -17621,6 +17621,15 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BATCH_NO.
+        /// </summary>
+        public static string NAME_BATCH_NO {
+            get {
+                return ResourceManager.GetString("NAME_BATCH_NO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Before.
         /// </summary>
         public static string NAME_Before {
@@ -17941,6 +17950,15 @@ namespace PE.HMIWWW.Core.Resources {
         public static string NAME_BindingMachineMode {
             get {
                 return ResourceManager.GetString("NAME_BindingMachineMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BLOOMS_IN_BUNDLE.
+        /// </summary>
+        public static string NAME_BLOOMS_IN_BUNDLE {
+            get {
+                return ResourceManager.GetString("NAME_BLOOMS_IN_BUNDLE", resourceCulture);
             }
         }
         
@@ -24083,6 +24101,24 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BatchDataDefinition.
+        /// </summary>
+        public static string NAME_L3TransferTable_BatchDataDefinition {
+            get {
+                return ResourceManager.GetString("NAME_L3TransferTable_BatchDataDefinition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BatchReport.
+        /// </summary>
+        public static string NAME_L3TransferTable_BatchReports {
+            get {
+                return ResourceManager.GetString("NAME_L3TransferTable_BatchReports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General Status Statistics.
         /// </summary>
         public static string NAME_L3TransferTable_General {
@@ -24092,7 +24128,7 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Product Report.
+        ///   Looks up a localized string similar to L3L2BatchData.
         /// </summary>
         public static string NAME_L3TransferTable_ProductReports {
             get {
@@ -24119,7 +24155,7 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Work Order Report.
+        ///   Looks up a localized string similar to L2L3BatchReport.
         /// </summary>
         public static string NAME_L3TransferTable_WorkOrderReports {
             get {
@@ -25352,6 +25388,15 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MaxDiameter.
+        /// </summary>
+        public static string NAME_MaxDiameter {
+            get {
+                return ResourceManager.GetString("NAME_MaxDiameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max. Elongation.
         /// </summary>
         public static string NAME_MaxElongation {
@@ -25393,6 +25438,15 @@ namespace PE.HMIWWW.Core.Resources {
         public static string NAME_MaxOvality {
             get {
                 return ResourceManager.GetString("NAME_MaxOvality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MaxSquareness.
+        /// </summary>
+        public static string NAME_MaxSquareness {
+            get {
+                return ResourceManager.GetString("NAME_MaxSquareness", resourceCulture);
             }
         }
         
@@ -25550,11 +25604,38 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MinDiameter.
+        /// </summary>
+        public static string NAME_MinDiameter {
+            get {
+                return ResourceManager.GetString("NAME_MinDiameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Min. Elongation.
         /// </summary>
         public static string NAME_MinElongation {
             get {
                 return ResourceManager.GetString("NAME_MinElongation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MinOvality.
+        /// </summary>
+        public static string NAME_MinOvality {
+            get {
+                return ResourceManager.GetString("NAME_MinOvality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MinSquareness.
+        /// </summary>
+        public static string NAME_MinSquareness {
+            get {
+                return ResourceManager.GetString("NAME_MinSquareness", resourceCulture);
             }
         }
         
@@ -25708,6 +25789,15 @@ namespace PE.HMIWWW.Core.Resources {
         public static string NAME_Name {
             get {
                 return ResourceManager.GetString("NAME_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NegRcsSide.
+        /// </summary>
+        public static string NAME_NegRcsSide {
+            get {
+                return ResourceManager.GetString("NAME_NegRcsSide", resourceCulture);
             }
         }
         
@@ -27089,6 +27179,15 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PO_NO.
+        /// </summary>
+        public static string NAME_PO_NO {
+            get {
+                return ResourceManager.GetString("NAME_PO_NO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Point.
         /// </summary>
         public static string NAME_Point {
@@ -27139,6 +27238,15 @@ namespace PE.HMIWWW.Core.Resources {
         public static string NAME_PositionsNumber {
             get {
                 return ResourceManager.GetString("NAME_PositionsNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PosRcsSide.
+        /// </summary>
+        public static string NAME_PosRcsSide {
+            get {
+                return ResourceManager.GetString("NAME_PosRcsSide", resourceCulture);
             }
         }
         
@@ -38951,6 +39059,33 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tracking Management 1.
+        /// </summary>
+        public static string PAGE_TITLE_TrackingManagement_Index1 {
+            get {
+                return ResourceManager.GetString("PAGE_TITLE_TrackingManagement_Index1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracking Management2.
+        /// </summary>
+        public static string PAGE_TITLE_TrackingManagement_Index2 {
+            get {
+                return ResourceManager.GetString("PAGE_TITLE_TrackingManagement_Index2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracking Management3.
+        /// </summary>
+        public static string PAGE_TITLE_TrackingManagement_Index3 {
+            get {
+                return ResourceManager.GetString("PAGE_TITLE_TrackingManagement_Index3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove Material.
         /// </summary>
         public static string PAGE_TITLE_TrackingManagement_RemoveRawMaterialPopup {
@@ -40229,7 +40364,7 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ft.
+        ///   Looks up a localized string similar to m.
         /// </summary>
         public static string UNIT_Length {
             get {
@@ -40274,7 +40409,7 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to x.
+        ///   Looks up a localized string similar to mm.
         /// </summary>
         public static string UNIT_Ovality {
             get {
@@ -40454,6 +40589,15 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to mm.
+        /// </summary>
+        public static string UNIT_SQUARNESS {
+            get {
+                return ResourceManager.GetString("UNIT_SQUARNESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to t.
         /// </summary>
         public static string UNIT_StdTph {
@@ -40526,7 +40670,7 @@ namespace PE.HMIWWW.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to lb.
+        ///   Looks up a localized string similar to kg.
         /// </summary>
         public static string UNIT_Weight {
             get {

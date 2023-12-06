@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "PE.HMIWWW.Services": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:61656;http://localhost:61660"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-﻿RegisterMethod(HmiRefreshKeys.ProductCatalogue, RefreshData);
+RegisterMethod(HmiRefreshKeys.ProductCatalogue, RefreshData);
 
 function RefreshData() {
   reloadKendoGrid();

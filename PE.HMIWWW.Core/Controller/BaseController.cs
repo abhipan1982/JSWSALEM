@@ -418,6 +418,10 @@ namespace PE.HMIWWW.Core.Controllers
       }
     }
 
+
+
+
+  
     protected async Task<ActionResult> TaskPrepareActionResultFromVm<T>(Func<Task<T>> methodToGetDataFromService,
       string partialViewModelName) where T : VM_Base
     {

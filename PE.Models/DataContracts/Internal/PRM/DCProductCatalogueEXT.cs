@@ -101,6 +101,7 @@ namespace PE.Models.DataContracts.Internal.PRM
     [DataMember]
     public long TypeId { get; set; }
 
+    [DataMember]
     public double? Weight { get; set; }
 
   }

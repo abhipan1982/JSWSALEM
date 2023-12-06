@@ -1,0 +1,766 @@
+16:01:23.437 [INF] User profile is available. Using 'C:\Users\z006rf8k\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+16:01:24.424 [INF] Limit Controller reload
+LimitGroup |                           Name |    LowerValue    <-->    UpperValue |     Unit
+-------------------------------------------------------------------------------------------------
+   Default |                   BilletLength |           0.8    <-->           2.2 |        m
+   Default |                BilletThickness |          0.25    <-->          0.45 |        m
+   Default |                   BilletWeight |           390    <-->        390000 |       kg
+   Default |                    BilletWidth |          0.25    <-->          0.45 |        m
+   Default |                   ChemAnalysis |             0    <-->             1 |      0_1
+   Default |                   MillCapacity |        0.2778    <-->       27.7778 |     kg/s
+   Default |                 OvenRecipeTemp |           800    <-->          1100 |       °C
+   Default |                        Percent |             0    <-->             1 |      0_1
+   Default |                ProductDiameter |         0.005    <-->         0.075 |        m
+   Default |                  ProductLength |             1    <-->           100 |        m
+   Default |               ProductThickness |         0.005    <-->         0.075 |        m
+   Default |                  ProductWeight |           100    <-->          4500 |       kg
+   Default |                   ProductWidth |         0.005    <-->         0.075 |        m
+   Default |                  SteelDensity  |          7500    <-->          7900 |    kg/m³
+
+
+16:01:24.437 [ERR] Error during reading Limits from the DB.
+System.TypeInitializationException: The type initializer for 'SMF.Module.Core.ModuleController' threw an exception.
+ ---> System.IO.IOException: The handle is invalid.
+   at System.ConsolePal.GetBufferInfo(Boolean throwOnNoConsole, Boolean& succeeded)
+   at System.ConsolePal.SetWindowSize(Int32 width, Int32 height)
+   at System.Console.SetWindowSize(Int32 width, Int32 height)
+   at SMF.Module.Core.ModuleController..cctor() in D:\a\1\s\SRC\SMF.Module\Core\ModuleController.cs:line 64
+   --- End of inner exception stack trace ---
+   at SMF.Module.Core.ModuleController.LimitsUpdated(String groupName) in D:\a\1\s\SRC\SMF.Module\Core\ModuleController.cs:line 302
+   at SMF.Module.Limit.LimitController.ReadLimits(String requestGroup, String infoText) in D:\a\1\s\SRC\SMF.Module\Limit\LimitController.cs:line 69
+16:01:27.925 [INF] Application started. Press Ctrl+C to shut down.
+16:01:27.925 [INF] Hosting environment: Development
+16:01:27.925 [INF] Content root path: D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW
+16:01:27.975 [INF] Request starting HTTP/1.1 GET http://localhost:18935/ - -
+16:01:28.147 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW)'
+16:01:28.159 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+16:01:29.737 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW) - Validation state: "Valid"
+16:01:29.746 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.611ms.
+16:01:43.205 [INF] Executing ViewResult, running view Index.
+16:01:47.000 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'EVTTriggersFeature'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.000 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'MVHAssetLayout'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.000 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'MVHAssetsLocation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.000 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'MVHFeatureCalculated'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.000 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'MVHFeatureCustom'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.000 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'MVHMeasurement'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.000 [WRN] Entity 'PRFKPIDefinition' has a global query filter defined and is the required end of a relationship with the entity 'PRFKPIValue'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.001 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'PRMMaterialStep'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.001 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'PRMProductStep'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.001 [WRN] Entity 'TRKRawMaterial' has a global query filter defined and is the required end of a relationship with the entity 'TRKLayerRawMaterialRelation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.001 [WRN] Entity 'TRKRawMaterial' has a global query filter defined and is the required end of a relationship with the entity 'TRKLayerRelation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.002 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKRawMaterialLocation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.002 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKRawMaterialsCut'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.002 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKRawMaterialsStep'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.002 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKTrackingInstruction'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:01:47.085 [INF] Entity Framework Core 6.0.0 initialized 'PEContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:01:47.630 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:01:47.722 [INF] Executed DbCommand (55ms) [Parameters=[@userName='?' (Size = 26), @isAdmin='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPUserMenu] @userName, @isAdmin
+16:01:48.366 [INF] Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [h].[WidgetConfigurationId], [h].[AUDCreatedTs], [h].[AUDLastUpdatedTs], [h].[AUDUpdatedBy], [h].[FKUserId], [h].[FKWidgetId], [h].[IsActive], [h].[IsBeforeCommit], [h].[IsDeleted], [h].[OrderSeq], [h].[WidgetFileName], [h].[WidgetName], [h0].[WidgetId], [h0].[AUDCreatedTs], [h0].[AUDLastUpdatedTs], [h0].[AUDUpdatedBy], [h0].[IsBeforeCommit], [h0].[IsDeleted], [h0].[WidgetFileName], [h0].[WidgetName]
+FROM [HMIWidgetConfigurations] AS [h]
+INNER JOIN [HMIWidgets] AS [h0] ON [h].[FKWidgetId] = [h0].[WidgetId]
+WHERE [h].[FKUserId] = @__userId_0
+ORDER BY [h].[OrderSeq]
+16:01:52.400 [INF] Executed ViewResult - view Index executed in 22645.6765ms.
+16:01:52.407 [INF] Executed action PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW) in 24246.9466ms
+16:01:52.408 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW)'
+16:01:52.480 [INF] Request finished HTTP/1.1 GET http://localhost:18935/ - - - 200 - text/html;+charset=utf-8 24509.7001ms
+16:01:53.636 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js.map - -
+16:01:54.138 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.all.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.all.min.js.map'
+16:01:54.290 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js.map - - - 200 16882499 text/plain 653.5296ms
+16:01:54.843 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map - -
+16:01:54.849 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.aspnetmvc.min.js.map'
+16:01:54.851 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map - - - 200 57060 text/plain 8.3102ms
+16:01:54.866 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map - -
+16:01:54.871 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.pl-PL.min.js.map'
+16:01:54.872 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map - - - 200 4026 text/plain 5.6941ms
+16:01:54.881 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map - -
+16:01:54.887 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.tr-TR.min.js.map'
+16:01:54.887 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map - - - 200 3986 text/plain 6.2274ms
+16:01:54.995 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - -
+16:01:55.009 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 12.3750ms
+16:01:55.065 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+16:01:55.074 [INF] Executing endpoint '/hmihub/negotiate'
+16:01:55.102 [INF] Executed endpoint '/hmihub/negotiate'
+16:01:55.103 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 37.6730ms
+16:01:55.160 [INF] Request starting HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0
+16:01:55.168 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=dqiSQFJrsTxk2qBpYPf07w - -
+16:01:55.193 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_vs/browserLink - -
+16:01:55.213 [INF] Executing endpoint '/hmihub'
+16:01:55.213 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+16:01:55.237 [INF] Route matched with {action = "GetLastShortAlarmData", controller = "Alarm", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetLastShortAlarmData(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.AlarmController (PE.HMIWWW).
+16:01:55.274 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 81.3047ms
+16:01:55.379 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+16:01:55.391 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:01:55.392 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+16:01:55.393 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+16:01:55.394 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.6493ms.
+16:01:55.397 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+16:01:55.399 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 7.238ms
+16:01:55.400 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:01:55.401 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 21.7289ms
+16:01:55.425 [INF] Executing action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) - Validation state: "Valid"
+16:01:55.530 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:01:55.562 [INF] Executed DbCommand (25ms) [Parameters=[@LanguageId='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPGetAlarmsByLanguage] @LanguageId
+16:01:55.595 [INF] Executed action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 169.2072ms.
+16:01:55.602 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:01:55.629 [INF] Executed action PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) in 391.3913ms
+16:01:55.629 [INF] Executed endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+16:01:55.631 [INF] Request finished HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0 - 200 - application/json;+charset=utf-8 470.6040ms
+16:02:53.935 [INF] Request starting HTTP/1.1 GET http://localhost:18935/L3CommStatus - -
+16:02:53.939 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW)'
+16:02:53.943 [INF] Route matched with {action = "Index", controller = "L3CommStatus", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:02:53.962 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW) - Validation state: "Valid"
+16:02:53.963 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.3349ms.
+16:02:54.643 [INF] Executing ViewResult, running view ~/Views/System/L3CommStatus/Index.cshtml.
+16:03:00.620 [INF] Entity Framework Core 6.0.0 initialized 'PEContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:03:00.641 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:03:00.654 [INF] Executed DbCommand (11ms) [Parameters=[@userName='?' (Size = 26), @isAdmin='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPUserMenu] @userName, @isAdmin
+16:03:00.719 [INF] Executed ViewResult - view ~/Views/System/L3CommStatus/Index.cshtml executed in 6755.1394ms.
+16:03:00.720 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW) in 6776.4227ms
+16:03:00.720 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW)'
+16:03:00.752 [INF] Request finished HTTP/1.1 GET http://localhost:18935/L3CommStatus - - - 200 - text/html;+charset=utf-8 6816.6002ms
+16:03:00.795 [INF] Executed endpoint '/hmihub'
+16:03:00.796 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=dqiSQFJrsTxk2qBpYPf07w - - - 101 - - 65625.7349ms
+16:03:00.890 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - -
+16:03:00.900 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 10.0282ms
+16:03:01.285 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js.map - -
+16:03:02.156 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.all.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.all.min.js.map'
+16:03:02.505 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js.map - - - 200 16882499 text/plain 1219.7858ms
+16:03:03.124 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map - -
+16:03:03.131 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.aspnetmvc.min.js.map'
+16:03:03.136 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map - - - 200 57060 text/plain 11.8597ms
+16:03:03.154 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map - -
+16:03:03.162 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.pl-PL.min.js.map'
+16:03:03.163 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map - - - 200 4026 text/plain 8.9428ms
+16:03:03.175 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map - -
+16:03:03.183 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.tr-TR.min.js.map'
+16:03:03.184 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map - - - 200 3986 text/plain 9.0341ms
+16:03:03.267 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_vs/browserLink - -
+16:03:03.470 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderList application/x-www-form-urlencoded;+charset=UTF-8 39
+16:03:03.472 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+16:03:03.476 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW)'
+16:03:03.483 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableGeneralList application/x-www-form-urlencoded;+charset=UTF-8 52
+16:03:03.485 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW)'
+16:03:03.486 [INF] Route matched with {action = "GetL3TransferTableWorkOrderList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableWorkOrderList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:03:03.492 [INF] Route matched with {action = "GetL3TransferTableGeneralList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableGeneralList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:03:03.494 [INF] Executing endpoint '/hmihub/negotiate'
+16:03:03.530 [INF] Executed endpoint '/hmihub/negotiate'
+16:03:03.530 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderReports application/x-www-form-urlencoded;+charset=UTF-8 39
+16:03:03.531 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 60.9725ms
+16:03:03.531 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableProductReports application/x-www-form-urlencoded;+charset=UTF-8 39
+16:03:03.540 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW)'
+16:03:03.543 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW)'
+16:03:03.546 [INF] Route matched with {action = "GetL3TransferTableWorkOrderReports", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableWorkOrderReports(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:03:03.548 [INF] Route matched with {action = "GetL3TransferTableProductReports", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableProductReports(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:03:03.574 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=W7ALq6i5I7rU4t9GfMSBbw - -
+16:03:03.576 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL2L3BatchReportList application/x-www-form-urlencoded;+charset=UTF-8 39
+16:03:03.578 [INF] Executing endpoint '/hmihub'
+16:03:03.579 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW)'
+16:03:03.652 [INF] Route matched with {action = "GetL2L3BatchReportList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL2L3BatchReportList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:03:03.677 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW) - Validation state: "Valid"
+16:03:03.677 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW) - Validation state: "Valid"
+16:03:03.677 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW) - Validation state: "Valid"
+16:03:03.680 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW) - Validation state: "Valid"
+16:03:03.693 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW) - Validation state: "Valid"
+16:03:03.711 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 443.5726ms
+16:03:03.745 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3L2BatchDataDefinitionList application/x-www-form-urlencoded;+charset=UTF-8 39
+16:03:03.769 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW)'
+16:03:03.782 [INF] Route matched with {action = "GetL3L2BatchDataDefinitionList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3L2BatchDataDefinitionList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:03:03.785 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW) - Validation state: "Valid"
+16:04:36.364 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:04:36.364 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:04:36.364 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:05:47.375 [INF] Executed endpoint '/hmihub'
+16:05:47.375 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=W7ALq6i5I7rU4t9GfMSBbw - - - 101 - - 163775.7759ms
+16:05:47.397 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L3L2WorkOrderDefinition] AS [l]
+16:05:47.397 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L2L3WorkOrderReport] AS [l]
+16:05:47.403 [INF] Entity Framework Core 6.0.0 initialized 'TransferCustomContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:05:47.403 [INF] Entity Framework Core 6.0.0 initialized 'TransferCustomContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:05:47.403 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:05:47.406 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:05:47.406 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:05:47.408 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:05:47.408 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:05:47.409 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L2L3ProductReport] AS [l]
+16:05:47.409 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfrprj].[L2L3BatchReport] AS [l]
+16:05:47.410 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:05:47.410 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:05:47.410 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:05:47.410 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:05:47.416 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[CounterId], [l].[AUDCreatedTs], [l].[BilletLength], [l].[BilletWeight], [l].[BundleWeightMax], [l].[BundleWeightMin], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[CustomerName], [l].[ExternalWorkOrderName], [l].[HeatName], [l].[InputShapeSymbol], [l].[InputThickness], [l].[InputWidth], [l].[IsUpdated], [l].[MaterialCatalogueName], [l].[NumberOfBillets], [l].[OrderDeadline], [l].[OutputShapeSymbol], [l].[OutputThickness], [l].[OutputWidth], [l].[PreviousWorkOrderName], [l].[ProductCatalogueName], [l].[SteelgradeCode], [l].[TargetWorkOrderWeight], [l].[TargetWorkOrderWeightMax], [l].[TargetWorkOrderWeightMin], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WorkOrderName]
+FROM [xfr].[L3L2WorkOrderDefinition] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:05:47.416 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfrprj].[L3L2BatchDataDefinition] AS [l]
+16:05:47.418 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:05:47.418 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:05:47.421 [INF] Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Counter], [l].[AUDCreatedTs], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[HeatName], [l].[InspectionResult], [l].[IsUpdated], [l].[OutputPieces], [l].[OutputThickness], [l].[OutputWeight], [l].[OutputWidth], [l].[ProductName], [l].[ProductType], [l].[SequenceInWorkOrder], [l].[ShiftName], [l].[SteelgradeCode], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WorkOrderName]
+FROM [xfr].[L2L3ProductReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:05:47.421 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[V_L3L2TransferTablesSummary] AS [v]
+16:05:47.425 [INF] Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[BATCH_NO], [l].[BAR_CODE_SCAN_TIME], [l].[BLOOMS_IN_BUNDLE], [l].[BUNDLE_WGT], [l].[CHARGING_REMARKS], [l].[CHARGING_SIDE], [l].[COBBLE_AREA], [l].[COBBLE_PERC], [l].[COBBLE_REASON], [l].[COLLING_REMARKS], [l].[CP1_OP_NAME], [l].[CP1_SUP_NAME], [l].[CP2_HELP_NAME], [l].[CP2_OP_NAME], [l].[CP3_OP_NAME], [l].[CP4_OP_NAME], [l].[CP5_OP_NAME], [l].[CP6_OP_NAME], [l].[CommMessage], [l].[CommStatus], [l].[DISCHARGING_REMARKS], [l].[FUR_CHARGE_TIME], [l].[FUR_DISCHARGE_TIME], [l].[INDIRECT_PERC], [l].[MISROLL_PERC], [l].[NO_ROLLED_BARS], [l].[PO_NO], [l].[ROLLING_REMARKS], [l].[ROLLING_TIME], [l].[SHIFT_IN_CHARGE_NAME], [l].[SUPERVISOR_NAME], [l].[ValidationCheck]
+FROM [xfrprj].[L2L3BatchReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:05:47.446 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Counter], [l].[AUDCreatedTs], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[CrewName], [l].[DelayDuration], [l].[HeatName], [l].[InputThickness], [l].[InputWidth], [l].[IsUpdated], [l].[IsWorkOrderFinished], [l].[MaterialCatalogueName], [l].[NumberOfChargedMaterials], [l].[NumberOfPiecesRejectedInLocation1], [l].[NumberOfPlannedMaterials], [l].[NumberOfProducts], [l].[NumberOfRejectedMaterials], [l].[NumberOfRolledMaterials], [l].[NumberOfScrappedMaterials], [l].[OutputThickness], [l].[OutputWidth], [l].[ProductCatalogueName], [l].[ShiftName], [l].[SteelgradeCode], [l].[TargetWorkOrderWeight], [l].[TotalWeightOfMaterials], [l].[TotalWeightOfProducts], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WeightOfPiecesRejectedInLocation1], [l].[WorkOrderEnd], [l].[WorkOrderName], [l].[WorkOrderStart]
+FROM [xfr].[L2L3WorkOrderReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:05:47.450 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 163731.1115ms.
+16:05:47.451 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:05:47.456 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [v].[OrderSeq], [v].[StatusInProc], [v].[StatusNew], [v].[StatusOK], [v].[StatusProcErr], [v].[StatusValErr], [v].[TransferTableName]
+FROM [xfr].[V_L3L2TransferTablesSummary] AS [v]
+ORDER BY [v].[OrderSeq] DESC
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:05:47.460 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 163756.9164ms.
+16:05:47.460 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:05:47.464 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW) in 163889.9234ms
+16:05:47.464 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW)'
+16:05:47.465 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableProductReports application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 163918.1918ms
+16:05:47.471 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW) in 163952.8858ms
+16:05:47.471 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW)'
+16:05:47.472 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableGeneralList application/x-www-form-urlencoded;+charset=UTF-8 52 - 200 - application/json;+charset=utf-8 163963.4238ms
+16:05:47.474 [INF] Request starting HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0
+16:05:47.477 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 163771.202ms.
+16:05:47.477 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:05:47.479 [INF] Executed DbCommand (13ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[CounterId], [l].[AUDCreatedTs], [l].[BATCH_NO], [l].[BLM_BRM_C_S_THICK], [l].[BLM_BRM_C_S_WIDTH], [l].[BLM_BRM_LENGTH], [l].[BLM_BRM_WEIGHT], [l].[CHARGE_TYPE], [l].[COOL_TYPE], [l].[CUST_NAME], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[HEAT_NO], [l].[INPUT_MATERIAL], [l].[IsUpdated], [l].[LIFT_TYPE], [l].[OUTPUT_MATERIAL], [l].[PO_NO], [l].[PSN], [l].[ROLLED_THICK], [l].[ROLLED_WIDTH], [l].[SO_QTY], [l].[S_DIA_TOL_MM_LOWER], [l].[S_DIA_TOL_MM_UPPER], [l].[S_LENGTH], [l].[S_LENGTH_MM_MAX], [l].[S_LENGTH_MM_MIN], [l].[S_MULTIPLE_LENGTH_MM], [l].[S_OUT_OF_SQUARNESS_MM_MAX], [l].[S_OUT_OF_SQUARNESS_MM_MIN], [l].[S_OVALITY_MM_MAX], [l].[S_OVALITY_MM_MIN], [l].[S_SIDE_TOL_MM_NEG], [l].[S_SIDE_TOL_MM_POS], [l].[UpdatedTs], [l].[ValidationCheck]
+FROM [xfrprj].[L3L2BatchDataDefinition] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:05:47.480 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+16:05:47.480 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+16:05:47.481 [INF] Route matched with {action = "GetLastShortAlarmData", controller = "Alarm", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetLastShortAlarmData(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.AlarmController (PE.HMIWWW).
+16:05:47.482 [INF] Executing action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) - Validation state: "Valid"
+16:05:47.486 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:05:47.489 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:05:47.490 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+16:05:47.492 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW) in 163979.9244ms
+16:05:47.492 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW)'
+16:05:47.493 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderList application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 163996.8769ms
+16:05:47.493 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+16:05:47.493 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.0152ms.
+16:05:47.494 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+16:05:47.494 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 163791.7667ms.
+16:05:47.495 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:05:47.496 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 5.8767ms
+16:05:47.496 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:05:47.497 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 17.0216ms
+16:05:47.505 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+16:05:47.506 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW) in 163828.2511ms
+16:05:47.506 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW)'
+16:05:47.506 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL2L3BatchReportList application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 163907.4819ms
+16:05:47.506 [INF] Executed DbCommand (20ms) [Parameters=[@LanguageId='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPGetAlarmsByLanguage] @LanguageId
+16:05:47.508 [INF] Executed action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 25.6191ms.
+16:05:47.508 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:05:47.509 [INF] Executed action PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) in 28.475ms
+16:05:47.509 [INF] Executed endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+16:05:47.510 [INF] Request finished HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0 - 200 - application/json;+charset=utf-8 35.5056ms
+16:05:47.511 [INF] Executing endpoint '/hmihub/negotiate'
+16:05:47.513 [INF] Executed endpoint '/hmihub/negotiate'
+16:05:47.514 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 9.5883ms
+16:05:47.528 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 163825.2787ms.
+16:05:47.528 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:05:47.529 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=erIJcObSz9BT4x6Jp8-I6w - -
+16:05:47.530 [INF] Executing endpoint '/hmihub'
+16:05:47.538 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW) in 163965.5094ms
+16:05:47.539 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW)'
+16:05:47.539 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderReports application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 163984.4035ms
+16:05:47.542 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+16:05:47.545 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:05:47.545 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+16:05:47.545 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+16:05:47.545 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.0108ms.
+16:05:47.545 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+16:05:47.547 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 1.9045ms
+16:05:47.547 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:05:47.548 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 5.3746ms
+16:07:14.380 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 250544.7346ms.
+16:07:14.382 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:07:14.413 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+16:07:14.431 [INF] Executing endpoint '/hmihub/negotiate'
+16:07:14.431 [INF] Executed endpoint '/hmihub'
+16:07:14.432 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=erIJcObSz9BT4x6Jp8-I6w - - - 101 - - 86889.7486ms
+16:07:14.433 [INF] Executed endpoint '/hmihub/negotiate'
+16:07:14.433 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 19.6133ms
+16:07:14.438 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW) in 250616.0212ms
+16:07:14.438 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW)'
+16:07:14.439 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3L2BatchDataDefinitionList application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 250654.3751ms
+16:07:14.444 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=XJRE0MkfSrSxdkXXkC0_ng - -
+16:07:14.446 [INF] Executing endpoint '/hmihub'
+16:07:14.466 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+16:07:14.468 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:07:14.468 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+16:07:14.469 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+16:07:14.469 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.0232ms.
+16:07:14.469 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+16:07:14.470 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 1.2543ms
+16:07:14.470 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:07:14.470 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 4.0151ms
+16:07:43.755 [INF] Request starting HTTP/1.1 GET http://localhost:18935/L3CommStatus - -
+16:07:43.758 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW)'
+16:07:43.758 [INF] Route matched with {action = "Index", controller = "L3CommStatus", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:07:43.759 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW) - Validation state: "Valid"
+16:07:43.759 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0198ms.
+16:07:43.759 [INF] Executing ViewResult, running view ~/Views/System/L3CommStatus/Index.cshtml.
+16:07:44.001 [INF] Entity Framework Core 6.0.0 initialized 'PEContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:07:44.011 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:07:44.023 [INF] Executed DbCommand (12ms) [Parameters=[@userName='?' (Size = 26), @isAdmin='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPUserMenu] @userName, @isAdmin
+16:07:44.049 [INF] Executed ViewResult - view ~/Views/System/L3CommStatus/Index.cshtml executed in 289.8655ms.
+16:07:44.049 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW) in 290.9292ms
+16:07:44.050 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW)'
+16:07:44.069 [INF] Request finished HTTP/1.1 GET http://localhost:18935/L3CommStatus - - - 200 - text/html;+charset=utf-8 314.5996ms
+16:07:44.133 [INF] Executed endpoint '/hmihub'
+16:07:44.134 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=XJRE0MkfSrSxdkXXkC0_ng - - - 101 - - 29685.9431ms
+16:07:44.138 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - -
+16:07:44.143 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 5.0490ms
+16:07:44.151 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_vs/browserLink - -
+16:07:44.209 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 57.9483ms
+16:07:44.466 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js.map - -
+16:07:44.920 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.all.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.all.min.js.map'
+16:07:45.084 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js.map - - - 200 16882499 text/plain 618.0385ms
+16:07:45.418 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map - -
+16:07:45.424 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.aspnetmvc.min.js.map'
+16:07:45.427 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map - - - 200 57060 text/plain 8.4182ms
+16:07:45.436 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map - -
+16:07:45.440 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.pl-PL.min.js.map'
+16:07:45.442 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map - - - 200 4026 text/plain 5.6340ms
+16:07:45.454 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map - -
+16:07:45.459 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.tr-TR.min.js.map'
+16:07:45.460 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map - - - 200 3986 text/plain 5.7085ms
+16:07:45.533 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+16:07:45.537 [INF] Executing endpoint '/hmihub/negotiate'
+16:07:45.539 [INF] Executed endpoint '/hmihub/negotiate'
+16:07:45.540 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 6.7415ms
+16:07:45.593 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableGeneralList application/x-www-form-urlencoded;+charset=UTF-8 52
+16:07:45.597 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW)'
+16:07:45.597 [INF] Route matched with {action = "GetL3TransferTableGeneralList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableGeneralList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:07:45.599 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW) - Validation state: "Valid"
+16:07:45.601 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:07:45.608 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[V_L3L2TransferTablesSummary] AS [v]
+16:07:45.610 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderList application/x-www-form-urlencoded;+charset=UTF-8 39
+16:07:45.612 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW)'
+16:07:45.612 [INF] Route matched with {action = "GetL3TransferTableWorkOrderList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableWorkOrderList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:07:45.614 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW) - Validation state: "Valid"
+16:07:45.615 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [v].[OrderSeq], [v].[StatusInProc], [v].[StatusNew], [v].[StatusOK], [v].[StatusProcErr], [v].[StatusValErr], [v].[TransferTableName]
+FROM [xfr].[V_L3L2TransferTablesSummary] AS [v]
+ORDER BY [v].[OrderSeq] DESC
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:07:45.616 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 17.4484ms.
+16:07:45.618 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:07:45.621 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW) in 24.262ms
+16:07:45.621 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW)'
+16:07:45.622 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableGeneralList application/x-www-form-urlencoded;+charset=UTF-8 52 - 200 - application/json;+charset=utf-8 28.5114ms
+16:07:45.622 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:07:45.634 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L3L2WorkOrderDefinition] AS [l]
+16:07:45.636 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderReports application/x-www-form-urlencoded;+charset=UTF-8 39
+16:07:45.641 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[CounterId], [l].[AUDCreatedTs], [l].[BilletLength], [l].[BilletWeight], [l].[BundleWeightMax], [l].[BundleWeightMin], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[CustomerName], [l].[ExternalWorkOrderName], [l].[HeatName], [l].[InputShapeSymbol], [l].[InputThickness], [l].[InputWidth], [l].[IsUpdated], [l].[MaterialCatalogueName], [l].[NumberOfBillets], [l].[OrderDeadline], [l].[OutputShapeSymbol], [l].[OutputThickness], [l].[OutputWidth], [l].[PreviousWorkOrderName], [l].[ProductCatalogueName], [l].[SteelgradeCode], [l].[TargetWorkOrderWeight], [l].[TargetWorkOrderWeightMax], [l].[TargetWorkOrderWeightMin], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WorkOrderName]
+FROM [xfr].[L3L2WorkOrderDefinition] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:07:45.641 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 27.3349ms.
+16:07:45.642 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:07:45.645 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW) in 32.2033ms
+16:07:45.645 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW)'
+16:07:45.646 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderList application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 35.8833ms
+16:07:45.649 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW)'
+16:07:45.649 [INF] Route matched with {action = "GetL3TransferTableWorkOrderReports", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableWorkOrderReports(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:07:45.651 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW) - Validation state: "Valid"
+16:07:45.655 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:07:45.656 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableProductReports application/x-www-form-urlencoded;+charset=UTF-8 39
+16:07:45.659 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L2L3WorkOrderReport] AS [l]
+16:07:45.660 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW)'
+16:07:45.661 [INF] Route matched with {action = "GetL3TransferTableProductReports", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableProductReports(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:07:45.664 [INF] Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Counter], [l].[AUDCreatedTs], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[CrewName], [l].[DelayDuration], [l].[HeatName], [l].[InputThickness], [l].[InputWidth], [l].[IsUpdated], [l].[IsWorkOrderFinished], [l].[MaterialCatalogueName], [l].[NumberOfChargedMaterials], [l].[NumberOfPiecesRejectedInLocation1], [l].[NumberOfPlannedMaterials], [l].[NumberOfProducts], [l].[NumberOfRejectedMaterials], [l].[NumberOfRolledMaterials], [l].[NumberOfScrappedMaterials], [l].[OutputThickness], [l].[OutputWidth], [l].[ProductCatalogueName], [l].[ShiftName], [l].[SteelgradeCode], [l].[TargetWorkOrderWeight], [l].[TotalWeightOfMaterials], [l].[TotalWeightOfProducts], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WeightOfPiecesRejectedInLocation1], [l].[WorkOrderEnd], [l].[WorkOrderName], [l].[WorkOrderStart]
+FROM [xfr].[L2L3WorkOrderReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:07:45.664 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW) - Validation state: "Valid"
+16:07:45.665 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 13.6312ms.
+16:07:45.667 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:07:45.668 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:07:45.669 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW) in 20.1929ms
+16:07:45.670 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW)'
+16:07:45.670 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderReports application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 33.6133ms
+16:07:45.671 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL2L3BatchReportList application/x-www-form-urlencoded;+charset=UTF-8 39
+16:07:45.678 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L2L3ProductReport] AS [l]
+16:07:45.686 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Counter], [l].[AUDCreatedTs], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[HeatName], [l].[InspectionResult], [l].[IsUpdated], [l].[OutputPieces], [l].[OutputThickness], [l].[OutputWeight], [l].[OutputWidth], [l].[ProductName], [l].[ProductType], [l].[SequenceInWorkOrder], [l].[ShiftName], [l].[SteelgradeCode], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WorkOrderName]
+FROM [xfr].[L2L3ProductReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:07:45.686 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3L2BatchDataDefinitionList application/x-www-form-urlencoded;+charset=UTF-8 39
+16:07:45.687 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 22.2172ms.
+16:07:45.687 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:07:45.689 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW) in 26.7465ms
+16:07:45.689 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW)'
+16:07:45.689 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableProductReports application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 33.6401ms
+16:07:45.690 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW)'
+16:07:45.690 [INF] Route matched with {action = "GetL2L3BatchReportList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL2L3BatchReportList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:07:45.692 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW)'
+16:07:45.692 [INF] Route matched with {action = "GetL3L2BatchDataDefinitionList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3L2BatchDataDefinitionList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:07:45.694 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW) - Validation state: "Valid"
+16:07:45.698 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW) - Validation state: "Valid"
+16:07:45.698 [INF] Request starting HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0
+16:07:45.699 [INF] Entity Framework Core 6.0.0 initialized 'TransferCustomContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:07:45.700 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+16:07:45.701 [INF] Route matched with {action = "GetLastShortAlarmData", controller = "Alarm", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetLastShortAlarmData(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.AlarmController (PE.HMIWWW).
+16:07:45.704 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfrprj].[L2L3BatchReport] AS [l]
+16:07:45.704 [INF] Executing action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) - Validation state: "Valid"
+16:07:45.706 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:15:49.596 [INF] User profile is available. Using 'C:\Users\z006rf8k\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+16:15:50.736 [INF] Limit Controller reload
+LimitGroup |                           Name |    LowerValue    <-->    UpperValue |     Unit
+-------------------------------------------------------------------------------------------------
+   Default |                   BilletLength |           0.8    <-->           2.2 |        m
+   Default |                BilletThickness |          0.25    <-->          0.45 |        m
+   Default |                   BilletWeight |           390    <-->        390000 |       kg
+   Default |                    BilletWidth |          0.25    <-->          0.45 |        m
+   Default |                   ChemAnalysis |             0    <-->             1 |      0_1
+   Default |                   MillCapacity |        0.2778    <-->       27.7778 |     kg/s
+   Default |                 OvenRecipeTemp |           800    <-->          1100 |       °C
+   Default |                        Percent |             0    <-->             1 |      0_1
+   Default |                ProductDiameter |         0.005    <-->         0.075 |        m
+   Default |                  ProductLength |             1    <-->           100 |        m
+   Default |               ProductThickness |         0.005    <-->         0.075 |        m
+   Default |                  ProductWeight |           100    <-->          4500 |       kg
+   Default |                   ProductWidth |         0.005    <-->         0.075 |        m
+   Default |                  SteelDensity  |          7500    <-->          7900 |    kg/m³
+
+
+16:15:50.743 [ERR] Error during reading Limits from the DB.
+System.TypeInitializationException: The type initializer for 'SMF.Module.Core.ModuleController' threw an exception.
+ ---> System.IO.IOException: The handle is invalid.
+   at System.ConsolePal.GetBufferInfo(Boolean throwOnNoConsole, Boolean& succeeded)
+   at System.ConsolePal.SetWindowSize(Int32 width, Int32 height)
+   at System.Console.SetWindowSize(Int32 width, Int32 height)
+   at SMF.Module.Core.ModuleController..cctor() in D:\a\1\s\SRC\SMF.Module\Core\ModuleController.cs:line 64
+   --- End of inner exception stack trace ---
+   at SMF.Module.Core.ModuleController.LimitsUpdated(String groupName) in D:\a\1\s\SRC\SMF.Module\Core\ModuleController.cs:line 302
+   at SMF.Module.Limit.LimitController.ReadLimits(String requestGroup, String infoText) in D:\a\1\s\SRC\SMF.Module\Limit\LimitController.cs:line 69
+16:16:02.725 [INF] Application started. Press Ctrl+C to shut down.
+16:16:02.726 [INF] Hosting environment: Development
+16:16:02.726 [INF] Content root path: D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW
+16:16:02.783 [INF] Request starting HTTP/1.1 GET http://localhost:18935/ - -
+16:16:03.234 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW)'
+16:16:03.260 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+16:16:06.730 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW) - Validation state: "Valid"
+16:16:06.755 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.2847ms.
+16:16:18.699 [INF] Executing ViewResult, running view Index.
+16:16:30.215 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'EVTTriggersFeature'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.216 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'MVHAssetLayout'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.216 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'MVHAssetsLocation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.217 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'MVHFeatureCalculated'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.217 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'MVHFeatureCustom'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.217 [WRN] Entity 'MVHFeature' has a global query filter defined and is the required end of a relationship with the entity 'MVHMeasurement'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.217 [WRN] Entity 'PRFKPIDefinition' has a global query filter defined and is the required end of a relationship with the entity 'PRFKPIValue'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.217 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'PRMMaterialStep'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.217 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'PRMProductStep'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.217 [WRN] Entity 'TRKRawMaterial' has a global query filter defined and is the required end of a relationship with the entity 'TRKLayerRawMaterialRelation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.218 [WRN] Entity 'TRKRawMaterial' has a global query filter defined and is the required end of a relationship with the entity 'TRKLayerRelation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.218 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKRawMaterialLocation'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.218 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKRawMaterialsCut'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.218 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKRawMaterialsStep'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.219 [WRN] Entity 'MVHAsset' has a global query filter defined and is the required end of a relationship with the entity 'TRKTrackingInstruction'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+16:16:30.406 [INF] Entity Framework Core 6.0.0 initialized 'PEContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:16:31.551 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:16:31.708 [INF] Executed DbCommand (81ms) [Parameters=[@userName='?' (Size = 26), @isAdmin='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPUserMenu] @userName, @isAdmin
+16:16:33.092 [INF] Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [h].[WidgetConfigurationId], [h].[AUDCreatedTs], [h].[AUDLastUpdatedTs], [h].[AUDUpdatedBy], [h].[FKUserId], [h].[FKWidgetId], [h].[IsActive], [h].[IsBeforeCommit], [h].[IsDeleted], [h].[OrderSeq], [h].[WidgetFileName], [h].[WidgetName], [h0].[WidgetId], [h0].[AUDCreatedTs], [h0].[AUDLastUpdatedTs], [h0].[AUDUpdatedBy], [h0].[IsBeforeCommit], [h0].[IsDeleted], [h0].[WidgetFileName], [h0].[WidgetName]
+FROM [HMIWidgetConfigurations] AS [h]
+INNER JOIN [HMIWidgets] AS [h0] ON [h].[FKWidgetId] = [h0].[WidgetId]
+WHERE [h].[FKUserId] = @__userId_0
+ORDER BY [h].[OrderSeq]
+16:16:35.219 [INF] Executed ViewResult - view Index executed in 28445.3152ms.
+16:16:35.231 [INF] Executed action PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW) in 31969.0091ms
+16:16:35.232 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.Index (PE.HMIWWW)'
+16:16:35.368 [INF] Request finished HTTP/1.1 GET http://localhost:18935/ - - - 200 - text/html;+charset=utf-8 32603.7228ms
+16:16:36.764 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - -
+16:16:36.786 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 20.4202ms
+16:16:37.186 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js.map - -
+16:16:38.286 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.all.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.all.min.js.map'
+16:16:38.625 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js.map - - - 200 16882499 text/plain 1439.4166ms
+16:16:39.375 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map - -
+16:16:39.385 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.aspnetmvc.min.js.map'
+16:16:39.388 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map - - - 200 57060 text/plain 12.5959ms
+16:16:39.419 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map - -
+16:16:39.426 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.pl-PL.min.js.map'
+16:16:39.428 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map - - - 200 4026 text/plain 8.8529ms
+16:16:39.443 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map - -
+16:16:39.451 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.tr-TR.min.js.map'
+16:16:39.452 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map - - - 200 3986 text/plain 9.1701ms
+16:16:39.563 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_vs/browserLink - -
+16:16:39.689 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 125.4257ms
+16:16:39.718 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+16:16:39.731 [INF] Executing endpoint '/hmihub/negotiate'
+16:16:39.775 [INF] Executed endpoint '/hmihub/negotiate'
+16:16:39.776 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 57.5153ms
+16:16:39.780 [INF] Request starting HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0
+16:16:39.852 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=1Wi8ZwE0pL_IpF677Bidnw - -
+16:16:39.867 [INF] Executing endpoint '/hmihub'
+16:16:39.867 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+16:16:39.909 [INF] Route matched with {action = "GetLastShortAlarmData", controller = "Alarm", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetLastShortAlarmData(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.AlarmController (PE.HMIWWW).
+16:16:40.120 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+16:16:40.127 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:16:40.130 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+16:16:40.132 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+16:16:40.134 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 1.8121ms.
+16:16:40.137 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+16:16:40.139 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 8.0633ms
+16:16:40.139 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:16:40.140 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 19.9104ms
+16:16:40.162 [INF] Executing action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) - Validation state: "Valid"
+16:16:40.270 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:16:40.300 [INF] Executed DbCommand (19ms) [Parameters=[@LanguageId='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPGetAlarmsByLanguage] @LanguageId
+16:16:40.342 [INF] Executed action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 179.4624ms.
+16:16:40.351 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:16:40.384 [INF] Executed action PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) in 475.3362ms
+16:16:40.385 [INF] Executed endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+16:16:40.386 [INF] Request finished HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0 - 200 - application/json;+charset=utf-8 605.5156ms
+16:17:31.309 [INF] Request starting HTTP/1.1 GET http://localhost:18935/L3CommStatus - -
+16:17:31.312 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW)'
+16:17:31.315 [INF] Route matched with {action = "Index", controller = "L3CommStatus", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:17:31.340 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW) - Validation state: "Valid"
+16:17:31.341 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.3253ms.
+16:17:33.777 [INF] Executing ViewResult, running view ~/Views/System/L3CommStatus/Index.cshtml.
+16:18:01.952 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+16:18:01.988 [INF] Executed endpoint '/hmihub'
+16:18:01.989 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=1Wi8ZwE0pL_IpF677Bidnw - - - 101 - - 82136.3090ms
+16:18:02.035 [INF] Entity Framework Core 6.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:18:02.061 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[HMIViewOrientation], [u].[LanguageId], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [smf].[Users] AS [u]
+WHERE [u].[Id] = @__p_0
+16:18:02.134 [INF] Executed DbCommand (4ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[ClaimType], [u].[ClaimValue], [u].[UserId]
+FROM [smf].[UserClaims] AS [u]
+WHERE [u].[UserId] = @__user_Id_0
+16:18:02.162 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Name]
+FROM [smf].[UserRoles] AS [u]
+INNER JOIN [smf].[Roles] AS [r] ON [u].[RoleId] = [r].[Id]
+WHERE [u].[UserId] = @__userId_0
+16:18:02.172 [INF] Executing endpoint '/hmihub/negotiate'
+16:18:02.178 [INF] Executed endpoint '/hmihub/negotiate'
+16:18:02.179 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 231.5602ms
+16:18:02.188 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=zajgF39PzI7v-vMFhjjXDA - -
+16:18:02.190 [INF] Executing endpoint '/hmihub'
+16:18:02.202 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+16:18:02.206 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:18:02.206 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+16:18:02.207 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+16:18:02.207 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.0128ms.
+16:18:02.207 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+16:18:02.208 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 1.6078ms
+16:18:02.208 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:18:02.209 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 7.0574ms
+16:18:02.500 [INF] Entity Framework Core 6.0.0 initialized 'PEContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:18:02.512 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:18:02.521 [INF] Executed DbCommand (9ms) [Parameters=[@userName='?' (Size = 26), @isAdmin='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPUserMenu] @userName, @isAdmin
+16:18:02.553 [INF] Executed ViewResult - view ~/Views/System/L3CommStatus/Index.cshtml executed in 31211.3907ms.
+16:18:02.553 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW) in 31238.124ms
+16:18:02.553 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.Index (PE.HMIWWW)'
+16:18:02.573 [INF] Request finished HTTP/1.1 GET http://localhost:18935/L3CommStatus - - - 200 - text/html;+charset=utf-8 31263.2486ms
+16:18:02.601 [INF] Executed endpoint '/hmihub'
+16:18:02.601 [INF] Request finished HTTP/1.1 GET http://localhost:18935/hmihub?id=zajgF39PzI7v-vMFhjjXDA - - - 101 - - 412.9955ms
+16:18:02.662 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - -
+16:18:02.664 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 2.2713ms
+16:18:03.086 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js.map - -
+16:18:03.473 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.all.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.all.min.js.map'
+16:18:03.620 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.all.min.js.map - - - 200 16882499 text/plain 533.8971ms
+16:18:04.061 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map - -
+16:18:04.067 [INF] Sending file. Request path: '/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\kendo.aspnetmvc.min.js.map'
+16:18:04.070 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/kendo.aspnetmvc.min.js.map - - - 200 57060 text/plain 8.9012ms
+16:18:04.081 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map - -
+16:18:04.085 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.pl-PL.min.js.map'
+16:18:04.086 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.pl-PL.min.js.map - - - 200 4026 text/plain 4.8950ms
+16:18:04.094 [INF] Request starting HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map - -
+16:18:04.099 [INF] Sending file. Request path: '/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map'. Physical path: 'D:\L2_Project\JSW_Salem\ProcessExpert_JSWSalem\Src\PE.HMIWWW\wwwroot\js\kendo\2020.2.617\cultures\kendo.culture.tr-TR.min.js.map'
+16:18:04.099 [INF] Request finished HTTP/1.1 GET http://localhost:18935/js/kendo/2020.2.617/cultures/kendo.culture.tr-TR.min.js.map - - - 200 3986 text/plain 5.7540ms
+16:18:04.125 [INF] Request starting HTTP/1.1 GET http://localhost:18935/_vs/browserLink - -
+16:18:04.183 [INF] Request finished HTTP/1.1 GET http://localhost:18935/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 58.9035ms
+16:18:04.192 [INF] Request starting HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+16:18:04.194 [INF] Executing endpoint '/hmihub/negotiate'
+16:18:04.196 [INF] Executed endpoint '/hmihub/negotiate'
+16:18:04.197 [INF] Request finished HTTP/1.1 POST http://localhost:18935/hmihub/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 5.2404ms
+16:18:04.288 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableGeneralList application/x-www-form-urlencoded;+charset=UTF-8 52
+16:18:04.292 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW)'
+16:18:04.300 [INF] Route matched with {action = "GetL3TransferTableGeneralList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableGeneralList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:18:04.312 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderList application/x-www-form-urlencoded;+charset=UTF-8 39
+16:18:04.324 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW)'
+16:18:04.330 [INF] Route matched with {action = "GetL3TransferTableWorkOrderList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableWorkOrderList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:18:04.330 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderReports application/x-www-form-urlencoded;+charset=UTF-8 39
+16:18:04.333 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW)'
+16:18:04.335 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW) - Validation state: "Valid"
+16:18:04.338 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW) - Validation state: "Valid"
+16:18:04.351 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableProductReports application/x-www-form-urlencoded;+charset=UTF-8 39
+16:18:04.353 [INF] Route matched with {action = "GetL3TransferTableWorkOrderReports", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableWorkOrderReports(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:18:04.354 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW)'
+16:18:04.356 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW) - Validation state: "Valid"
+16:18:04.361 [INF] Route matched with {action = "GetL3TransferTableProductReports", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3TransferTableProductReports(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:18:04.363 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW) - Validation state: "Valid"
+16:18:04.374 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3L2BatchDataDefinitionList application/x-www-form-urlencoded;+charset=UTF-8 39
+16:18:04.374 [INF] Request starting HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL2L3BatchReportList application/x-www-form-urlencoded;+charset=UTF-8 39
+16:18:04.377 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW)'
+16:18:04.378 [INF] Executing endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW)'
+16:18:04.382 [INF] Route matched with {action = "GetL2L3BatchReportList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL2L3BatchReportList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:18:04.385 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW) - Validation state: "Valid"
+16:18:04.394 [INF] Route matched with {action = "GetL3L2BatchDataDefinitionList", controller = "L3CommStatus", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetL3L2BatchDataDefinitionList(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.System.L3CommStatusController (PE.HMIWWW).
+16:18:04.418 [INF] Executing action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW) - Validation state: "Valid"
+16:18:14.822 [INF] Request starting HTTP/1.1 GET http://localhost:18935/hmihub?id=yagZ5tJn-p9A2ZhCJYcafQ - -
+16:18:16.286 [INF] Executing endpoint '/hmihub'
+16:18:17.216 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:18:17.249 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L3L2WorkOrderDefinition] AS [l]
+16:18:17.260 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:18:17.262 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:18:17.263 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:18:17.263 [INF] Entity Framework Core 6.0.0 initialized 'TransferCustomContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:18:17.263 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:18:17.263 [INF] Entity Framework Core 6.0.0 initialized 'TransferContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:18:17.263 [INF] Entity Framework Core 6.0.0 initialized 'TransferCustomContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:18:17.271 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfrprj].[L2L3BatchReport] AS [l]
+16:18:17.271 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L2L3ProductReport] AS [l]
+16:18:17.273 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:18:17.273 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:18:17.273 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:18:17.273 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:18:17.277 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfrprj].[L3L2BatchDataDefinition] AS [l]
+16:18:17.277 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[CounterId], [l].[AUDCreatedTs], [l].[BilletLength], [l].[BilletWeight], [l].[BundleWeightMax], [l].[BundleWeightMin], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[CustomerName], [l].[ExternalWorkOrderName], [l].[HeatName], [l].[InputShapeSymbol], [l].[InputThickness], [l].[InputWidth], [l].[IsUpdated], [l].[MaterialCatalogueName], [l].[NumberOfBillets], [l].[OrderDeadline], [l].[OutputShapeSymbol], [l].[OutputThickness], [l].[OutputWidth], [l].[PreviousWorkOrderName], [l].[ProductCatalogueName], [l].[SteelgradeCode], [l].[TargetWorkOrderWeight], [l].[TargetWorkOrderWeightMax], [l].[TargetWorkOrderWeightMin], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WorkOrderName]
+FROM [xfr].[L3L2WorkOrderDefinition] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:18:17.278 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:18:17.278 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:18:17.287 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[V_L3L2TransferTablesSummary] AS [v]
+16:18:17.293 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Counter], [l].[AUDCreatedTs], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[HeatName], [l].[InspectionResult], [l].[IsUpdated], [l].[OutputPieces], [l].[OutputThickness], [l].[OutputWeight], [l].[OutputWidth], [l].[ProductName], [l].[ProductType], [l].[SequenceInWorkOrder], [l].[ShiftName], [l].[SteelgradeCode], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WorkOrderName]
+FROM [xfr].[L2L3ProductReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:18:17.303 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [xfr].[L2L3WorkOrderReport] AS [l]
+16:18:17.304 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:18:17.304 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+16:18:17.321 [INF] Executed DbCommand (18ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[CounterId], [l].[AUDCreatedTs], [l].[BATCH_NO], [l].[BLM_BRM_C_S_THICK], [l].[BLM_BRM_C_S_WIDTH], [l].[BLM_BRM_LENGTH], [l].[BLM_BRM_WEIGHT], [l].[CHARGE_TYPE], [l].[COOL_TYPE], [l].[CUST_NAME], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[HEAT_NO], [l].[INPUT_MATERIAL], [l].[IsUpdated], [l].[LIFT_TYPE], [l].[OUTPUT_MATERIAL], [l].[PO_NO], [l].[PSN], [l].[ROLLED_THICK], [l].[ROLLED_WIDTH], [l].[SO_QTY], [l].[S_DIA_TOL_MM_LOWER], [l].[S_DIA_TOL_MM_UPPER], [l].[S_LENGTH], [l].[S_LENGTH_MM_MAX], [l].[S_LENGTH_MM_MIN], [l].[S_MULTIPLE_LENGTH_MM], [l].[S_OUT_OF_SQUARNESS_MM_MAX], [l].[S_OUT_OF_SQUARNESS_MM_MIN], [l].[S_OVALITY_MM_MAX], [l].[S_OVALITY_MM_MIN], [l].[S_SIDE_TOL_MM_NEG], [l].[S_SIDE_TOL_MM_POS], [l].[UpdatedTs], [l].[ValidationCheck]
+FROM [xfrprj].[L3L2BatchDataDefinition] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:18:17.343 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 12979.6526ms.
+16:18:17.344 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:18:17.355 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [v].[OrderSeq], [v].[StatusInProc], [v].[StatusNew], [v].[StatusOK], [v].[StatusProcErr], [v].[StatusValErr], [v].[TransferTableName]
+FROM [xfr].[V_L3L2TransferTablesSummary] AS [v]
+ORDER BY [v].[OrderSeq] DESC
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:18:17.360 [INF] Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[BATCH_NO], [l].[BAR_CODE_SCAN_TIME], [l].[BLOOMS_IN_BUNDLE], [l].[BUNDLE_WGT], [l].[CHARGING_REMARKS], [l].[CHARGING_SIDE], [l].[COBBLE_AREA], [l].[COBBLE_PERC], [l].[COBBLE_REASON], [l].[COLLING_REMARKS], [l].[CP1_OP_NAME], [l].[CP1_SUP_NAME], [l].[CP2_HELP_NAME], [l].[CP2_OP_NAME], [l].[CP3_OP_NAME], [l].[CP4_OP_NAME], [l].[CP5_OP_NAME], [l].[CP6_OP_NAME], [l].[CommMessage], [l].[CommStatus], [l].[DISCHARGING_REMARKS], [l].[FUR_CHARGE_TIME], [l].[FUR_DISCHARGE_TIME], [l].[INDIRECT_PERC], [l].[MISROLL_PERC], [l].[NO_ROLLED_BARS], [l].[PO_NO], [l].[ROLLING_REMARKS], [l].[ROLLING_TIME], [l].[SHIFT_IN_CHARGE_NAME], [l].[SUPERVISOR_NAME], [l].[ValidationCheck]
+FROM [xfrprj].[L2L3BatchReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:18:17.361 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 13025.9811ms.
+16:18:17.362 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:18:17.364 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW) in 13002.1066ms
+16:18:17.364 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableProductReports (PE.HMIWWW)'
+16:18:17.368 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableProductReports application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 13017.3418ms
+16:18:17.371 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 13032.6789ms.
+16:18:17.371 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:18:17.374 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW) in 13074.0602ms
+16:18:17.374 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableGeneralList (PE.HMIWWW)'
+16:18:17.375 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableGeneralList application/x-www-form-urlencoded;+charset=UTF-8 52 - 200 - application/json;+charset=utf-8 13086.8393ms
+16:18:17.387 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW) in 13056.9537ms
+16:18:17.387 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderList (PE.HMIWWW)'
+16:18:17.388 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderList application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 13076.2686ms
+16:18:17.401 [INF] Executed DbCommand (15ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Counter], [l].[AUDCreatedTs], [l].[CommMessage], [l].[CommStatus], [l].[CreatedTs], [l].[CrewName], [l].[DelayDuration], [l].[HeatName], [l].[InputThickness], [l].[InputWidth], [l].[IsUpdated], [l].[IsWorkOrderFinished], [l].[MaterialCatalogueName], [l].[NumberOfChargedMaterials], [l].[NumberOfPiecesRejectedInLocation1], [l].[NumberOfPlannedMaterials], [l].[NumberOfProducts], [l].[NumberOfRejectedMaterials], [l].[NumberOfRolledMaterials], [l].[NumberOfScrappedMaterials], [l].[OutputThickness], [l].[OutputWidth], [l].[ProductCatalogueName], [l].[ShiftName], [l].[SteelgradeCode], [l].[TargetWorkOrderWeight], [l].[TotalWeightOfMaterials], [l].[TotalWeightOfProducts], [l].[UpdatedTs], [l].[ValidationCheck], [l].[WeightOfPiecesRejectedInLocation1], [l].[WorkOrderEnd], [l].[WorkOrderName], [l].[WorkOrderStart]
+FROM [xfr].[L2L3WorkOrderReport] AS [l]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+16:18:17.467 [INF] Request starting HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0
+16:18:17.472 [INF] Executing endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+16:18:17.472 [INF] Route matched with {action = "GetLastShortAlarmData", controller = "Alarm", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.JsonResult] GetLastShortAlarmData(Kendo.Mvc.UI.DataSourceRequest) on controller PE.HMIWWW.Controllers.AlarmController (PE.HMIWWW).
+16:18:17.473 [INF] Executing action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) - Validation state: "Valid"
+16:18:17.477 [INF] Request starting HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - -
+16:18:17.485 [INF] Executing endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:18:17.485 [INF] Route matched with {action = "GetPublishDate", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetPublishDate() on controller PE.HMIWWW.Controllers.HomeController (PE.HMIWWW).
+16:18:17.485 [INF] Executing action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) - Validation state: "Valid"
+16:18:17.485 [INF] Executed action method PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.ContentResult in 0.0125ms.
+16:18:17.485 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+16:18:17.489 [INF] Entity Framework Core 6.0.0 initialized 'HmiContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+16:18:17.735 [INF] Executed DbCommand (246ms) [Parameters=[@LanguageId='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+[dbo].[SPGetAlarmsByLanguage] @LanguageId
+16:18:17.736 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 13316.9959ms.
+16:18:17.736 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:18:17.737 [INF] Executed action PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW) in 252.3318ms
+16:18:17.739 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 13353.5082ms.
+16:18:17.740 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:18:17.740 [INF] Executed endpoint 'PE.HMIWWW.Controllers.HomeController.GetPublishDate (PE.HMIWWW)'
+16:18:17.740 [INF] Executed action method PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 266.3407ms.
+16:18:17.741 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:18:17.743 [INF] Executed action PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW) in 270.4716ms
+16:18:17.743 [INF] Executed endpoint 'PE.HMIWWW.Controllers.AlarmController.GetLastShortAlarmData (PE.HMIWWW)'
+16:18:17.743 [INF] Request finished HTTP/1.1 GET http://localhost:18935/Home/GetPublishDate - - - 200 19 text/plain;+charset=utf-8 264.4777ms
+16:18:17.752 [INF] Request finished HTTP/1.1 POST http://localhost:18935/Alarm/GetLastShortAlarmData - 0 - 200 - application/json;+charset=utf-8 285.0573ms
+16:18:17.757 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW) in 13374.2767ms
+16:18:17.757 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL2L3BatchReportList (PE.HMIWWW)'
+16:18:17.758 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL2L3BatchReportList application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 13383.8790ms
+16:18:17.761 [INF] Executed action method PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW), returned result Microsoft.AspNetCore.Mvc.JsonResult in 13404.1494ms.
+16:18:17.761 [INF] Executing JsonResult, writing value of type 'Kendo.Mvc.UI.DataSourceResult'.
+16:18:17.764 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW) in 13366.9373ms
+16:18:17.764 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3L2BatchDataDefinitionList (PE.HMIWWW)'
+16:18:17.765 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3L2BatchDataDefinitionList application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 13390.6760ms
+16:18:17.771 [INF] Executed action PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW) in 13416.8435ms
+16:18:17.771 [INF] Executed endpoint 'PE.HMIWWW.Controllers.System.L3CommStatusController.GetL3TransferTableWorkOrderReports (PE.HMIWWW)'
+16:18:17.771 [INF] Request finished HTTP/1.1 POST http://localhost:18935/L3CommStatus/GetL3TransferTableWorkOrderReports application/x-www-form-urlencoded;+charset=UTF-8 39 - 200 - application/json;+charset=utf-8 13441.1026ms

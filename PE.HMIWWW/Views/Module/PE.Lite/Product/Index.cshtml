@@ -1,4 +1,4 @@
-﻿@using PE.HMIWWW.ViewModel.Module.Lite.Product
+@using PE.HMIWWW.ViewModel.Module.Lite.Product
 @{
     ViewBag.Title = VM_Resources.PAGE_TITLE_ProductCatalogue_Index;
     Layout = "~/Views/Shared/_LayoutWithoutWidgets.cshtml";
@@ -37,6 +37,32 @@
             .Filterable(false);
         c.Bound(x => x.Weight)
             .Filterable(false);
+//av add start 260723
+       c.Bound(x => x.MinOvality)
+            .Filterable(false);
+        c.Bound(x => x.MinDiameter)
+            .Filterable(false);
+        c.Bound(x => x.MaxDiameter)
+            .Filterable(false);
+        c.Bound(x => x.Diameter)
+            .Filterable(false);
+        c.Bound(x => x.MinSquareness)
+            .Filterable(false);
+        c.Bound(x => x.MaxSquareness)
+            .Filterable(false);
+        c.Bound(x => x.NegRcsSide)
+            .Filterable(false);
+        c.Bound(x => x.PosRcsSide)
+            .Filterable(false);
+//av add end 260723
+
+
+
+
+
+
+
+
         c.Bound(x => x.Id)
             .Filterable(false)
             .ClientTemplate(Html.ImageButton("edit", "EditProductCataloguePopup(#:Id#)") + Html.ImageButton("details", "GoToDetails(#:Id#)").ToString()

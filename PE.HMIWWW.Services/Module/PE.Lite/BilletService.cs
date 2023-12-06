@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PE.BaseDbEntity.Models;
 using PE.BaseDbEntity.PEContext;
-using PE.BaseModels.DataContracts.Internal.PRM;
+//using PE.BaseModels.DataContracts.Internal.PRM;
+using PE.Models.DataContracts.Internal.PRM;
+
 using PE.HMIWWW.Core.Communication;
 using PE.HMIWWW.Core.Resources;
 using PE.HMIWWW.Core.Service;
@@ -97,7 +99,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref materialCatalogue);
 
-      DCMaterialCatalogue dcMaterialCatalogue = new DCMaterialCatalogue
+      DCMaterialCatalogueEXT dcMaterialCatalogue = new DCMaterialCatalogueEXT
       {
         MaterialCatalogueId = materialCatalogue.Id,
         MaterialCatalogueName = materialCatalogue.MaterialCatalogueName,
@@ -140,7 +142,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref materialCatalogue);
 
-      DCMaterialCatalogue dcMaterialCatalogue = new DCMaterialCatalogue
+      DCMaterialCatalogueEXT dcMaterialCatalogue = new DCMaterialCatalogueEXT
       {
         MaterialCatalogueId = materialCatalogue.Id,
         MaterialCatalogueName = materialCatalogue.MaterialCatalogueName,
@@ -231,7 +233,7 @@ namespace PE.HMIWWW.Services.Module.PE.Lite
 
       UnitConverterHelper.ConvertToSi(ref materialCatalogue);
 
-      DCMaterialCatalogue dcMatCatalogue = new DCMaterialCatalogue { MaterialCatalogueId = materialCatalogue.Id };
+      DCMaterialCatalogueEXT dcMatCatalogue = new DCMaterialCatalogueEXT { MaterialCatalogueId = materialCatalogue.Id };
 
       //request data from module
       SendOfficeResult<DataContractBase> sendOfficeResult =

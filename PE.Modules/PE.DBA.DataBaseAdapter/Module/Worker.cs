@@ -42,8 +42,7 @@ namespace PE.DBA.DataBaseAdapter.Module
       {
         _isAvailableForCallTimerMethod = false;
 
-        //Added by Abhishek
-
+        //Added by Abhishek       
         await _l3DbCommunicationManager.TransferBatchDataFromTransferTableToAdapterAsync();
         await _l3DbCommunicationManager.UpdateBatchDataWithTimeoutAsync();
       }

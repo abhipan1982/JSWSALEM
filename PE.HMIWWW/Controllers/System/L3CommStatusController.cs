@@ -55,6 +55,33 @@ namespace PE.HMIWWW.Controllers.System
         _l3CommStatusService.GetL3TransferTableWorkOrderList(ModelState, request));
     }
 
+    //Av@071123--
+
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_L3CommStatus, Constants.SmfAuthorization_Module_System,
+      RightLevel.View)]
+    public Task<JsonResult> GetL3L2BatchDataDefinitionList([DataSourceRequest] DataSourceRequest request)
+    {
+      return PrepareJsonResultFromDataSourceResult(() =>
+        _l3CommStatusService.GetL3L2BatchDataDefinitionList(ModelState, request));
+    }
+
+
+
+    //Av@231123
+
+    [SmfAuthorization(Constants.SmfAuthorization_Controller_L3CommStatus, Constants.SmfAuthorization_Module_System,
+      RightLevel.View)]
+    public Task<JsonResult> GetL2L3BatchReportList([DataSourceRequest] DataSourceRequest request)
+    {
+      return PrepareJsonResultFromDataSourceResult(() =>
+        _l3CommStatusService.GetL2L3BatchReport(ModelState, request));
+    }
+
+
+
+
+
     [SmfAuthorization(Constants.SmfAuthorization_Controller_L3CommStatus, Constants.SmfAuthorization_Module_System,
       RightLevel.View)]
     public Task<JsonResult> GetL3TransferTableGeneralList([DataSourceRequest] DataSourceRequest request)
@@ -158,6 +185,8 @@ namespace PE.HMIWWW.Controllers.System
       return PrepareJsonResultFromDataSourceResult(() =>
         _l3CommStatusService.GetL3TransferTableProductReports(ModelState, request));
     }
+
+    
 
     [SmfAuthorization(Constants.SmfAuthorization_Controller_L3CommStatus, Constants.SmfAuthorization_Module_System,
       RightLevel.View)]

@@ -66,7 +66,7 @@ namespace PE.DBA.DataBaseAdapter.Handlers
       return ctx.L3L2BatchDataDefinitions.Where(x => x.CounterId == counter).SingleOrDefaultAsync();
     }
 
-    public void UpdateWorkOrderDefinition(L3L2BatchDataDefinition wod, DCL3L2BatchData dc)
+    public void UpdateWorkOrderDefinition(L3L2BatchDataDefinition wod, DCL3L2BatchDataDefinitionExt dc)
     {
       wod.UpdatedTs = DateTime.Now;
       wod.CommStatus = CommStatus.New.Value;
@@ -96,6 +96,47 @@ namespace PE.DBA.DataBaseAdapter.Handlers
       //wod.OutputThickness = dc.OutputThickness?.Trim();
       //wod.OutputWidth = dc.OutputWidth?.Trim();
       //wod.OutputShapeSymbol = dc.OutputShapeSymbol?.Trim();
+    }
+
+    //AV@
+    public Task<L3L2WorkOrderDefinition> GetWorkOrderDefinitionByIdAsyncEXT(TransferContext ctx, long counter)
+    {
+      return ctx.L3L2WorkOrderDefinitions.Where(x => x.CounterId == counter).SingleOrDefaultAsync();
+    }
+
+    //AV@
+
+
+    public void UpdateWorkOrderDefinitionEXT(L3L2WorkOrderDefinition wod, DCL3L2WorkOrderDefinitionExtMOD dc)
+    {
+      wod.UpdatedTs = DateTime.Now;
+      wod.CommStatus = CommStatus.New.Value;
+      wod.CommMessage = null;
+      wod.ValidationCheck = null;
+
+      wod.WorkOrderName = dc.WorkOrderName?.Trim();
+      wod.ExternalWorkOrderName = dc.ExternalWorkOrderName?.Trim();
+      wod.PreviousWorkOrderName = dc.PreviousWorkOrderName?.Trim();
+      wod.OrderDeadline = dc.OrderDeadline?.Trim();
+      wod.HeatName = dc.HeatName?.Trim();
+      wod.BilletWeight = dc.BilletWeight?.Trim();
+      wod.NumberOfBillets = dc.NumberOfBillets?.Trim();
+      wod.CustomerName = dc.CustomerName?.Trim();
+      wod.BundleWeightMin = dc.BundleWeightMin?.Trim();
+      wod.BundleWeightMax = dc.BundleWeightMax?.Trim();
+      wod.TargetWorkOrderWeight = dc.TargetWorkOrderWeight?.Trim();
+      wod.TargetWorkOrderWeightMin = dc.TargetWorkOrderWeightMin?.Trim();
+      wod.TargetWorkOrderWeightMax = dc.TargetWorkOrderWeightMax?.Trim();
+      wod.MaterialCatalogueName = dc.MaterialCatalogue?.Trim();
+      wod.ProductCatalogueName = dc.ProductCatalogue?.Trim();
+      wod.SteelgradeCode = dc.SteelgradeCode?.Trim();
+      wod.InputThickness = dc.InputThickness?.Trim();
+      wod.InputWidth = dc.InputWidth?.Trim();
+      wod.BilletLength = dc.BilletLength?.Trim();
+      wod.InputShapeSymbol = dc.InputShapeSymbol?.Trim();
+      wod.OutputThickness = dc.OutputThickness?.Trim();
+      wod.OutputWidth = dc.OutputWidth?.Trim();
+      wod.OutputShapeSymbol = dc.OutputShapeSymbol?.Trim();
     }
 
     //public Task<L2L3WorkOrderReport> GetWorkOrderReportByIdAsync(TransferContext ctx, long counter)

@@ -25,26 +25,26 @@ namespace PE.HMIWWW.ViewModel.Module.Lite.Furnace
       HeatName = entity.HeatName;
       RawMaterialId = entity.RawMaterialId;
     }
-    //public VM_Furnace(V_MaterialsInFurnace entity)
-    //{
-    //  Position = entity.Sorting;
-    //  RawMaterialId = entity.RawMaterialId;
-    //  RawMaterialName = entity.RawMaterialName;
-    //  //this.AssetId = entity.AssetId;
-    //  //this.AssetName = entity.AssetName;
-    //  Weight = entity.LastWeight;
-    //  Length = entity.LastLength;
-    //  MaterialId = entity.MaterialId;
-    //  MaterialName = entity.MaterialName;
-    //  WorkOrderName = entity.WorkOrderName;
-    //  HeatName = entity.HeatName;
-    //  SteelgradeCode = entity.SteelgradeCode;
-    //  WorkOrderId = entity.WorkOrderId;
-    //  SteelGradeId = entity.SteelgradeId;
-    //  HeatId = entity.HeatId;
+    public VM_Furnace(V_MaterialsInFurnace entity)
+    {
+      Position = entity.Sorting;
+      RawMaterialId = entity.RawMaterialId;
+      RawMaterialName = entity.RawMaterialName;
+      //this.AssetId = entity.AssetId;
+      //this.AssetName = entity.AssetName;
+      Weight = entity.LastWeight;
+      Length = entity.LastLength;
+      MaterialId = entity.MaterialId;
+      MaterialName = entity.MaterialName;
+      WorkOrderName = entity.WorkOrderName;
+      HeatName = entity.HeatName;
+      SteelgradeCode = entity.SteelgradeCode;
+      WorkOrderId = entity.WorkOrderId;
+      SteelGradeId = entity.SteelgradeId;
+      HeatId = entity.HeatId;
 
-    //  UnitConverterHelper.ConvertToLocal(this);
-    //}
+      UnitConverterHelper.ConvertToLocal(this);
+    }
 
     public VM_Furnace(V_RawMaterialInFurnace entity)
     {
