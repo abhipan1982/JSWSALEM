@@ -11,7 +11,7 @@ namespace PE.DBA.DataBaseAdapter.Communication
 {
   public class SendOffice : ModuleBaseSendOffice, IDbAdapterSendOffice
   {
-    //Added by AP on16082023
+    //Added by AP on 07122023
     public virtual Task<SendOfficeResult<DCBatchDataStatus>> SendBatchDataToAdapterAsync(
       DCL3L2BatchDataDefinition dataToSend)
     {
